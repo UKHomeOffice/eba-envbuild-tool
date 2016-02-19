@@ -1,0 +1,9 @@
+<!-- God know what this is for -->
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define"
+	xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form"
+	xmlns:i="jelly:fmt" xmlns:p="/lib/hudson/project">
+  
+    <f:entry field="environmentBuildCommand" title="Command test" description="The command to run."><f:textbox name="value" value="${it.command}" readonly="true"/> </f:entry>
+    
+</j:jelly>

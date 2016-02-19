@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<deploymentdescriptor xmlns="http://ebsa.ipt.com/ddConfig-1.0">
+    <plans>
+        <plan impactLevel="1">
+            <step>
+                <perform filter="all"/>
+            </step>
+        </plan>
+    </plans>
+    <components>
+        <component hostnames="mc1" minimumPlan="1">
+            <yaml>
+                  one:
+            </yaml>
+        </component>
+        <component hostnames="mc1" minimumPlan="1">
+            <yaml>
+                  TWO:
+                    require: Package[one]
+            </yaml>
+        </component>
+        <component require="two" hostnames="mc2" minimumPlan="1">
+            <yaml>
+                  three:
+            </yaml>
+        </component>
+        <component hostnames="mc2" minimumPlan="1">
+            <yaml>
+                  four:
+                    require: Package[three]
+            </yaml>
+        </component>
+    </components>
+</deploymentdescriptor>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <ac:execute xmlns:ac="http://ebsa.ipt.com/aCloudCommand-1.1">
+        <ac:EnvironmentContainer command="create" includes="npa" strategy="merge" errorStrategy="exit">
+            <ac:Environment command="confirm" includes="HO_IPT_NPA_PRP3" strategy="exists" errorStrategy="exit">
+                <ac:VirtualMachineContainer command="confirm" includes="HO_IPT_NPA_PRP3_DABC" strategy="exists" errorStrategy="exit">
+                    <ac:VirtualMachine command="create" includes="afwam02.*" strategy="overwrite" errorStrategy="exit"/>
+                </ac:VirtualMachineContainer>
+            </ac:Environment>
+        </ac:EnvironmentContainer>
+    </ac:execute>

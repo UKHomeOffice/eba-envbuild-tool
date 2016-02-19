@@ -1,0 +1,17 @@
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+    <div>
+    	EnvironmentBuildPlugin config.jelly
+		<!-- <f:advanced>
+			<f:entry title="Prepare only" field="prepareOnly" name="prepareOnly" description="If set to true then no actual deployment work will occur, only the preparation phase will execute.">
+				<f:checkbox/>
+			</f:entry>	
+			<f:entry title="Hiera Repo" field="hieraRepo" name="hieraRepo" description="GIT repo URL for puppet hieradata files (e.g ssh://git@yourgit/puppethieradb.git).  This would normally be left blank as the default from the configuration file on disk should be sufficient.">
+			  <f:textbox name="hieraRepo"/>
+			</f:entry>	
+			<f:entry title="Deployment Descriptor Repo" field="deploymentDescriptorRepo" name="deploymentDescriptorRepo" description="GIT repo URL for deployment descriptors (e.g ssh://git@yourgit/puppethieradb.git).  This would normally be left blank as the default from the configuration file on disk should be sufficient.">
+			  <f:textbox name="deploymentDescriptorRepo"/>
+			</f:entry>
+		</f:advanced> -->
+    </div>
+ </j:jelly>
+   

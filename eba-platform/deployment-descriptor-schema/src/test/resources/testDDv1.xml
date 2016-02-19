@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<deploymentdescriptor xmlns="http://ebsa.ipt.com/ddConfig-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+    <metadata>
+        <minApplicationVersion>1.0.0</minApplicationVersion>     
+    </metadata>
+    
+    <plans>
+		<plan description="most difficult plan" impactLevel="2" name="one">
+			<step description="Stop things">
+				<inject description="description" path="control_managed_instances/startAPPWLSMS1/action" value="stop" hostnames="soatzm01,soatzm02" ifMissing="fail" />
+				<inject description="desc" path="action" hostnames="soatzm01">
+					<yaml>
+						something:
+						- 'Class[Profile::Wls::Ipt_custom]'
+						- 'Class[Profile::Wls::Startwls_managed]'
+					</yaml>
+				</inject>
+			</step>
+            <step >
+				<perform filter="all" description="Do everything in one go"/>
+			</step>
+            <step >
+				<execute command="ps -ef" description="Run a command" hostnames="soatzm01"/>
+			</step>
+		</plan>
+		<plan description="easy plan" impactLevel="1">
+			<step description="Do everything in one go">
+				<perform filter="all" />
+			</step>
+		</plan>
+	</plans>
+	<environments>
+		<environment name="PRP1">
+			<zone name="dazo" reference="np_prp1_dazo">
+				<target name="soa" hostnames="soatzm01" />
+			</zone>
+		</environment>
+	</environments>
+	<components>
+		<component minimumPlan="2" hostnames="soatzm01">
+			<yaml>
+				CommonConfigRPM:
+					require:
+					- 'Class[Profile::Wls::Ipt_custom]'
+					- 'Class[Profile::Wls::Startwls_managed]'
+					tag: 'appdeploy'
+			</yaml>
+			<hints>
+				<undeploy chainBehaviour="whole-chain-multi-transition"></undeploy>
+				<upgrade method="justDeploy"></upgrade>
+				<downgrade method="undeployRedeploy"></downgrade>				
+			</hints>
+			<before>
+				<step>
+					<inject path="control_managed_instances/startAPPWLSMS1/action" value="start" ifMissing="fail" />
+				</step>
+			</before>
+			<after>
+				<step>
+					<inject path="control_managed_instances/startAPPWLSMS1/action" value="stop" ifMissing="fail" />
+				</step>
+			</after>
+		</component>
+		<component minimumPlan="1" hostnames="soatzm01">
+			<yaml>
+			IPTSOACommon:
+				require: Package[CommonConfigRPM]
+				tag: 'appdeploy'
+			</yaml>
+			<hints>
+				<undeploy chainBehaviour="whole-chain-multi-transition"></undeploy>
+				<upgrade method="justDeploy"></upgrade>
+				<downgrade method="undeployRedeploy"></downgrade>
+			</hints>
+		</component>
+		<component minimumPlan="1" hostnames="soatzm01">
+			<yaml>
+			IPTCommonExceptionHandler:
+				require: Package[IPTSOACommon]
+				tag: 'appdeploy'
+			</yaml>
+			<hints>
+				<undeploy chainBehaviour="whole-chain-multi-transition"></undeploy>
+				<upgrade method="justDeploy"></upgrade>
+				<downgrade method="undeployRedeploy"></downgrade>
+			</hints>
+		</component>
+		<component minimumPlan="1" hostnames="soatzm01">
+			<yaml>
+			IPTCDPServiceBroker:
+				require: Package[IPTCommonExceptionHandler]
+				tag: 'appdeploy'
+			</yaml>
+			<hints>
+				<undeploy chainBehaviour="whole-chain-multi-transition"></undeploy>
+				<upgrade method="justDeploy"></upgrade>
+				<downgrade method="undeployRedeploy"></downgrade>
+			</hints>
+		</component>
+		<component minimumPlan="1" hostnames="soatzm01">
+			<yaml>
+			PKISSServiceProcessBroker:
+				require: Package[IPTCDPServiceBroker]
+				tag: 'appdeploy'
+			</yaml>
+			<hints>
+				<undeploy chainBehaviour="whole-chain-multi-transition"></undeploy>
+				<upgrade method="justDeploy"></upgrade>
+				<downgrade method="undeployRedeploy"></downgrade>
+			</hints>
+		</component>
+		<component minimumPlan="1" hostnames="soatzm01">
+			<yaml>
+			PKISSServices:
+				require: Package[PKISSServiceProcessBroker]
+				tag: 'appdeploy'
+			</yaml>
+			<hints>
+				<undeploy chainBehaviour="whole-chain-multi-transition"></undeploy>
+				<upgrade method="justDeploy"></upgrade>
+				<downgrade method="undeployRedeploy"></downgrade>
+			</hints>
+		</component>
+		<component minimumPlan="1" hostnames="soatzm01">
+			<yaml>
+			IABSServiceProcessBroker:
+				require: Package[PKISSServices]
+				tag: 'appdeploy'
+			</yaml>
+			<hints>
+				<undeploy chainBehaviour="whole-chain-multi-transition"></undeploy>
+				<upgrade method="justDeploy"></upgrade>
+				<downgrade method="undeployRedeploy"></downgrade>
+			</hints>
+		</component>
+		<component minimumPlan="1" hostnames="soatzm01">
+			<yaml>
+			IABSServiceManager:
+				require: Package[IABSServiceProcessBroker]
+				tag: 'appdeploy'
+			</yaml>
+			<hints>
+				<undeploy chainBehaviour="whole-chain-multi-transition"></undeploy>
+				<upgrade method="justDeploy"></upgrade>
+				<downgrade method="undeployRedeploy"></downgrade>
+			</hints>
+		</component>
+		<component minimumPlan="1" hostnames="soatzm01">
+			<yaml>
+			IPTPKISSManagement:
+				require: Package[IABSServiceProcessBroker]
+				tag: 'appdeploy'
+			</yaml>
+			<hints>
+				<undeploy chainBehaviour="whole-chain-multi-transition"></undeploy>
+				<upgrade method="justDeploy"></upgrade>
+				<downgrade method="undeployRedeploy"></downgrade>
+			</hints>
+		</component>
+		<component minimumPlan="1" hostnames="soatzm01">
+			<yaml>
+			IPTIABSManagement:
+				require: Package[IPTPKISSManagement]
+				tag: 'appdeploy'
+			</yaml>
+			<hints>
+				<undeploy chainBehaviour="whole-chain-multi-transition"></undeploy>
+				<upgrade method="justDeploy"></upgrade>
+				<downgrade method="undeployRedeploy"></downgrade>
+			</hints>
+		</component>
+		<component minimumPlan="1" hostnames="soatzm01">
+			<yaml>
+			IPTBRPFulfilmentManagement:
+				require: Package[IPTIABSManagement]
+				tag: 'appdeploy'
+			</yaml>
+			<hints>
+				<undeploy chainBehaviour="whole-chain-multi-transition"></undeploy>
+				<upgrade method="justDeploy"></upgrade>
+				<downgrade method="undeployRedeploy"></downgrade>
+			</hints>
+		</component>
+		<component minimumPlan="1" hostnames="soatzm01">
+			<yaml>
+			IPTRules:
+				require: Package[IPTBRPFulfilmentManagement]
+				tag: 'appdeploy'
+			</yaml>
+			<hints>
+				<undeploy chainBehaviour="whole-chain-multi-transition"></undeploy>
+				<upgrade method="justDeploy"></upgrade>
+				<downgrade method="undeployRedeploy"></downgrade>
+			</hints>
+		</component>
+		<component minimumPlan="1" hostnames="soatzm01" >
+			<yaml>
+			IPTFulfilmentManagement:
+				require: Package[IPTRules]
+				tag: 'appdeploy'
+			</yaml>
+			<hints>
+				<undeploy chainBehaviour="whole-chain-multi-transition"></undeploy>
+				<upgrade method="justDeploy"></upgrade>
+				<downgrade method="undeployRedeploy"></downgrade>
+			</hints>
+		</component>
+		<component minimumPlan="1" hostnames="soatzm01" >
+			<yaml>
+			IPTBatchHandler:
+				require: Package[IPTFulfilmentManagement]
+				tag: 'appdeploy'
+			</yaml>
+			<hints>
+				<undeploy chainBehaviour="whole-chain-multi-transition"></undeploy>
+				<upgrade method="justDeploy"></upgrade>
+				<downgrade method="undeployRedeploy"></downgrade>
+			</hints>
+		</component>
+	</components>
+</deploymentdescriptor>
+

@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 rel. 3 sp1 (http://www.altova.com) by Home Office (Home Office) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://ebsa.ipt.com/AgnosticCloudConfig-1.0" targetNamespace="http://ebsa.ipt.com/AgnosticCloudConfig-1.0" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="GeographicContainer" type="GeographicContainerType">
+		<xs:annotation>
+			<xs:documentation>Comment describing your root element</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="GeographicContainerType">
+		<xs:sequence>
+			<xs:element name="account" type="xs:string"/>
+			<xs:element name="region" type="xs:string"/>
+			<xs:element name="EnvironmentContainer" type="EnvironmentContainerType"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:ID" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="EnvironmentContainerType">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string"/>
+			<xs:element name="provider" type="ProviderType"/>
+			<xs:element name="Environment" type="EnvironmentType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:sequence>
+				<xs:element name="EnvironmentContainerDefinition" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="EnvironmentContainerDefinitionType">
+								<xs:sequence>
+									<xs:element name="name" type="xs:string"/>
+									<xs:element name="version" type="xs:string"/>
+									<xs:element name="Network" type="OrganisationalNetworkType" minOccurs="0" maxOccurs="unbounded"/>
+									<xs:element name="Gateway" type="GatewayType" minOccurs="0" maxOccurs="unbounded"/>
+									<xs:element name="DataCenter" type="DataCenterType" maxOccurs="unbounded"/>
+								</xs:sequence>
+							</xs:extension>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:ID" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="EnvironmentType">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string"/>
+			<xs:element name="notes" type="xs:string"/>
+			<xs:element name="EnvironmentDefinition" type="EnvironmentDefinitionType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:ID" use="required"/>
+		<xs:attribute name="environmentContainerDefinitionId" type="xs:IDREF"/>
+	</xs:complexType>
+	<xs:complexType name="EnvironmentContainerDefinitionType">
+		<xs:attribute name="id" type="xs:ID" use="required"/>
+	</xs:complexType>
+	<xs:simpleType name="NetworkTypeType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Application"/>
+			<xs:enumeration value="Organisation"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="NetworkType">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string"/>
+			<xs:element name="description" type="xs:string"/>
+			<xs:element name="fenceMode" type="xs:string"/>
+			<xs:element name="networkMask" type="xs:string"/>
+			<xs:element name="gatewayAddress" type="xs:string"/>
+			<xs:element name="primaryDns" type="xs:string"/>
+			<xs:element name="secondaryDns" type="xs:string"/>
+			<xs:element name="dnsSuffix" type="xs:string"/>
+			<xs:element name="staticIpPool" type="xs:string"/>
+			<xs:element name="ipRangeStart" type="xs:string"/>
+			<xs:element name="ipRangeEnd" type="xs:string"/>
+			<xs:element name="CIDR" type="xs:string"/>
+			<xs:element name="shared" type="xs:boolean" default="false" minOccurs="0"/>
+			<xs:element name="MetaData" type="MetaDataType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:ID" use="required"/>
+		<xs:attribute name="dataCenterId" type="xs:IDREF"/>
+		<xs:attribute name="dataCenterName" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="ApplicationNetworkType">
+		<xs:complexContent>
+			<xs:extension base="NetworkType"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="OrganisationalNetworkType">
+		<xs:complexContent>
+			<xs:extension base="NetworkType">
+				<xs:sequence minOccurs="0">
+					<xs:element name="peerNetworkName" type="xs:string"/>
+					<xs:element name="peerEnvironmentName" type="xs:string"/>
+				</xs:sequence>
+				<xs:attribute name="gatewayId" type="xs:IDREF"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="EnvironmentDefinitionComplexType">
+		<xs:sequence>
+			<xs:element name="EnvironmentDefinitionType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="EnvironmentDefinitionType">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string"/>
+			<xs:element name="version" type="xs:string"/>
+			<xs:element name="cidr" type="xs:string"/>
+			<xs:element name="VirtualMachineContainer" type="VirtualMachineContainerType" maxOccurs="unbounded"/>
+			<xs:element name="MetaData" type="MetaDataType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:ID" use="required"/>
+		<xs:attribute name="environmentDefinitionType" type="EnvironmentDefinitionTypeType" use="required"/>
+	</xs:complexType>
+	<xs:simpleType name="EnvironmentDefinitionTypeType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Logical"/>
+			<xs:enumeration value="Blueprint"/>
+			<xs:enumeration value="Physical"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="VirtualMachineContainerType">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string"/>
+			<xs:element name="description" type="xs:string"/>
+			<xs:element name="runtimeLease" type="xs:string"/>
+			<xs:element name="storageLease" type="xs:string"/>
+			<xs:element name="serviceLevel" type="xs:string"/>
+			<xs:element name="powerOn" type="xs:boolean"/>
+			<xs:element name="deploy" type="xs:boolean"/>
+			<xs:element name="domain" type="xs:string"/>
+			<xs:element name="VirtualMachine" type="VirtualMachineType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Network" type="ApplicationNetworkType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:ID" use="required"/>
+		<xs:attribute name="dataCenterId" type="xs:IDREF"/>
+		<xs:attribute name="dataCenterName" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="MetaDataType">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string"/>
+			<xs:element name="value" type="xs:string"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:ID" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="VirtualMachineType">
+		<xs:sequence>
+			<xs:element name="vmName" type="xs:string"/>
+			<xs:element name="computerName" type="xs:string"/>
+			<xs:element name="description" type="xs:string"/>
+			<xs:element name="templateName" type="xs:string"/>
+			<xs:element name="templateServiceLevel" type="xs:string"/>
+			<xs:element name="storageProfile" type="xs:string"/>
+			<xs:element name="customisationScript" type="xs:string"/>
+			<xs:element name="VMOrder" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The order of the VM in in the sequence for powering on (ascending order) and off (reversed order high to low)</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="0"/>
+						<xs:maxInclusive value="1000"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="VMStartDelay" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The Start delay</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="0"/>
+						<xs:maxInclusive value="180"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="VMStopDelay" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The Stop delay in seconds</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="0"/>
+						<xs:maxInclusive value="180"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="VMStartAction" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The VM Start Action. One of none, powerOn</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="powerOn">
+							<xs:annotation>
+								<xs:documentation>This will set the VM to Power On when started by the vApp.</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="none">
+							<xs:annotation>
+								<xs:documentation>This will set the VM do nothing when started by the vApp.</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="VMStopAction" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The VM Stop Action. One of powerOff, guestShutdown</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="powerOff">
+							<xs:annotation>
+								<xs:documentation>This will set the VM to Power Off when stopped by the vApp.</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="guestShutdown">
+							<xs:annotation>
+								<xs:documentation>This will set the VM to Shutdown when stopped by the vApp.</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="cpuCount" type="xs:integer"/>
+			<xs:element name="memory" type="xs:integer"/>
+			<xs:element name="memoryUnit" type="xs:string"/>
+			<xs:element name="hardwareProfile" type="xs:string"/>
+			<xs:element name="hatype" type="xs:string" minOccurs="0"/>
+			<xs:element name="Storage" type="StorageType" maxOccurs="unbounded"/>
+			<xs:element name="NIC" type="NICType" maxOccurs="unbounded"/>
+			<xs:element name="MetaData" type="MetaDataType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:ID" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="NICType">
+		<xs:sequence>
+			<xs:element name="indexNumber" type="xs:integer"/>
+			<xs:element name="primary" type="xs:boolean"/>
+			<xs:element name="ipAssignment" type="xs:string"/>
+			<xs:element name="Interface" type="InterfaceType" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:ID" use="required"/>
+		<xs:attribute name="networkID" type="xs:IDREF"/>
+		<xs:attribute name="networkName" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="StorageType">
+		<xs:sequence>
+			<xs:element name="indexNumber" type="xs:integer"/>
+			<xs:element name="size" type="xs:integer"/>
+			<xs:element name="sizeUnit" type="xs:string"/>
+			<xs:element name="busType" type="xs:string"/>
+			<xs:element name="busSubType" type="xs:string"/>
+			<xs:element name="deviceMount" type="xs:string"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:ID" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="DataCenterType">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:ID" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="GatewayType">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string"/>
+			<xs:element name="NAT" type="NATType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:ID" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="NATType">
+		<xs:sequence>
+			<xs:element name="appliedOn" type="xs:string"/>
+			<xs:element name="originalSourceIpOrRange" type="xs:string"/>
+			<xs:element name="translatedSourceIpOrRange" type="xs:string"/>
+			<xs:element name="enabled" type="xs:boolean"/>
+			<xs:element name="DNAT" type="DNATType" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:ID" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="DNATType">
+		<xs:sequence>
+			<xs:element name="translatedPort" type="xs:string"/>
+			<xs:element name="protocolType" type="xs:string"/>
+			<xs:element name="protocolOriginalPort" type="xs:string"/>
+			<xs:element name="protocolIcmpType" type="xs:string"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:ID" use="required"/>
+	</xs:complexType>
+	<xs:simpleType name="ProviderType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="SKYSCAPE"/>
+			<xs:enumeration value="AWS"/>
+			<xs:enumeration value="MICROSOFTAZURE"/>
+			<xs:enumeration value="GOOGLECOMPUTE"/>
+			<xs:enumeration value="IBMSOFTLAYER"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="InterfaceType">
+		<xs:sequence>
+			<xs:element name="interfaceNumber" type="xs:integer" minOccurs="0"/>
+			<xs:element name="staticIpPool" type="xs:string"/>
+			<xs:element name="networkMask" type="xs:string"/>
+			<xs:element name="name" type="xs:string"/>
+			<xs:element name="staticIpAddress" type="xs:string"/>
+			<xs:element name="isVip" type="xs:boolean"/>
+			<xs:element name="VRRP" type="xs:integer" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

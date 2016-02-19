@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Design note - Environment &amp; Release Management V3.x</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Design note - Environment &amp; Release Management V3.x
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout two-equal" data-layout="two-equal">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<style type='text/css'>/*<![CDATA[*/
+div.rbtoc1455124470936 {padding: 0px;}
+div.rbtoc1455124470936 ul {list-style: disc;margin-left: 0px;}
+div.rbtoc1455124470936 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1455124470936'>
+<ul class='toc-indentation'>
+<li><a href='#Designnote-Environment&amp;ReleaseManagementV3.x-References'>References</a></li>
+<li><a href='#Designnote-Environment&amp;ReleaseManagementV3.x-Overview'>Overview</a></li>
+<li><a href='#Designnote-Environment&amp;ReleaseManagementV3.x-KeyFeaturesandDesignDecisions'>Key Features and Design Decisions</a>
+<ul class='toc-indentation'>
+<li><a href='#Designnote-Environment&amp;ReleaseManagementV3.x-Extensibility,modularisationandprotectingstrategicusefulness'>Extensibility, modularisation and protecting strategic usefulness</a>
+<ul class='toc-indentation'>
+<li><a href='#Designnote-Environment&amp;ReleaseManagementV3.x-SelfServicepluginAPI'>Self Service plugin API</a></li>
+</ul>
+</li>
+<li><a href='#Designnote-Environment&amp;ReleaseManagementV3.x-OccasionalMismatchBetweenHieraandtheEnvironment(YUM)'>Occasional Mismatch Between Hiera and the Environment (YUM)</a>
+<ul class='toc-indentation'>
+<li><a href='#Designnote-Environment&amp;ReleaseManagementV3.x-Implementationnotes'>Implementation notes</a></li>
+</ul>
+</li>
+<li><a href='#Designnote-Environment&amp;ReleaseManagementV3.x-RPMFailFileReportingandRemoval'>RPM Fail File Reporting and Removal</a></li>
+<li><a href='#Designnote-Environment&amp;ReleaseManagementV3.x-UIComplexity'>UI Complexity</a></li>
+<li><a href='#Designnote-Environment&amp;ReleaseManagementV3.x-DeploymentDescriptorComplexity'>Deployment Descriptor Complexity</a></li>
+<li><a href='#Designnote-Environment&amp;ReleaseManagementV3.x-Parallelism'>Parallelism</a></li>
+<li><a href='#Designnote-Environment&amp;ReleaseManagementV3.x-Waits'>Waits</a></li>
+<li><a href='#Designnote-Environment&amp;ReleaseManagementV3.x-Auditingandreportingofdeployments'>Auditing and reporting of deployments</a></li>
+<li><a href='#Designnote-Environment&amp;ReleaseManagementV3.x-Ad-hoc&#39;Custom&#39;Deployments-NOTIMPLEMENTED'>Ad-hoc &#39;Custom&#39; Deployments - NOT IMPLEMENTED</a></li>
+</ul>
+</li>
+<li><a href='#Designnote-Environment&amp;ReleaseManagementV3.x-OutstandingQuestions'>Outstanding Questions</a></li>
+</ul>
+</div></div>
+</div>
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p><u><strong>Children pages</strong></u></p><p><ul class='childpages-macro'><li><a href="https://<confluenceurl>/display/EN/Micro+Design">Micro Design</a><ul class='childpages-macro'><li><a href="https://<confluenceurl>/display/EN/Typical+Deployment+Steps">Typical Deployment Steps</a></li></ul></li><li><a href="https://<confluenceurl>/pages/viewpage.action?pageId=32675271">Notes from whiteboard meeting 13/04/2015</a></li><li><a href="https://<confluenceurl>/display/EN/Release+database+V3.x">Release database V3.x</a></li><li><a href="https://<confluenceurl>/display/EN/Self+Service%3A+Deployment+Descriptor+changes+to+support+SS3">Self Service: Deployment Descriptor changes to support SS3</a></li><li><a href="https://<confluenceurl>/display/EN/UI+Screen+designs">UI Screen designs</a><ul class='childpages-macro'><li><a href="https://<confluenceurl>/display/EN/Plan+Phase+Wireframe">Plan Phase Wireframe</a></li><li><a href="https://<confluenceurl>/pages/viewpage.action?pageId=40732413">UI Screen designs - &quot;Adhoc&quot; Self Service Deployments</a></li><li><a href="https://<confluenceurl>/display/EN/UI+Screen+designs+-+Create+a+Release">UI Screen designs - Create a Release</a></li><li><a href="https://<confluenceurl>/display/EN/UI+Screen+designs+-+Deploy+Screen">UI Screen designs - Deploy Screen</a></li></ul></li><li><a href="https://<confluenceurl>/display/EN/Version+3+Deployment+Descriptors+and+Prepared+Reports">Version 3 Deployment Descriptors and Prepared Reports</a></li></ul></p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="Designnote-Environment&amp;ReleaseManagementV3.x-References">References</h2><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th class="confluenceTh">ID</th><th class="confluenceTh">Reference</th></tr><tr><td class="confluenceTd">1</td><td class="confluenceTd"><a href="24390972.html">Design note - Environment &amp; Release Management V2.x</a></td></tr><tr><td colspan="1" class="confluenceTd">2</td><td colspan="1" class="confluenceTd"><a href="25186459.html">Design note - Environment &amp; Release Management V1.x</a></td></tr></tbody></table></div><h2 id="Designnote-Environment&amp;ReleaseManagementV3.x-Overview">Overview</h2><p>This design note describes the additions to the environment management and release processes which are required to support deployment of IPT Releases.  An IPT Release can be described as a collection of known versions of Application Versions.</p><p>The set of changes required in order to support the deployment of IPT Releases are the following:</p><ul><li>Database<br /><ul><li>Upgrading of the release database with a new database table ReleaseVersion to maintain the IPT release-related metadata and to provide a high level grouping entity fro the ApplicationVersions which are aggregated under it.  This will include:<ul><li>the deprecation of the existing release column in the existing ApplicationVersion table.  This will be replaced by a foreign key to the ReleaseVerison table.</li><li>a data migration to move the existing data into the new structure</li></ul></li></ul></li><li>UI<ul><li>Jenkins<br /><ul><li>Create a new screen in Jenkins to allow users to Create IPT Releases</li><li>Update the existing ApplicationVersion screen to allow the selection of the relevant IPT Release instead of what we have now (the ability to type a JIRA ID into a text field)</li><li>Create a new screen in Jenkins to allow a user to deploy an IPTRelease</li></ul></li><li>Proof of concept an early look management UI.  Possible implement some admin functionalty for the database.</li></ul></li><li>Engine<ul><li>Create a new descriptor or extend the existing deployment descriptor to describes a deployment of a series of applications.<ul><li>My preference would be to extend the existing deployment descriptor so its supports nesting of components.  At the moment the components described in the files are a specialisation of a more general component. An application is just a different specialisation of a component.  Ideally we would be able to apply the same logic to the changes we make to the environment management application so we can look towards arbitrary nesting.  This will be important as we expand it out to look at deploying different types of components.</li></ul></li><li>Update the environment-management program so that it:<ul><li>Takes a new command line argument ( an IPT Release Version ID)</li><li>Collects all of the ApplicationVersions for the IPT Release Version passed in</li><li>Generates a release deployment plan</li><li>Executes the release deployment plan</li></ul></li></ul></li><li>Test Harness<ul><li>Update the test harness to cater for scenarios where we are deploying an IPT Release</li></ul></li></ul><p> </p><h2 id="Designnote-Environment&amp;ReleaseManagementV3.x-KeyFeaturesandDesignDecisions">Key Features and Design Decisions</h2><h3 id="Designnote-Environment&amp;ReleaseManagementV3.x-Extensibility,modularisationandprotectingstrategicusefulness">Extensibility, modularisation and protecting strategic usefulness</h3><p>The more we fit self service for a specific purpose the shorter we make its lifespan and the less useful we make it in the long term.  With every change we make we should be bearing in mind the effect that this change will have on the strategic usefulness of the tool.</p><p>Most of the changes that we are seeing now are add-on functionality rather than core functionality. </p><p>It is time to formalise the relationship between core self service functionality and add-on functionality.</p><h4 id="Designnote-Environment&amp;ReleaseManagementV3.x-SelfServicepluginAPI">Self Service plugin API</h4><p>Self Service needs to be updated to make use of a mechanism to extend its functionality through plugins.,  This will help us to stabilise the core codebase and extend outside of the main codebase.</p><p>Considerations for the design of plugins and their runtime environment are the following:</p><ul><li>Plugin authoring and deployment<br /><ul><li>Plugins should be developed in their own maven projects and separately deployable from the core application.  We may choose to bundle a set of known plugins for ease of deployment in the first instance.</li><li>Plugin projects should depend on the environment-management project and not the other way around</li><li>Where plugins are deployed bundled with the environment-management tooling they need to be bundled at the rpm stage so as not to introduce circular dependencies.</li><li>An abstract implementation of a plugin should be created which contains an empty implementation of all the interface methods as well as base code for loading configuration. This will mean that authors only need to implement the methods that they want to and nothign else.</li></ul></li><li>Plugin discovery and load<ul><li>Plugins do not need to be hot deployable, it is sufficient for them to be loaded at application startup.</li><li>Plugins should be deployed as jar files into a &quot;plugins&quot; folder alongside the core application.</li><li>The plugins folder and all of its jar files should be on the main classpath as the core application.  It should not be necessary for them to be added to the classpath manually, it should be suficient just to drop the jar file into the &quot;plugins&quot; folder.</li></ul></li><li>Plugin Lifecycle and interface<ul><li><p>Plugins should implement a strict interface</p></li><li>Plugins should be stateless</li><li>Plugins should be threadsafe</li><li>The lifecycle of a plugin will be something like this<ul><li>An instance of all plugins will instantiated and will be added to a list of plugins</li><li>At every hook point in the program the relevant method will be called on each plugin in turn</li></ul></li><li>Alternatively we could consider plugin chains where a plugin is responsible for calling the next.</li></ul></li><li>Plugin configuration<ul><li>Plugins which require configuration should be represented by a configuration file</li><li>The configuration file name should be the fully qualified class name of the plugin with a &quot;.conf&quot; extension.   It should be loaded from the classpath and shoudl reside in the &quot;plugins&quot; folder alongside the jar file.</li><li>The fiel should be a key value pair properties file.</li></ul></li><li>Plugin interoperability and interdependencies/<ul><li>There is a conflict between easy configuration and declarative behaviour.  I favour easy config if possible but I recognise that there will be occasions where execution order is important.</li><li>Each plugin, can optionally specify its preferred place in the execution order per plugin interface method in its configuration file.   <br /><ul><li>e.g &lt;interface method name&gt;.preferredPosition=&lt;number&gt;</li><li>If there are other plugins which have the same number then an exception will be thrown otherwise the plugins with an order will be executed in that order and those without an order will be executed afterwards in any order.</li></ul></li><li>Plugin call order can be achieved</li></ul></li></ul><p>Java plugin techniques</p><ul><li><a href="https://code.google.com/p/jspf/" class="external-link" rel="nofollow">https://code.google.com/p/jspf/</a></li><li>Since 1.6, there's been <a href="http://download.oracle.com/javase/6/docs/api/java/util/ServiceLoader.html" class="external-link" rel="nofollow">java.util.ServiceLoader</a></li><li>OSGI</li><li><a href="https://github.com/decebals/pf4j" class="external-link" rel="nofollow">https://github.com/decebals/pf4j</a></li><li><a href="http://jpf.sourceforge.net/index.html" class="external-link" rel="nofollow">http://jpf.sourceforge.net/index.html</a></li></ul><h3 id="Designnote-Environment&amp;ReleaseManagementV3.x-OccasionalMismatchBetweenHieraandtheEnvironment(YUM)">Occasional Mismatch Between Hiera and the Environment (YUM)</h3><p>A key assumption up this point has been that the Hiera repository is the single source of truth when self service discovers what is deployed into an environment that is managed by Puppet. Regular, automatic Puppet runs will (in the vast majority of cases) ensure that the environments are synchronised with what resides in the Hiera repository.</p><p>However, in some cases due to a local Puppet issue or an RPM deployment issue, etc, this may not be case. Prior to a given self service deployment there may have been multiple Puppet runs that have silently failed and so the Hiera repository contains stale data.</p><p>A business need has therefore been identified that requires a feature to be added to an implementation of Self Service 3. This feature would enable a user to be warned in advance of a deployment when there is a mismatch between the RPMs defined in the Hiera repository and what is actually deployed in the environment (via YUM). The same business need would also apply to self service 2.</p><p>In it's first iteration, this feature would likely consist of extra information that is presented to user in the pre-deployment plan. This extra information would show not only Hiera's current view of the environment along with the target Hiera configuration, but crucially also what YUM is currently reporting as installed into the environment.</p><p>Future iterations of this feature could attempt to take remedial action in the case of a mismatch such as a preemptive Puppet run or editing the Hiera to reflect the environment (reverse synchronisation). This would likely need confirmation from the user before this is carried out.</p><h4 id="Designnote-Environment&amp;ReleaseManagementV3.x-Implementationnotes">Implementation notes</h4><p>The concept of a list of items deployed in an environment is a generic one of which a look at hiera or a look at yum are just examples.  I would like for us to extract out the common elements of both systems into a generic interface for fetching data about environments and versions of components deployed in the environments.  The code should then get data from both sources by accessing the same interface.</p><p>Moving in this direction will make it easier to move away from one or another  should we ever need to do so.</p><h3 id="Designnote-Environment&amp;ReleaseManagementV3.x-RPMFailFileReportingandRemoval">RPM Fail File Reporting and Removal</h3><p>When an RPM is deployed into an environment a pre-installation step is save an empty RPM 'fail file' into a specified directory. This fail file is then deleted upon successful installation. If an installation has been unsuccessful then the fail file would remain and would be detected by Puppet which would fail the overall Puppet run (and the wider self service job).</p><p>A feature has been included the latest self service 2 that will report the existence of fail files in an environment as part of the pre-deployment report. This feature would also be included in any implementation of self service 3.</p><p>A future iteration of this feature may also delete these files as part of a deployment. This should only be done once a user has confirmed that their existence has been investigated.</p><h3 id="Designnote-Environment&amp;ReleaseManagementV3.x-UIComplexity">UI Complexity</h3><p>Whilst the overall UX of self service 2 is good, it does suffer from an over abundance of logging. This leads to most users being left unable to interpret the logs when there are issues.</p><p>Both logging clarity and wider UX will have to be a key consideration for self service 3. The self service 3 deployment plan will have to handle the data associated with ten times the application deployments as self service 2.</p><h3 id="Designnote-Environment&amp;ReleaseManagementV3.x-DeploymentDescriptorComplexity">Deployment Descriptor Complexity</h3><p>Self service 2 DDs are inherently complex (many possible features) and this has lead to them being seen as opaque and hard to write &amp; understand.</p><p>Self service 3 DDs must be straightforward and for the most part should be easier to understand than self service 2 DDs as they really only define ordering.</p><h3 id="Designnote-Environment&amp;ReleaseManagementV3.x-Parallelism">Parallelism</h3><p>In service service 3 the deployment of some applications must be done in parallel to save time. This should be achieved by:</p><ol><li>Defining applications in the self service 3 deployment descriptor as being candidates for parallel deployment</li><li>Adding additional arguments to our MCollective calls to trigger Puppet runs simultaneously across an environment and for self service 3 to wait for all these to complete before continuing</li></ol><h3 id="Designnote-Environment&amp;ReleaseManagementV3.x-Waits">Waits</h3><p>In self service 3 some applications will require an arbitrary wait between application deployments. This is to allow for additional actions to finish that do not form part of the RPM installation.</p><p>This functionality would be defined in self service 3 deployment descriptor and/or release.</p><h3 id="Designnote-Environment&amp;ReleaseManagementV3.x-Auditingandreportingofdeployments">Auditing and reporting of deployments</h3><p>All self service 3 deployments must be recorded in the release database to ensure reporting, auditing and repeated deployments can be carried out. </p><h3 id="Designnote-Environment&amp;ReleaseManagementV3.x-Ad-hoc&#39;Custom&#39;Deployments-NOTIMPLEMENTED">Ad-hoc 'Custom' Deployments - NOT IMPLEMENTED</h3><p>A business need has been reported to allow a subgroup of privileged users to carry out self service 3 deployments that are involve only a subset of applications. This would likely be carried out mid-sprint hotfix or when a previously deployment failed.</p><p>The standard self service 3 release process, along with custom releases, is detailed below.</p><p>
+
+<map id="gliffy-map-32605660-2073" name="gliffy-map-32605660-2073"></map>
+<table width="100%" class="gliffy-macro-table">
+    <tr>
+        <td >
+            <table class="gliffy-macro-inner-table">
+                <caption align="bottom">
+ </caption>
+
+                <tr>
+                    <td>
+                        <img style="border: none; width: 1400px;" usemap="#gliffy-map-32605660-2073" src="attachments/26163260/32605661.png" alt="" class="gliffy-macro-image"/>
+                    </td>
+                </tr>
+            </table>
+ 
+        </td>
+    </tr>
+</table>
+
+
+</p><h2 id="Designnote-Environment&amp;ReleaseManagementV3.x-OutstandingQuestions">Outstanding Questions</h2><ol><li>Who has ownership of the self service 3 deployment descriptors?</li><li>Who has ownership of the self service 3 releases?</li><li>Who has ownership of the self service 3 deployments?</li></ol><p> </p><p> </p><p> </p></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                        
+                    
+                 
+                </div>             </div> 
+            
+        </div>     </body>
+</html>

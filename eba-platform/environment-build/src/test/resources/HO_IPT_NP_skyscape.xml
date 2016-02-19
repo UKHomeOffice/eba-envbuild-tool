@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Partial implementation (1st Virtual Machine Container, all Org Networks and Gateways) of HO_IPT_NP_PRP1 in the cloud agnostic schema -->
+<GeographicContainer id="ID_1" xmlns="http://ebsa.ipt.com/AgnosticCloudConfig-1.0" xsi:schemaLocation="http://ebsa.ipt.com/AgnosticCloudConfig-1.0 AgnosticCloudConfig-1.0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<account>Home Office</account>
+	<region>IPT</region>
+	<EnvironmentContainer id="EnvironmentContainer_1">
+		<name>np</name>
+		<provider>SKYSCAPE</provider>
+		<EnvironmentContainerDefinition id="EnvironmentContainerDefinition_1">
+			<name>HO_IPT_NP_PRP1</name>
+			<version>1.0</version>
+			<Network gatewayId="nft000c2i2-1" id="HO_IPT_NP_TLG1_MEBC_APP_I1" dataCenterName="Home Office IPT NP (IL2-PROD-STANDARD)">
+				<name>HO_IPT_NP_TLG1_MEBC_APP_I1</name>
+				<description>Isolated network that connects the MEBC to other Management VApps</description>
+				<fenceMode>ISOLATED</fenceMode>
+				<networkMask>255.255.255.0</networkMask>
+				<gatewayAddress>10.16.15.1</gatewayAddress>
+				<primaryDns>10.16.16.7</primaryDns>
+				<secondaryDns></secondaryDns>
+				<dnsSuffix></dnsSuffix>
+				<staticIpPool></staticIpPool>
+				<ipRangeStart>10.16.15.2</ipRangeStart>
+				<ipRangeEnd>10.16.15.254</ipRangeEnd>
+				<CIDR></CIDR>
+				<shared>true</shared>
+			</Network>
+			<Network id="HO_IPT_NP_PRP1_COBC_MABC_MAN_I1" gatewayId="nft000c2i2-1" dataCenterName="Home Office IPT NP (IL2-PROD-STANDARD)">
+				<name>HO_IPT_NP_PRP1_COBC_MABC_MAN_I1</name>
+				<description>Isolated network - Core Boundary Control to the Management Boundary Control in PRP1</description>
+				<fenceMode>ISOLATED</fenceMode>
+				<networkMask>255.255.255.0</networkMask>
+				<gatewayAddress>10.32.128.1</gatewayAddress>
+				<primaryDns>10.16.16.7</primaryDns>
+				<secondaryDns></secondaryDns>
+				<dnsSuffix></dnsSuffix>
+				<staticIpPool></staticIpPool>
+				<ipRangeStart>10.32.128.2</ipRangeStart>
+				<ipRangeEnd>10.32.128.254</ipRangeEnd>
+				<CIDR></CIDR>
+				<shared>true</shared>
+			</Network>
+			<Network id="HO_IPT_NP_PRP1_PRZO_MABC_MAN_I1" gatewayId="nft000c2i2-1" dataCenterName="Home Office IPT NP (IL2-PROD-STANDARD)">
+				<name>HO_IPT_NP_PRP1_PRZO_MABC_MAN_I1</name>
+				<description>Isolated network - Private Application Zone to the Management Boundary Control in PRP1</description>
+				<fenceMode>ISOLATED</fenceMode>
+				<networkMask>255.255.255.0</networkMask>
+				<gatewayAddress>10.32.144.1</gatewayAddress>
+				<primaryDns>10.16.16.7</primaryDns>
+				<secondaryDns></secondaryDns>
+				<dnsSuffix></dnsSuffix>
+				<staticIpPool></staticIpPool>
+				<ipRangeStart>10.32.144.2</ipRangeStart>
+				<ipRangeEnd>10.32.144.254</ipRangeEnd>
+				<CIDR></CIDR>
+				<shared>true</shared>
+			</Network>
+			<Network id="HO_IPT_NP_PRP1_DABC_MABC_MAN_I1" gatewayId="nft000c2i2-1" dataCenterName="Home Office IPT NP (IL2-PROD-STANDARD)">
+				<name>HO_IPT_NP_PRP1_DABC_MABC_MAN_I1</name>
+				<description>Isolated network - Data Boundary Control to the Management Boundary Control in PRP1</description>
+				<fenceMode>ISOLATED</fenceMode>
+				<networkMask>255.255.255.0</networkMask>
+				<gatewayAddress>10.32.160.1</gatewayAddress>
+				<primaryDns>10.16.16.7</primaryDns>
+				<secondaryDns></secondaryDns>
+				<dnsSuffix></dnsSuffix>
+				<staticIpPool></staticIpPool>
+				<ipRangeStart>10.32.160.2</ipRangeStart>
+				<ipRangeEnd>10.32.160.254</ipRangeEnd>
+				<CIDR></CIDR>
+				<shared>true</shared>
+			</Network>
+			<Network id="HO_IPT_NP_PRP1_DAZO_MABC_MAN_I1" gatewayId="nft000c2i2-1" dataCenterName="Home Office IPT NP (IL2-PROD-STANDARD)">
+				<name>HO_IPT_NP_PRP1_DAZO_MABC_MAN_I1</name>
+				<description>Isolated network - Data Zone to the Management Boundary Control in PRP1</description>
+				<fenceMode>ISOLATED</fenceMode>
+				<networkMask>255.255.255.0</networkMask>
+				<gatewayAddress>10.32.176.1</gatewayAddress>
+				<primaryDns>10.16.16.7</primaryDns>
+				<secondaryDns></secondaryDns>
+				<dnsSuffix></dnsSuffix>
+				<staticIpPool></staticIpPool>
+				<ipRangeStart>10.32.176.2</ipRangeStart>
+				<ipRangeEnd>10.32.176.254</ipRangeEnd>
+				<CIDR></CIDR>
+				<shared>true</shared>
+			</Network>
+			<Network id="HO_IPT_NP_PRP1_ESZO_MABC_MAN_I1" gatewayId="nft000c2i2-1" dataCenterName="Home Office IPT NP (IL2-PROD-STANDARD)">
+				<name>HO_IPT_NP_PRP1_ESZO_MABC_MAN_I1</name>
+				<description>Isolated network - External Simulator Zone to the Management Boundary Control in PRP1</description>
+				<fenceMode>ISOLATED</fenceMode>
+				<networkMask>255.255.255.0</networkMask>
+				<gatewayAddress>10.32.192.1</gatewayAddress>
+				<primaryDns>10.16.16.7</primaryDns>
+				<secondaryDns></secondaryDns>
+				<dnsSuffix></dnsSuffix>
+				<staticIpPool></staticIpPool>
+				<ipRangeStart>10.32.192.2</ipRangeStart>
+				<ipRangeEnd>10.32.192.254</ipRangeEnd>
+				<CIDR></CIDR>
+				<shared>true</shared>
+			</Network>
+			<Network id="HO_IPT_NP_PRP1_COBC_DABC_APP_I1" gatewayId="nft000c2i2-1" dataCenterName="Home Office IPT NP (IL2-PROD-STANDARD)">
+				<name>HO_IPT_NP_PRP1_COBC_DABC_APP_I1</name>
+				<description>Isolated network - Core Boundary Control to the Data Boundary Control in PRP1</description>
+				<fenceMode>ISOLATED</fenceMode>
+				<networkMask>255.255.255.0</networkMask>
+				<gatewayAddress>10.32.15.1</gatewayAddress>
+				<primaryDns></primaryDns>
+				<secondaryDns></secondaryDns>
+				<dnsSuffix></dnsSuffix>
+				<staticIpPool></staticIpPool>
+				<ipRangeStart>10.32.15.2</ipRangeStart>
+				<ipRangeEnd>10.32.15.254</ipRangeEnd>
+				<CIDR></CIDR>
+				<shared>true</shared>
+			</Network>
+			<Network id="HO_IPT_NP_PRP1_DABC_DAZO_APP_I1" gatewayId="nft000c2i2-1" dataCenterName="Home Office IPT NP (IL2-PROD-STANDARD)">
+				<name>HO_IPT_NP_PRP1_DABC_DAZO_APP_I1</name>
+				<description>Isolated network - Data Boundary Control to the Data Zone in PRP1</description>
+				<fenceMode>ISOLATED</fenceMode>
+				<networkMask>255.255.255.0</networkMask>
+				<gatewayAddress>10.32.47.1</gatewayAddress>
+				<primaryDns></primaryDns>
+				<secondaryDns></secondaryDns>
+				<dnsSuffix></dnsSuffix>
+				<staticIpPool></staticIpPool>
+				<ipRangeStart>10.32.47.2</ipRangeStart>
+				<ipRangeEnd>10.32.47.254</ipRangeEnd>
+				<CIDR></CIDR>
+				<shared>true</shared>
+			</Network>
+			<Network id="HO_IPT_NP_PRP1_DABC_ESZO_APP_I1" gatewayId="nft000c2i2-1" dataCenterName="Home Office IPT NP (IL2-PROD-STANDARD)">
+				<name>HO_IPT_NP_PRP1_DABC_ESZO_APP_I1</name>
+				<description>Isolated network - Data Boundary Control to the External Simulator Zone in PRP1</description>
+				<fenceMode>ISOLATED</fenceMode>
+				<networkMask>255.255.255.0</networkMask>
+				<gatewayAddress>10.32.79.1</gatewayAddress>
+				<primaryDns></primaryDns>
+				<secondaryDns></secondaryDns>
+				<dnsSuffix></dnsSuffix>
+				<staticIpPool></staticIpPool>
+				<ipRangeStart>10.32.79.2</ipRangeStart>
+				<ipRangeEnd>10.32.79.254</ipRangeEnd>
+				<CIDR></CIDR>
+				<shared>true</shared>
+			</Network>
+			<Gateway id="nft000c2i2-1">
+				<name>nft000c2i2-1</name>
+				<NAT id="Nat_1">
+					<appliedOn>nft000c2i2</appliedOn>
+					<originalSourceIpOrRange>185.40.8.186</originalSourceIpOrRange>
+					<translatedSourceIpOrRange>10.16.0.5</translatedSourceIpOrRange>
+					<enabled>true</enabled>
+					<DNAT id="DNat_1">
+						<translatedPort>22</translatedPort>
+						<protocolType>TCP</protocolType>
+						<protocolOriginalPort>22</protocolOriginalPort>
+						<protocolIcmpType></protocolIcmpType>
+					</DNAT>
+				</NAT>
+				<NAT id="Nat_2">
+					<appliedOn>nft000c2i2</appliedOn>
+					<originalSourceIpOrRange>185.40.8.186</originalSourceIpOrRange>
+					<translatedSourceIpOrRange>10.16.0.3</translatedSourceIpOrRange>
+					<enabled>true</enabled>
+					<DNAT id="DNat_2">
+						<translatedPort>80</translatedPort>
+						<protocolType>TCP</protocolType>
+						<protocolOriginalPort>80</protocolOriginalPort>
+						<protocolIcmpType></protocolIcmpType>
+					</DNAT>
+				</NAT>
+				<NAT id="Nat_3">
+					<appliedOn>nft000c2i2</appliedOn>
+					<originalSourceIpOrRange>185.40.8.186</originalSourceIpOrRange>
+					<translatedSourceIpOrRange>10.16.0.3</translatedSourceIpOrRange>
+					<enabled>true</enabled>
+					<DNAT id="DNat_3">
+						<translatedPort>443</translatedPort>
+						<protocolType>TCP</protocolType>
+						<protocolOriginalPort>443</protocolOriginalPort>
+						<protocolIcmpType></protocolIcmpType>
+					</DNAT>
+				</NAT>
+				<NAT id="Nat_4">
+					<appliedOn>nft000c2i2</appliedOn>
+					<originalSourceIpOrRange>10.16.0.4</originalSourceIpOrRange>
+					<translatedSourceIpOrRange>185.40.8.186</translatedSourceIpOrRange>
+					<enabled>true</enabled>
+				</NAT>
+			</Gateway>
+			<DataCenter id="DC_1">
+				<name>Home Office IPT NP (IL2-PROD-STANDARD)</name>
+			</DataCenter>
+		</EnvironmentContainerDefinition>
+	</EnvironmentContainer>
+</GeographicContainer>

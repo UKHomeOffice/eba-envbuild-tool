@@ -1,0 +1,983 @@
+<?xml version="1.0" standalone="no"?>
+<GeographicContainer id="_1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://ebsa.ipt.com/AgnosticCloudConfig-1.0">
+	<account/>
+	<region/>
+	<EnvironmentContainer id="_2">
+		<name>npa</name>
+		<provider>AWS</provider>
+		<Environment id="_5" environmentContainerDefinitionId="_3">
+			<name>HO_IPT_NPA_CTL1</name>
+			<notes/>
+			<EnvironmentDefinition id="_6" environmentDefinitionType="Physical">
+				<name>HO_IPT_NPA_CTL1</name>
+				<version>0.04</version>
+				<cidr/>
+				<VirtualMachineContainer id="_7" dataCenterId="_4" dataCenterName="name">
+					<name>HO_IPT_NPA_CTL1_CTZO</name>
+					<description>HO_IPT_NPA_CTL1_CTZO</description>
+					<runtimeLease/>
+					<storageLease/>
+					<serviceLevel/>
+					<powerOn>true</powerOn>
+					<deploy>true</deploy>
+					<domain>npa-ctl1-ctzo.ipt.ho.local</domain>
+					<VirtualMachine id="_8">
+						<vmName>cnfem01</vmName>
+						<computerName>cnfem01</computerName>
+						<description>Confluence</description>
+						<templateName>ami-0c2e2178</templateName>
+						<templateServiceLevel/>
+						<storageProfile/>
+						<customisationScript/>
+						<cpuCount>4</cpuCount>
+						<memory>16</memory>
+						<memoryUnit>GB</memoryUnit>
+						<hardwareProfile/>
+						<Storage id="_9">
+							<indexNumber>1</indexNumber>
+							<size>50</size>
+							<sizeUnit>GB</sizeUnit>
+							<busType/>
+							<busSubType/>
+							<deviceMount>/dev/sda1</deviceMount>
+						</Storage>
+						<Storage id="_10">
+							<indexNumber>2</indexNumber>
+							<size>250</size>
+							<sizeUnit>GB</sizeUnit>
+							<busType/>
+							<busSubType/>
+							<deviceMount>/dev/sdh</deviceMount>
+						</Storage>
+						<NIC id="_13" networkID="_11" networkName="name">
+							<indexNumber>1</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool>10.80.1.0/24</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>cnfea01</name>
+								<staticIpAddress>10.80.1.14</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+						<NIC id="_49" networkID="_45" networkName="name">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool>10.80.130.0/24</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>cnfem01</name>
+								<staticIpAddress>10.80.130.14</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+					</VirtualMachine>
+					<VirtualMachine id="_14">
+						<vmName>jirem01</vmName>
+						<computerName>jirem01</computerName>
+						<description>Jira</description>
+						<templateName>ami-0c2e2178</templateName>
+						<templateServiceLevel/>
+						<storageProfile/>
+						<customisationScript/>
+						<cpuCount>4</cpuCount>
+						<memory>16</memory>
+						<memoryUnit>GB</memoryUnit>
+						<hardwareProfile/>
+						<Storage id="_15">
+							<indexNumber>1</indexNumber>
+							<size>50</size>
+							<sizeUnit>GB</sizeUnit>
+							<busType/>
+							<busSubType/>
+							<deviceMount>/dev/sda1</deviceMount>
+						</Storage>
+						<Storage id="_16">
+							<indexNumber>2</indexNumber>
+							<size>150</size>
+							<sizeUnit>GB</sizeUnit>
+							<busType/>
+							<busSubType/>
+							<deviceMount>/dev/sdh</deviceMount>
+						</Storage>
+						<NIC id="_17" networkID="_11" networkName="name">
+							<indexNumber>1</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool>10.80.1.0/24</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>jirea01</name>
+								<staticIpAddress>10.80.1.15</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+						<NIC id="_50" networkID="_45" networkName="name">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool>10.80.130.0/24</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>jirem01</name>
+								<staticIpAddress>10.80.130.15</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+					</VirtualMachine>
+					<VirtualMachine id="_18">
+						<vmName>inmfm01</vmName>
+						<computerName>inmfm01</computerName>
+						<description>Instant Messaging</description>
+						<templateName>EBSA-TEMPLATES-HIPCHAT-1_2_8-64</templateName>
+						<templateServiceLevel/>
+						<storageProfile/>
+						<customisationScript/>
+						<cpuCount>4</cpuCount>
+						<memory>16</memory>
+						<memoryUnit>GB</memoryUnit>
+						<hardwareProfile/>
+						<Storage id="_19">
+							<indexNumber>1</indexNumber>
+							<size>50</size>
+							<sizeUnit>GB</sizeUnit>
+							<busType/>
+							<busSubType/>
+							<deviceMount>/dev/sda1</deviceMount>
+						</Storage>
+						<Storage id="_20">
+							<indexNumber>2</indexNumber>
+							<size>150</size>
+							<sizeUnit>GB</sizeUnit>
+							<busType/>
+							<busSubType/>
+							<deviceMount>/dev/sdh</deviceMount>
+						</Storage>
+						<NIC id="_21" networkID="_11" networkName="name">
+							<indexNumber>1</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool>10.80.2.0/24</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>inmfa01</name>
+								<staticIpAddress>10.80.2.14</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+						<NIC id="_51" networkID="_45" networkName="name">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool>10.80.131.0/24</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>inmfm01</name>
+								<staticIpAddress>10.80.131.14</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+					</VirtualMachine>
+					<VirtualMachine id="_22">
+						<vmName>cwdhm01</vmName>
+						<computerName>cwdhm01</computerName>
+						<description>Crowd</description>
+						<templateName>ami-0c2e2178</templateName>
+						<templateServiceLevel/>
+						<storageProfile/>
+						<customisationScript/>
+						<cpuCount>4</cpuCount>
+						<memory>8</memory>
+						<memoryUnit>GB</memoryUnit>
+						<hardwareProfile/>
+						<Storage id="_23">
+							<indexNumber>1</indexNumber>
+							<size>50</size>
+							<sizeUnit>GB</sizeUnit>
+							<busType/>
+							<busSubType/>
+							<deviceMount>/dev/sda1</deviceMount>
+						</Storage>
+						<NIC id="_24" networkID="_11" networkName="name">
+							<indexNumber>1</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool>10.80.4.0/24</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>cwdha01</name>
+								<staticIpAddress>10.80.4.14</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+						<NIC id="_54" networkID="_45" networkName="name">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool>10.80.133.0/24</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>cwdhm01</name>
+								<staticIpAddress>10.80.133.14</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+					</VirtualMachine>
+					<VirtualMachine id="_25">
+						<vmName>dbsgm01</vmName>
+						<computerName>dbsgm01</computerName>
+						<description>Database</description>
+						<templateName>ami-0c2e2178</templateName>
+						<templateServiceLevel/>
+						<storageProfile/>
+						<customisationScript/>
+						<cpuCount>4</cpuCount>
+						<memory>8</memory>
+						<memoryUnit>GB</memoryUnit>
+						<hardwareProfile/>
+						<hatype>AP</hatype>
+						<Storage id="_26">
+							<indexNumber>1</indexNumber>
+							<size>50</size>
+							<sizeUnit>GB</sizeUnit>
+							<busType/>
+							<busSubType/>
+							<deviceMount>/dev/sda1</deviceMount>
+						</Storage>
+						<Storage id="_27">
+							<indexNumber>2</indexNumber>
+							<size>50</size>
+							<sizeUnit>GB</sizeUnit>
+							<busType/>
+							<busSubType/>
+							<deviceMount>/dev/sdh</deviceMount>
+						</Storage>
+						<NIC id="_28" networkID="_11" networkName="name">
+							<indexNumber>1</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool>10.80.3.0/24</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>dbsga01</name>
+								<staticIpAddress>10.80.3.15</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+							<Interface>
+								<staticIpPool>10.80.3.0/24</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>dbsga0v</name>
+								<staticIpAddress>10.80.3.14</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>201</VRRP>
+							</Interface>
+						</NIC>
+						<NIC id="_52" networkID="_45" networkName="name">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool>10.80.132.0/24</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>dbsgm01</name>
+								<staticIpAddress>10.80.132.15</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+					</VirtualMachine>
+					<VirtualMachine id="_29">
+						<vmName>dbsgm02</vmName>
+						<computerName>dbsgm02</computerName>
+						<description>Database</description>
+						<templateName>ami-0c2e2178</templateName>
+						<templateServiceLevel/>
+						<storageProfile/>
+						<customisationScript/>
+						<cpuCount>4</cpuCount>
+						<memory>8</memory>
+						<memoryUnit>GB</memoryUnit>
+						<hardwareProfile/>
+						<hatype>AP</hatype>
+						<Storage id="_30">
+							<indexNumber>1</indexNumber>
+							<size>50</size>
+							<sizeUnit>GB</sizeUnit>
+							<busType/>
+							<busSubType/>
+							<deviceMount>/dev/sda1</deviceMount>
+						</Storage>
+						<Storage id="_31">
+							<indexNumber>2</indexNumber>
+							<size>50</size>
+							<sizeUnit>GB</sizeUnit>
+							<busType/>
+							<busSubType/>
+							<deviceMount>/dev/sdh</deviceMount>
+						</Storage>
+						<NIC id="_32" networkID="_11" networkName="name">
+							<indexNumber>1</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool>10.80.3.0/24</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>dbsga02</name>
+								<staticIpAddress>10.80.3.16</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+							<Interface>
+								<staticIpPool>10.80.3.0/24</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>dbsga0v</name>
+								<staticIpAddress>10.80.3.14</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>201</VRRP>
+							</Interface>
+						</NIC>
+						<NIC id="_53" networkID="_45" networkName="name">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool>10.80.132.0/24</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>dbsgm02</name>
+								<staticIpAddress>10.80.132.16</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+					</VirtualMachine>
+					<VirtualMachine id="_33">
+						<vmName>artam01</vmName>
+						<computerName>artam01</computerName>
+						<description>Application Router</description>
+						<templateName>ami-0c2e2178</templateName>
+						<templateServiceLevel/>
+						<storageProfile/>
+						<customisationScript/>
+						<cpuCount>1</cpuCount>
+						<memory>2</memory>
+						<memoryUnit>GB</memoryUnit>
+						<hardwareProfile/>
+						<hatype>AP</hatype>
+						<Storage id="_34">
+							<indexNumber>1</indexNumber>
+							<size>50</size>
+							<sizeUnit>GB</sizeUnit>
+							<busType/>
+							<busSubType/>
+							<deviceMount>/dev/sda1</deviceMount>
+						</Storage>
+						<NIC id="_35" networkID="_11" networkName="name">
+							<indexNumber>1</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<interfaceNumber>3</interfaceNumber>
+								<staticIpPool>10.80.3.0/24</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>artag01</name>
+								<staticIpAddress>10.80.3.12</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+							<Interface>
+								<interfaceNumber>3</interfaceNumber>
+								<staticIpPool>10.80.3.0/24</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>artag0v</name>
+								<staticIpAddress>10.80.3.11</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>8</VRRP>
+							</Interface>
+						</NIC>
+						<NIC id="_39" networkID="_11" networkName="name">
+							<indexNumber>1</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<interfaceNumber>4</interfaceNumber>
+								<staticIpPool>10.80.4.0/24</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>artah01</name>
+								<staticIpAddress>10.80.4.12</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+							<Interface>
+								<interfaceNumber>4</interfaceNumber>
+								<staticIpPool>10.80.4.0/24</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>artah0v</name>
+								<staticIpAddress>10.80.4.11</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>9</VRRP>
+							</Interface>
+						</NIC>
+						<NIC id="_41" networkID="_11" networkName="name">
+							<indexNumber>1</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<interfaceNumber>2</interfaceNumber>
+								<staticIpPool>10.80.2.0/24</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>artaf01</name>
+								<staticIpAddress>10.80.2.12</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+							<Interface>
+								<interfaceNumber>2</interfaceNumber>
+								<staticIpPool>10.80.2.0/24</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>artaf0v</name>
+								<staticIpAddress>10.80.2.11</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>7</VRRP>
+							</Interface>
+						</NIC>
+						<NIC id="_43" networkID="_11" networkName="name">
+							<indexNumber>1</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<interfaceNumber>1</interfaceNumber>
+								<staticIpPool>10.80.1.0/24</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>artae01</name>
+								<staticIpAddress>10.80.1.12</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+							<Interface>
+								<interfaceNumber>1</interfaceNumber>
+								<staticIpPool>10.80.1.0/24</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>artae0v</name>
+								<staticIpAddress>10.80.1.11</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>6</VRRP>
+							</Interface>
+						</NIC>
+						<NIC id="_47" networkID="_45" networkName="name">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool>10.80.129.0/24</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>artam01</name>
+								<staticIpAddress>10.80.129.15</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+							<Interface>
+								<staticIpPool>10.80.129.0/24</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>artam0v</name>
+								<staticIpAddress>10.80.129.14</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>5</VRRP>
+							</Interface>
+						</NIC>
+					</VirtualMachine>
+					<VirtualMachine id="_36">
+						<vmName>artam02</vmName>
+						<computerName>artam02</computerName>
+						<description>Application Router</description>
+						<templateName>ami-0c2e2178</templateName>
+						<templateServiceLevel/>
+						<storageProfile/>
+						<customisationScript/>
+						<cpuCount>1</cpuCount>
+						<memory>2</memory>
+						<memoryUnit>GB</memoryUnit>
+						<hardwareProfile/>
+						<hatype>AP</hatype>
+						<Storage id="_37">
+							<indexNumber>1</indexNumber>
+							<size>50</size>
+							<sizeUnit>GB</sizeUnit>
+							<busType/>
+							<busSubType/>
+							<deviceMount>/dev/sda1</deviceMount>
+						</Storage>
+						<NIC id="_38" networkID="_11" networkName="name">
+							<indexNumber>1</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<interfaceNumber>3</interfaceNumber>
+								<staticIpPool>10.80.3.0/24</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>artag02</name>
+								<staticIpAddress>10.80.3.13</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+							<Interface>
+								<interfaceNumber>3</interfaceNumber>
+								<staticIpPool>10.80.3.0/24</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>artag0v</name>
+								<staticIpAddress>10.80.3.11</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>8</VRRP>
+							</Interface>
+						</NIC>
+						<NIC id="_40" networkID="_11" networkName="name">
+							<indexNumber>1</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<interfaceNumber>4</interfaceNumber>
+								<staticIpPool>10.80.4.0/24</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>artah02</name>
+								<staticIpAddress>10.80.4.13</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+							<Interface>
+								<interfaceNumber>4</interfaceNumber>
+								<staticIpPool>10.80.4.0/24</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>artah0v</name>
+								<staticIpAddress>10.80.4.11</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>9</VRRP>
+							</Interface>
+						</NIC>
+						<NIC id="_42" networkID="_11" networkName="name">
+							<indexNumber>1</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<interfaceNumber>2</interfaceNumber>
+								<staticIpPool>10.80.2.0/24</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>artaf02</name>
+								<staticIpAddress>10.80.2.13</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+							<Interface>
+								<interfaceNumber>2</interfaceNumber>
+								<staticIpPool>10.80.2.0/24</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>artaf0v</name>
+								<staticIpAddress>10.80.2.11</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>7</VRRP>
+							</Interface>
+						</NIC>
+						<NIC id="_44" networkID="_11" networkName="name">
+							<indexNumber>1</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<interfaceNumber>1</interfaceNumber>
+								<staticIpPool>10.80.1.0/24</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>artae02</name>
+								<staticIpAddress>10.80.1.13</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+							<Interface>
+								<interfaceNumber>1</interfaceNumber>
+								<staticIpPool>10.80.1.0/24</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>artae0v</name>
+								<staticIpAddress>10.80.1.11</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>6</VRRP>
+							</Interface>
+						</NIC>
+						<NIC id="_48" networkID="_45" networkName="name">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool>10.80.129.0/24</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>artam02</name>
+								<staticIpAddress>10.80.129.16</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+							<Interface>
+								<staticIpPool>10.80.129.0/24</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>artam0v</name>
+								<staticIpAddress>10.80.129.14</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>5</VRRP>
+							</Interface>
+						</NIC>
+					</VirtualMachine>
+					<VirtualMachine id="_55">
+						<vmName>mrtcm01</vmName>
+						<computerName>mrtcm01</computerName>
+						<description>Management Router</description>
+						<templateName>ami-0c2e2178</templateName>
+						<templateServiceLevel/>
+						<storageProfile/>
+						<customisationScript/>
+						<cpuCount>1</cpuCount>
+						<memory>2</memory>
+						<memoryUnit>GB</memoryUnit>
+						<hardwareProfile/>
+						<hatype>AP</hatype>
+						<Storage id="_56">
+							<indexNumber>1</indexNumber>
+							<size>50</size>
+							<sizeUnit>GB</sizeUnit>
+							<busType/>
+							<busSubType/>
+							<deviceMount>/dev/sda1</deviceMount>
+						</Storage>
+						<NIC id="_57" networkID="_45" networkName="name">
+							<indexNumber>1</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<interfaceNumber>5</interfaceNumber>
+								<staticIpPool>10.80.133.0/24</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>mrthm01</name>
+								<staticIpAddress>10.80.133.12</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+							<Interface>
+								<interfaceNumber>5</interfaceNumber>
+								<staticIpPool>10.80.133.0/24</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>mrthm0v</name>
+								<staticIpAddress>10.80.133.11</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>16</VRRP>
+							</Interface>
+						</NIC>
+						<NIC id="_61" networkID="_45" networkName="name">
+							<indexNumber>1</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<interfaceNumber>4</interfaceNumber>
+								<staticIpPool>10.80.132.0/24</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>mrtgm01</name>
+								<staticIpAddress>10.80.132.12</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+							<Interface>
+								<interfaceNumber>4</interfaceNumber>
+								<staticIpPool>10.80.132.0/24</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>mrtgm0v</name>
+								<staticIpAddress>10.80.132.11</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>15</VRRP>
+							</Interface>
+						</NIC>
+						<NIC id="_63" networkID="_45" networkName="name">
+							<indexNumber>1</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<interfaceNumber>3</interfaceNumber>
+								<staticIpPool>10.80.131.0/24</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>mrtfm01</name>
+								<staticIpAddress>10.80.131.12</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+							<Interface>
+								<interfaceNumber>3</interfaceNumber>
+								<staticIpPool>10.80.131.0/24</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>mrtfm0v</name>
+								<staticIpAddress>10.80.131.11</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>14</VRRP>
+							</Interface>
+						</NIC>
+						<NIC id="_65" networkID="_45" networkName="name">
+							<indexNumber>1</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<interfaceNumber>2</interfaceNumber>
+								<staticIpPool>10.80.130.0/24</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>mrtem01</name>
+								<staticIpAddress>10.80.130.12</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+							<Interface>
+								<interfaceNumber>2</interfaceNumber>
+								<staticIpPool>10.80.130.0/24</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>mrtem0v</name>
+								<staticIpAddress>10.80.130.11</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>13</VRRP>
+							</Interface>
+						</NIC>
+						<NIC id="_67" networkID="_45" networkName="name">
+							<indexNumber>1</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<interfaceNumber>1</interfaceNumber>
+								<staticIpPool>10.80.129.0/24</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>mrtam01</name>
+								<staticIpAddress>10.80.129.12</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+							<Interface>
+								<interfaceNumber>1</interfaceNumber>
+								<staticIpPool>10.80.129.0/24</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>mrtam0v</name>
+								<staticIpAddress>10.80.129.11</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>12</VRRP>
+							</Interface>
+						</NIC>
+						<NIC id="_71" networkID="_69" networkName="name">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool/>
+								<networkMask/>
+								<name>mrtcm01</name>
+								<staticIpAddress>10.80.128.12</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+							<Interface>
+								<staticIpPool/>
+								<networkMask/>
+								<name>mrtcm0v</name>
+								<staticIpAddress>10.80.128.11</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>11</VRRP>
+							</Interface>
+						</NIC>
+					</VirtualMachine>
+					<VirtualMachine id="_58">
+						<vmName>mrtcm02</vmName>
+						<computerName>mrtcm02</computerName>
+						<description>Management Router</description>
+						<templateName>ami-0c2e2178</templateName>
+						<templateServiceLevel/>
+						<storageProfile/>
+						<customisationScript/>
+						<cpuCount>1</cpuCount>
+						<memory>2</memory>
+						<memoryUnit>GB</memoryUnit>
+						<hardwareProfile/>
+						<hatype>AP</hatype>
+						<Storage id="_59">
+							<indexNumber>1</indexNumber>
+							<size>50</size>
+							<sizeUnit>GB</sizeUnit>
+							<busType/>
+							<busSubType/>
+							<deviceMount>/dev/sda1</deviceMount>
+						</Storage>
+						<NIC id="_60" networkID="_45" networkName="name">
+							<indexNumber>1</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<interfaceNumber>5</interfaceNumber>
+								<staticIpPool>10.80.133.0/24</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>mrthm02</name>
+								<staticIpAddress>10.80.133.13</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+							<Interface>
+								<interfaceNumber>5</interfaceNumber>
+								<staticIpPool>10.80.133.0/24</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>mrthm0v</name>
+								<staticIpAddress>10.80.133.11</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>16</VRRP>
+							</Interface>
+						</NIC>
+						<NIC id="_62" networkID="_45" networkName="name">
+							<indexNumber>1</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<interfaceNumber>4</interfaceNumber>
+								<staticIpPool>10.80.132.0/24</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>mrtgm02</name>
+								<staticIpAddress>10.80.132.13</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+							<Interface>
+								<interfaceNumber>4</interfaceNumber>
+								<staticIpPool>10.80.132.0/24</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>mrtgm0v</name>
+								<staticIpAddress>10.80.132.11</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>15</VRRP>
+							</Interface>
+						</NIC>
+						<NIC id="_64" networkID="_45" networkName="name">
+							<indexNumber>1</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<interfaceNumber>3</interfaceNumber>
+								<staticIpPool>10.80.131.0/24</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>mrtfm02</name>
+								<staticIpAddress>10.80.131.13</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+							<Interface>
+								<interfaceNumber>3</interfaceNumber>
+								<staticIpPool>10.80.131.0/24</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>mrtfm0v</name>
+								<staticIpAddress>10.80.131.11</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>14</VRRP>
+							</Interface>
+						</NIC>
+						<NIC id="_66" networkID="_45" networkName="name">
+							<indexNumber>1</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<interfaceNumber>2</interfaceNumber>
+								<staticIpPool>10.80.130.0/24</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>mrtem02</name>
+								<staticIpAddress>10.80.130.13</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+							<Interface>
+								<interfaceNumber>2</interfaceNumber>
+								<staticIpPool>10.80.130.0/24</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>mrtem0v</name>
+								<staticIpAddress>10.80.130.11</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>13</VRRP>
+							</Interface>
+						</NIC>
+						<NIC id="_68" networkID="_45" networkName="name">
+							<indexNumber>1</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<interfaceNumber>1</interfaceNumber>
+								<staticIpPool>10.80.129.0/24</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>mrtam02</name>
+								<staticIpAddress>10.80.129.13</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+							<Interface>
+								<interfaceNumber>1</interfaceNumber>
+								<staticIpPool>10.80.129.0/24</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>mrtam0v</name>
+								<staticIpAddress>10.80.129.11</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>12</VRRP>
+							</Interface>
+						</NIC>
+						<NIC id="_72" networkID="_69" networkName="name">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool/>
+								<networkMask/>
+								<name>mrtcm02</name>
+								<staticIpAddress>10.80.128.13</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+							<Interface>
+								<staticIpPool/>
+								<networkMask/>
+								<name>mrtcm0v</name>
+								<staticIpAddress>10.80.128.11</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>11</VRRP>
+							</Interface>
+						</NIC>
+					</VirtualMachine>
+					<Network id="_11" dataCenterId="_4" dataCenterName="name">
+						<name>HO_IPT_NPA_CTL1_CTZO_APP</name>
+						<description>Application</description>
+						<fenceMode>NATROUTED</fenceMode>
+						<networkMask>255.255.255.0</networkMask>
+						<gatewayAddress>10.80.0.1</gatewayAddress>
+						<primaryDns>10.20.16.17</primaryDns>
+						<secondaryDns/>
+						<dnsSuffix>npa-ctl1-ctzo.ipt.ho.local</dnsSuffix>
+						<staticIpPool>10.80.0.0/22</staticIpPool>
+						<ipRangeStart>10.80.0.1</ipRangeStart>
+						<ipRangeEnd>10.80.0.254</ipRangeEnd>
+						<CIDR/>
+						<shared>true</shared>
+					</Network>
+					<Network id="_45" dataCenterId="_4" dataCenterName="name">
+						<name>HO_IPT_NPA_CTL1_CTZO_MAN</name>
+						<description>Management</description>
+						<fenceMode>NATROUTED</fenceMode>
+						<networkMask>255.255.255.0</networkMask>
+						<gatewayAddress>10.80.129.1</gatewayAddress>
+						<primaryDns>10.20.16.17</primaryDns>
+						<secondaryDns/>
+						<dnsSuffix>npa-ctl1-ctzo.ipt.ho.local</dnsSuffix>
+						<staticIpPool>10.80.129.0/22</staticIpPool>
+						<ipRangeStart>10.80.129.1</ipRangeStart>
+						<ipRangeEnd>10.80.129.254</ipRangeEnd>
+						<CIDR/>
+						<shared>true</shared>
+					</Network>
+				</VirtualMachineContainer>
+			</EnvironmentDefinition>
+		</Environment>
+		<EnvironmentContainerDefinition id="_3">
+			<name>npa</name>
+			<version>0.1</version>
+			<Network id="_69" dataCenterId="_4" gatewayId="_46" dataCenterName="name">
+				<name>HO_IPT_NPA_CTL1_CTZO_CO_DAT1_MABC_MAN_I1</name>
+				<description>Collab to MABC connectivity</description>
+				<fenceMode>BRIDGED</fenceMode>
+				<networkMask>255.255.255.0</networkMask>
+				<gatewayAddress>10.80.128.1</gatewayAddress>
+				<primaryDns>10.20.16.17</primaryDns>
+				<secondaryDns/>
+				<dnsSuffix/>
+				<staticIpPool>10.80.128.0/24</staticIpPool>
+				<ipRangeStart>10.80.128.1</ipRangeStart>
+				<ipRangeEnd>10.80.128.254</ipRangeEnd>
+				<CIDR/>
+				<shared>true</shared>
+				<peerNetworkName>HO_IPT_NPA_CO_DAT1_MABC_MAN_I1</peerNetworkName>
+				<peerEnvironmentName>HO_IPT_NPA_CO_DAT1</peerEnvironmentName>
+			</Network>
+			<Gateway id="_12">
+				<name>0</name>
+			</Gateway>
+			<Gateway id="_46">
+				<name>0</name>
+			</Gateway>
+			<Gateway id="_70">
+				<name>0</name>
+			</Gateway>
+			<DataCenter id="_4">
+				<name>eu-west-1a</name>
+			</DataCenter>
+		</EnvironmentContainerDefinition>
+	</EnvironmentContainer>
+</GeographicContainer>

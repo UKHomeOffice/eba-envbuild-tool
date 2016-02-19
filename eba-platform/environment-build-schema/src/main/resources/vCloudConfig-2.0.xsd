@@ -1,0 +1,833 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 rel. 3 sp1 (http://www.altova.com) by Home Office (Home Office) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vc="http://ebsa.ipt.com/VCloudConfig-2.0" targetNamespace="http://ebsa.ipt.com/VCloudConfig-2.0" elementFormDefault="qualified" attributeFormDefault="unqualified" vc:minVersion="1.1">
+	<xs:element name="Organisation" type="vc:OrganisationType">
+		<xs:annotation>
+			<xs:documentation>The name of the organisation containing the environment being created / updated</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="VirtualApplicationType">
+		<xs:sequence>
+			<xs:element name="Name">
+				<xs:annotation>
+					<xs:documentation>The standardised virtual application name</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="40"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Description">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="RuntimeLease" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="20"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="StorageLease" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="20"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="ServiceLevel">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="PowerOn" type="xs:boolean"/>
+			<xs:element name="Deploy" type="xs:boolean"/>
+			<xs:element name="Network" type="vc:NetworkType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="VirtualMachine" type="vc:VirtualMachineType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="NetworkType">
+		<xs:choice>
+			<xs:element name="OrganisationNetwork" type="vc:AssignOrganisationNetworkType"/>
+			<xs:element name="ApplicationNetwork" type="vc:ApplicationNetworkType"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="AssignOrganisationNetworkType">
+		<xs:sequence>
+			<xs:element name="Name">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="50"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="FenceMode">
+				<xs:annotation>
+					<xs:documentation>Networking fence mode</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="BRIDGED">
+							<xs:annotation>
+								<xs:documentation>This will give you a "Direct" connection</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="NATROUTED">
+							<xs:annotation>
+								<xs:documentation>This will give you a "Fenced" connection</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ApplicationNetworkType">
+		<xs:sequence>
+			<xs:element name="Name">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="50"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="FenceMode">
+				<xs:annotation>
+					<xs:documentation>Networking fence mode</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="BRIDGED">
+							<xs:annotation>
+								<xs:documentation>This will give you a "Direct" connection</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="ISOLATED">
+							<xs:annotation>
+								<xs:documentation>This will give you an isolated network.</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="NATROUTED">
+							<xs:annotation>
+								<xs:documentation>This will give you a "Fenced" connection</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="NetworkMask">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="15"/>
+						<xs:minLength value="8"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="GatewayAddress" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="8"/>
+						<xs:maxLength value="14"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="PrimaryDNS" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="8"/>
+						<xs:maxLength value="14"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="SecondaryDNS" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="8"/>
+						<xs:maxLength value="14"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="DNSSuffix" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="StaticIPPool" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="30"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="IPRange" minOccurs="0" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="startAddress">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="15"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="endAddress">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="15"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="VirtualMachineType">
+		<xs:sequence>
+			<xs:element name="VMName">
+				<xs:annotation>
+					<xs:documentation>The VM name - a label that appears in VCD lists</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="50"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="ComputerName">
+				<xs:annotation>
+					<xs:documentation>The computer name / host name set in the guest OS of the VM that identifies it on a network.  Restricted to 15 characters for Windows, for non-Windows systems it can be 63 characters long and contain dots.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="50"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Description" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The description of the VM</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Template">
+				<xs:annotation>
+					<xs:documentation>The template this VM should be instantiated from</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Name">
+							<xs:annotation>
+								<xs:documentation>The name of the template that this VM should be instantiated from</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="50"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="ServiceLevel">
+							<xs:annotation>
+								<xs:documentation>The service level that the template is held against</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="100"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="StorageProfile">
+				<xs:annotation>
+					<xs:documentation>The storage profile to use when the VM is deployed</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="50"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="GuestCustomisationScript" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A reference to a script which will be executed on the guest. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<!-- EBSAD-12397 - power on and off ordering -->
+			<xs:element name="VMOrder" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The order of the VM in in the sequence for powering on (ascending order) and off (reversed order high to low)</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="0"/>
+						<xs:maxInclusive value="1000"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="VMStartDelay" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The Start delay</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="0"/>
+						<xs:maxInclusive value="180"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="VMStopDelay" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The Stop delay in seconds</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="0"/>
+						<xs:maxInclusive value="180"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<!-- EBSAD-12397 - power on and off ordering -->
+			<!-- EBSAD-14676 start -->
+			<xs:element name="VMStartAction" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The VM Start Action. One of none, powerOn</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="powerOn">
+							<xs:annotation>
+								<xs:documentation>This will set the VM to Power On when started by the vApp.</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="none">
+							<xs:annotation>
+								<xs:documentation>This will set the VM do nothing when started by the vApp.</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="VMStopAction" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The VM Stop Action. One of powerOff, guestShutdown</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="powerOff">
+							<xs:annotation>
+								<xs:documentation>This will set the VM to Power Off when stopped by the vApp.</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="guestShutdown">
+							<xs:annotation>
+								<xs:documentation>This will set the VM to Shutdown when stopped by the vApp.</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<!-- EBSAD-14676 end -->
+			<xs:element name="VirtualHardware">
+				<xs:annotation>
+					<xs:documentation>The virtual hardware assigned to the VM</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="CPU">
+							<xs:annotation>
+								<xs:documentation>Number of virtual CPUs allocated to the VM (1 - 32)</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:int">
+									<xs:minInclusive value="1"/>
+									<xs:maxInclusive value="32"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="MemorySize" type="vc:SizeType">
+							<xs:annotation>
+								<xs:documentation>Total virtual memory allocated to the VM</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="HardDisk" type="vc:HardDiskType" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Number of virtual hard drives allocated to the VM</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="NetworkCard" type="vc:VirtualNetworkCardType" maxOccurs="10">
+							<xs:annotation>
+								<xs:documentation>The list of virtual network interface cards associated to the VM.  Max of 10 vNICs per VM.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="MetaData" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Additional meta data that can be added to the VM, uses the 'Text' type of the meta data</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Name">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="20"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="Value">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="100"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="VirtualNetworkCardType">
+		<xs:sequence>
+			<xs:element name="NICNumber" type="xs:int" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The NIC number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="IsPrimaryNIC" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Denotes the primary virtual network interface card</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NetworkName">
+				<xs:annotation>
+					<xs:documentation>The name of the network assigned to the VM</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="50"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="IPAssignment">
+				<xs:annotation>
+					<xs:documentation>How the IP is allocated to this vNIC</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:choice>
+						<xs:element name="StaticIPPool">
+							<xs:annotation>
+								<xs:documentation>The IP of this vNIC is assigned from a static pool of IPs</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="StaticManual">
+							<xs:annotation>
+								<xs:documentation>The IP of this vNIC is assigned manually</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="IPAddress">
+										<xs:annotation>
+											<xs:documentation>The statically defined IP of this vNIC</xs:documentation>
+										</xs:annotation>
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:minLength value="8"/>
+												<xs:maxLength value="14"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="DHCP">
+							<xs:annotation>
+								<xs:documentation>The IP of this vNIC is assigned dynamically</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SizeType">
+		<xs:choice>
+			<xs:element name="SizeGB" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>The size in GB</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SizeMB" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>The size in MB</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="HardDiskType">
+		<xs:sequence>
+			<xs:element name="DiskNumber">
+				<xs:annotation>
+					<xs:documentation>The index of the disk, starting at 0</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="1"/>
+						<xs:maxInclusive value="10"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="DiskSize" type="vc:SizeType">
+				<xs:annotation>
+					<xs:documentation>The size of this virtual hard disk</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="BusType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The bus type of the hard disk (only applicable for new hard disks as you cannot change these I would imagine once they are created)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="BusSubType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The bus sub type of the hard disk (only applicable for new hard disks as you cannot change these I would imagine once they are created)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="EnvironmentType">
+		<xs:sequence>
+			<xs:element name="Name">
+				<xs:annotation>
+					<xs:documentation>The name of the environment e.g. SystemTest1</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="30"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="VirtualApplication" type="vc:VirtualApplicationType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The virtual applications within the environment being created / updated</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="NetworkSettingsType">
+		<xs:sequence>
+			<xs:element name="FenceMode">
+				<xs:annotation>
+					<xs:documentation>The type of network, either: a Routed network which provides controlled access to machines and networks outside of the data centre via an edge gateway, or an Isolated network which only provides access to machines within the data centre.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="NATROUTED"/>
+						<xs:enumeration value="ISOLATED"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="GatewayAddress">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="8"/>
+						<xs:maxLength value="14"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="NetworkMask">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="15"/>
+						<xs:minLength value="8"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="PrimaryDNS" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="8"/>
+						<xs:maxLength value="14"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="SecondaryDNS" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="8"/>
+						<xs:maxLength value="14"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="DNSSuffix" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="IPRange" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>An IP range (format: 192.168.1.2 - 192.168.1.100) N.B. single IPs are represented with the same start and end address</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="startAddress">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="15"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="endAddress">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="15"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OrganisationNetworkType">
+		<xs:sequence>
+			<xs:element name="VirtualDataCenter">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="EdgeGateway">
+				<xs:annotation>
+					<xs:documentation>The Edge Gateway that this organisation network is configured against</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="50"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Name">
+				<xs:annotation>
+					<xs:documentation>The name of the organisation network</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="40"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Description" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The description of the organisation network</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Shared" type="xs:boolean" default="false">
+				<xs:annotation>
+					<xs:documentation>Share this organisation network across other VDCs within the organisation</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NetworkSettings" type="vc:NetworkSettingsType">
+				<xs:annotation>
+					<xs:documentation>The configuration of the network settings</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OrganisationType">
+		<xs:choice>
+			<xs:element name="Environment" type="vc:EnvironmentType"/>
+			<xs:element name="Configuration" type="vc:ConfigurationType"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="EdgeGatewayType">
+		<xs:sequence>
+			<xs:element name="Name">
+				<xs:annotation>
+					<xs:documentation>Name of the Edge Gateway</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="50"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="EdgeGatewayServices" type="vc:EdgeGatewayServicesType"/>
+			<xs:element name="VirtualDataCenter">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="EdgeGatewayServicesType">
+		<xs:sequence>
+			<xs:element name="NAT" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Modify the source or destination IP addresses of packets arriving to and leaving from the Edge Gateway</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:choice>
+						<xs:element name="SNAT">
+							<xs:annotation>
+								<xs:documentation>Source NAT rule - changes the source IP address of outbound packaets</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="AppliedOn">
+										<xs:annotation>
+											<xs:documentation>Specify the network on which to apply the rule.</xs:documentation>
+										</xs:annotation>
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:maxLength value="100"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:element>
+									<xs:element name="OriginalSourceIPOrRange">
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:maxLength value="19"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:element>
+									<xs:element name="TranslatedSourceIPOrRange">
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:maxLength value="19"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:element>
+									<xs:element name="Enabled" type="xs:boolean">
+										<xs:annotation>
+											<xs:documentation>Is this rule enabled</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="DNAT">
+							<xs:annotation>
+								<xs:documentation>Destination NAT rule - changes the destination IP address and, optionally, port of inbound packets</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="AppliedOn">
+										<xs:annotation>
+											<xs:documentation>Specify the network on which to apply the rule.</xs:documentation>
+										</xs:annotation>
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:maxLength value="100"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:element>
+									<xs:element name="OriginalSourceIPOrRange">
+										<xs:annotation>
+											<xs:documentation>A single or range of destination IP addresses from the network to which the rule applies.</xs:documentation>
+										</xs:annotation>
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:maxLength value="19"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:element>
+									<xs:element name="Protocol">
+										<xs:annotation>
+											<xs:documentation>Constrain the matching type of packets to a specific port or ICMP packet type.</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="Type">
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:enumeration value="TCP"/>
+															<xs:enumeration value="UDP"/>
+															<xs:enumeration value="TCPUDP"/>
+															<xs:enumeration value="ICMP"/>
+															<xs:enumeration value="ANY"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+												<xs:element name="OriginalPort">
+													<xs:simpleType>
+														<xs:restriction base="xs:string"/>
+													</xs:simpleType>
+												</xs:element>
+												<xs:element name="ICMPType" minOccurs="0">
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:enumeration value="ANY"/>
+															<xs:enumeration value="Address-mask-request"/>
+															<xs:enumeration value="Address-mask-reply"/>
+															<xs:enumeration value="Destination-unreachable"/>
+															<xs:enumeration value="Echo-request"/>
+															<xs:enumeration value="Echo-reply"/>
+															<xs:enumeration value="Parameter-problem"/>
+															<xs:enumeration value="Redirect"/>
+															<xs:enumeration value="Router-advertisement"/>
+															<xs:enumeration value="Router-solicitation"/>
+															<xs:enumeration value="Source-quench"/>
+															<xs:enumeration value="Time-exceeded"/>
+															<xs:enumeration value="Timestamp-request"/>
+															<xs:enumeration value="Timestamp-reply"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="TranslatedSourceIPOrRange">
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:maxLength value="19"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:element>
+									<xs:element name="TranslatedPort">
+										<xs:simpleType>
+											<xs:restriction base="xs:string"/>
+										</xs:simpleType>
+									</xs:element>
+									<xs:element name="Enabled" type="xs:boolean">
+										<xs:annotation>
+											<xs:documentation>Is this rule enabled</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:choice>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ConfigurationType">
+		<xs:sequence>
+			<xs:element name="EdgeGateway" type="vc:EdgeGatewayType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="OrganisationNetwork" type="vc:OrganisationNetworkType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>EBA - OS - Landing Page</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            EBA - OS - Landing Page
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    
+                    <div id="main-content" class="wiki-content group">
+                    <h1 id="EBA-OS-LandingPage-Introduction">Introduction</h1><p>The Environment Build Automation (EBA) tooling has been developed to enable an environment to be designed using Visio and to be automatically provisioned in the cloud. Two components of the tooling, <strong>EBA Visio Physical Design</strong> and <strong>EBA ACloud</strong>, have been open sourced and together enable environments designed in Visio to be provisioned in the cloud. The virtual machines in that network will have an operating system image but no additional middleware or user applications loaded and configured. The programme that gave rise to these tools has a more comprehensive toolset that does have capabilities to do orchestrated middleware and application deployment but is not open sourced at this time. By way of example of how these tools can form part of a more comprehensive environment build toolset the environment build tooling design that these tools are being used in is outlined <a href="#EBA-OS-LandingPage-EBSAEnvironmentBuildTooling">here</a>.</p><p>The basic premise is that a physical environment design is composed in Visio using the tools provided in the EBA Visio Physical Design project. This provides a custom Visio stencil containing the custom shapes and associated shape data, a configuration file and a programme to enable the design to be exported to an XML file conforming to an EBA provider agnostic schema. The environment definition XML, along with a Build Plan XML is fed into the EBA ACloud Client tool which then provisions your environment in your cloud provider (AWS or a VMware based cloud provider that uses the VMware vCloud Director (v5.1 up to v5.6) API's, e.g Skyscape).</p><p>This basic premise is illustrated below:</p><p> </p><p>
+
+<map id="gliffy-map-65478557-2676" name="gliffy-map-65478557-2676"></map>
+<table width="100%" class="gliffy-macro-table">
+    <tr>
+        <td >
+            <table class="gliffy-macro-inner-table">
+                <caption align="bottom">
+ </caption>
+
+                <tr>
+                    <td>
+                        <img style="border: none; width: 1040px;" usemap="#gliffy-map-65478557-2676" src="attachments/65478538/65478558.png" alt="" class="gliffy-macro-image"/>
+                    </td>
+                </tr>
+            </table>
+ 
+        </td>
+    </tr>
+</table>
+
+
+</p><p>Details of each of how to configure and use each of the two components are here:</p><ul><li><a href="EBA---Visio-Physical-Design_57512650.html">EBA Visio Physical Design</a>.</li></ul><div class="toc-macro rbtoc1452167226877"><ul class="toc-indentation"><li style="list-style-type: none;background-image: none;"><ul class="toc-indentation"><li><a href="EBA---Visio-Physical-Design_57512650.html#EBA-VisioPhysicalDesign-Workflow">Workflow</a></li><li><a href="EBA---Visio-Physical-Design_57512650.html#EBA-VisioPhysicalDesign-Provideragnosticschemas">Provider agnostic schemas</a><ul class="toc-indentation"><li><a href="EBA---Visio-Physical-Design_57512650.html#EBA-VisioPhysicalDesign-Configurationschema"><span class="confluence-link">Configuration schema</span></a></li><li><a href="EBA---Visio-Physical-Design_57512650.html#EBA-VisioPhysicalDesign-Commandschema">Command schema</a></li></ul></li><li><a href="EBA---Visio-Physical-Design_57512650.html#EBA-VisioPhysicalDesign-VisioCustomisation">Visio Customisation</a></li><li><a href="EBA---Visio-Physical-Design_57512650.html#EBA-VisioPhysicalDesign-DesignProcess">Design Process</a></li><li><a href="EBA---Visio-Physical-Design_57512650.html#EBA-VisioPhysicalDesign-VisioStencildata">Visio Stencil data</a></li><li><a href="EBA---Visio-Physical-Design_57512650.html#EBA-VisioPhysicalDesign-VisioExportConfigurationdata">Visio Export Configuration data</a></li><li><a href="EBA---Visio-Physical-Design_57512650.html#EBA-VisioPhysicalDesign-MandatoryRules">Mandatory Rules</a><ul class="toc-indentation"><li><a href="EBA---Visio-Physical-Design_57512650.html#EBA-VisioPhysicalDesign-HeartbeatandReplicationvLANs">Heartbeat and Replication vLANs</a></li><li><a href="EBA---Visio-Physical-Design_57512650.html#EBA-VisioPhysicalDesign-Build-ornottobuild">Build - or not to build</a></li></ul></li><li><a href="EBA---Visio-Physical-Design_57512650.html#EBA-VisioPhysicalDesign-MetaDataRequirements">Meta Data Requirements</a></li><li><a href="EBA---Visio-Physical-Design_57512650.html#EBA-VisioPhysicalDesign-UsefulPages">Useful Pages</a></li></ul></li></ul></div><ul class="toc-indentation"><li><a href="EBA---ACloud_61115560.html">EBA ACloud</a><br /><ul class="toc-indentation"><li><a href="EBA---ACloud_61115560.html#EBA-ACloud-ProviderAgnosticDataModel-theenvironmentdefinitionXMLfile">Provider Agnostic Data Model - the environment definition XML file</a></li><li><a href="EBA---ACloud_61115560.html#EBA-ACloud-InvokingtheACloudclient">Invoking the ACloud client</a><ul class="toc-indentation"><li><a href="EBA---ACloud_61115560.html#EBA-ACloud-Requirements">Requirements</a></li><li><a href="EBA---ACloud_61115560.html#EBA-ACloud-Build">Build</a></li><li><a href="EBA---ACloud_61115560.html#EBA-ACloud-Prepareanexecutionplan">Prepare an execution plan</a></li><li><a href="EBA---ACloud_61115560.html#EBA-ACloud-Run">Run</a></li><li><a href="EBA---ACloud_61115560.html#EBA-ACloud-Javadocs">Javadocs</a></li></ul></li><li><a href="EBA---ACloud_61115560.html#EBA-ACloud-Configuration">Configuration</a></li><li><a href="EBA---ACloud_61115560.html#EBA-ACloud-Customisation">Customisation</a></li><li><a href="EBA---ACloud_61115560.html#EBA-ACloud-FunctionalCoverage">Functional Coverage</a></li></ul></li></ul><p>There is a set of introductory training videos here: <a href="EBA---Training-Videos_65475255.html">EBA - Training Videos</a></p><h1 id="EBA-OS-LandingPage-EBSAEnvironmentBuildTooling">EBSA Environment Build Tooling</h1><p>EBSA has developed a set of capabilities to perform Environment Build and Management, Environment Access Management and Continuous Integration. 
+Some of the assets developed for that programme will be open sourced and others will be packaged for restricted distribution.</p><p><span class="confluence-anchor-link" id="EBA-OS-LandingPage-EBA_Diagram"></span></p><p> </p><p><span class="confluence-embedded-file-wrapper"><img class="confluence-embedded-image" src="attachments/65478538/65480393.png" data-image-src="attachments/65478538/65480393.png" data-unresolved-comment-count="0" data-linked-resource-id="65480393" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="E2E Environment Build open source.png" data-base-url="https://<confluenceurl>" data-linked-resource-content-type="image/png" data-linked-resource-container-id="65478538" data-linked-resource-container-version="23"></span></p><p>The environment build and management tooling includes the following capabilities:</p><ul><li>Automated build and modification of Skyscape or AWS hosted resources (virtual applications, virtual machines and networks) using the vCloud Director or AWS E2C API based upon configuration managed meta data (XML definition files) and operating system templates</li><li>Automated layering and modification of the following configuration managed meta data and deployment artifacts onto the virtual machines:<ul><li>Operating system configuration</li><li>Operating system patching</li><li>Middleware installation</li><li>Middleware configuration</li><li>Middleware patching</li><li>Application code installation (onto Middleware)</li><li>Application code configuration</li></ul></li><li><p>A<strong> Self Service</strong> capability for the deployment and configuration of components, applications or full releases:</p><ul><li>Standard UI for deployers: Ability for non-specialist, authorised individuals to easily and frequently deploy packaged applications into their own environments, including production environments.</li><li>Standard deployment interface for developers</li></ul><ul><li>Deployments are remote: Console access to target servers is not available to deployers at deployment time (ssh sudo access is uncommon)</li><li>Deployments are <br /><ul><li>robust</li><li>repeatable</li><li>fast</li><li>easy</li></ul></li></ul></li></ul><p> </p>
+                    </div>
+
+                                        
+                    
+                 
+                </div>             </div> 
+            
+        </div>     </body>
+</html>

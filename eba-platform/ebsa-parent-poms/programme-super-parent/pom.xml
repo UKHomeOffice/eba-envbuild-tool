@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.ipt.ci</groupId>
+	<artifactId>super-parent</artifactId>
+	<version>1.0.0</version>
+	<packaging>pom</packaging>
+	
+	<description>This is the top level parent project for CI projects</description>
+	
+
+	
+	<!--
+	  This section is needed if you are going to perform a release.  Maven needs to know where your source code is so that it can check in changes to the version numbers.
+	-->
+    <scm>
+        <connection>scm:git:ssh://git@yourgit.git</connection>
+        <developerConnection>scm:git:ssh://yourgit.git</developerConnection>
+        <url>https://yourgit.git</url>
+        <tag>HEAD</tag>
+    </scm>
+	
+</project>

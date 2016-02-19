@@ -1,0 +1,510 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2015 sp2 (http://www.altova.com) by David Manning (PA Consulting Ltd) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:dd="http://ebsa.ipt.com/ddConfig-1.0" targetNamespace="http://ebsa.ipt.com/ddConfig-1.0" elementFormDefault="qualified" attributeFormDefault="unqualified" dd:minVersion="1.1">
+	
+	<xs:element name="deploymentdescriptor" type="dd:deploymentDescriptorType">
+		<xs:annotation>
+			<xs:documentation>The plan</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	
+	<xs:complexType name="deploymentDescriptorType">
+		<xs:sequence>
+			<xs:element name="metadata" type="dd:metadataType" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="plans" type="dd:plansType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="schemes" type="dd:schemesType" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="environments" type="dd:environmentsType" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="components" type="dd:componentsType" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="metadataType">
+		<xs:annotation>
+			<xs:documentation>Contains items which are used as subsidiary deployment facts</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="minApplicationVersion" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Contains the version number of the minimum ApplicationVersion which this deployment plan is valid for.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="maxApplicationVersion" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Contains the version number of the maximum ApplicationVersion which this deployment plan is valid for (optional).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="plansType">
+		<xs:annotation>
+			<xs:documentation>
+			 Can contain one or more plans.  A plan is a set of one or more steps.  The reason for having more than one plan is to provide
+			 a way in which deployments can happen with minimal impact.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="plan" type="dd:planType" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="schemesType">
+		<xs:annotation>
+			<xs:documentation>A deployment scheme allows for zone-specific customisation of the deployment. There are a few rules:
+                                          1) Every scheme must be associated with a zone.  An zone is a collection of virtual machines. The 
+                                             collections are defined by the environment definition metadata, in the case of puppet and skyscape this is effectively a vApp.
+                                             The zone which a scheme is associated with is denoted with the "zone" attribute (for historical reasons, the "environment" attribute
+                                             is also accepted and has the same meaning, but should be considered deprecated).
+                                             At runtime the environment management program looks for a scheme which matches the user-selected zone being deployed into.
+                                             If no such scheme exists, it is assumed that the hostnames provided on the components can be interpreted as literal hostnames or roles.
+                                          2) There can, however, be more than one scheme per zone. Multiple schemes per zone allows multiple different copies of an 
+                                             application to be managed in the same environment.  Where there is more than one scheme per environment they are differentiated
+                                             from each other by means of the "name" attribute.  Which named scheme should be used is passed to the environment management
+                                             program as a parameter at runtime so the choice of scheme becomes based on the compound key of zone name and scheme name.
+                                          
+                                          The "schemes" element contain a collection of "scheme" elements.   Each "scheme" element contains multiple "target" elements as well as
+                                          an indication (if necessary) of the scope of the deployment (i.e. if it is limited to a particular set of machines within the environment or if it
+                                          is applied across the entire environment.  
+        	</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="scheme" type="dd:schemeType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="schemeType">
+		<xs:sequence>
+			<xs:element name="target" type="dd:targetType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>This optional attribute is only required if there are more than one schemes where the "environment" or "zone" attribute is 
+	                                              the same.  It is used to differentiate different schemes within the same environment.
+	            </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="zone" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>This attribute is used to define which zone a scheme should be applied in. One of the primary 
+                                              arguments to the environment management program is the target zone and the value of this attribute needs
+                                              to match that value of the scheme is to be used during a deployment.
+               	</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="environment" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>DEPRECATED - This is equivalent to a zone but only included for backwards compatibility.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="scope" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>This attribute is used to restrict the set of hosts or roles to which a deployment is applicable.  
+                It is a comma separated list of names.  The names are resolved in the same way as the values for the hostnames 
+                attributes on the components.
+                </xs:documentation>
+            </xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+
+	<xs:complexType name="environmentType">
+		<xs:annotation>
+			<xs:documentation>Defines the specifics of a deployment to a given environment.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+				<xs:element name="zone" type="dd:zoneType" minOccurs="1" maxOccurs="unbounded"></xs:element>
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>The name of the environment being deployed to.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="variant" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>A label which applies to this environment type when several variants of an environment exist.
+				The front-end may specify this variant value. If it does, the algorithm will search for a node of this type
+				which matches by both name and variant.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	
+	<xs:complexType name="environmentsType">
+		<xs:sequence>
+				<xs:element name="environment" type="dd:environmentType" minOccurs="1" maxOccurs="unbounded"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="zoneType">
+		<xs:sequence>
+			<xs:element name="target" type="dd:targetType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="reference" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>A unique reference used to identify this zone within the mechanism in place to 
+				action zone changes. For example, it currently identifies a hiera file but may in future be used
+				to action changes via YUM.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="scope" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>This optional attribute is used to restrict the set of hosts or roles to which a deployment is applicable.  
+                It is a comma separated list of names.  The names are resolved in the same way as the values for the hostnames attributes 
+                on the components.
+                </xs:documentation>
+            </xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="name" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>This optional attribute is required to distinguish between zones in the same environment if they share the
+				same name. If this situation arises, it is expected that the name of the zone to use would be provided, since there is no way
+				to determine which zone to use otherwise.
+	            </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	
+	<xs:complexType name="targetType">
+		<xs:attribute name="name" type="xs:string" use="required"/>
+		<xs:attribute name="hostnames" type="xs:string" use="required"/>
+	</xs:complexType>
+	
+	<xs:complexType name="componentsType">
+		<xs:annotation>
+			<xs:documentation>Contains all of the components which are managed by this plan.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="component" type="dd:componentType" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="planType">
+		<xs:sequence>
+			<xs:element name="step" type="dd:stepItemType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>A step is a delimiter for puppet runs. The deployment my or may not do more than one puppet run within a step
+						but it will always do a puppet run between steps. This provides a way for the deployment author to ensure that an
+						environment is in a specific state before the next step is performed.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="impactLevel" type="xs:int"/>
+		<xs:attribute name="description" type="xs:string"/>
+		<xs:attribute name="name" type="xs:string"/>
+	</xs:complexType>
+	
+	<xs:complexType name="stepItemType">
+		<xs:sequence>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element name="inject" type="dd:injectType" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="perform" type="dd:performType" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="execute" type="dd:executeType" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="remove" type="dd:removeType" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:choice>
+		</xs:sequence>
+		<xs:attribute name="description" type="xs:string"/>
+	</xs:complexType>
+        
+    <xs:complexType name="componentStep">
+		<xs:sequence>
+			<xs:element name="step" type="dd:componentStepItemType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>A component step is a variation of a step within a plan, it is carried out before or after the deployment
+                                                          of the specific component to which it pertains rather than before or after the deployment as a whole.  
+                                                          If a puppet run is required for a step then it will result in its own puppet run (i.e. it will not piggy 
+                                                          back on the puppet run used to update the component).                                                          
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="description" type="xs:string"/>
+		<xs:attribute name="name" type="xs:string"/>
+	</xs:complexType>
+        
+    <xs:complexType name="componentStepItemType">
+		<xs:sequence>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element name="inject" type="dd:injectType" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="execute" type="dd:executeType" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="remove" type="dd:removeType" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:choice>
+		</xs:sequence>
+		<xs:attribute name="description" type="xs:string"/>
+	</xs:complexType>
+	
+    <xs:complexType name="stepCommandType">
+		<xs:attribute name="description" type="xs:string" use="optional"/>
+		<xs:attribute name="hostnames" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>
+				A csv list of host name prefixes. This will be interpreted as a role 
+				(in which case it will need to be three letters max) or as an fqdn if 
+				it is more than three characters.  This value will be used to update 
+				brand new yaml files in new environments and will be used to cross check
+				that the components are only deployed to the machines or roles where 
+				they were intended to be deployed.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+        
+    <xs:complexType name="injectType">
+		<xs:complexContent>
+			<xs:extension base="dd:stepCommandType">
+				<xs:sequence>
+					<xs:element name="yaml" type="xs:string" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>A snippet of yaml that needs to be inserted at
+								the path. Cannot be used in conjunction with the "value"
+								attribute.
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="path" type="xs:string" use="required">
+					<xs:annotation>
+						<xs:documentation>Full path to the node that needs to be updated
+							(e.g. system:packages/mypackage/attributeofsomekind).
+						</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="value" type="xs:string" use="optional">
+					<xs:annotation>
+						<xs:documentation>A scalar value that needs to be set at the path.
+							Cannot be used in conjunction with the "yaml" tag which allows
+							the insertion of a scriptlet.
+						</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="ifMissing" type="dd:failureActionsType" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="removeType">
+		<xs:complexContent>
+			<xs:extension base="dd:stepCommandType">
+				<xs:attribute name="path" type="xs:string" use="required">
+					<xs:annotation>
+						<xs:documentation>Full path to the node that needs to be removed
+							(e.g. system:packages/mypackage/attributeofsomekind). Everything under
+							this node will be removed, and the node itself, and if it is the only item
+							under its parent then its parent will be removed, and so on removing ancestors
+							while there is a single line of decent.
+						</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+    
+    <xs:complexType name="executeType">
+		<xs:complexContent>
+			<xs:extension base="dd:stepCommandType">
+				<xs:attribute name="command" type="xs:string" use="required">
+					<xs:annotation>
+						<xs:documentation>The command to run</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="ignoreFailure" type="xs:boolean" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="performType">
+		<xs:complexContent>
+			<xs:extension base="dd:stepCommandType">
+				<xs:attribute name="filter" type="dd:deploymentActionType" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="componentType">
+		<xs:sequence>
+			<xs:element name="yaml" type="xs:string" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="hints" type="dd:hintsType" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="before" type="dd:additionalActionsType" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="after" type="dd:additionalActionsType" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+		<xs:attribute name="minimumPlan" type="xs:int"/>
+		<xs:attribute name="hostnames" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>
+				A csv list of host name prefixes. This will be interpreted as a role 
+				(in which case it will need to be three letters max) or as an fqdn if 
+				it is more than three characters.  This value will be used to update 
+				brand new yaml files in new environments and will be used to cross check
+				that the components are only deployed to the machines or roles where 
+				they were intended to be deployed.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="require" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>
+				A csv list of package names that this component depends on, is the same as a requires
+				in the body of the yaml for this component and it can be used interchangeably.
+				The ony time when you really need this is when you have cross amchine dependencies.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	
+	<xs:complexType name="hintsType">
+		<xs:sequence>
+			<xs:element name="deploy" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+				    <xs:sequence>
+						<xs:element name="before" type="dd:additionalActionsType" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="after" type="dd:additionalActionsType" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+					<xs:attribute name="chainBehaviour" type="dd:chainBehaviourType"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="undeploy" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="before" type="dd:additionalActionsType" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="after" type="dd:additionalActionsType" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+					<xs:attribute name="chainBehaviour" type="dd:chainBehaviourType"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="upgrade" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="before" type="dd:additionalActionsType" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="after" type="dd:additionalActionsType" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+					<xs:attribute name="method" type="dd:changeMethodType"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="downgrade" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="before" type="dd:additionalActionsType" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="after" type="dd:additionalActionsType" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+					<xs:attribute name="method" type="dd:changeMethodType"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+        
+    <xs:complexType name="additionalActionsType">
+    	<xs:sequence>
+    		<xs:element name="step" type="dd:stepItemType" minOccurs="1" maxOccurs="unbounded"/>
+    	</xs:sequence>
+    </xs:complexType>    
+        
+	<xs:simpleType name="chainBehaviourType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="whole-chain-multi-transition">
+				<xs:annotation>
+					<xs:documentation>For "whole-chain-multi-transition" puppet would be forced to act on this component separately in the
+						dependency chain, and it would be forced to do a run for this component that it can be guaranteed to be changed before
+						its dependents and after its dependencies.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="whole-chain-single-transition">
+				<xs:annotation>
+					<xs:documentation>For "whole-chain-single-transition" puppet would be forced to act on the
+						entire chain, but it would be allowed to remove / deploy all components in the same dependency chain at the same time.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="dependents-only-multi-transition">
+				<xs:annotation>
+					<xs:documentation>For "dependents-only-multi-transition" puppet would be forced to act on the all components in the chain which
+					    are above the  affected component.  It would be forced to do a run for each component.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="dependents-only-single-transition">
+				<xs:annotation>
+					<xs:documentation>For "dependents-only-single-transition" puppet would be forced to act on the
+						entire chain, but it would be allowed to act on all components in
+						the same dependency chain during the same puppet run.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="isolated">
+				<xs:annotation>
+					<xs:documentation>In this the component could be added/removed on
+						its own without affecting other dependencies in its chain
+						(although the Hieradata for the immediate upstream dependencies
+						will be updated to remove relevant "requires" declarations.).  This is the default.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="changeMethodType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="undeployRedeploy">
+				<xs:annotation>
+					<xs:documentation>In this case puppet would be forced to do a run
+						specifically to undeploy this component, then a new run would be
+						performed to install the desired version.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="justDeploy">
+				<xs:annotation>
+					<xs:documentation>In this case puppet would be allowed to just
+						install the desired version without any other actions first.  This is the default.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="deploymentActionType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="all">
+				<xs:annotation>
+					<xs:documentation>All actions will be performed, in whatever order
+						the deployer determines is appropriate from the component
+						dependency chains and the component hints.
+						This is the default and is the one that should be used.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="failureActionsType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="insertKeyAndValueOnly">
+				<xs:annotation>
+					<xs:documentation>If the node is indicated by the path is missing
+						this will ensure that the node and its parent get inserted. If any
+						more are missing it will fail.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="insertAll">
+				<xs:annotation>
+					<xs:documentation>This will ensure that every node that needs to be
+						inserted in order to satisfy the path are inserted.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="insertKeyAndValueAndParentMap">
+				<xs:annotation>
+					<xs:documentation>Like insertKeyAndValueOnly but will go one level
+						higher.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="fail">
+				<xs:annotation>
+					<xs:documentation>If any of the path elements are missing this will
+						fail.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+
+</xs:schema>

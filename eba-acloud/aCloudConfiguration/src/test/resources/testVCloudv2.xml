@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<vc:Organisation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ebsa.ipt.com/VCloudConfig-2.0 ../../../main/resources/VCloudConfig-2.0.xsd" xmlns:vc="http://ebsa.ipt.com/VCloudConfig-2.0"  >
+	<vc:Environment>
+	    <vc:Name>Some environment name</vc:Name>
+		<vc:VirtualApplication>
+			<vc:Name>COLLABORATION_VAPP</vc:Name>
+			<vc:Description>This is the application container for all of the collaboration tools</vc:Description>
+			<vc:RuntimeLease>lease</vc:RuntimeLease>
+			<vc:StorageLease>12 years</vc:StorageLease>
+			<vc:ServiceLevel>Not sure what the values for this are but i guess it refers to a vdc in some way</vc:ServiceLevel>
+			<vc:PowerOn>true</vc:PowerOn>
+			
+			<vc:Deploy>true</vc:Deploy>
+			
+			<vc:Network>
+				<vc:OrganisationNetwork>
+					<vc:Name>Management</vc:Name>
+					<vc:FenceMode>BRIDGED</vc:FenceMode>
+				</vc:OrganisationNetwork>				
+			</vc:Network>
+			<vc:VirtualMachine>
+				<vc:VMName>IPT_HOST-1</vc:VMName>
+				<vc:ComputerName>ipt-host-2</vc:ComputerName>
+				<vc:Description>This is a sensible description for ipt-host-1</vc:Description>				
+				<vc:Template>
+					<vc:Name>IPT-TEMPLATES-CENTOS-6.5-64</vc:Name>
+					<vc:ServiceLevel>Home Office IPT-DEPLOYED (IL2-PROD-STANDARD)</vc:ServiceLevel>
+				</vc:Template>
+				<vc:StorageProfile>No idea what this means</vc:StorageProfile>
+				<vc:GuestCustomisationScript>/var/lib/jenkins/jobs/retrieve_configuration/workspace/customiseGuest.sh</vc:GuestCustomisationScript>
+				<vc:VirtualHardware>
+					<vc:CPU>2</vc:CPU>
+					<vc:MemorySize>
+						<vc:SizeGB>4</vc:SizeGB>
+					</vc:MemorySize>
+					<vc:HardDisk>
+						<vc:DiskNumber>1</vc:DiskNumber>
+						<vc:DiskSize>
+							<vc:SizeGB>50</vc:SizeGB>
+						</vc:DiskSize>
+					</vc:HardDisk>
+					<vc:HardDisk>
+						<vc:DiskNumber>2</vc:DiskNumber>
+						<vc:DiskSize>
+							<vc:SizeGB>50</vc:SizeGB>
+						</vc:DiskSize>
+					</vc:HardDisk>
+					<vc:NetworkCard>
+						<vc:IsPrimaryNIC>true</vc:IsPrimaryNIC>
+						<vc:NetworkName>IPT_DISCONNECTWORK_1</vc:NetworkName>
+						<vc:IPAssignment>						    
+						       <vc:DHCP></vc:DHCP>						    
+						</vc:IPAssignment>
+					</vc:NetworkCard>
+				</vc:VirtualHardware>
+			</vc:VirtualMachine>
+		</vc:VirtualApplication>
+	</vc:Environment>
+</vc:Organisation>

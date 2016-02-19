@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Composite Release Deployment Descriptor</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Composite Release Deployment Descriptor
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    
+                    <div id="main-content" class="wiki-content group">
+                    <p><style type='text/css'>/*<![CDATA[*/
+div.rbtoc1455124473680 {padding: 0px;}
+div.rbtoc1455124473680 ul {list-style: disc;margin-left: 0px;}
+div.rbtoc1455124473680 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1455124473680'>
+<ul class='toc-indentation'>
+<li><a href='#CompositeReleaseDeploymentDescriptor-Introduction'>Introduction</a></li>
+<li><a href='#CompositeReleaseDeploymentDescriptor-DeploymentDescriptorStorage'>Deployment Descriptor Storage</a></li>
+<li><a href='#CompositeReleaseDeploymentDescriptor-Structure'>Structure</a>
+<ul class='toc-indentation'>
+<li><a href='#CompositeReleaseDeploymentDescriptor-phase'>phase</a></li>
+<li><a href='#CompositeReleaseDeploymentDescriptor-application'>application</a></li>
+<li><a href='#CompositeReleaseDeploymentDescriptor-stop'>stop</a></li>
+<li><a href='#CompositeReleaseDeploymentDescriptor-after'>after </a></li>
+<li><a href='#CompositeReleaseDeploymentDescriptor-before'>before</a></li>
+<li><a href='#CompositeReleaseDeploymentDescriptor-step'>step</a></li>
+<li><a href='#CompositeReleaseDeploymentDescriptor-wait'>wait</a></li>
+<li><a href='#CompositeReleaseDeploymentDescriptor-inject/remove/execute'>inject / remove / execute</a></li>
+</ul>
+</li>
+<li><a href='#CompositeReleaseDeploymentDescriptor-ExampleDeploymentDescriptor'>Example Deployment Descriptor</a></li>
+</ul>
+</div></p><h2 id="CompositeReleaseDeploymentDescriptor-Introduction">Introduction</h2><p>Composite Release Deployment Descriptors are simple XML documents to describe the order in which to release SS2 Applications.</p><h2 id="CompositeReleaseDeploymentDescriptor-DeploymentDescriptorStorage">Deployment Descriptor Storage</h2><p>Composite Release Deployment descriptors are stored in Stash, under the <a href="https://<stashurl>/projects/EBSAT/repos/releasedeploymentdescriptors/browse?at=refs%2Fheads%2Fci" class="external-link" rel="nofollow">EBSA Tooling / releasedeploymentdescriptors</a> repository in the CI branch. These should only be accessible by DevOps resources within each team.</p><h2 id="CompositeReleaseDeploymentDescriptor-Structure">Structure</h2><p>Composite Release Deployment Descriptors must follow a strict set of guidelines (enforced by validation against a schema). Since an .xsd file isn't very readable, the following guides describes the sections of the deployment descriptor.</p><h3 id="CompositeReleaseDeploymentDescriptor-phase">phase</h3><p>A phase contains one or more applications to deploy and additional <strong>wait</strong> or <strong>stop</strong> steps as required.</p><h3 id="CompositeReleaseDeploymentDescriptor-application">application</h3><p>Contained within a phase, this has an attribute <strong>shortName</strong> which indicates the application to be deployed.</p><p>If there are multiple <strong>application</strong> tags in a <strong>phase</strong>, it is expected that these can be deployed in parallel. If one application fails to install, this may cause the other applications in the same phase to be in an inconsistent state during their installation.</p><h3 id="CompositeReleaseDeploymentDescriptor-stop">stop</h3><p>Contained within a phase, this will stop the deployment at the end of the phase, allowing a user to run manual tasks. When the user is ready to resume the deployment, they can restart the deployment in Self Service 3.0 and the deployment will continue from the following phase.</p><p><span>If there are no actions within a phase (for example, the applications in the phase have previously been installed at the expected versions), then the phase will not run and the <strong>stop</strong> is ignored.</span></p><p><span>There is a single attribute, <strong>message</strong>, which is used to indicate why the stop has occurred.</span></p><h3 id="CompositeReleaseDeploymentDescriptor-after"><span>after </span></h3><p><span>The after tag contains one or more <strong>steps</strong> to be run after a phase has completed.</span></p><h3 id="CompositeReleaseDeploymentDescriptor-before">before</h3><p><span>The before tag contains one or more <strong>steps</strong> to be run before a phase has started.</span></p><h3 id="CompositeReleaseDeploymentDescriptor-step"><span>step</span></h3><p><span>A step can contain one of <strong>wait</strong>, <strong>inject</strong> or <strong>remove</strong>.</span></p><h3 id="CompositeReleaseDeploymentDescriptor-wait"><span>wait</span></h3><p>The wait tag allows for a small automated delay to be inserted into the deployment plan. For example, this can allow time for a service to start before deployment continues.</p><h3 id="CompositeReleaseDeploymentDescriptor-inject/remove/execute">inject / remove / execute</h3><p>These commands insert or remove yaml as specified, or run a command. These are equivalent to tags of the same name in <a href="Application-Deployment-Descriptor-Guide_26977173.html#ApplicationDeploymentDescriptorGuide-optionalTags">Self Service 2.0 Application deployment descriptors</a>.</p><h2 id="CompositeReleaseDeploymentDescriptor-ExampleDeploymentDescriptor">Example Deployment Descriptor</h2><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Example Deployment Descriptor</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: xml; gutter: false; theme: Confluence" style="font-size:12px;">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;dd:releaseDeploymentDescriptor xmlns:dd=&quot;http://ebsa.ipt.com/releaseDDconfig-1.0&quot;&gt;
+    &lt;dd:phase&gt;
+        &lt;dd:application shortName=&quot;IPT_ABS&quot;/&gt;
+        &lt;dd:stop message=&quot;Stopping after phase 1&quot; /&gt;
+    &lt;/dd:phase&gt;
+	&lt;dd:phase&gt;
+        &lt;dd:application shortName=&quot;IPT_ABS_DS&quot;/&gt;
+        &lt;dd:after&gt;
+        	&lt;dd:step&gt;
+        		&lt;dd:wait seconds=&quot;300&quot;/&gt;
+        	&lt;/dd:step&gt;
+        &lt;/dd:after&gt;
+    &lt;/dd:phase&gt;
+	&lt;dd:phase&gt;
+        &lt;dd:application shortName=&quot;IPT_ABS_SIM&quot;/&gt;
+    &lt;/dd:phase&gt;
+&lt;/dd:releaseDeploymentDescriptor&gt;</pre>
+</div></div><p>The above deployment descriptor contains three <strong>applications</strong>, IPT_ABS, IPT_ABS_DS and IPT_ABS_SIM which will be deployed in three <strong>phases</strong>. After IPT_ABS has been deployed in the first phase, the deployment will <strong>stop</strong> with a message, enabling users to run manual tasks (such as restart services, run scripts or other manual commands). When the deployment restarts, it will move to the second phase and deploy IPT_ABS_DB, <strong>after</strong> which it will <strong>wait</strong> for 300 seconds. This allows a user to programme in an automatic wait period; for example, waiting for a service to start. The third phase simply deploys IPT_ABS_SIM.</p>
+                    </div>
+
+                    
+                 
+                </div>             </div> 
+            
+        </div>     </body>
+</html>

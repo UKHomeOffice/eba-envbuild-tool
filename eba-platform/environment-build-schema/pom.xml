@@ -1,0 +1,241 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.ipt.ebsa.environment</groupId>
+	<artifactId>environment-build-schema</artifactId>
+	<version>1.0.145-SNAPSHOT</version>
+
+	<packaging>jar</packaging>
+	<name>Environment Build schema</name>
+	<description>Schema for automated environment builds</description>
+
+	<properties>
+		<aCloudConfiguration.version>1.0.86_aws-SNAPSHOT</aCloudConfiguration.version>
+		<vCloudConfiguration.version>1.0.95-SNAPSHOT</vCloudConfiguration.version>
+		<environment.common.version>1.0.187</environment.common.version>
+		<external.schema.dir>src/main/resources</external.schema.dir>
+	</properties>
+
+	<parent>
+		<groupId>com.ipt.ci</groupId>
+		<artifactId>parent</artifactId>
+		<version>1.0.0</version>
+	</parent>
+	<scm>
+		<connection>scm:git:ssh://git@yourgit.git</connection>
+		<developerConnection>scm:git:ssh://yourgit.git</developerConnection>
+		<url>https://yourgit.git</url>
+		<tag>HEAD</tag>
+	</scm>
+
+
+	<dependencies>
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+			<version>2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.xml</groupId>
+			<artifactId>jaxb-impl</artifactId>
+			<version>2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version><!--$NO-MVN-MAN-VER$ -->
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.ipt.ebsa</groupId>
+			<artifactId>aCloudConfiguration</artifactId>
+			<version>1.0.86_aws-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ipt.ebsa</groupId>
+			<artifactId>vCloudConfiguration</artifactId>
+			<version>1.0.95-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.6</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>17.0</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.1.3</version>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+  			<artifactId>mockito-core</artifactId>
+  			<version>1.10.8</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.ipt.ebsa.environment</groupId>
+			<artifactId>environment-common</artifactId>
+			<version>1.0.189-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.jvnet.jaxb2.maven2</groupId>
+				<artifactId>maven-jaxb2-plugin</artifactId>
+				<version>0.8.1</version>
+				<executions>
+					<execution>
+						<phase>process-sources</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<strict>false</strict>
+					<extension>true</extension>
+					<schemaIncludes>
+						<schemaInclude>*.xsd</schemaInclude>
+					</schemaIncludes>
+					<!-- <bindingIncludes>
+						<bindingInclude>*.xjb</bindingInclude>
+					</bindingIncludes> -->
+					<schemaIncludes>
+						<schemaInclude>*.xsd</schemaInclude>
+						<!-- <schema>
+							<dependencyResource>
+								<groupId>com.ipt.ebsa</groupId>
+								<artifactId>vCloudConfiguration</artifactId>
+								<version>${vCloudConfiguration.version}</version>
+								<resource>vCloudCommand-2.0.xsd</resource>
+							</dependencyResource>
+						</schema> -->
+						<!-- <schema>
+							<dependencyResource>
+								<groupId>com.ipt.ebsa</groupId>
+								<artifactId>vCloudConfiguration</artifactId>
+								<version>${vCloudConfiguration.version}</version>
+								<resource>vCloudConfig-2.0.xsd</resource>
+							</dependencyResource>
+						</schema> -->
+					</schemaIncludes>
+<!-- 					<bindings>
+						<bindingIncludes>
+							<dependencyResource>
+								<groupId>com.ipt.ebsa</groupId>
+								<artifactId>vCloudConfiguration</artifactId>
+								<version>${vCloudConfiguration.version}</version>
+								<resource>bindings-1.0.xjb</resource>
+							</dependencyResource>
+						</bindingIncludes>
+					</bindings> -->
+					<episodes>
+						<episode> <!-- Don't create source java for the aCloud stuff as it'll conflict with the code in the jar -->
+							<groupId>com.ipt.ebsa</groupId>
+							<artifactId>aCloudConfiguration</artifactId>
+							<version>${aCloudConfiguration.version}</version>
+						</episode>
+						<episode> <!-- Don't create source java for the vCloud stuff as it'll conflict with the code in the jar -->
+							<groupId>com.ipt.ebsa</groupId>
+							<artifactId>vCloudConfiguration</artifactId>
+							<version>${vCloudConfiguration.version}</version>
+						</episode>
+					</episodes>
+					<!-- <useDependenciesAsEpisodes>false</useDependenciesAsEpisodes>
+					<catalog>src/main/resources/catalog.cat</catalog> -->
+					<!-- <catalogResolver>org.jvnet.jaxb2.maven2.resolver.tools.ClasspathCatalogResolver</catalogResolver> -->
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<configuration>
+							<tasks>
+								<mkdir dir="target/" />
+								<echo file="target/${project.artifactId}-build.properties"
+									append="false">MVN_VERSION=${project.version}${line.separator}MVN_GROUP=${project.groupId}${line.separator}MVN_ARTIFACT=${project.artifactId}</echo>
+							</tasks>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>unpack</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>unpack</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>com.ipt.ebsa</groupId>
+									<artifactId>vCloudConfiguration</artifactId>
+									<version>${vCloudConfiguration.version}</version>
+									<includes>vCloud*.xsd</includes>
+									<outputDirectory>${external.schema.dir}</outputDirectory>
+								</artifactItem>
+								<artifactItem>
+									<groupId>com.ipt.ebsa</groupId>
+									<artifactId>aCloudConfiguration</artifactId>
+									<version>${aCloudConfiguration.version}</version>
+									<includes>aCloud*.xsd, AgnosticCloud*.xsd</includes>
+									<outputDirectory>${external.schema.dir}</outputDirectory>
+								</artifactItem>
+							</artifactItems>
+						</configuration>
+					</execution>
+				</executions> 
+            </plugin>
+            <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.7</source>
+        				<target>1.7</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.4</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<phase>install</phase>
+						<goals>
+	        				<goal>jar-no-fork</goal>
+	      				</goals>
+    				</execution>
+  				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>
+

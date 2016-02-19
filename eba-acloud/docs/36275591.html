@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VPC&#39;s and VPC Peer Vlans</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            VPC&#39;s and VPC Peer Vlans
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    
+                    <div id="main-content" class="wiki-content group">
+                    <p>An AWS VPC maps to an Environment Group or Environment Container. This means all VMs in a VPC will have the same first 2 octets in the IP address. The interfaces between VPCs require Peer Vlans. Connectivity is achieved by connecting a vlan from each VPC together.</p><p> </p><p>The vlan definitions in the physical designs will need extra attributes added to them.</p><p>Peer_Remote_VPC     (e.g. HO_IPT_NPA_TLG1)</p><p>Peer_Remote_vLAN    ( e.g. HO_IPT_NP_TLG1_MEBC_APP_I1)</p><p> </p><p>Designs will need to change so that each end of a cross VPC vlan is defined as a separate lan using the local address range. These vlans are then joined together.using the VPC peering.</p><p> </p><p>
+
+<map id="gliffy-map-37322848-6439" name="gliffy-map-37322848-6439"></map>
+<table width="100%" class="gliffy-macro-table">
+    <tr>
+        <td >
+            <table class="gliffy-macro-inner-table">
+                <caption align="bottom">
+ </caption>
+
+                <tr>
+                    <td>
+                        <img style="border: none; width: 980px;" usemap="#gliffy-map-37322848-6439" src="attachments/36275591/37322849.png" alt="" class="gliffy-macro-image"/>
+                    </td>
+                </tr>
+            </table>
+ 
+        </td>
+    </tr>
+</table>
+
+
+</p><p> </p>
+                    </div>
+
+                                        
+                    
+                 
+                </div>             </div> 
+            
+        </div>     </body>
+</html>

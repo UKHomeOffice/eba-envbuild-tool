@@ -1,0 +1,63 @@
+ [31m|[0m [ >                                                           ] 0 / 1
+13/02 17:35:59,924 DEBUG com.ipt.ebsa.manage.puppet.JschManager: 
+ [32m*[0m [ ==========================================================> ] 1 / 1
+
+
+rmaem01.np-prp2-przo.ipt.ho.local        [31mRequest Aborted[0m
+   [33mChanges Made; Failures Occurred running '/opt/puppet/bin/puppet agent --test --detailed-exitcodes --color false'[0m
+         err: Error: Could not update: Execution of '/usr/bin/yum -d 0 -e 0 -y install ssb-core-features-lib-nexus-2.1.484-1' returned 1: Error: Nothing to do
+              Error: /Stage[main]/System::Packages/Package[ssb-core-features-lib-nexus]/ensure: change from absent to 2.1.484-1 failed: Could not update: Execution of '/usr/bin/yum -d 0 -e 0 -y install ssb-core-features-lib-nexus-2.1.484-1' returned 1: Error: Nothing to do
+              Warning: /Stage[main]/System::Execs/Exec[rpmcheck]: Skipping because of failed dependencies
+   Exit Code: 1
+         out: Info: Retrieving plugin
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/pe_version.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet
+13/02 17:35:59,925 DEBUG com.ipt.ebsa.manage.puppet.JschManager: /lib/facter/role.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/dg_cluster_name.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/fqdn_app.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/iptables_persistent_version.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/lvm_support.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/ipt_env.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/facter_dot_d.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/fqdn_south.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/project.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/db_cluster.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/sec_comp.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/puppet_vardir.rb
+              Info: Loading facts in /v
+13/02 17:35:59,925 DEBUG com.ipt.ebsa.manage.puppet.JschManager: ar/opt/lib/pe-puppet/lib/facter/hostname_south.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/sudo_env.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/organisation.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/root_home.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/custom_auth_conf.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/oracle_publickey.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/vapp_id.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/es_facts.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/mebc_domain.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/oracle_database_homes.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/puppetdb_server_status.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/postgres_def
+13/02 17:35:59,925 DEBUG com.ipt.ebsa.manage.puppet.JschManager: ault_version.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/ebsa_env.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/env_name.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/hostname_app.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/zabbix_version.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/windows.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/default_gateway.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/concat_basedir.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/orawls.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/compartment.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/amandabackup_publickey.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/tooling_domain.rb
+              Info: Loading facts in /va
+13/02 17:35:59,925 DEBUG com.ipt.ebsa.manage.puppet.JschManager: r/opt/lib/pe-puppet/lib/facter/ip6tables_version.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/iptables_version.rb
+              Info: Caching catalog for rmaem01.np-prp2-przo.ipt.ho.local
+              Info: Applying configuration version '1423848848'
+              Notice: /Stage[main]/System::Packages/Package[ssb-rpm-nexus-baseline-config]/ensure: created
+              Info: /Stage[main]/System::Packages/Package[ssb-rpm-nexus-baseline-config]: Scheduling refresh of Exec[rpmcheck]
+              Notice: /Stage[main]/System::Execs/Exec[rpmcheck]: Dependency Package[ssb-core-features-lib-nexus] has failures: true
+              Notice: /Stage[main]/System::Execs/Exec[rpmcheck]: Triggered 'refresh' from 1 events
+              Notice: Finished catalog run in 53.94 seconds
+      Output:
+      status: 6

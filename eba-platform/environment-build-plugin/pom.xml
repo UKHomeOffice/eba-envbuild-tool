@@ -1,0 +1,237 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.ipt.ebsa.buildtools</groupId>
+	<artifactId>environment-build-plugin</artifactId>
+	<version>1.0.189-SNAPSHOT</version>
+	<packaging>hpi</packaging>
+	<parent>
+		<groupId>org.jenkins-ci.plugins</groupId>
+		<artifactId>plugin</artifactId>
+		<version>1.594</version>
+		<!-- which version of Jenkins is this plugin built against? Users must 
+			have at least this Jenkins version to use this plugin. -->
+	</parent>
+	<!-- SCM Details. Remove if uisng EBSA Parent -->
+	<scm>
+		<connection>scm:git:ssh://git@yourgit.git</connection>
+		<developerConnection>scm:git:ssh://yourgit.git</developerConnection>
+		<url>https://yourgit.git</url>
+		<tag>HEAD</tag>
+	</scm>
+
+	<properties>
+		<!-- this is used in two places in the pom, once as a depdency and once 
+			as a resource -->
+
+		<environment-build-database-version>1.173-SNAPSHOT</environment-build-database-version>
+		<plugin-common-version>1.0.133-SNAPSHOT</plugin-common-version>
+		<environment-common-version>1.0.189-SNAPSHOT</environment-common-version>
+		<environment.build.version>1.0.275-SNAPSHOT</environment.build.version>
+	</properties>
+
+
+	<licenses>
+		<license>
+			<name>MIT License</name>
+			<url>http://opensource.org/licenses/MIT</url>
+		</license>
+	</licenses>
+	<!-- get every artifact through repo.jenkins-ci.org, which proxies all the 
+		artifacts that we need -->
+	<repositories>
+		<repository>
+			<id>repo.jenkins-ci.org</id>
+			<url>http://repo.jenkins-ci.org/public/</url>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>repo.jenkins-ci.org</id>
+			<url>http://repo.jenkins-ci.org/public/</url>
+		</pluginRepository>
+	</pluginRepositories>
+	<dependencies>
+		<dependency>
+			<groupId>com.ipt.ebsa.environment.build.metadata</groupId>
+			<artifactId>environment-build-database</artifactId>
+			<version>1.173-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ipt.ebsa.environment</groupId>
+			<artifactId>plugin-common</artifactId>
+			<version>1.0.133-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ipt.ebsa.environment</groupId>
+			<artifactId>environment-common</artifactId>
+			<version>1.0.189-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>3.6.10.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>3.6.10.Final</version>
+		</dependency>
+		<!-- Commons -->
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.1.3</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.6</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>9.4-1201-jdbc41</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>1.8.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+  			<artifactId>mockito-core</artifactId>
+  			<version>1.10.8</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+		<plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <executions>
+                <execution>
+                    <id>unpack</id>
+                    <phase>prepare-package</phase>
+                    <goals>
+                        <goal>unpack</goal>
+                    </goals>
+                    <configuration>
+                        <artifactItems>
+                            <artifactItem>
+                                <groupId>com.ipt.ebsa.environment.build</groupId>
+								<artifactId>environment-build</artifactId>
+								<version>${environment.build.version}</version>
+                                <type>jar</type>
+                                <includes>report.js,jsdifflib/*</includes>
+                                <outputDirectory>${basedir}/src/main/webapp/js</outputDirectory>
+                            </artifactItem>
+                        </artifactItems>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+			<plugin>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>2.6.1</version>
+				<executions>
+					<execution>
+						<id>auto-clean</id>
+						<phase>initialize</phase>
+						<goals>
+							<goal>clean</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<includes>
+						<!-- Remove tests written by jenkins -->
+						<include>com/**/*Test.java</include>
+					</includes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>2.9</version>
+				<configuration>
+					<downloadSources>true</downloadSources>
+					<downloadJavadocs>true</downloadJavadocs>
+					<outputDirectory>target/eclipse-classes</outputDirectory>
+					<!-- This is so that it does not disrupt the stuff put into target classes 
+						by the Jenkins plugin when you do a "clean" -->
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<configuration>
+							<tasks>
+								<mkdir dir="target/" />
+								<echo append="false"
+									file="target/${project.artifactId}-build.properties">MVN_VERSION=${project.version}${line.separator}MVN_GROUP=${project.groupId}${line.separator}MVN_ARTIFACT=${project.artifactId}</echo>
+							</tasks>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+		<pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.apache.maven.plugins
+										</groupId>
+										<artifactId>
+											maven-clean-plugin
+										</artifactId>
+										<versionRange>
+											[2.6.1,)
+										</versionRange>
+										<goals>
+											<goal>clean</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+</project>

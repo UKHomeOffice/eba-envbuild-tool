@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Design note - Program flows</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Design note - Program flows
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    
+                    <div id="main-content" class="wiki-content group">
+                    <h2 id="Designnote-Programflows-Input">Input</h2><ul><li>Location where the build plans are - GIT repo / directory</li><li>Environment to be built</li><li><s>VApp or set of VApps within that environment to build.</s></li></ul><h2 id="Designnote-Programflows-Buildplans">Build plans</h2><h3 id="Designnote-Programflows-Organisation">Organisation</h3><p>The program will read all the xml files recusively within a designated folder and the sum of all the files will be the model which the program uses.  e.g.</p><ul><li>environmentdefinitions<ul><li>common.xml<ul><li>stuff<br /><ul><li>environments.xml - Contains the list of environments and the references to the build plans that they hold</li><li>plan_&lt;name&gt;.xml - Contains a specific build plan with a specific name</li></ul></li><li>otherstuff/<ul><li>something.xml</li></ul></li></ul></li></ul></li></ul><h3 id="Designnote-Programflows-Model">Model</h3><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th class="confluenceTh">XML Schema</th><th class="confluenceTh">Example instance document</th></tr><tr><td class="confluenceTd"><a href="attachments/29039733/29231815.xsd" data-linked-resource-id="29231815" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="EnvironmentBuildSequence-1.0.xsd" data-linked-resource-content-type="application/x-upload-data" data-linked-resource-container-id="29039733" data-linked-resource-container-version="6">EnvironmentBuildSequence-1.0.xsd</a></td><td class="confluenceTd"><a href="attachments/29039733/29231816.xml" data-linked-resource-id="29231816" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="EnvironmentBuildSequenceExample.xml" data-nice-type="XML File" data-linked-resource-content-type="text/xml" data-linked-resource-container-id="29039733" data-linked-resource-container-version="6">EnvironmentBuildSequenceExample.xml</a></td></tr></tbody></table></div><p> </p><p>
+
+<map id="gliffy-map-29231723-2673" name="gliffy-map-29231723-2673"></map>
+<table width="100%" class="gliffy-macro-table">
+    <tr>
+        <td >
+            <table class="gliffy-macro-inner-table">
+                <caption align="bottom">
+ </caption>
+
+                <tr>
+                    <td>
+                        <img style="border: none; width: 881px;" usemap="#gliffy-map-29231723-2673" src="attachments/29039733/29231724.png" alt="" class="gliffy-macro-image"/>
+                    </td>
+                </tr>
+            </table>
+ 
+        </td>
+    </tr>
+</table>
+
+
+</p><h3 id="Designnote-Programflows-Parameters">Parameters</h3><p>Variables should be available to all actions at execution time.</p><p>They should be delivered by means of a map (a context) which is scoped to the correct level. </p><p>Program starts with a global map.  Keys in the</p><p> </p><p> </p><p>
+
+<map id="gliffy-map-29230654-9712" name="gliffy-map-29230654-9712"></map>
+<table width="100%" class="gliffy-macro-table">
+    <tr>
+        <td >
+            <table class="gliffy-macro-inner-table">
+                <caption align="bottom">
+ </caption>
+
+                <tr>
+                    <td>
+                        <img style="border: none; width: 1872px;" usemap="#gliffy-map-29230654-9712" src="attachments/29039733/29230655.png" alt="" class="gliffy-macro-image"/>
+                    </td>
+                </tr>
+            </table>
+ 
+        </td>
+    </tr>
+</table>
+
+
+</p>
+                    </div>
+
+                                        
+                    
+                 
+                </div>             </div> 
+            
+        </div>     </body>
+</html>

@@ -1,0 +1,12 @@
+ [31m|[0m [ >                                                           ] 0 / 1
+17/02 09:34:31,829 DEBUG com.ipt.ebsa.ssh.JschManager: 
+ [32m*[0m [ ==========================================================> ] 1 / 1
+
+
+tstdzm01.st-dev1-ebs1.ipt.local          [31mRequest Aborted[0m
+   [33mUNKNOWN error  running '/opt/puppet/bin/puppet agent --test --detailed-exitcodes --color false'[0m
+         err:
+   Exit Code: 1
+         out: Notice: Run of Puppet configuration client already in progress; skipping  (/var/opt/lib/pe-puppet/state/agent_catalog_run.lock exists)
+      Output:
+      status: 1

@@ -1,0 +1,193 @@
+<j:jelly xmlns:j="jelly:core" xmlns:f="/lib/form" xmlns:l="/lib/layout" xmlns:st="jelly:stapler">
+
+	<!-- This is the snippet that is displayed when the user has chosen to "Build with parameters". 
+		 Note: This jelly file is supported by the javascript in EnvironmentBuildPlugin.js
+	-->
+	
+	 <f:block>
+	 	<!--<div style="color:Blue">For more information or to raise a bug/issue, please see the <a href="https://<confluenceurl>/display/EN/Self+Service+2.0" target="_blank">Self Service home page</a></div>-->
+	 	<br/>
+	 </f:block>
+	 <f:block>
+	 	<f:section title="Build configuration" name="parameter">
+	 		<!-- I don't know why we need this name, but it doesn't appear to work without it... -->
+	 		<input type="hidden" name="name" value="${it.name}" />
+	 		<input type="hidden" name="workDir" value="${it.workDir}" />
+	
+			<div style="display: none;" id="spinnergif_fetch" class="result_alert">
+				<img src="${resURL}/images/spinner.gif" /> Fetching Environment build data
+			</div>
+			<div style="display: none;" id="spinnergif_generate" class="result_alert">
+				<img src="${resURL}/images/spinner.gif" /> Generating build plan
+			</div>
+			<div style="display: none;" id="checkoutError" class="result_alert">
+				<img src="${rootURL}/plugin/environment-build-plugin/images/1.gif" /> Unable to complete checkout of build plans, contact support.
+			</div>
+			<div style="display: none;" id="xmlError" class="result_alert">
+				<img src="${rootURL}/plugin/environment-build-plugin/images/1.gif" /> Unable to parse xml build plans, contact support
+			</div>
+			<div style="display: none;" id="planError" class="result_alert">
+				<img src="${rootURL}/plugin/environment-build-plugin/images/1.gif" /> Unable to generate build plan, contact support.
+			</div>
+			<div style="display: none;" id="checkoutSuccess" class="result_alert">
+				<img src="${resURL}/images/48x48/accept.png" /> Plan check-out successful
+			</div>
+			<div style="display: none;" id="generateSuccess" class="result_alert">
+				<img src="${resURL}/images/48x48/accept.png" /> Plan generation successful
+			</div>
+			<f:entry title="Cloud provider" name="provider" field="provider" help="/plugin/environment-build-plugin/help-provider.html">
+				<select name="provider" id="provider">
+					<f:option value="0">Select...</f:option>
+					<f:option value="AWS">Amazon</f:option>
+					<f:option value="SKYSCAPE">Skyscape</f:option>
+				</select>
+			</f:entry>
+			<f:block><hr class="grey"/></f:block>
+			<f:entry title="Environment" name="environment" field="environment" help="/plugin/environment-build-plugin/help-environment.html">
+				<select name="environment" id="environment" disabled="disabled">
+					<f:option value="0">Select...</f:option>
+				</select>
+			</f:entry>
+			<f:entry>or</f:entry>
+			<f:entry title="Environment container" name="container" field="container" help="/plugin/environment-build-plugin/help-container.html">
+				<select name="container" id="container" disabled="disabled">
+					<f:option value="0">Select...</f:option>
+				</select>
+			</f:entry>
+			<f:block ><hr class="grey"/></f:block>
+			<f:entry title="Version" name="version" field="version" help="/plugin/environment-build-plugin/help-version.html">
+				<select id="version" name="version" disabled="disabled">
+					<f:option value="0">Select...</f:option>
+				</select>
+			</f:entry>
+		</f:section>
+		<f:section title="User Parameters">
+			<f:block>
+				<p id="noupscaption">No environment/container selected or no user parameters for the selected environment/container</p>
+			</f:block>
+			<f:invisibleEntry><td name="insertion"></td></f:invisibleEntry>
+			<f:entry />
+			<f:block>
+				<span id="generate_wrapper" class="yui-button yui-submit-button submit-button primary" name="Submit" style="visibility: visible;">
+					<span class="first-child">
+						<button type="button" id="generate" tabindex="0"  accesskey="g" title="alt (+ shift) + g" onclick="generateReport();">Generate Plan</button>
+					</span>
+				</span>
+			</f:block>
+		</f:section>
+	</f:block>
+	<f:block>
+		<div id="reportdiv" class="vpad"/>
+		<div id="logwrapperdiv" style="display: none;" class="vpad">
+			<span class="yui-button yui-submit-button submit-button primary" name="Submit" style="visibility: visible;">
+				<span class="first-child">
+					<button id="detailshow" type="button" accesskey="d" title="alt (+ shift) + d">Show detailed view</button>
+				</span>
+			</span>
+			<span class="yui-button yui-submit-button submit-button primary" name="Submit" style="visibility: visible;">
+				<span class="first-child">
+					<button id="logshow" type="button" accesskey="l" title="alt (+ shift) + l">Show Log</button>
+				</span>
+			</span>
+			<div id="log_title" style="display: none;" class="section-header">Log</div>
+	 		<div style="color:Blue"></div>
+	 		<br/>
+			<div id="logdiv" style="display: none;" />
+		</div>
+	</f:block>
+	<style>
+		table.parameters {
+			table-layout: fixed;
+		}
+		td.setting-leftspace {
+			width: 0.1%
+		}
+		td.setting-name {
+			width: 1%;
+		}
+		td.setting-main {
+		}
+		td.setting-help {
+			width: 1%;
+		}
+		.webix_hs_center {
+			background: #eee;
+			solid 1px #f3f3f3;
+		}
+		#logdiv {
+			height: 20em;
+			overflow: auto;
+			white-space: pre-wrap;
+			text-align: left;
+		}
+		.vpad {
+			padding-top: 2em;
+		}
+		#logwrapperdiv {
+			text-align: right;
+		}
+		#log_title {
+			text-align: left;
+		}
+		.grey {
+			height: 0px; 
+			border-top: 1px solid #e0e0e0; 
+			border-bottom: 0; 
+			border-left: 0; 
+			border-right: 0;
+    		margin: 0; 
+    		padding: 0;
+    		margin-top: 8px;
+    		margin-bottom: 8px;
+		}
+	</style>
+
+	<link rel="stylesheet" href="${rootURL}/plugin/environment-build-plugin/css/webix.css" type="text/css" />
+
+	<script type="text/javascript">
+		var workspace = "${it.workspace}"
+		
+		// TODO move these two to EnvironmentBuildPlugin.js
+		// Data about the build plan for the chosen environment and version
+		var envData = {};
+		
+		// Data about the build plan for the chosen container and version
+		var contData = {};
+
+		// The environments and versions available for selection		
+		var rawData = {}
+
+		var backendProxy = {};
+		
+		var orgWidth = 0
+		
+		
+		// Add a function which will be accessible to scripts evaluated as part of DOM injection.
+		window.acceptData = function(data) {
+			init(data, false); // Call code in report.js to populate the newly injected stuffs
+			document.getElementById('report').style.display="none";
+			document.getElementById('main-panel').style.width = (parseInt(orgWidth) - 60) + "px" // Hack
+			rawData = data;
+		}
+		
+		/**
+		 * Init.
+		 */
+		window.addEventListener("load", function() {
+			// Stuff to load on page load
+			// Jelly will substitute this for a proxy object which can be used to call controller methods marked @Javascript
+			backendProxy = <st:bind value="${it}" />;
+			orgWidth = document.getElementById('main-panel').offsetWidth
+			document.getElementById('main-panel').style.width = (parseInt(orgWidth) - 60) + "px" // Hack
+		}, false);
+	</script>
+	<script type="text/javascript" src="${rootURL}/plugin/environment-build-plugin/js/report.js"/>
+	<script type="text/javascript" src="http://cdn.webix.com/edge/webix.js"></script>
+	<script type="text/javascript" src="${rootURL}/plugin/environment-build-plugin/js/EnvironmentBuildPlugin.js" />
+	<link rel="stylesheet" type="text/css" href="${rootURL}/plugin/environment-build-plugin/js/jsdifflib/diffview.css"/>
+	<script type="text/javascript" src="${rootURL}/plugin/environment-build-plugin/js/jsdifflib/diffview.js"></script>
+	<script type="text/javascript" src="${rootURL}/plugin/environment-build-plugin/js/jsdifflib/difflib.js"></script>
+</j:jelly>
+
+
+

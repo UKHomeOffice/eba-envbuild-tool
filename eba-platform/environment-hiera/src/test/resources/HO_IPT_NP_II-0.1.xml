@@ -1,0 +1,53 @@
+<!-- 
+Incomplete Environment Container Definition for np based on the information available in HO_IPT_NP_II_PJT3-0.1.xml
+An Environment Container Definition must exist in the database before importing Environments since EBSAD-15676.
+This file is sufficient for importing Environments and creating them in Skyscape (assuming the Environment's Org Networks already exists in Skyscape).
+This file is not sufficient for creating the Org Networks from scratch in Skyscape due to missing data.
+NOTE that, currently, only a single EnvironmentContainerDefinition version is supported.
+-->
+<GeographicContainer id="_1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ebsa.ipt.com/AgnosticCloudConfig-1.0">
+	<account/>
+	<region/>
+	<EnvironmentContainer id="_2">
+		<name>np</name>
+		<provider>SKYSCAPE</provider>
+		<EnvironmentContainerDefinition id="_5">
+			<name>np</name>
+			<version>0.1</version>
+			<isCurrent/>
+			<Network id="_8" dataCenterId="_7">
+				<name>HO_IPT_NP_DAT1_INBC_AI1</name>
+				<description/>
+				<fenceMode>BRIDGED</fenceMode>
+				<networkMask/>
+				<gatewayAddress/>
+				<primaryDns/>
+				<secondaryDns/>
+				<dnsSuffix/>
+				<staticIpPool>10.48.15.0/24</staticIpPool>
+				<ipRangeStart/>
+				<ipRangeEnd/>
+				<CIDR/>
+				<shared>true</shared>
+			</Network>
+			<Network id="_75" dataCenterId="_7">
+				<name>HO_IPT_NP_DAT1_MABC_MI1</name>
+				<description/>
+				<fenceMode>BRIDGED</fenceMode>
+				<networkMask/>
+				<gatewayAddress/>
+				<primaryDns/>
+				<secondaryDns/>
+				<dnsSuffix/>
+				<staticIpPool>10.48.134.0/24</staticIpPool>
+				<ipRangeStart/>
+				<ipRangeEnd/>
+				<CIDR/>
+				<shared>true</shared>
+			</Network>
+			<DataCenter id="_7">
+				<name/>
+			</DataCenter>
+		</EnvironmentContainerDefinition>
+	</EnvironmentContainer>
+</GeographicContainer>

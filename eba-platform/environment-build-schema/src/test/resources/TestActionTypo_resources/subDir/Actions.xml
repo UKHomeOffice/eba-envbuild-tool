@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eb:builds xmlns:eb="http://ebsa.ipt.com/EnvironmentBuildSequence-1.0" xmlns:vc="http://ebsa.ipt.com/VCloudCommand-2.0" xmlns:ac="http://ebsa.ipt.com/aCloudCommand-1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://ebsa.ipt.com/EnvironmentBuildSequence-1.0 ../../../../main/resources/EnvironmentBuildSchema-1.0.xsd ">
+  <eb:action id="Release the hounds">
+    <eb:infra>
+      <eb:vCloud>
+	    <vc:Environment>
+	      <vc:VirtualApplication command="create" errorStrategy="exit" excludes="" includes="" strategy="createOnly"/>
+	    </vc:Environment>
+	  </eb:vCloud>
+	  <eb:aCloud>
+	    <ac:EnvironmentContainer>
+	      <ac:Environment>
+	        <ac:VirtualMachineContainer command="create" errorStrategy="exit" excludes="" includes="" strategy="createOnlyWait"/>
+	      </ac:Environment>
+	    </ac:EnvironmentContainer>
+	  </eb:aCloud>
+    </eb:infra>
+  </eb:action>
+  <eb:action id="Open sesame">
+    <eb:call action="Chocs away!" />
+    <eb:call action="Bolt the gate" />
+  </eb:action>
+  <eb:action id="Chocs away!">
+    <eb:sshcommand machine="${machine}" jumphosts="Gloria Estefan" sshoptsfile="${sshopts}" remotecommand="command x"/>
+  </eb:action>
+  <eb:action id="Bolt the gate">
+  	<!-- EBSAD-16311: Test with no jumphosts -->
+    <eb:sshcommand machine="${machine}" sshoptsfile="${sshopts}" remotecommand="command x"/>
+  </eb:action>
+</eb:builds>

@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    xsv:minVersion="1.0" xsv:maxVersion="1.1"
+    targetNamespace="http://ebsa.ipt.com/EnvironmentBuildSequence-1.0"
+    xmlns:ac="http://ebsa.ipt.com/aCloudCommand-1.1"
+    xmlns:accfg="http://ebsa.ipt.com/AgnosticCloudConfig-1.0"
+    xmlns:vc="http://ebsa.ipt.com/VCloudCommand-2.0"
+    xmlns:xsv="http://www.w3.org/2007/XMLSchema-versioning"
+    xmlns:eb="http://ebsa.ipt.com/EnvironmentBuildSequence-1.0">
+    <xs:import schemaLocation="vCloudCommand-2.0.xsd" namespace="http://ebsa.ipt.com/VCloudCommand-2.0"/>
+    <xs:import schemaLocation="aCloudCommand-1.1.xsd" namespace="http://ebsa.ipt.com/aCloudCommand-1.1"/>
+    <xs:import schemaLocation="AgnosticCloudConfig-1.0.xsd" namespace="http://ebsa.ipt.com/AgnosticCloudConfig-1.0"/>
+
+    <xs:element name="builds" type="eb:BuildsType">
+        <xs:unique name="UniqueActionName">
+            <xs:selector xpath="ation"/>
+            <xs:field xpath="attribute::name"/>
+        </xs:unique>
+    </xs:element>
+
+    <xs:complexType name="BuildsType">
+        <xs:sequence>
+            <xs:element name="globalparams" type="eb:GlobalParametersType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="environment" type="eb:EnvironmentType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="environmentcontainer" type="eb:EnvironmentContainerType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="build" type="eb:BuildType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="sequence" type="eb:SequenceType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="action" type="eb:ActionType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="EnvironmentType">
+    	<xs:sequence>
+    		<xs:element name="buildref" type="eb:BuildRefType" maxOccurs="unbounded" minOccurs="1"></xs:element>
+    	</xs:sequence>
+    	<xs:attribute name="name" type="xs:string" />
+    </xs:complexType>
+    <xs:complexType name="EnvironmentContainerType">
+    	<xs:sequence>
+    		<xs:element name="buildref" type="eb:BuildRefType" maxOccurs="unbounded" minOccurs="1"></xs:element>
+    	</xs:sequence>
+    	<xs:attribute name="name" type="xs:string" />
+    </xs:complexType>
+    <xs:complexType name="BuildType">
+        <xs:sequence>
+            <xs:element name="param" type="eb:ParamType" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="sequenceref" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:attribute name="sequenceid"/>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="GlobalParametersType">
+        <xs:sequence>
+            <xs:element name="param" type="eb:ParamType" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="SequenceType">
+        <xs:complexContent>
+            <xs:extension base="eb:SequenceChoiceType">
+                <xs:attribute name="id" type="xs:string"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="SequenceChoiceType">
+        <xs:sequence>
+            <xs:element name="param" type="eb:ParamType" minOccurs="0" maxOccurs="unbounded" />
+            <xs:choice maxOccurs="unbounded" minOccurs="1">
+                <xs:element name="step">
+                    <xs:complexType>
+                        <xs:attribute name="actionid" type="xs:string" use="required"/>
+                        <xs:attribute name="context" type="xs:string"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="sequenceref">
+                    <xs:complexType>
+                        <xs:attribute name="sequenceid" use="required"/>
+                        <xs:attribute name="context" type="xs:string"/>
+                    </xs:complexType>
+                </xs:element>
+            </xs:choice>
+        </xs:sequence>        
+    </xs:complexType>
+    <xs:complexType name="ActionType">
+        <xs:complexContent>
+            <xs:extension base="eb:ActionChoiceType">
+                <xs:attribute name="id" type="xs:string" use="required"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="ActionDefinitionType">
+        <xs:sequence>
+            <xs:element name="id" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ActionChoiceType">
+        <xs:sequence>
+            <xs:choice maxOccurs="unbounded">
+                <xs:element name="infra" type="eb:InfrastructureProvisioningActionDefinitionType"/>
+                <xs:element name="call" type="eb:ActionCallType"/>
+                <xs:element name="sshcommand" type="eb:SSHCommandActionDefinitionType"/>
+                <xs:element name="internalhiera" type="eb:InternalHieraActionDefinitionType"/>
+                <xs:element name="firewallhiera" type="eb:FirewallHieraActionDefinitionType"/>
+            </xs:choice>
+        </xs:sequence>
+    </xs:complexType>
+  
+    <xs:complexType name="InfrastructureProvisioningActionDefinitionType">
+		<xs:sequence>
+			<xs:element name="vCloud" type="eb:vCloudCommand" minOccurs="0"/>
+			<xs:element name="aCloud" type="eb:aCloudCommand" minOccurs="0"/>
+		</xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="vCloudCommand">
+    	<xs:complexContent>
+    		<xs:extension base="vc:Execute"/>
+    	</xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="aCloudCommand">
+    	<xs:complexContent>
+    		<xs:extension base="ac:Execute"/>
+    	</xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="SSHCommandActionDefinitionType" >
+        <xs:complexContent>
+            <xs:extension base="eb:ActionDefinitionType">
+                <xs:attribute name="remotecommand" type="xs:string" use="required"/>
+                <xs:attribute name="machine" type="xs:string" use="required"/>
+                <xs:attribute name="sshoptsfile" type="xs:string" use="required"/>
+                <xs:attribute name="jumphosts" type="xs:string"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:simpleType name="UpdateBehaviour">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="overwrite-all"/>
+			<xs:enumeration value="add-and-update-only"/>
+		</xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="ZoneBase">
+		<xs:attribute name="zone" type="xs:string" use="required" />
+	</xs:complexType>
+	<xs:complexType name="Zone">
+		<xs:complexContent>
+			<xs:extension base="eb:ZoneBase" />
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="RelatedZone">
+		<xs:complexContent>
+			<xs:extension base="eb:ZoneBase" />
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Scope">
+		<xs:attribute name="yamlpath" type="xs:string" use="required" />
+	</xs:complexType>
+    <xs:complexType name="InternalHieraActionDefinitionType" >
+        <xs:complexContent>
+			<xs:extension base="eb:ActionDefinitionType">
+				<xs:sequence>
+					<xs:choice maxOccurs="unbounded" minOccurs="0">
+						<xs:element name="zone" type="eb:Zone"/>
+						<xs:element name="scope" type="eb:Scope"/>
+					</xs:choice>
+				</xs:sequence>
+				<xs:attribute name="updatebehaviour" type="eb:UpdateBehaviour" use="required" />
+				<xs:attribute name="hierarepourl" type="xs:string" use="required" />
+				<xs:attribute name="routesrepourl" type="xs:string" use="required" />
+				<xs:attribute name="routespath" type="xs:string" use="required" />
+				<xs:attribute name="zones" type="xs:string" />
+			</xs:extension>
+		</xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="FirewallHieraActionDefinitionType" >
+        <xs:complexContent>
+            <xs:extension base="eb:ActionDefinitionType">
+            	<xs:sequence>
+					<xs:choice maxOccurs="unbounded" minOccurs="0">
+						<xs:element name="zone" type="eb:Zone"/>
+						<xs:element name="scope" type="eb:Scope"/>
+					</xs:choice>
+				</xs:sequence>
+				<xs:attribute name="updatebehaviour" type="eb:UpdateBehaviour" use="required" />
+                <xs:attribute name="hierarepourl" type="xs:string" use="required"/>
+                <xs:attribute name="firewallrepourl" type="xs:string" use="required"/>
+                <xs:attribute name="firewallpath" type="xs:string" use="required"/>
+                <xs:attribute name="zones" type="xs:string" />
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="ActionCallType">
+        <xs:complexContent>
+            <xs:extension base="eb:ActionDefinitionType">
+            	<xs:attribute name="action" type="xs:string" use="required"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="ParamType">
+        <xs:attribute name="name" type="xs:string" use="required"/>
+        <xs:attribute name="value" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="BuildRefType">
+    	<xs:choice maxOccurs="unbounded" minOccurs="0">
+   			<xs:element name="parameter" type="eb:ParamType" minOccurs="0" maxOccurs="unbounded"/>
+   			<xs:element name="userparameter" type="eb:UserParameterType" minOccurs="0" maxOccurs="unbounded"/>
+    	</xs:choice>
+    	<xs:attribute name="id" type="xs:string" use="required"/>
+  	    <xs:attribute name="displayname" type="xs:string" use="required"/> 
+    	<xs:attribute name="buildid" type="xs:string" use="required"/> <!-- Id of the build that would run-->
+    	<xs:attribute name="provider" type="accfg:ProviderType"/>
+    </xs:complexType>
+    <xs:complexType name="UserParameterType">
+    	<xs:attribute name="displayname" type="xs:string" use="required"></xs:attribute>
+    	<xs:attribute name="id" type="xs:string" use="required"></xs:attribute>
+    </xs:complexType>
+</xs:schema>

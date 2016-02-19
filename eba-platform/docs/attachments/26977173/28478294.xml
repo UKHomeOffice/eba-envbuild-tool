@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<deploymentdescriptor xmlns="http://ebsa.ipt.com/ddConfig-1.0">
+  <metadata>
+    <minApplicationVersion>1.0</minApplicationVersion>
+  </metadata>
+  <plans>
+    <plan description="Basic deployment" impactLevel="1">
+      <step description="Do everything">
+        <perform filter="all" />
+      </step>
+    </plan>
+  </plans>
+  <schemes>
+    <scheme name="zzz_env" environment="db-env1-zzz1" scope="db">
+      <target name="dt" hostnames="dtzzzm01" />
+    </scheme>
+  </schemes>
+  <components>
+    <component minimumPlan="1" hostnames="dt" require="package_dependency_on_a_different_host">
+      <yaml>
+	      package_to_install:
+              require:
+              - Package[package_dependency]
+              tag: 'appdeploy'
+	  </yaml>
+      <hints>
+        <deploy chainBehaviour="whole-chain-multi-transition">
+          <before>
+            <step description="A description">
+			  <inject path="system::services/service-name/ensure" value="stopped" ifMissing="insertAll" hostnames="dtzzzm01"/>
+            </step>
+          </before>
+          <after>
+            <step description="A description">
+			  <inject path="system::services/service-name/ensure" value="running" ifMissing="insertAll" hostnames="dtzzzm01"/>
+			  <inject path="system::services/service-name/enable" value="true" ifMissing="insertAll" hostnames="dtzzzm01"/>
+            </step>
+          </after>
+        </deploy>
+      </hints>
+    </component>
+  </components>
+</deploymentdescriptor>

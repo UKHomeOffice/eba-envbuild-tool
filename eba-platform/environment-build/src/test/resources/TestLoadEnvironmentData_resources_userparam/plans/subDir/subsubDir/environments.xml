@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eb:builds xmlns:eb="http://ebsa.ipt.com/EnvironmentBuildSequence-1.0" xmlns:vc="http://ebsa.ipt.com/VCloudCommand-2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://ebsa.ipt.com/EnvironmentBuildSequence-1.0 ">
+  <eb:environment name="HO_IPT_NP_PRP1_MABC">
+  	<eb:buildref id="b1" displayname="standard build" buildid="prod_like">
+	  	<eb:userparameter id="userparam1" displayname="user param 1"/>
+	    <eb:userparameter id="userparam2" displayname="user param 2"/>
+    </eb:buildref>
+  </eb:environment>
+  <eb:environment name="HO_IPT_NPA_PRP1_MABC">
+  	<eb:buildref id="b2" displayname="standard build" buildid="prod_like2">
+	  	<eb:userparameter id="userparam1" displayname="user param 1"/>
+	    <eb:userparameter id="userparam2" displayname="user param 2"/>
+    </eb:buildref>
+  </eb:environment>
+</eb:builds>

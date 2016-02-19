@@ -1,0 +1,23 @@
+target/
+work/
+.classpath
+.project
+**/*.iml
+.idea/
+.settings/
+**/*.swp
+**/*.pyc
+**/.pydevproject
+Function/filesystem-housekeeping/**/generated/
+Function/filesystem-housekeeping/**/*.log
+dependency-reduced-pom.xml
+ssh_config
+
+#environmentManagement.log is spat out by log4j for environment management tool. Not useful in git. Could also have dates appended, hence *
+environmentManagement.log*
+environmentCommon.log*
+environmentBuild.log*
+environmentHiera.log*
+
+/bin/
+Function/environment-management/src/test/resources/ss3/report.html

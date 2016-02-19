@@ -1,0 +1,41 @@
+<jxb:bindings version="1.0" xmlns:jxb="http://java.sun.com/xml/ns/jaxb" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" jxb:extensionBindingPrefixes="xjc">
+
+	<jxb:bindings schemaLocation="ddConfig-1.0.xsd" node="/xs:schema">
+		<jxb:schemaBindings>
+			<jxb:package name="com.ipt.ebsa.deployment.descriptor" />
+			<jxb:nameXmlTransform>
+				<jxb:typeName prefix="XML" />
+				<jxb:anonymousTypeName prefix="XML" />
+			</jxb:nameXmlTransform>
+		</jxb:schemaBindings>
+		<jxb:bindings node="xs:simpleType[@name='deploymentActionType']">
+			<jxb:typesafeEnumClass>
+				<jxb:typesafeEnumMember value="all" name="all" />
+			</jxb:typesafeEnumClass>
+		</jxb:bindings>
+		<jxb:bindings node="xs:simpleType[@name='failureActionsType']">
+			<jxb:typesafeEnumClass>
+				<jxb:typesafeEnumMember value="insertKeyAndValueOnly" name="INSERT_KEY_AND_VALUE_ONLY" />
+				<jxb:typesafeEnumMember value="insertAll" name="INSERT_ALL" />
+				<jxb:typesafeEnumMember value="insertKeyAndValueAndParentMap" name="INSERT_KEY_AND_VALUE_AND_PARENT_MAP_ONLY" />
+				<jxb:typesafeEnumMember value="fail" name="FAIL" />
+			</jxb:typesafeEnumClass>
+		</jxb:bindings>
+		<jxb:bindings node="xs:simpleType[@name='chainBehaviourType']">
+			<jxb:typesafeEnumClass>
+				<jxb:typesafeEnumMember value="whole-chain-multi-transition" name="whole_chain_multi_transition" />
+				<jxb:typesafeEnumMember value="whole-chain-single-transition" name="whole_chain_single_transition" />
+				<jxb:typesafeEnumMember value="dependents-only-multi-transition" name="dependents_only_multi_transition" />
+				<jxb:typesafeEnumMember value="dependents-only-single-transition" name="dependents_only_single_transition" />
+				<jxb:typesafeEnumMember value="isolated" name="isolated" />
+			</jxb:typesafeEnumClass>
+		</jxb:bindings>
+		<jxb:bindings node="xs:simpleType[@name='changeMethodType']">
+			<jxb:typesafeEnumClass>
+				<jxb:typesafeEnumMember value="undeployRedeploy" name="undeployRedeploy" />
+				<jxb:typesafeEnumMember value="justDeploy" name="justDeploy" />
+			</jxb:typesafeEnumClass>
+		</jxb:bindings>
+	</jxb:bindings>
+
+</jxb:bindings>

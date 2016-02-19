@@ -1,0 +1,8 @@
+<ac:execute xmlns:ac="http://ebsa.ipt.com/aCloudCommand-1.1" xsi:schemaLocation="http://ebsa.ipt.com/aCloudCommand-1.1 aCloudCommand-1.1.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<ac:EnvironmentContainer command="create" includes="np" strategy="merge" errorStrategy="exit">
+		<ac:Environment command="confirm" includes="EBSAD-20086-ENV" strategy="exists" errorStrategy="exit">
+			<ac:VirtualMachineContainer command="create" includes="EBSAD-20086-VMC" strategy="merge" errorStrategy="exit"/>
+			<ac:VirtualMachineContainer command="confirm" includes="EBSAD-20086-VMC" strategy="exists" errorStrategy="exit"/>
+		</ac:Environment>
+	</ac:EnvironmentContainer>
+</ac:execute>				

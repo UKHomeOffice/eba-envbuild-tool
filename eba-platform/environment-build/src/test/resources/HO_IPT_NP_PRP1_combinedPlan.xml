@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<builds xmlns="http://ebsa.ipt.com/EnvironmentBuildSequence-1.0" xmlns:ac="http://ebsa.ipt.com/aCloudCommand-1.1" xmlns:vc="http://ebsa.ipt.com/VCloudCommand-2.0">
+    <environment name="HO_IPT_NP_PRP1_MABC">
+        <buildref buildid="prod_like" displayname="standard build" id="b1"/>
+    </environment>
+    <environment name="HO_IPT_NPA_PRP1_MABC">
+        <buildref buildid="prod_like2" displayname="standard build" id="b2"/>
+    </environment>
+    <build id="prod_like">
+        <param value="Rod" name="build_1"/>
+        <param value="Jane" name="build_2"/>
+        <param value="Freddy" name="build_3"/>
+        <param value="emo,goth" name="excludes"/>
+        <sequenceref sequenceid="S1"/>
+    </build>
+    <build id="prod_like2">
+        <param value="Rod" name="build_1"/>
+        <param value="Jane" name="build_2"/>
+        <param value="Freddy" name="build_3"/>
+        <param value="emo,goth" name="excludes"/>
+        <sequenceref sequenceid="S1"/>
+    </build>
+    <sequence id="S1">
+        <param value="Zippy" name="sequence_1a"/>
+        <param value="George" name="sequence_1b"/>
+        <param value="Bungle" name="sequence_1c"/>
+        <step context="step_context_param_1=Rosie" actionid="Release the hounds"/>
+        <sequenceref sequenceid="S2"/>
+    </sequence>
+    <sequence id="S2">
+        <param value="Sooty" name="sequence_2a"/>
+        <param value="Sweep" name="sequence_2b"/>
+        <param value="Sue" name="sequence_2c"/>
+        <step context="step_context_param_2 =Noddy  ,  step_context_param_3 = Big Ears" actionid="Release the hounds"/>
+        <step context="step_context_param_4=Rosie,machine=RageAgainst,sshopts=~/.ssh/config,jumphosts=test.host" actionid="Open sesame"/>
+    </sequence>
+    <action id="Release the hounds">
+        <infra>
+            <vCloud>
+                <vc:Environment>
+                    <vc:VirtualApplication errorStrategy="exit" strategy="createOnly" excludes="${excludes}" includes="" command="create"/>
+                </vc:Environment>
+            </vCloud>
+            <aCloud>
+                <ac:EnvironmentContainer>
+                    <ac:Environment>
+                        <ac:VirtualMachineContainer errorStrategy="exit" strategy="createOnlyWait" excludes="" includes="" command="create"/>
+                    </ac:Environment>
+                </ac:EnvironmentContainer>
+            </aCloud>
+        </infra>
+    </action>
+    <action id="Open sesame">
+        <call action="Chocs away!"/>
+        <call action="Bolt the gate"/>
+    </action>
+    <action id="Chocs away!">
+        <sshcommand jumphosts="${jumphosts}" sshoptsfile="${sshopts}" machine="${machine}" remotecommand="command x"/>
+    </action>
+    <action id="Bolt the gate">
+        <sshcommand sshoptsfile="${sshopts}" machine="${machine}" remotecommand="command x"/>
+    </action>
+    <action id="The engines cannae take it">
+        <internalhiera routespath="path/to/xls" routesrepourl="git://testroutes.git" hierarepourl="git://testhiera.git" updatebehaviour="add-and-update-only"/>
+    </action>
+    <action id="Illogical, captain">
+        <firewallhiera firewallpath="path/to/firewall/xls" firewallrepourl="git://firewall.git" hierarepourl="git://hiera.git" updatebehaviour="add-and-update-only"/>
+    </action>
+</builds>

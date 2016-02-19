@@ -1,0 +1,411 @@
+<style>
+	body {
+		font-family: Helvetica, Arial, sans-serif;
+		font-size: 13px;
+	}
+	.jenkinsy_table {
+		border: solid 1px #f0f0f0;
+		border-radius: 4px;
+		border-collapse: collapse;
+		padding: 3px 4px 3px 4px;
+	}
+	.jenkinsy_table thead {
+		background-color: #f0f0f0;
+		padding: 7px 0px;
+	}
+	.jenkinsy_table td,th {	
+		padding-right: 15px;
+		padding-left: 15px;
+		padding-top: 5px;
+		padding-bottom: 5px;
+	}
+	.jenkinsy_table thead tr {
+		border-bottom: 1px solid #ddd;
+		padding: 3px 4px 3px 4px;
+	}
+	.jenkinsy_table.with_summary_rows tr:nth-child(4n+1) {
+		background: #fbfbfb;
+	}
+	
+	.jenkinsy_table.no_summary tr:nth-child(odd) {
+		background: #fbfbfb;
+	}
+	.expando a{
+		float: left;
+	}
+	
+	.expando {
+		width: 1%;
+	}
+	.components_table,
+	.transitions_table {
+		width: 85%;
+		margin-left:auto;
+		margin-right:auto;
+		font-size: 12px;
+		margin-top:30px;
+		margin-bottom:30px;
+	}
+	div.cutoffable .transition_status_report td {
+		padding: 5px 0px 5px 0px;	
+	}
+	.transitions_table td.message {
+		font-weight: bold;
+	}
+	td > .cutoffable {
+		overflow: hidden;
+		height: 0px; 
+	}
+	.jenkinsy_table .contentRow {
+		overflow: hidden;
+	}
+	.jenkinsy_table .contentRow td {
+		padding-top: 0px;
+		padding-bottom: 0px;
+	}
+	.section_break {
+		margin: 30px;
+	}
+
+	.jenkinsy_table tr .last {
+		border-bottom: groove ;
+	}
+	
+	.jenkinsy_table tr {
+		text_align: left;
+	}
+	
+	#plan {
+		/* More of a suggestion that the width should be 0.75 of the viewable area.
+		   Content may still take up more than this width if it needs it.*/
+		width: 75vw; 
+	}
+	.update_failed {
+		color: red;
+	}
+	.error {
+		color:red;
+	}
+	.hidden {
+		display: none;	
+	}
+	.jenkins_table .full_width {
+		width: 100%;
+	}
+	#phases_table {
+		table-layout: fixed;
+	}
+	#phases_table td.col0,
+	#phases_table td.col1,
+	#phases_table td.expando {
+		width: 10px;
+	}
+	
+	th {
+		text-align: left;
+	}
+	.progress_indicator {
+		font-size: 25px;
+  		color: green;
+	}
+	div.spinner {
+		width:            16px;
+		height:           16px;
+		background-image: url('data:image/gif;base64,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');
+	}
+	a.ddlink:link,
+	a.ddlink:visited,
+	a.ddlink:hover,
+	a.ddlink:active {
+		color: #204A87;
+		font-size: medium;
+	}
+	.initiallyHidden,
+	.deployedVersion {
+		display: none;
+	}
+	#auto_refresh_container {
+	    text-align: right;
+	}
+	
+</style>
+<div id="auto_refresh_container" class="initiallyHidden">
+    <a href="#">disable auto-refresh</a>
+</div>
+<div id="plan_anchor"/>
+<div id="deployment_details_container" class="initiallyHidden">
+<hr class="section_break" />
+<h2>Deployment</h2>
+<template id="deployment_details_template">
+	<tbody>
+		<tr>
+			<td>Environment</td>
+			<td id="environment"></td>
+		</tr>
+		<tr>
+			<td>Composite Release Version</td>
+			<td id="releaseVersion"></td>
+		</tr>
+		<tr id="started">
+			<td>Started</td>
+			<td class="text"></td>
+		</tr>
+		<tr id="finished">
+			<td>Finished</td>
+			<td class="text"></td>
+		</tr>
+		<tr id="status">
+			<td>Status</td>
+			<td class="progress_indicator"></td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<div class="initiallyHidden error" id="statusMessage">
+					The deployment failed. Some transitions to be run after the failed transition may be missing from the next deployment.<br />
+					We suggest checking the status of any <b>inject</b>, <b>remove</b>, or <b>execute</b> transitions in the failed phase and being prepared to run these steps manually.
+				</div>
+			</td>
+		</tr>
+	</tbody>
+</template>
+<table id="deployment_details" class="jenkinsy_table">
+</table>
+</div>
+<div id="application_table_container" class="initiallyHidden">
+	<hr class="section_break"/>
+	<h2 id="plan_title">Deployment plan</h2>
+	<!-- Summary row in the applications table -->
+	<template id="deployments_summary_template">
+		<tr class="summaryRow">
+			<td class="expando">	
+				<a href="javascript:void(0);">
+					<img style="width: 16px; height: 16px; " class="icon-expando" src="expand.png">
+				</a>
+			</td>
+			<td class="col1"></td>
+			<td class="col2"></td>
+			<td class="col3"></td>
+		</tr>
+	</template>
+	<!-- Structure of the component actions table within the applications table -->
+	<template id="deployments_content_template">
+		<tr class="contentRow">
+			<td colspan="4">
+				<div class="cutoffable">
+					<table class="jenkinsy_table with_summary_rows components_table">
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Minimum plan</th>
+								<th>Target version</th>
+								<th>Existing version</th>
+								<th class="deployedVersion">Deployed Version</th>
+								<th>Max depth</th>
+								<th>Action(s)</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+				</div>
+			</td>
+		</tr>
+	</template>
+	<!-- Structure of the component actions rows -->
+	<template id="component_data_template">
+		<tr>
+			<td class="col1"></td>
+			<td class="col2"></td>
+			<td class="col3"></td>
+			<td class="col4"></td>
+			<td class="deployedVersion"></td>
+			<td class="col5"></td>
+			<td class="col6"></td>
+		</tr>
+	</template>
+	<!-- Structure of the applications table -->
+	<table id="application_table" class="jenkinsy_table with_summary_rows">
+		<thead>
+			<tr>
+				<th/>
+				<th>Name</th>
+				<th>Version</th>
+				<th>Component Change Summary</th>
+			</tr>
+		</thead>
+		<tbody>
+
+		</tbody>
+	</table>
+</div>
+<div id="phases_table_container" class="initiallyHidden">
+	<hr class="section_break"/>
+	<h2>Phases</h2>
+	<!-- Structure of the phase summary rows -->
+	<template id="phases_summary_template">
+		<tr class="summaryRow">
+			<td class="expando">	
+				<a href="javascript:void(0);">
+					<img style="width: 16px; height: 16px;" class="icon-expando" src="expand.png">
+				</a>
+			</td>
+			<td class="progress_indicator"></td> <!-- Progress indicator -->
+			<td class="col1"></td> <!-- Phase index -->
+			<td class="col2"></td> <!-- Phase contents -->
+		</tr>
+	</template>
+
+	<!-- Structure of the phase content rows, including table to display transitions -->
+	<template id="phases_content_template">
+		<tr class="contentRow">
+			<td colspan="4">
+				<div class="cutoffable">
+					<!-- Transitions table -->
+					<table class="jenkinsy_table with_summary_rows full_width transitions_table">
+						<thead>
+							<tr>
+								<th />
+								<th>Transition #</th>
+								<th>Application</th>
+								<th>Existing Path</th>
+								<th>Existing value</th>
+								<th>Requested Path</th>
+								<th>Requested Value</th>
+								<th>Paths added</th>
+								<th>Paths removed</th>
+								<th>Hiera File</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+				</div>
+			</td>
+		</tr>
+	</template>
+	<!-- Structure of the transition rows -->
+
+	<template id="transitions_content_data_template">
+		<tr>
+			<td class="progress_indicator"></td>
+			<td class="col1"></td>
+			<td class="col2"></td>
+			<td class="col3"></td>
+			<td class="col4"></td>
+			<td class="col5"></td>
+			<td class="col6"></td>
+			<td class="col7"></td>
+			<td class="col8"></td>
+			<td class="col9"></td>
+		</tr>
+	</template>
+	<template id="transitions_status_data_template">
+		<tr class="summaryRow">
+			<td class="expando">	
+				<a href="javascript:void(0);">
+					<img style="width: 16px; height: 16px;" class="icon-expando" src="expand.png">
+				</a>
+			</td>
+			<td colspan="9" class="error message"></td>
+		</tr>
+		<tr class="contentRow transitionStatusReport">
+			<td></td>
+			<td colspan="10">
+				<div class="cutoffable">
+					<table class="jenkinsy_table with_summary_rows full_width transition_status_report">
+						<tr class="exception initiallyHidden"><td></td></tr>
+						<tr class="stackTrace initiallyHidden"><td></td></tr>
+						<tr class="log"><td></td></tr>
+					</table>
+				</table>
+			</td>
+		</tr>
+	</template>
+	<!-- Structure of the command rows -->
+	<template id="command_data_template">
+		<tr>
+			<td class="progress_indicator"></td>
+			<td class="col1"></td>
+			<td class="col2"></td>
+			<td class="col3" colspan="3" style="font-weight: bold; padding: 12px;"></td>
+			<td class="col4" colspan="4" style="font-weight: bold; padding: 12px;"></td>
+		</tr>
+	</template>
+	<!-- Structure of the wait rows -->
+	<template id="wait_data_template">
+		<tr>
+			<td class="progress_indicator"></td>
+			<td class="col1"></td>
+			<td class="col2" colspan="8" style="font-weight: bold; padding: 12px;"></td>
+		</tr>
+	</template>
+	<!-- Structure of the stop rows -->
+	<template id="stop_data_template">
+		<tr>
+			<td class="progress_indicator"></td>
+			<td class="col1"></td>
+			<td class="col2" colspan="2" style="font-weight: bold; padding: 12px;"></td>
+			<td class="col3" colspan="6" style="font-weight: bold; padding: 12px;"></td>
+		</tr>
+	</template>
+	<!-- The phases table -->
+	<table id="phases_table" class="jenkinsy_table with_summary_rows">
+		<thead>
+			<tr>
+				<th/>
+				<th/>
+				<th>Phase #</th>
+				<th>Applications</th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
+</div>
+
+<div id="dependencies_container" class="initiallyHidden">
+	<hr class="section_break"/>
+	<h2>Dependencies</h2>
+</div>
+
+<div id="descriptors_container" class="initiallyHidden">
+	<hr class="section_break"/>
+	<h2>Application Deployment Descriptors</h2>
+	<p>(Links will open in a new tab/window)</p>
+	
+	<h4 id="releaseDDHeader">Release Deployment Descriptor</h4>
+	
+	<h4>Application Deployment Descriptors</h4>
+	<ul></ul>
+</div>
+<div id="ffs_container">
+	<hr class="section_break"/>
+	<h2>Fail Files</h2>
+	<p id="ff_error" class="error hidden">Unable to report RPM fail files - check the logs for details</p>
+	<template id="ffs_template">
+		<div class="cutoffable">
+			<table class="jenkinsy_table no_summary fail_files">
+				<thead>
+					<tr>
+						<th>Host</th>
+						<th>Status</th>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+		</div>
+	</template>
+	<template id="fail_file_row">
+		<tr>
+			<td class="col1"></td>
+			<td class="col2"></td>
+		</tr>
+	</template>
+</div>
+<script type="text/javascript" id="js_caller">
+	// Populate the tables from the JSON data
+	window.data = |data|
+	window.populateTemplate(data)
+	window.addListeners(60);
+</script>

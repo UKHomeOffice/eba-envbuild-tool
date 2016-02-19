@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eb:builds xmlns:eb="http://ebsa.ipt.com/EnvironmentBuildSequence-1.0" xmlns:vc="http://ebsa.ipt.com/VCloudCommand-2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://ebsa.ipt.com/EnvironmentBuildSequence-1.0 ../../../../../main/resources/EnvironmentBuildSchema-1.0.xsd ">
+  <eb:environment name="hostile">
+  	<eb:buildref id="UniqueIdentifityForThisBuildRef" displayname="Standard EBSA Build" buildid="prod_like">
+  		<eb:parameter name="build_4" value="Glenda" />
+  		<eb:userparameter id="something useful" displayname="Input something useful please, guv" />
+  		<eb:parameter name="build_5" value="Joseph" />
+  		<eb:userparameter id="something better" displayname="Input something better please, guv" />
+  	</eb:buildref>
+  </eb:environment>
+  <eb:environmentcontainer name="base_container">
+  	<eb:buildref id="S1" displayname="Standard Container" buildid="prod_like">
+  		<eb:parameter name="env_1" value="Hey" />
+  		<eb:userparameter id="up_cont_1" displayname="Something for a container" />
+  		<eb:parameter name="env_2" value="Ya" />
+  		<eb:userparameter id="up_cont_2" displayname="Something else" />
+  	</eb:buildref>
+  </eb:environmentcontainer>
+</eb:builds>

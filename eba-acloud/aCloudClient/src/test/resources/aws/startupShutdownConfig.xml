@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GeographicContainer id="ID_1" xsi:schemaLocation="http://ebsa.ipt.com/AgnosticCloudConfig-1.0 AgnosticCloudConfig-1.0.xsd" xmlns="http://ebsa.ipt.com/AgnosticCloudConfig-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<account>UNITTESTEBSA</account>
+	<region>eu-west-1</region>
+	<EnvironmentContainer id="ID_2">
+		<name>UNITTESTContainer</name>
+		<provider>AWS</provider>
+		<Environment environmentContainerDefinitionId="ID_13" id="ID_3">
+			<name>UNITTEST_SUSD_ENVIRONMENT</name>
+			<notes>notes</notes>
+			<EnvironmentDefinition environmentDefinitionType="Physical" id="ID_4">
+				<name>UNITTEST_SUSD_ENVIRONMENT_DEFINITION</name>
+				<version>1.0</version>
+				<cidr>10.16.0.0/16</cidr>
+				<VirtualMachineContainer dataCenterName="String" dataCenterId="datacentre_1" id="ID_5">
+					<name>UNITTEST_SUSD_TEST_VMC</name>
+					<description>test vmc</description>
+					<runtimeLease>String</runtimeLease>
+					<storageLease>String</storageLease>
+					<serviceLevel>String</serviceLevel>
+					<powerOn>true</powerOn>
+					<deploy>true</deploy>
+					<domain>test.domain.local</domain>
+					<VirtualMachine id="VM_1">
+						<vmName>UNITTEST_SUSD_testvm1</vmName>
+						<computerName>UNITTEST_SUSD_testvm1</computerName>
+						<description>testvm1 description</description>
+						<templateName>ami-08acfa7f</templateName>
+						<templateServiceLevel>String</templateServiceLevel>
+						<storageProfile>String</storageProfile>
+						<customisationScript></customisationScript>
+						<VMOrder>0</VMOrder>
+						<VMStartDelay>0</VMStartDelay>
+						<VMStopDelay>0</VMStopDelay>
+						<VMStartAction>none</VMStartAction>
+						<VMStopAction>guestShutdown</VMStopAction>
+						<cpuCount>0</cpuCount>
+						<memory>0</memory>
+						<memoryUnit>String</memoryUnit>
+						<hardwareProfile>m3.large</hardwareProfile>
+						<hatype>String</hatype>
+						<Storage id="VM_1_DISK_1">
+							<indexNumber>0</indexNumber>
+							<size>50</size>
+							<sizeUnit>GB</sizeUnit>
+							<busType>String</busType>
+							<busSubType>String</busSubType>
+							<deviceMount>/dev/sda1</deviceMount>
+						</Storage>
+						<NIC networkID="APP_NET_1" networkName="String" id="VM_1_NIC_1">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>String</ipAssignment>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>susdTestNic1</name>
+								<staticIpAddress>10.16.100.4</staticIpAddress>
+								<isVip>false</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+						</NIC>
+					</VirtualMachine>
+					<VirtualMachine id="VM_2">
+						<vmName>UNITTEST_SUSD_testvm2</vmName>
+						<computerName>UNITTEST_SUSD_testvm2</computerName>
+						<description>testvm2 description</description>
+						<templateName>ami-08acfa7f</templateName>
+						<templateServiceLevel>String</templateServiceLevel>
+						<storageProfile>String</storageProfile>
+						<customisationScript></customisationScript>
+						<VMOrder>0</VMOrder>
+						<VMStartDelay>0</VMStartDelay>
+						<VMStopDelay>0</VMStopDelay>
+						<VMStartAction>none</VMStartAction>
+						<VMStopAction>guestShutdown</VMStopAction>
+						<cpuCount>0</cpuCount>
+						<memory>0</memory>
+						<memoryUnit>String</memoryUnit>
+						<hardwareProfile>m3.large</hardwareProfile>
+						<hatype>String</hatype>
+						<Storage id="VM_2_DISK_1">
+							<indexNumber>0</indexNumber>
+							<size>50</size>
+							<sizeUnit>GB</sizeUnit>
+							<busType>String</busType>
+							<busSubType>String</busSubType>
+							<deviceMount>/dev/sda1</deviceMount>
+						</Storage>
+						<NIC networkID="APP_NET_1" networkName="String" id="VM_2_NIC_1">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>String</ipAssignment>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>susdTestNic1</name>
+								<staticIpAddress>10.16.100.5</staticIpAddress>
+								<isVip>false</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+						</NIC>
+					</VirtualMachine>
+					<VirtualMachine id="VM_3">
+						<vmName>UNITTEST_SUSD_testvm3</vmName>
+						<computerName>UNITTEST_SUSD_testvm3</computerName>
+						<description>testvm3 description</description>
+						<templateName>ami-08acfa7f</templateName>
+						<templateServiceLevel>String</templateServiceLevel>
+						<storageProfile>String</storageProfile>
+						<customisationScript></customisationScript>
+						<VMOrder>0</VMOrder>
+						<VMStartDelay>0</VMStartDelay>
+						<VMStopDelay>0</VMStopDelay>
+						<VMStartAction>none</VMStartAction>
+						<VMStopAction>guestShutdown</VMStopAction>
+						<cpuCount>0</cpuCount>
+						<memory>0</memory>
+						<memoryUnit>String</memoryUnit>
+						<hardwareProfile>m3.large</hardwareProfile>
+						<hatype>String</hatype>
+						<Storage id="VM_3_DISK_1">
+							<indexNumber>0</indexNumber>
+							<size>50</size>
+							<sizeUnit>GB</sizeUnit>
+							<busType>String</busType>
+							<busSubType>String</busSubType>
+							<deviceMount>/dev/sda1</deviceMount>
+						</Storage>
+						<NIC networkID="APP_NET_1" networkName="String" id="VM_3_NIC_1">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>String</ipAssignment>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>susdTestNic1</name>
+								<staticIpAddress>10.16.100.6</staticIpAddress>
+								<isVip>false</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+						</NIC>
+					</VirtualMachine>
+					<VirtualMachine id="VM_4">
+						<vmName>UNITTEST_SUSD_testvm4</vmName>
+						<computerName>UNITTEST_SUSD_testvm4</computerName>
+						<description>testvm4 description</description>
+						<templateName>ami-08acfa7f</templateName>
+						<templateServiceLevel>String</templateServiceLevel>
+						<storageProfile>String</storageProfile>
+						<customisationScript></customisationScript>
+						<VMOrder>0</VMOrder>
+						<VMStartDelay>0</VMStartDelay>
+						<VMStopDelay>0</VMStopDelay>
+						<VMStartAction>none</VMStartAction>
+						<VMStopAction>guestShutdown</VMStopAction>
+						<cpuCount>0</cpuCount>
+						<memory>0</memory>
+						<memoryUnit>String</memoryUnit>
+						<hardwareProfile>m3.large</hardwareProfile>
+						<hatype>String</hatype>
+						<Storage id="VM_4_DISK_1">
+							<indexNumber>0</indexNumber>
+							<size>50</size>
+							<sizeUnit>GB</sizeUnit>
+							<busType>String</busType>
+							<busSubType>String</busSubType>
+							<deviceMount>/dev/sda1</deviceMount>
+						</Storage>
+						<NIC networkID="APP_NET_1" networkName="String" id="VM_4_NIC_1">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>String</ipAssignment>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>susdTestNic1</name>
+								<staticIpAddress>10.16.100.7</staticIpAddress>
+								<isVip>false</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+						</NIC>
+					</VirtualMachine>
+					<Network dataCenterName="String" dataCenterId="datacentre_1" id="APP_NET_1">
+						<name>UNITTEST_SUSD_TEST_APP_NET_1</name>
+						<description>test net 1 desc</description>
+						<fenceMode>String</fenceMode>
+						<networkMask>String</networkMask>
+						<gatewayAddress>String</gatewayAddress>
+						<primaryDns>10.0.0.0</primaryDns>
+						<secondaryDns>String</secondaryDns>
+						<dnsSuffix>String</dnsSuffix>
+						<staticIpPool>String</staticIpPool>
+						<ipRangeStart>String</ipRangeStart>
+						<ipRangeEnd>String</ipRangeEnd>
+						<CIDR>10.16.100.0/24</CIDR>
+						<shared>false</shared>
+					</Network>
+				</VirtualMachineContainer>
+			</EnvironmentDefinition>
+		</Environment>
+		<EnvironmentContainerDefinition id="ID_13">
+			<name>SUSH_ENVIRONMENT_DEFINITION</name>
+			<version>1.0</version>
+			<Network dataCenterName="String" dataCenterId="datacentre_1" id="ID_14">
+				<name>UNITTEST_SUSD_TEST_ORG_NET_1</name>
+				<description>test org net</description>
+				<fenceMode>String</fenceMode>
+				<networkMask>String</networkMask>
+				<gatewayAddress>String</gatewayAddress>
+				<primaryDns>10.0.0.0</primaryDns>
+				<secondaryDns>10.0.0.0</secondaryDns>
+				<dnsSuffix>String</dnsSuffix>
+				<staticIpPool>String</staticIpPool>
+				<ipRangeStart>String</ipRangeStart>
+				<ipRangeEnd>String</ipRangeEnd>
+				<CIDR>10.16.101.0/24</CIDR>
+				<shared>false</shared>
+			</Network>
+			<DataCenter id="datacentre_1">
+				<name>eu-west-1a</name>
+			</DataCenter>
+		</EnvironmentContainerDefinition>
+	</EnvironmentContainer>
+</GeographicContainer>

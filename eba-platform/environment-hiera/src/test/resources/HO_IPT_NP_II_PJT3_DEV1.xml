@@ -1,0 +1,1125 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<GeographicContainer xmlns="http://ebsa.ipt.com/AgnosticCloudConfig-1.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="_1"
+	xsi:schemaLocation="http://ebsa.ipt.com/AgnosticCloudConfig-1.0 AgnosticCloudConfig-1.0.xsd">
+	<account/>
+	<region/>
+	<EnvironmentContainer id="_2">
+		<name>np</name>
+		<provider>SKYSCAPE</provider>
+		<Environment environmentContainerDefinitionId="_5" id="_3">
+			<name>HO_IPT_NP_II_PJT3_DEV1</name>
+			<notes/>
+			<EnvironmentDefinition environmentDefinitionType="Physical" id="_4">
+				<name>HO_IPT_NP_II_PJT3_DEV1</name>
+				<version>0.2</version>
+				<cidr/>
+				<isCurrent/>
+				<VirtualMachineContainer dataCenterId="_7" id="_6">
+					<name>HO_IPT_NP_II_PJT3_DEV1</name>
+					<description>HO_IPT_NP_II_PJT3_DEV1</description>
+					<runtimeLease/>
+					<storageLease/>
+					<serviceLevel>Home Office IPT NP (IL2-DEVTEST-BASIC)</serviceLevel>
+					<powerOn>true</powerOn>
+					<deploy>true</deploy>
+					<domain>np-ii-pjt3-dev1.ipt.ho.local</domain>
+					<VirtualMachine id="_9">
+						<vmName>artam01</vmName>
+						<computerName>artam01</computerName>
+						<description>Application Router</description>
+						<templateName>EBSA-TEMPLATES-CENTOS-6.5-64</templateName>
+						<templateServiceLevel>Home Office IPT NP (IL2-DEVTEST-BASIC)</templateServiceLevel>
+						<storageProfile>9-76-3-BASIC-ANY</storageProfile>
+						<customisationScript>/var/lib/jenkins/jobs/retrieve_configuration/workspace/customise.strategic.sh</customisationScript>
+						<cpuCount>1</cpuCount>
+						<memory>2</memory>
+						<memoryUnit>GB</memoryUnit>
+						<hardwareProfile/>
+						<hatype>0</hatype>
+						<Storage id="_10">
+							<indexNumber>1</indexNumber>
+							<size>50</size>
+							<sizeUnit>GB</sizeUnit>
+							<busType>0</busType>
+							<busSubType>0</busSubType>
+							<deviceMount>0</deviceMount>
+						</Storage>
+						<NIC id="_11" networkID="_8">
+							<indexNumber>1</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool/>
+								<networkMask/>
+								<name>artam01</name>
+								<staticIpAddress>10.48.15.12</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+						<NIC id="_12" networkID="_13">
+							<indexNumber>2</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool/>
+								<networkMask/>
+								<name>artaa01</name>
+								<staticIpAddress>10.43.0.1</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+						<NIC id="_59" networkID="_60">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool/>
+								<networkMask/>
+								<name/>
+								<staticIpAddress>10.43.128.2</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+					</VirtualMachine>
+					<VirtualMachine id="_14">
+						<vmName>dbsam21</vmName>
+						<computerName>dbsam21</computerName>
+						<description>Scheduler Database</description>
+						<templateName>EBSA-TEMPLATES-CENTOS-6.5-64</templateName>
+						<templateServiceLevel>Home Office IPT NP (IL2-DEVTEST-BASIC)</templateServiceLevel>
+						<storageProfile>9-76-3-BASIC-ANY</storageProfile>
+						<customisationScript>/var/lib/jenkins/jobs/retrieve_configuration/workspace/customise.strategic.sh</customisationScript>
+						<cpuCount>2</cpuCount>
+						<memory>8</memory>
+						<memoryUnit>GB</memoryUnit>
+						<hardwareProfile/>
+						<hatype>0</hatype>
+						<Storage id="_15">
+							<indexNumber>1</indexNumber>
+							<size>50</size>
+							<sizeUnit>GB</sizeUnit>
+							<busType>0</busType>
+							<busSubType>0</busSubType>
+							<deviceMount>0</deviceMount>
+						</Storage>
+						<NIC id="_16" networkID="_13">
+							<indexNumber>1</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool/>
+								<networkMask/>
+								<name>dbsaa21</name>
+								<staticIpAddress>10.43.0.16</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+						<NIC id="_76" networkID="_60">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool/>
+								<networkMask/>
+								<name>dbsam21</name>
+								<staticIpAddress>10.43.128.16</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+					</VirtualMachine>
+					<VirtualMachine id="_17">
+						<vmName>rmaam01</vmName>
+						<computerName>rmaam01</computerName>
+						<description>SSB Repo</description>
+						<templateName>EBSA-TEMPLATES-CENTOS-6.5-64</templateName>
+						<templateServiceLevel>Home Office IPT NP (IL2-DEVTEST-BASIC)</templateServiceLevel>
+						<storageProfile>9-76-3-BASIC-ANY</storageProfile>
+						<customisationScript>/var/lib/jenkins/jobs/retrieve_configuration/workspace/customise.strategic.sh</customisationScript>
+						<cpuCount>1</cpuCount>
+						<memory>2</memory>
+						<memoryUnit>GB</memoryUnit>
+						<hardwareProfile/>
+						<hatype>0</hatype>
+						<Storage id="_18">
+							<indexNumber>1</indexNumber>
+							<size>50</size>
+							<sizeUnit>GB</sizeUnit>
+							<busType>0</busType>
+							<busSubType>0</busSubType>
+							<deviceMount>0</deviceMount>
+						</Storage>
+						<NIC id="_19" networkID="_13">
+							<indexNumber>1</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool/>
+								<networkMask/>
+								<name>rmaaa01</name>
+								<staticIpAddress>10.43.0.4</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+						<NIC id="_70" networkID="_60">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool/>
+								<networkMask/>
+								<name>rmaam01</name>
+								<staticIpAddress>10.43.128.4</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+					</VirtualMachine>
+					<VirtualMachine id="_20">
+						<vmName>ssbam01</vmName>
+						<computerName>ssbam01</computerName>
+						<description>SSB</description>
+						<templateName>EBSA-TEMPLATES-RHEL-6.5-64</templateName>
+						<templateServiceLevel>Home Office IPT NP (IL2-DEVTEST-BASIC)</templateServiceLevel>
+						<storageProfile>9-76-3-BASIC-ANY</storageProfile>
+						<customisationScript>/var/lib/jenkins/jobs/retrieve_configuration/workspace/customise.strategic.sh</customisationScript>
+						<cpuCount>2</cpuCount>
+						<memory>8</memory>
+						<memoryUnit>GB</memoryUnit>
+						<hardwareProfile/>
+						<hatype>0</hatype>
+						<Storage id="_21">
+							<indexNumber>1</indexNumber>
+							<size>50</size>
+							<sizeUnit>GB</sizeUnit>
+							<busType>0</busType>
+							<busSubType>0</busSubType>
+							<deviceMount>0</deviceMount>
+						</Storage>
+						<NIC id="_22" networkID="_13">
+							<indexNumber>1</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool/>
+								<networkMask/>
+								<name>ssbaa01</name>
+								<staticIpAddress>10.43.0.3</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+						<NIC id="_79" networkID="_60">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool/>
+								<networkMask/>
+								<name>ssbam01</name>
+								<staticIpAddress>10.43.128.3</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+					</VirtualMachine>
+					<VirtualMachine id="_23">
+						<vmName>ldpam01</vmName>
+						<computerName>ldpam01</computerName>
+						<description>SSB LDAP</description>
+						<templateName>EBSA-TEMPLATES-RHEL-6.5-64</templateName>
+						<templateServiceLevel>Home Office IPT NP (IL2-DEVTEST-BASIC)</templateServiceLevel>
+						<storageProfile>9-76-3-BASIC-ANY</storageProfile>
+						<customisationScript>/var/lib/jenkins/jobs/retrieve_configuration/workspace/customise.strategic.sh</customisationScript>
+						<cpuCount>1</cpuCount>
+						<memory>2</memory>
+						<memoryUnit>GB</memoryUnit>
+						<hardwareProfile/>
+						<hatype>0</hatype>
+						<Storage id="_24">
+							<indexNumber>1</indexNumber>
+							<size>50</size>
+							<sizeUnit>GB</sizeUnit>
+							<busType>0</busType>
+							<busSubType>0</busSubType>
+							<deviceMount>0</deviceMount>
+						</Storage>
+						<NIC id="_25" networkID="_13">
+							<indexNumber>1</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool/>
+								<networkMask/>
+								<name>ldpaa01</name>
+								<staticIpAddress>10.43.0.5</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+						<NIC id="_64" networkID="_60">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool/>
+								<networkMask/>
+								<name>ldpam01</name>
+								<staticIpAddress>10.43.128.5</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+					</VirtualMachine>
+					<VirtualMachine id="_26">
+						<vmName>dbsam11</vmName>
+						<computerName>dbsam11</computerName>
+						<description>DOC Database</description>
+						<templateName>EBSA-TEMPLATES-CENTOS-6.5-64</templateName>
+						<templateServiceLevel>Home Office IPT NP (IL2-DEVTEST-BASIC)</templateServiceLevel>
+						<storageProfile>9-76-3-BASIC-ANY</storageProfile>
+						<customisationScript>/var/lib/jenkins/jobs/retrieve_configuration/workspace/customise.strategic.sh</customisationScript>
+						<cpuCount>2</cpuCount>
+						<memory>8</memory>
+						<memoryUnit>GB</memoryUnit>
+						<hardwareProfile/>
+						<hatype>0</hatype>
+						<Storage id="_27">
+							<indexNumber>1</indexNumber>
+							<size>50</size>
+							<sizeUnit>GB</sizeUnit>
+							<busType>0</busType>
+							<busSubType>0</busSubType>
+							<deviceMount>0</deviceMount>
+						</Storage>
+						<NIC id="_28" networkID="_13">
+							<indexNumber>1</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool/>
+								<networkMask/>
+								<name>dbsaa11</name>
+								<staticIpAddress>10.43.0.7</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+						<NIC id="_65" networkID="_60">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool/>
+								<networkMask/>
+								<name>dbsam11</name>
+								<staticIpAddress>10.43.128.7</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+					</VirtualMachine>
+					<VirtualMachine id="_29">
+						<vmName>etlam01</vmName>
+						<computerName>etlam01</computerName>
+						<description>ETL Job Execution</description>
+						<templateName>EBSA-TEMPLATES-RHEL-6.5-64</templateName>
+						<templateServiceLevel>Home Office IPT NP (IL2-DEVTEST-BASIC)</templateServiceLevel>
+						<storageProfile>9-76-3-BASIC-ANY</storageProfile>
+						<customisationScript>/var/lib/jenkins/jobs/retrieve_configuration/workspace/customise.strategic.sh</customisationScript>
+						<cpuCount>2</cpuCount>
+						<memory>8</memory>
+						<memoryUnit>GB</memoryUnit>
+						<hardwareProfile/>
+						<hatype>0</hatype>
+						<Storage id="_30">
+							<indexNumber>1</indexNumber>
+							<size>50</size>
+							<sizeUnit>GB</sizeUnit>
+							<busType>0</busType>
+							<busSubType>0</busSubType>
+							<deviceMount>0</deviceMount>
+						</Storage>
+						<NIC id="_31" networkID="_13">
+							<indexNumber>1</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool/>
+								<networkMask/>
+								<name>etlaa01</name>
+								<staticIpAddress>10.43.0.9</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+						<NIC id="_66" networkID="_60">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool/>
+								<networkMask/>
+								<name>etlam01</name>
+								<staticIpAddress>10.43.128.9</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+					</VirtualMachine>
+					<VirtualMachine id="_32">
+						<vmName>etcam01</vmName>
+						<computerName>etcam01</computerName>
+						<description>ETL Controller</description>
+						<templateName>EBSA-TEMPLATES-RHEL-6.5-64</templateName>
+						<templateServiceLevel>Home Office IPT NP (IL2-DEVTEST-BASIC)</templateServiceLevel>
+						<storageProfile>9-76-3-BASIC-ANY</storageProfile>
+						<customisationScript>/var/lib/jenkins/jobs/retrieve_configuration/workspace/customise.strategic.sh</customisationScript>
+						<cpuCount>2</cpuCount>
+						<memory>8</memory>
+						<memoryUnit>GB</memoryUnit>
+						<hardwareProfile/>
+						<hatype>0</hatype>
+						<Storage id="_33">
+							<indexNumber>1</indexNumber>
+							<size>50</size>
+							<sizeUnit>GB</sizeUnit>
+							<busType>0</busType>
+							<busSubType>0</busSubType>
+							<deviceMount>0</deviceMount>
+						</Storage>
+						<NIC id="_34" networkID="_13">
+							<indexNumber>1</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool/>
+								<networkMask/>
+								<name>etcaa01</name>
+								<staticIpAddress>10.43.0.11</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+						<NIC id="_67" networkID="_60">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool/>
+								<networkMask/>
+								<name>etcam01</name>
+								<staticIpAddress>10.43.128.11</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+					</VirtualMachine>
+					<VirtualMachine id="_35">
+						<vmName>dbsam31</vmName>
+						<computerName>dbsam31</computerName>
+						<description>SOA Database</description>
+						<templateName>EBSA-TEMPLATES-RHEL-6.5-64</templateName>
+						<templateServiceLevel>Home Office IPT NP (IL2-DEVTEST-BASIC)</templateServiceLevel>
+						<storageProfile>9-76-3-BASIC-ANY</storageProfile>
+						<customisationScript>/var/lib/jenkins/jobs/retrieve_configuration/workspace/customise.strategic.sh</customisationScript>
+						<cpuCount>2</cpuCount>
+						<memory>16</memory>
+						<memoryUnit>GB</memoryUnit>
+						<hardwareProfile/>
+						<hatype>0</hatype>
+						<Storage id="_36">
+							<indexNumber>1</indexNumber>
+							<size>50</size>
+							<sizeUnit>GB</sizeUnit>
+							<busType>0</busType>
+							<busSubType>0</busSubType>
+							<deviceMount>0</deviceMount>
+						</Storage>
+						<Storage id="_37">
+							<indexNumber>2</indexNumber>
+							<size>78</size>
+							<sizeUnit>GB</sizeUnit>
+							<busType>0</busType>
+							<busSubType>0</busSubType>
+							<deviceMount>0</deviceMount>
+						</Storage>
+						<NIC id="_38" networkID="_13">
+							<indexNumber>1</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool/>
+								<networkMask/>
+								<name>dbsaa31</name>
+								<staticIpAddress>10.43.0.13</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+						<NIC id="_68" networkID="_60">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool/>
+								<networkMask/>
+								<name>dbsam31</name>
+								<staticIpAddress>10.43.128.13</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+					</VirtualMachine>
+					<VirtualMachine id="_39">
+						<vmName>scham01</vmName>
+						<computerName>scham01</computerName>
+						<description>Scheduler</description>
+						<templateName>EBSA-TEMPLATES-CENTOS-6.5-64</templateName>
+						<templateServiceLevel>Home Office IPT NP (IL2-DEVTEST-BASIC)</templateServiceLevel>
+						<storageProfile>9-76-3-BASIC-ANY</storageProfile>
+						<customisationScript>/var/lib/jenkins/jobs/retrieve_configuration/workspace/customise.strategic.sh</customisationScript>
+						<cpuCount>4</cpuCount>
+						<memory>8</memory>
+						<memoryUnit>GB</memoryUnit>
+						<hardwareProfile/>
+						<hatype>0</hatype>
+						<Storage id="_40">
+							<indexNumber>1</indexNumber>
+							<size>50</size>
+							<sizeUnit>GB</sizeUnit>
+							<busType>0</busType>
+							<busSubType>0</busSubType>
+							<deviceMount>0</deviceMount>
+						</Storage>
+						<NIC id="_41" networkID="_13">
+							<indexNumber>1</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool/>
+								<networkMask/>
+								<name>schaa01</name>
+								<staticIpAddress>10.43.0.15</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+						<NIC id="_69" networkID="_60">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool/>
+								<networkMask/>
+								<name>scham01</name>
+								<staticIpAddress>10.43.128.15</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+					</VirtualMachine>
+					<VirtualMachine id="_42">
+						<vmName>dbsam01</vmName>
+						<computerName>dbsam01</computerName>
+						<description>SSB Database</description>
+						<templateName>EBSA-TEMPLATES-CENTOS-6.5-64</templateName>
+						<templateServiceLevel>Home Office IPT NP (IL2-DEVTEST-BASIC)</templateServiceLevel>
+						<storageProfile>9-76-3-BASIC-ANY</storageProfile>
+						<customisationScript>/var/lib/jenkins/jobs/retrieve_configuration/workspace/customise.strategic.sh</customisationScript>
+						<cpuCount>2</cpuCount>
+						<memory>8</memory>
+						<memoryUnit>GB</memoryUnit>
+						<hardwareProfile/>
+						<hatype>0</hatype>
+						<Storage id="_43">
+							<indexNumber>1</indexNumber>
+							<size>50</size>
+							<sizeUnit>GB</sizeUnit>
+							<busType>0</busType>
+							<busSubType>0</busSubType>
+							<deviceMount>0</deviceMount>
+						</Storage>
+						<NIC id="_44" networkID="_13">
+							<indexNumber>1</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool/>
+								<networkMask/>
+								<name>dbsaa01</name>
+								<staticIpAddress>10.43.0.6</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+						<NIC id="_71" networkID="_60">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool/>
+								<networkMask/>
+								<name>dbsam01</name>
+								<staticIpAddress>10.43.128.6</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+					</VirtualMachine>
+					<VirtualMachine id="_45">
+						<vmName>ldpam02</vmName>
+						<computerName>ldpam02</computerName>
+						<description>Identity Man LDAP</description>
+						<templateName>EBSA-TEMPLATES-CENTOS-6.5-64</templateName>
+						<templateServiceLevel>Home Office IPT NP (IL2-DEVTEST-BASIC)</templateServiceLevel>
+						<storageProfile>9-76-3-BASIC-ANY</storageProfile>
+						<customisationScript>/var/lib/jenkins/jobs/retrieve_configuration/workspace/customise.strategic.sh</customisationScript>
+						<cpuCount>1</cpuCount>
+						<memory>2</memory>
+						<memoryUnit>GB</memoryUnit>
+						<hardwareProfile/>
+						<hatype>0</hatype>
+						<Storage id="_46">
+							<indexNumber>1</indexNumber>
+							<size>50</size>
+							<sizeUnit>GB</sizeUnit>
+							<busType>0</busType>
+							<busSubType>0</busSubType>
+							<deviceMount>0</deviceMount>
+						</Storage>
+						<NIC id="_47" networkID="_13">
+							<indexNumber>1</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool/>
+								<networkMask/>
+								<name>ldpaa02</name>
+								<staticIpAddress>10.43.0.8</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+						<NIC id="_72" networkID="_60">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool/>
+								<networkMask/>
+								<name>ldpam02</name>
+								<staticIpAddress>10.43.128.8</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+					</VirtualMachine>
+					<VirtualMachine id="_48">
+						<vmName>dbsam51</vmName>
+						<computerName>dbsam51</computerName>
+						<description>Landing DB</description>
+						<templateName>EBSA-TEMPLATES-RHEL-6.5-64</templateName>
+						<templateServiceLevel>Home Office IPT NP (IL2-DEVTEST-BASIC)</templateServiceLevel>
+						<storageProfile>9-76-3-BASIC-ANY</storageProfile>
+						<customisationScript>/var/lib/jenkins/jobs/retrieve_configuration/workspace/customise.strategic.sh</customisationScript>
+						<cpuCount>4</cpuCount>
+						<memory>32</memory>
+						<memoryUnit>GB</memoryUnit>
+						<hardwareProfile/>
+						<hatype>0</hatype>
+						<Storage id="_49">
+							<indexNumber>1</indexNumber>
+							<size>50</size>
+							<sizeUnit>GB</sizeUnit>
+							<busType>0</busType>
+							<busSubType>0</busSubType>
+							<deviceMount>0</deviceMount>
+						</Storage>
+						<Storage id="_50">
+							<indexNumber>2</indexNumber>
+							<size>206</size>
+							<sizeUnit>GB</sizeUnit>
+							<busType>0</busType>
+							<busSubType>0</busSubType>
+							<deviceMount>0</deviceMount>
+						</Storage>
+						<NIC id="_51" networkID="_13">
+							<indexNumber>1</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool/>
+								<networkMask/>
+								<name>dbsaa51</name>
+								<staticIpAddress>10.43.0.10</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+						<NIC id="_73" networkID="_60">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool/>
+								<networkMask/>
+								<name>dbsam51</name>
+								<staticIpAddress>10.43.128.10</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+					</VirtualMachine>
+					<VirtualMachine id="_52">
+						<vmName>soaam01</vmName>
+						<computerName>soaam01</computerName>
+						<description>SOA APP</description>
+						<templateName>EBSA-TEMPLATES-RHEL-6.5-64</templateName>
+						<templateServiceLevel>Home Office IPT NP (IL2-DEVTEST-BASIC)</templateServiceLevel>
+						<storageProfile>9-76-3-BASIC-ANY</storageProfile>
+						<customisationScript>/var/lib/jenkins/jobs/retrieve_configuration/workspace/customise.strategic.sh</customisationScript>
+						<cpuCount>2</cpuCount>
+						<memory>16</memory>
+						<memoryUnit>GB</memoryUnit>
+						<hardwareProfile/>
+						<hatype>0</hatype>
+						<Storage id="_53">
+							<indexNumber>1</indexNumber>
+							<size>50</size>
+							<sizeUnit>GB</sizeUnit>
+							<busType>0</busType>
+							<busSubType>0</busSubType>
+							<deviceMount>0</deviceMount>
+						</Storage>
+						<Storage id="_54">
+							<indexNumber>2</indexNumber>
+							<size>78</size>
+							<sizeUnit>GB</sizeUnit>
+							<busType>0</busType>
+							<busSubType>0</busSubType>
+							<deviceMount>0</deviceMount>
+						</Storage>
+						<NIC id="_55" networkID="_13">
+							<indexNumber>1</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool/>
+								<networkMask/>
+								<name>soaaa01</name>
+								<staticIpAddress>10.43.0.12</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+						<NIC id="_74" networkID="_60">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool/>
+								<networkMask/>
+								<name>soaam01</name>
+								<staticIpAddress>10.43.128.12</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+					</VirtualMachine>
+					<VirtualMachine id="_56">
+						<vmName>docam01</vmName>
+						<computerName>docam01</computerName>
+						<description>DOC</description>
+						<templateName>EBSA-TEMPLATES-RHEL-6.5-64</templateName>
+						<templateServiceLevel>Home Office IPT NP (IL2-DEVTEST-BASIC)</templateServiceLevel>
+						<storageProfile>9-76-3-BASIC-ANY</storageProfile>
+						<customisationScript>/var/lib/jenkins/jobs/retrieve_configuration/workspace/customise.strategic.sh</customisationScript>
+						<cpuCount>2</cpuCount>
+						<memory>8</memory>
+						<memoryUnit>GB</memoryUnit>
+						<hardwareProfile/>
+						<hatype>0</hatype>
+						<Storage id="_57">
+							<indexNumber>1</indexNumber>
+							<size>50</size>
+							<sizeUnit>GB</sizeUnit>
+							<busType>0</busType>
+							<busSubType>0</busSubType>
+							<deviceMount>0</deviceMount>
+						</Storage>
+						<NIC id="_58" networkID="_13">
+							<indexNumber>1</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool/>
+								<networkMask/>
+								<name>docaa01</name>
+								<staticIpAddress>10.43.0.14</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+						<NIC id="_75" networkID="_60">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool/>
+								<networkMask/>
+								<name>docam01</name>
+								<staticIpAddress>10.43.128.14</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+					</VirtualMachine>
+					<VirtualMachine id="_61">
+						<vmName>mrtam01</vmName>
+						<computerName>mrtam01</computerName>
+						<description>Management Router</description>
+						<templateName>EBSA-TEMPLATES-CENTOS-6.5-64</templateName>
+						<templateServiceLevel>Home Office IPT NP (IL2-DEVTEST-BASIC)</templateServiceLevel>
+						<storageProfile>9-76-3-BASIC-ANY</storageProfile>
+						<customisationScript>/var/lib/jenkins/jobs/retrieve_configuration/workspace/customise.strategic.sh</customisationScript>
+						<cpuCount>1</cpuCount>
+						<memory>2</memory>
+						<memoryUnit>GB</memoryUnit>
+						<hardwareProfile/>
+						<hatype>0</hatype>
+						<Storage id="_62">
+							<indexNumber>1</indexNumber>
+							<size>50</size>
+							<sizeUnit>GB</sizeUnit>
+							<busType>0</busType>
+							<busSubType>0</busSubType>
+							<deviceMount>0</deviceMount>
+						</Storage>
+						<NIC id="_63" networkID="_60">
+							<indexNumber>1</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool/>
+								<networkMask/>
+								<name/>
+								<staticIpAddress>10.43.128.1</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+						<NIC id="_77" networkID="_78">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool/>
+								<networkMask/>
+								<name>mrtam01</name>
+								<staticIpAddress>10.48.134.12</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+					</VirtualMachine>
+					<VirtualMachine id="_80">
+						<vmName>dbsam41</vmName>
+						<computerName>dbsam41</computerName>
+						<description>ETL &amp; OER Database</description>
+						<templateName>EBSA-TEMPLATES-RHEL-6.5-64</templateName>
+						<templateServiceLevel>Home Office IPT NP (IL2-DEVTEST-BASIC)</templateServiceLevel>
+						<storageProfile>9-76-3-BASIC-ANY</storageProfile>
+						<customisationScript>/var/lib/jenkins/jobs/retrieve_configuration/workspace/customise.strategic.sh</customisationScript>
+						<cpuCount>2</cpuCount>
+						<memory>16</memory>
+						<memoryUnit>GB</memoryUnit>
+						<hardwareProfile/>
+						<hatype>0</hatype>
+						<Storage id="_81">
+							<indexNumber>1</indexNumber>
+							<size>50</size>
+							<sizeUnit>GB</sizeUnit>
+							<busType>0</busType>
+							<busSubType>0</busSubType>
+							<deviceMount>0</deviceMount>
+						</Storage>
+						<Storage id="_82">
+							<indexNumber>2</indexNumber>
+							<size>78</size>
+							<sizeUnit>GB</sizeUnit>
+							<busType>0</busType>
+							<busSubType>0</busSubType>
+							<deviceMount>0</deviceMount>
+						</Storage>
+						<NIC id="_83" networkID="_13">
+							<indexNumber>1</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool/>
+								<networkMask/>
+								<name>dbsaa41</name>
+								<staticIpAddress>10.43.0.17</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+						<NIC id="_84" networkID="_60">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool/>
+								<networkMask/>
+								<name>dbsam41</name>
+								<staticIpAddress>10.43.128.17</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+					</VirtualMachine>
+					<VirtualMachine id="_85">
+						<vmName>tstam01</vmName>
+						<computerName>tstam01</computerName>
+						<description>WebService SIM</description>
+						<templateName>EBSA-TEMPLATES-CENTOS-6.5-64</templateName>
+						<templateServiceLevel>Home Office IPT NP (IL2-DEVTEST-BASIC)</templateServiceLevel>
+						<storageProfile>9-76-3-BASIC-ANY</storageProfile>
+						<customisationScript>/var/lib/jenkins/jobs/retrieve_configuration/workspace/customise.strategic.sh</customisationScript>
+						<cpuCount>2</cpuCount>
+						<memory>4</memory>
+						<memoryUnit>GB</memoryUnit>
+						<hardwareProfile/>
+						<hatype>0</hatype>
+						<Storage id="_86">
+							<indexNumber>1</indexNumber>
+							<size>50</size>
+							<sizeUnit>GB</sizeUnit>
+							<busType>0</busType>
+							<busSubType>0</busSubType>
+							<deviceMount>0</deviceMount>
+						</Storage>
+						<NIC id="_87" networkID="_60">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool/>
+								<networkMask/>
+								<name>tstam01</name>
+								<staticIpAddress>10.43.128.19</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+						<NIC id="_93" networkID="_13">
+							<indexNumber>1</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool/>
+								<networkMask/>
+								<name>tstaa01</name>
+								<staticIpAddress>10.43.0.19</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+					</VirtualMachine>
+					<VirtualMachine id="_88">
+						<vmName>soaam11</vmName>
+						<computerName>soaam11</computerName>
+						<description>SOA CDP</description>
+						<templateName>EBSA-TEMPLATES-RHEL-6.5-64</templateName>
+						<templateServiceLevel>Home Office IPT NP (IL2-DEVTEST-BASIC)</templateServiceLevel>
+						<storageProfile>9-76-3-BASIC-ANY</storageProfile>
+						<customisationScript>/var/lib/jenkins/jobs/retrieve_configuration/workspace/customise.strategic.sh</customisationScript>
+						<cpuCount>2</cpuCount>
+						<memory>16</memory>
+						<memoryUnit>GB</memoryUnit>
+						<hardwareProfile/>
+						<hatype>0</hatype>
+						<Storage id="_89">
+							<indexNumber>1</indexNumber>
+							<size>50</size>
+							<sizeUnit>GB</sizeUnit>
+							<busType>0</busType>
+							<busSubType>0</busSubType>
+							<deviceMount>0</deviceMount>
+						</Storage>
+						<Storage id="_90">
+							<indexNumber>2</indexNumber>
+							<size>78</size>
+							<sizeUnit>GB</sizeUnit>
+							<busType>0</busType>
+							<busSubType>0</busSubType>
+							<deviceMount>0</deviceMount>
+						</Storage>
+						<NIC id="_91" networkID="_13">
+							<indexNumber>1</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool/>
+								<networkMask/>
+								<name>soaaa11</name>
+								<staticIpAddress>10.43.0.18</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+						<NIC id="_92" networkID="_60">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool/>
+								<networkMask/>
+								<name>soaam11</name>
+								<staticIpAddress>10.43.128.18</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+					</VirtualMachine>
+					<VirtualMachine id="_94">
+						<vmName>dbsam61</vmName>
+						<computerName>dbsam61</computerName>
+						<description>Source DB</description>
+						<templateName>EBSA-TEMPLATES-RHEL-6.5-64</templateName>
+						<templateServiceLevel>Home Office IPT NP (IL2-DEVTEST-BASIC)</templateServiceLevel>
+						<storageProfile>9-76-3-BASIC-ANY</storageProfile>
+						<customisationScript>/var/lib/jenkins/jobs/retrieve_configuration/workspace/customise.strategic.sh</customisationScript>
+						<cpuCount>2</cpuCount>
+						<memory>32</memory>
+						<memoryUnit>GB</memoryUnit>
+						<hardwareProfile/>
+						<hatype>0</hatype>
+						<Storage id="_95">
+							<indexNumber>1</indexNumber>
+							<size>50</size>
+							<sizeUnit>GB</sizeUnit>
+							<busType>0</busType>
+							<busSubType>0</busSubType>
+							<deviceMount>0</deviceMount>
+						</Storage>
+						<Storage id="_96">
+							<indexNumber>2</indexNumber>
+							<size>206</size>
+							<sizeUnit>GB</sizeUnit>
+							<busType>0</busType>
+							<busSubType>0</busSubType>
+							<deviceMount>0</deviceMount>
+						</Storage>
+						<NIC id="_97" networkID="_60">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool/>
+								<networkMask/>
+								<name>dbsam61</name>
+								<staticIpAddress>10.43.128.20</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+						<NIC id="_98" networkID="_13">
+							<indexNumber>1</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool/>
+								<networkMask/>
+								<name>dbsaa61</name>
+								<staticIpAddress>10.43.0.20</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+					</VirtualMachine>
+					<VirtualMachine id="_99">
+						<vmName>ssmam01</vmName>
+						<computerName>ssmam01</computerName>
+						<description>SSB Manager</description>
+						<templateName>EBSA-TEMPLATES-RHEL-6.5-64</templateName>
+						<templateServiceLevel>Home Office IPT NP (IL2-DEVTEST-BASIC)</templateServiceLevel>
+						<storageProfile>9-76-3-BASIC-ANY</storageProfile>
+						<customisationScript>/var/lib/jenkins/jobs/retrieve_configuration/workspace/customise.strategic.sh</customisationScript>
+						<cpuCount>2</cpuCount>
+						<memory>8</memory>
+						<memoryUnit>GB</memoryUnit>
+						<hardwareProfile/>
+						<hatype>0</hatype>
+						<Storage id="_100">
+							<indexNumber>1</indexNumber>
+							<size>50</size>
+							<sizeUnit>GB</sizeUnit>
+							<busType>0</busType>
+							<busSubType>0</busSubType>
+							<deviceMount>0</deviceMount>
+						</Storage>
+						<NIC id="_101" networkID="_60">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool/>
+								<networkMask/>
+								<name>ssmam01</name>
+								<staticIpAddress>10.43.128.21</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+						<NIC id="_102" networkID="_13">
+							<indexNumber>1</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool/>
+								<networkMask/>
+								<name>ssmaa01</name>
+								<staticIpAddress>10.43.0.21</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+					</VirtualMachine>
+					<Network dataCenterId="_7" id="_13">
+						<name>HO_IPT_NP_DEV1_APP_A1</name>
+						<description>Application</description>
+						<fenceMode>NATROUTED</fenceMode>
+						<networkMask>255.255.255.0</networkMask>
+						<gatewayAddress>10.43.0.1</gatewayAddress>
+						<primaryDns>10.16.16.7</primaryDns>
+						<secondaryDns/>
+						<dnsSuffix>np-ii-pjt3-dev1.ipt.ho.local</dnsSuffix>
+						<staticIpPool>10.43.0.0/24</staticIpPool>
+						<ipRangeStart>10.43.0.2</ipRangeStart>
+						<ipRangeEnd>10.43.0.254</ipRangeEnd>
+						<CIDR/>
+						<shared>true</shared>
+					</Network>
+					<Network dataCenterId="_7" id="_60">
+						<name>HO_IPT_NP_DEV1_MAN_A1</name>
+						<description>Management</description>
+						<fenceMode>NATROUTED</fenceMode>
+						<networkMask>255.255.255.0</networkMask>
+						<gatewayAddress>10.43.128.1</gatewayAddress>
+						<primaryDns>10.16.16.7</primaryDns>
+						<secondaryDns/>
+						<dnsSuffix>np-ii-pjt3-dev1.ipt.ho.local</dnsSuffix>
+						<staticIpPool>10.43.128.0/24</staticIpPool>
+						<ipRangeStart>10.43.128.2</ipRangeStart>
+						<ipRangeEnd>10.43.128.254</ipRangeEnd>
+						<CIDR/>
+						<shared>true</shared>
+					</Network>
+				</VirtualMachineContainer>
+			</EnvironmentDefinition>
+		</Environment>
+		<EnvironmentContainerDefinition id="_5">
+			<name>np</name>
+			<version>0.1</version>
+			<isCurrent/>
+			<Network dataCenterId="_7" id="_8">
+				<name>HO_IPT_NP_DAT1_INBC_AI1</name>
+				<description>Common INBC - Application</description>
+				<fenceMode>BRIDGED</fenceMode>
+				<networkMask/>
+				<gatewayAddress/>
+				<primaryDns/>
+				<secondaryDns/>
+				<dnsSuffix/>
+				<staticIpPool>10.48.15.0/24</staticIpPool>
+				<ipRangeStart/>
+				<ipRangeEnd>10.48.15.254</ipRangeEnd>
+				<CIDR/>
+				<shared>true</shared>
+			</Network>
+			<Network dataCenterId="_7" id="_78">
+				<name>HO_IPT_NP_DAT1_MABC_MI1</name>
+				<description>Common MABC - Management</description>
+				<fenceMode>BRIDGED</fenceMode>
+				<networkMask/>
+				<gatewayAddress/>
+				<primaryDns/>
+				<secondaryDns/>
+				<dnsSuffix/>
+				<staticIpPool>10.48.134.0/24</staticIpPool>
+				<ipRangeStart/>
+				<ipRangeEnd>10.48.134.254</ipRangeEnd>
+				<CIDR/>
+				<shared>true</shared>
+			</Network>
+			<DataCenter id="_7">
+				<name/>
+			</DataCenter>
+		</EnvironmentContainerDefinition>
+	</EnvironmentContainer>
+</GeographicContainer>

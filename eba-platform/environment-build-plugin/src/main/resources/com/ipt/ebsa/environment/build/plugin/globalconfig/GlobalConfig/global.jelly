@@ -1,0 +1,14 @@
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+    <f:section title="EBSA Environment Build">
+	    <f:entry name="environmentBuildExecutable" field="environmentBuildExecutable" title="Executable file" description="Exact, absolute folder location of the shell script which kicks of the environment build program."><f:textbox name="environmentBuildExecutable"/></f:entry>
+    	<f:entry name="environmentBuildConfigFile" field="environmentBuildConfigFile" title="Configuration File" description="Absolute file location which contains the base properties for the environment build program."><f:textbox name="environmentBuildConfigFile"/></f:entry>
+    	<f:entry name="driverClass" field="driverClass" title="Driver" description="JDBC driver class."><f:textbox name="driverClass"/></f:entry>
+		<f:entry name="url" field="url" title="URL" description="Url of the database which hosts the release information."><f:textbox name="url"/></f:entry>
+		<f:entry name="username" field="username" title="Username" description="Username for the database."><f:textbox name="username"/></f:entry>
+		<f:entry name="password" field="password" title="Password" description="Password for the database."><f:password name="password"/></f:entry>
+		<f:entry name="schema" field="schema" title="Schema" description="Schema in the database"><f:textbox name="schema"/></f:entry>
+		<f:entry name="autodll" field="autodll" title="Hibernate auto DLL" description="Determine behaviour of what happens when hibernate starts"><f:textbox name="autodll"/></f:entry>
+		<f:entry name="dialect" field="dialect" title="SQL Dialect" description="The regional accent understood by the database"><f:textbox name="dialect"/></f:entry>
+		<f:entry name="ldapFilteringEnabled" field="ldapFilteringEnabled" title="Enable LDAP Filtering" description="User LDAP roles to filter the environments available for the user to build"><f:checkbox /></f:entry> 
+	</f:section>      
+</j:jelly>

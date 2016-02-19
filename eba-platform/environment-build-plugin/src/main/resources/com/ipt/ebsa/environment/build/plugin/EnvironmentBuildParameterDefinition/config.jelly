@@ -1,0 +1,12 @@
+<?jelly escape-by-default='true'?>
+
+
+<!-- This is the snippet that is displayed when the user is configuring the job. It collects parameters
+     for a parameterised build -->
+	
+	
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form" xmlns:i="jelly:fmt" xmlns:p="/lib/hudson/project">
+	 <f:entry title="Work Folder" help="/plugin/environment-build-plugin/help-workDir.html">
+         <input type="text" style="width: 400px" name="workDir" value="${instance.workDir}" />
+	 </f:entry>
+</j:jelly>

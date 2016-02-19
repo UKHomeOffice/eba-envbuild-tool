@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Design note - Environment &amp; Release Management V2.x</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Design note - Environment &amp; Release Management V2.x
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    
+                    <div id="main-content" class="wiki-content group">
+                    <h2 id="Designnote-Environment&amp;ReleaseManagementV2.x-/*&lt;![CDATA[*/div.rbtoc1455124466185{padding:0px;}div.rbtoc1455124466185ul{list-style:disc;margin-left:0px;}div.rbtoc1455124466185li{margin-left:0px;padding-left:0px;}/*]]&gt;*/Overview#Designnote-Environment&amp;Relea"><style type='text/css'>/*<![CDATA[*/
+div.rbtoc1455124466185 {padding: 0px;}
+div.rbtoc1455124466185 ul {list-style: disc;margin-left: 0px;}
+div.rbtoc1455124466185 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1455124466185'>
+<ul class='toc-indentation'>
+<li><a href='#Designnote-Environment&amp;ReleaseManagementV2.x-Overview'>Overview</a></li>
+<li><a href='#Designnote-Environment&amp;ReleaseManagementV2.x-Userjourney'>User journey</a></li>
+<li><a href='#Designnote-Environment&amp;ReleaseManagementV2.x-Endtoendelaboration'>End to end elaboration</a></li>
+<li><a href='#Designnote-Environment&amp;ReleaseManagementV2.x-Errorhandling'>Error handling</a></li>
+<li><a href='#Designnote-Environment&amp;ReleaseManagementV2.x-Deploymentdescriptor'>Deployment descriptor</a></li>
+<li><a href='#Designnote-Environment&amp;ReleaseManagementV2.x-Detaildesign'>Detail design</a>
+<ul class='toc-indentation'>
+<li><a href='#Designnote-Environment&amp;ReleaseManagementV2.x-Sequentialexecutionofanumberofpuppetruns'>Sequential execution of a number of puppet runs</a></li>
+<li><a href='#Designnote-Environment&amp;ReleaseManagementV2.x-Selectingadeploymentplan'>Selecting a deployment plan</a></li>
+<li><a href='#Designnote-Environment&amp;ReleaseManagementV2.x-Datastructures'>Data structures</a></li>
+<li><a href='#Designnote-Environment&amp;ReleaseManagementV2.x-Programflow'>Program flow</a></li>
+<li><a href='#Designnote-Environment&amp;ReleaseManagementV2.x-Actionandvalidationmatrix'>Action and validation matrix</a></li>
+</ul>
+</li>
+<li><a href='#Designnote-Environment&amp;ReleaseManagementV2.x-Commandline'>  Command line</a></li>
+<li><a href='#Designnote-Environment&amp;ReleaseManagementV2.x-'></a></li>
+<li><a href='#Designnote-Environment&amp;ReleaseManagementV2.x-Designdecisions'>Design decisions</a>
+<ul class='toc-indentation'>
+<li><a href='#Designnote-Environment&amp;ReleaseManagementV2.x-Prosandconsofdifferentfileformats'> Pros and cons of different file formats</a></li>
+</ul>
+</li>
+</ul>
+</div></h2><h2 id="Designnote-Environment&amp;ReleaseManagementV2.x-Overview">Overview</h2><p>We need to be able to deploy, undeploy and upgrade a variety of different types of components in multiple environments in a way that is efficient and effective and takes into account the complexities of a variety of different types of inter-dependencies between components.</p><p>The following solution describes how we can achieve this leveraging existing tools within our infrastructure in a way which is efficient, scalable and provides coverage of all of the use cases for which the system needs to be built.</p><h2 id="Designnote-Environment&amp;ReleaseManagementV2.x-Userjourney">User journey</h2><p>The vision is to</p><ol><li>Provide a user interface and underlying functionality which allows an untrained user to deploy an entire set of components into an environment, this would typically be used for SIT environments and beyond. It requires an ApplicationVersion to have been created first.<br /><br />
+
+<map id="gliffy-map-24742544-9903" name="gliffy-map-24742544-9903"></map>
+<table width="100%" class="gliffy-macro-table">
+    <tr>
+        <td >
+            <table class="gliffy-macro-inner-table">
+                <caption align="bottom">
+ </caption>
+
+                <tr>
+                    <td>
+                        <img style="border: none; width: 560px;" usemap="#gliffy-map-24742544-9903" src="attachments/24390972/24742545.png" alt="" class="gliffy-macro-image"/>
+                    </td>
+                </tr>
+            </table>
+ 
+        </td>
+    </tr>
+</table>
+
+
+<br /><br /></li><li>Provide a user interface and underlying functionality which allows an untrained user to select one or more components to deploy into an environment, this would be used in CIT, DEV and SST environments.  This does not require an ApplicationVersion to have been created.<br /><br />
+
+<map id="gliffy-map-24742562-3600" name="gliffy-map-24742562-3600"></map>
+<table width="100%" class="gliffy-macro-table">
+    <tr>
+        <td >
+            <table class="gliffy-macro-inner-table">
+                <caption align="bottom">
+ </caption>
+
+                <tr>
+                    <td>
+                        <img style="border: none; width: 440px;" usemap="#gliffy-map-24742562-3600" src="attachments/24390972/24742563.png" alt="" class="gliffy-macro-image"/>
+                    </td>
+                </tr>
+            </table>
+ 
+        </td>
+    </tr>
+</table>
+
+
+</li></ol><p> </p><h2 id="Designnote-Environment&amp;ReleaseManagementV2.x-Endtoendelaboration">End to end elaboration</h2><p>
+
+<map id="gliffy-map-24742651-8405" name="gliffy-map-24742651-8405"></map>
+<table width="100%" class="gliffy-macro-table">
+    <tr>
+        <td >
+            <table class="gliffy-macro-inner-table">
+                <caption align="bottom">
+ </caption>
+
+                <tr>
+                    <td>
+                        <img style="border: none; width: 1190px;" usemap="#gliffy-map-24742651-8405" src="attachments/24390972/24742652.png" alt="" class="gliffy-macro-image"/>
+                    </td>
+                </tr>
+            </table>
+ 
+        </td>
+    </tr>
+</table>
+
+
+<br /><br /></p><h2 id="Designnote-Environment&amp;ReleaseManagementV2.x-Errorhandling">Error handling</h2><p>There should be a clear message to the user in case of failed deployment about the state of the target environment.</p><h2 id="Designnote-Environment&amp;ReleaseManagementV2.x-Deploymentdescriptor">Deployment descriptor</h2><p>The deployment mechanism is governed by a deployment descriptor which is a mix of puppet style hieradata yaml snippets and other metadata.  The descriptor has the following properties:</p><ol><li>It is an XML file</li><li>It is written on a per application basis</li><li>It is environmentally agnostic.</li><li>We need multiple versions of the deployment descriptor as different versions of the application will potentially have differences in their deployment plans.</li></ol><p>The deployment descriptor has two sections</p><ul><li>Plans<ul><li>A set of different deployment plans to suit different situations</li><li>Each plan describes<ul><li>A set of state transitions which need to be made in order to bring the environment up to the final state.</li><li>Each state transition describes a set of changes which need to be made to the yaml files in the target environment</li><li>The deployment program will make the changes, kick off a puppet run and then wait for the run to complete</li></ul></li></ul></li><li>Components<ul><li>Each component is described in Hiera YAML format which acts as a template for that component.</li><li>Each component lists its &quot;minimum impact plan&quot; (mil).  This is a pointer to the plan described above which can be used to deploy this component.  In most cases a simple redeploy plan can be used but in other cases the deployment will require a more sophisticated plan.<br /><br /></li></ul></li></ul><div class="code panel pdl" style="border-width: 1px;">
+ <div class="codeHeader panelHeader pdl hide-border-bottom" style="border-bottom-width: 1px;">
+  <b class=" code-title">Deployment Descriptor Schema</b>
+  <span class="collapse-source expand-control"><span class="expand-control-icon icon">&nbsp;</span><span class="expand-control-text">Expand source</span></span>
+ </div>
+ <div class="codeContent panelContent pdl hide-toolbar"> 
+  <pre class="brush: xml; gutter: true; theme: Confluence; collapse: true" style="font-size:12px;">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!-- edited with XMLSpy v2010 rel. 3 (x64) (http://www.altova.com) by Andy (Home Office) --&gt;
+&lt;xs:schema xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:dd=&quot;http://ebsa.ipt.com/ddConfig-1.0&quot; targetNamespace=&quot;http://ebsa.ipt.com/ddConfig-1.0&quot; elementFormDefault=&quot;qualified&quot; attributeFormDefault=&quot;unqualified&quot; dd:minVersion=&quot;1.1&quot;&gt;
+
+    &lt;xs:element name=&quot;deploymentdescriptor&quot; type=&quot;dd:deploymentDescriptorType&quot;&gt;
+        &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The plan&lt;/xs:documentation&gt;
+        &lt;/xs:annotation&gt;
+    &lt;/xs:element&gt;
+
+    &lt;xs:complexType name=&quot;deploymentDescriptorType&quot;&gt;
+        &lt;xs:sequence&gt;
+            &lt;xs:element name=&quot;metadata&quot; type=&quot;dd:metadataType&quot; maxOccurs=&quot;1&quot; minOccurs=&quot;0&quot; /&gt;
+            &lt;xs:element name=&quot;plans&quot; type=&quot;dd:plansType&quot; maxOccurs=&quot;1&quot; minOccurs=&quot;1&quot; /&gt;
+            &lt;xs:element name=&quot;components&quot; type=&quot;dd:componentsType&quot; maxOccurs=&quot;1&quot; minOccurs=&quot;1&quot; /&gt;
+        &lt;/xs:sequence&gt;
+    &lt;/xs:complexType&gt;
+
+    &lt;xs:complexType name=&quot;metadataType&quot;&gt;
+        &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Contains items which are used as subsidiary deployment facts&lt;/xs:documentation&gt;
+        &lt;/xs:annotation&gt;
+        &lt;xs:sequence&gt;
+            &lt;xs:element name=&quot;minApplicationVersion&quot; type=&quot;xs:string&quot; maxOccurs=&quot;1&quot; minOccurs=&quot;1&quot;&gt;
+                &lt;xs:annotation&gt;
+                    &lt;xs:documentation&gt;Contains the version number of the minimum ApplicationVersion which this deployment plan is valid for.&lt;/xs:documentation&gt;
+                &lt;/xs:annotation&gt;
+            &lt;/xs:element&gt;
+            &lt;xs:element name=&quot;maxApplicationVersion&quot; type=&quot;xs:string&quot; maxOccurs=&quot;1&quot; minOccurs=&quot;0&quot;&gt;
+                &lt;xs:annotation&gt;
+                    &lt;xs:documentation&gt;Contains the version number of the maximum ApplicationVersion which this deployment plan is valid for (optional).&lt;/xs:documentation&gt;
+                &lt;/xs:annotation&gt;
+            &lt;/xs:element&gt;
+        &lt;/xs:sequence&gt;
+    &lt;/xs:complexType&gt;
+
+    &lt;xs:complexType name=&quot;plansType&quot;&gt;
+        &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;
+             Can contain one or more plans.  A plan is a set of one or more steps.  The reason for having more than one plan is to provide
+             a way in which deployments can happen with minimal impact.&lt;/xs:documentation&gt;
+        &lt;/xs:annotation&gt;
+        &lt;xs:sequence&gt;
+            &lt;xs:element name=&quot;plan&quot; type=&quot;dd:planType&quot; maxOccurs=&quot;unbounded&quot; minOccurs=&quot;1&quot;&gt;&lt;/xs:element&gt;
+        &lt;/xs:sequence&gt;
+    &lt;/xs:complexType&gt;
+
+    &lt;xs:complexType name=&quot;componentsType&quot;&gt;
+        &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Contains all of the components which are managed by this plan.
+            &lt;/xs:documentation&gt;
+        &lt;/xs:annotation&gt;
+        &lt;xs:sequence&gt;
+            &lt;xs:element name=&quot;component&quot; type=&quot;dd:componentType&quot; maxOccurs=&quot;unbounded&quot; minOccurs=&quot;1&quot;&gt;&lt;/xs:element&gt;
+        &lt;/xs:sequence&gt;
+    &lt;/xs:complexType&gt;
+
+    &lt;xs:complexType name=&quot;planType&quot;&gt;
+        &lt;xs:sequence&gt;
+            &lt;xs:element name=&quot;step&quot; type=&quot;dd:stepItemType&quot; maxOccurs=&quot;unbounded&quot; minOccurs=&quot;0&quot;&gt;
+                &lt;xs:annotation&gt;
+                    &lt;xs:documentation&gt;A step is a delimiter for puppet runs. The deployment my or may not do more than one puppet run within a step
+                        but it will always do a puppet run between steps. This provides a way for the deployment author to ensure that an
+                        environment is in a specific state before the next step is performed.
+                    &lt;/xs:documentation&gt;
+                &lt;/xs:annotation&gt;
+            &lt;/xs:element&gt;
+        &lt;/xs:sequence&gt;
+        &lt;xs:attribute name=&quot;impactLevel&quot; type=&quot;xs:int&quot;&gt;&lt;/xs:attribute&gt;
+        &lt;xs:attribute name=&quot;description&quot; type=&quot;xs:string&quot;&gt;&lt;/xs:attribute&gt;
+        &lt;xs:attribute name=&quot;name&quot; type=&quot;xs:string&quot;&gt;&lt;/xs:attribute&gt;
+    &lt;/xs:complexType&gt;
+
+    &lt;xs:complexType name=&quot;stepItemType&quot;&gt;
+        &lt;xs:sequence&gt;
+            &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;
+                &lt;xs:element name=&quot;inject&quot; type=&quot;dd:injectType&quot; maxOccurs=&quot;unbounded&quot; minOccurs=&quot;0&quot;&gt;&lt;/xs:element&gt;
+                &lt;xs:element name=&quot;perform&quot; type=&quot;dd:performType&quot; maxOccurs=&quot;unbounded&quot; minOccurs=&quot;0&quot;&gt;&lt;/xs:element&gt;
+                &lt;!-- &lt;xs:element name=&quot;remove&quot; type=&quot;dd:removeComponentsType&quot; maxOccurs=&quot;unbounded&quot; minOccurs=&quot;0&quot;&gt;&lt;/xs:element&gt; --&gt;
+            &lt;/xs:choice&gt;
+        &lt;/xs:sequence&gt;
+
+        &lt;xs:attribute name=&quot;description&quot; type=&quot;xs:string&quot;&gt;&lt;/xs:attribute&gt;
+    &lt;/xs:complexType&gt;
+
+    &lt;xs:complexType name=&quot;stepCommandType&quot;&gt;
+        &lt;xs:attribute name=&quot;description&quot; type=&quot;xs:string&quot; use=&quot;optional&quot;&gt;&lt;/xs:attribute&gt;
+        &lt;xs:attribute name=&quot;hostnames&quot; type=&quot;xs:string&quot; use=&quot;optional&quot;&gt;
+            &lt;xs:annotation&gt;
+                &lt;xs:documentation&gt;
+                A csv list of host name prefixes. This will be interpreted as a role 
+                (in which case it will need to be three letters max) or as an fqdn if 
+                it is more than three characters.  This value will be used to update 
+                brand new yaml files in new environments and will be used to cross check
+                that the components are only deployed to the machines or roles where 
+                they were intended to be deployed.
+                &lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute name=&quot;tags&quot; type=&quot;xs:string&quot; use=&quot;optional&quot;&gt;
+            &lt;xs:annotation&gt;
+                &lt;xs:documentation&gt;A CSV list of tag names that may be used to subset the puppet run to just items marked with this set of tags.
+                &lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+    &lt;/xs:complexType&gt;
+
+    &lt;xs:complexType name=&quot;injectType&quot;&gt;
+        &lt;xs:complexContent&gt;
+            &lt;xs:extension base=&quot;dd:stepCommandType&quot;&gt;
+                &lt;xs:sequence&gt;
+                    &lt;xs:element name=&quot;yaml&quot; type=&quot;xs:string&quot; maxOccurs=&quot;1&quot; minOccurs=&quot;0&quot;&gt;
+                        &lt;xs:annotation&gt;
+                            &lt;xs:documentation&gt;A snippet of yaml that needs to be inserted at
+                                the path. Cannot be used in conjunction with the &quot;value&quot;
+                                attribute.
+                            &lt;/xs:documentation&gt;
+                        &lt;/xs:annotation&gt;
+                    &lt;/xs:element&gt;
+                &lt;/xs:sequence&gt;
+                &lt;xs:attribute name=&quot;path&quot; type=&quot;xs:string&quot; use=&quot;required&quot;&gt;
+                    &lt;xs:annotation&gt;
+                        &lt;xs:documentation&gt;Full path to the node that needs to be updated
+                            (e.g. system:packages/mypackage/attributeofsomekind).
+                        &lt;/xs:documentation&gt;
+                    &lt;/xs:annotation&gt;
+                &lt;/xs:attribute&gt;
+                &lt;xs:attribute name=&quot;value&quot; type=&quot;xs:string&quot; use=&quot;optional&quot;&gt;
+                    &lt;xs:annotation&gt;
+                        &lt;xs:documentation&gt;A scalar value that needs to be set at the path.
+                            Cannot be used in conjunction with the &quot;yaml&quot; tag which allows
+                            the insertion of a scriptlet.
+                        &lt;/xs:documentation&gt;
+                    &lt;/xs:annotation&gt;
+                &lt;/xs:attribute&gt;
+                &lt;xs:attribute name=&quot;ifMissing&quot; use=&quot;optional&quot; type=&quot;dd:failureActionsType&quot; /&gt;
+            &lt;/xs:extension&gt;
+        &lt;/xs:complexContent&gt;
+    &lt;/xs:complexType&gt;
+
+    &lt;xs:complexType name=&quot;performType&quot;&gt;
+        &lt;xs:complexContent&gt;
+            &lt;xs:extension base=&quot;dd:stepCommandType&quot;&gt;
+                &lt;xs:attribute name=&quot;filter&quot; use=&quot;required&quot; type=&quot;dd:deploymentActionType&quot; /&gt;
+            &lt;/xs:extension&gt;
+        &lt;/xs:complexContent&gt;
+    &lt;/xs:complexType&gt;
+    &lt;xs:complexType name=&quot;componentType&quot;&gt;
+        &lt;xs:sequence&gt;
+            &lt;xs:element name=&quot;yaml&quot; type=&quot;xs:string&quot; maxOccurs=&quot;1&quot; minOccurs=&quot;1&quot;&gt;&lt;/xs:element&gt;
+            &lt;xs:element name=&quot;hints&quot; type=&quot;dd:hintsType&quot; maxOccurs=&quot;1&quot; minOccurs=&quot;0&quot;&gt;&lt;/xs:element&gt;
+        &lt;/xs:sequence&gt;
+        &lt;xs:attribute name=&quot;minimumPlan&quot; type=&quot;xs:int&quot;&gt;&lt;/xs:attribute&gt;
+        &lt;xs:attribute name=&quot;hostnames&quot; type=&quot;xs:string&quot; use=&quot;required&quot;&gt;
+            &lt;xs:annotation&gt;
+                &lt;xs:documentation&gt;
+                A csv list of host name prefixes. This will be interpreted as a role 
+                (in which case it will need to be three letters max) or as an fqdn if 
+                it is more than three characters.  This value will be used to update 
+                brand new yaml files in new environments and will be used to cross check
+                that the components are only deployed to the machines or roles where 
+                they were intended to be deployed.
+                &lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute name=&quot;require&quot; type=&quot;xs:string&quot; use=&quot;optional&quot;&gt;
+            &lt;xs:annotation&gt;
+                &lt;xs:documentation&gt;
+                A csv list of package names that this component depends on, is the same as a requires
+                in the body of the yaml for this component and it can be used interchangeably.
+                The ony time when you really need this is when you have cross amchine dependencies.
+                &lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+    &lt;/xs:complexType&gt;
+
+    &lt;xs:complexType name=&quot;hintsType&quot;&gt;
+        &lt;xs:sequence&gt;
+            &lt;xs:element name=&quot;deploy&quot; maxOccurs=&quot;1&quot; minOccurs=&quot;0&quot;&gt;
+                &lt;xs:complexType&gt;
+                    &lt;xs:attribute name=&quot;chainBehaviour&quot; type=&quot;dd:chainBehaviourType&quot; /&gt;
+                &lt;/xs:complexType&gt;
+            &lt;/xs:element&gt;
+            &lt;xs:element name=&quot;undeploy&quot; maxOccurs=&quot;1&quot; minOccurs=&quot;0&quot;&gt;
+                &lt;xs:complexType&gt;
+                    &lt;xs:attribute name=&quot;chainBehaviour&quot; type=&quot;dd:chainBehaviourType&quot; /&gt;
+                &lt;/xs:complexType&gt;
+            &lt;/xs:element&gt;
+            &lt;xs:element name=&quot;upgrade&quot; maxOccurs=&quot;1&quot; minOccurs=&quot;0&quot;&gt;
+                &lt;xs:complexType&gt;
+                    &lt;xs:attribute name=&quot;method&quot; type=&quot;dd:changeMethodType&quot; /&gt;
+                &lt;/xs:complexType&gt;
+            &lt;/xs:element&gt;
+            &lt;xs:element name=&quot;downgrade&quot; maxOccurs=&quot;1&quot; minOccurs=&quot;0&quot;&gt;
+                &lt;xs:complexType&gt;
+                    &lt;xs:attribute name=&quot;method&quot; type=&quot;dd:changeMethodType&quot; /&gt;
+                &lt;/xs:complexType&gt;
+            &lt;/xs:element&gt;
+        &lt;/xs:sequence&gt;
+    &lt;/xs:complexType&gt;
+
+    &lt;xs:simpleType name=&quot;chainBehaviourType&quot;&gt;
+        &lt;xs:restriction base=&quot;xs:string&quot;&gt;
+            &lt;xs:enumeration value=&quot;whole-chain-multi-transition&quot;&gt;
+                &lt;xs:annotation&gt;
+                    &lt;xs:documentation&gt;For &quot;whole-chain-multi-transition&quot; puppet would be forced to act on this component separately in the
+                        dependency chain, and it would be forced to do a run for this component that it can be guaranteed to be changed before
+                        its dependents and after its dependencies.
+                    &lt;/xs:documentation&gt;
+                &lt;/xs:annotation&gt;
+            &lt;/xs:enumeration&gt;
+            &lt;xs:enumeration value=&quot;whole-chain-single-transition&quot;&gt;
+                &lt;xs:annotation&gt;
+                    &lt;xs:documentation&gt;For &quot;whole-chain-single-transition&quot; puppet would be forced to act on the
+                        entire chain, but it would be allowed to remove / deploy all components in the same dependency chain at the same time.
+                    &lt;/xs:documentation&gt;
+                &lt;/xs:annotation&gt;
+            &lt;/xs:enumeration&gt;
+            &lt;xs:enumeration value=&quot;dependents-only-multi-transition&quot;&gt;
+                &lt;xs:annotation&gt;
+                    &lt;xs:documentation&gt;For &quot;dependents-only-multi-transition&quot; puppet would be forced to act on the all components in the chain which
+                        are above the  affected component.  It would be forced to do a run for each component.
+                    &lt;/xs:documentation&gt;
+                &lt;/xs:annotation&gt;
+            &lt;/xs:enumeration&gt;
+            &lt;xs:enumeration value=&quot;dependents-only-single-transition&quot;&gt;
+                &lt;xs:annotation&gt;
+                    &lt;xs:documentation&gt;For &quot;dependents-only-single-transition&quot; puppet would be forced to act on the
+                        entire chain, but it would be allowed to act on all components in
+                        the same dependency chain during the same puppet run.
+                    &lt;/xs:documentation&gt;
+                &lt;/xs:annotation&gt;
+            &lt;/xs:enumeration&gt;
+            &lt;xs:enumeration value=&quot;isolated&quot;&gt;
+                &lt;xs:annotation&gt;
+                    &lt;xs:documentation&gt;In this the component could be added/removed on
+                        its own without affecting other dependencies in its chain
+                        (although the Hieradata for the immediate upstream dependencies
+                        will be updated to remove relevant &quot;requires&quot; declarations.).  This is the default.
+                    &lt;/xs:documentation&gt;
+                &lt;/xs:annotation&gt;
+            &lt;/xs:enumeration&gt;
+        &lt;/xs:restriction&gt;
+    &lt;/xs:simpleType&gt;
+
+    &lt;xs:simpleType name=&quot;changeMethodType&quot;&gt;
+        &lt;xs:restriction base=&quot;xs:string&quot;&gt;
+            &lt;xs:enumeration value=&quot;undeployRedeploy&quot;&gt;
+                &lt;xs:annotation&gt;
+                    &lt;xs:documentation&gt;In this case puppet would be forced to do a run
+                        specifically to undeploy this component, then a new run would be
+                        performed to install the desired version.
+                    &lt;/xs:documentation&gt;
+                &lt;/xs:annotation&gt;
+            &lt;/xs:enumeration&gt;
+            &lt;xs:enumeration value=&quot;justDeploy&quot;&gt;
+                &lt;xs:annotation&gt;
+                    &lt;xs:documentation&gt;In this case puppet would be allowed to just
+                        install the desired version without any other actions first.  This is the default.
+                    &lt;/xs:documentation&gt;
+                &lt;/xs:annotation&gt;
+            &lt;/xs:enumeration&gt;
+        &lt;/xs:restriction&gt;
+    &lt;/xs:simpleType&gt;
+
+
+    &lt;xs:simpleType name=&quot;deploymentActionType&quot;&gt;
+        &lt;xs:restriction base=&quot;xs:string&quot;&gt;
+            &lt;xs:enumeration value=&quot;all&quot;&gt;
+                &lt;xs:annotation&gt;
+                    &lt;xs:documentation&gt;All actions will be performed, in whatever order
+                        the deployer determines is appropriate from the component
+                        dependency chains and the component hints.
+                        This is the default and is the one that should be used.
+                    &lt;/xs:documentation&gt;
+                &lt;/xs:annotation&gt;
+            &lt;/xs:enumeration&gt;
+            &lt;xs:enumeration value=&quot;upgrade&quot;&gt;
+                &lt;xs:annotation&gt;
+                    &lt;xs:documentation&gt;Only upgrade actions will be performed, in
+                        whatever order the deployer determines is appropriate from the
+                        component dependency chains and the component hints.
+                        EXPERIMENTAL
+                    &lt;/xs:documentation&gt;
+                &lt;/xs:annotation&gt;
+            &lt;/xs:enumeration&gt;
+            &lt;xs:enumeration value=&quot;downgrade&quot;&gt;
+                &lt;xs:annotation&gt;
+                    &lt;xs:documentation&gt;Only downgrade actions will be performed, in
+                        whatever order the deployer determines is appropriate from the
+                        component dependency chains and the component hints.
+                        EXPERIMENTAL
+                    &lt;/xs:documentation&gt;
+                &lt;/xs:annotation&gt;
+            &lt;/xs:enumeration&gt;
+            &lt;xs:enumeration value=&quot;deploy&quot;&gt;
+                &lt;xs:annotation&gt;
+                    &lt;xs:documentation&gt;Only deploy actions will be performed, in
+                        whatever order the deployer determines is appropriate from the
+                        component dependency chains and the component hints.
+                        EXPERIMENTAL
+                    &lt;/xs:documentation&gt;
+                &lt;/xs:annotation&gt;
+            &lt;/xs:enumeration&gt;
+            &lt;xs:enumeration value=&quot;undeploy&quot;&gt;
+                &lt;xs:annotation&gt;
+                    &lt;xs:documentation&gt;Only undeploy actions will be performed, in
+                        whatever order the deployer determines is appropriate from the
+                        component dependency chains and the component hints.
+                        EXPERIMENTAL
+                    &lt;/xs:documentation&gt;
+                &lt;/xs:annotation&gt;
+            &lt;/xs:enumeration&gt;
+        &lt;/xs:restriction&gt;
+    &lt;/xs:simpleType&gt;
+
+    &lt;xs:simpleType name=&quot;failureActionsType&quot;&gt;
+        &lt;xs:restriction base=&quot;xs:string&quot;&gt;
+            &lt;xs:enumeration value=&quot;insertKeyAndValueOnly&quot;&gt;
+                &lt;xs:annotation&gt;
+                    &lt;xs:documentation&gt;If the node is indicated by the path is missing
+                        this will ensure that the node and its parent get inserted. If any
+                        more are missing it will fail.
+                    &lt;/xs:documentation&gt;
+                &lt;/xs:annotation&gt;
+            &lt;/xs:enumeration&gt;
+            &lt;xs:enumeration value=&quot;insertAll&quot;&gt;
+                &lt;xs:annotation&gt;
+                    &lt;xs:documentation&gt;This will ensure that every node that needs to be
+                        inserted in order to satisfy the path are inserted.
+                    &lt;/xs:documentation&gt;
+                &lt;/xs:annotation&gt;
+            &lt;/xs:enumeration&gt;
+            &lt;xs:enumeration value=&quot;insertKeyAndValueAndParentMap&quot;&gt;
+                &lt;xs:annotation&gt;
+                    &lt;xs:documentation&gt;Like insertKeyAndValueOnly but will go one level
+                        higher.
+                    &lt;/xs:documentation&gt;
+                &lt;/xs:annotation&gt;
+            &lt;/xs:enumeration&gt;
+            &lt;xs:enumeration value=&quot;fail&quot;&gt;
+                &lt;xs:annotation&gt;
+                    &lt;xs:documentation&gt;If any of the path elements are missing this will
+                        fail.
+                    &lt;/xs:documentation&gt;
+                &lt;/xs:annotation&gt;
+            &lt;/xs:enumeration&gt;
+        &lt;/xs:restriction&gt;
+    &lt;/xs:simpleType&gt;
+
+&lt;/xs:schema&gt;
+
+
+
+</pre> 
+ </div>
+</div><p> </p><p> </p><div class="code panel pdl" style="border-width: 1px;">
+ <div class="codeHeader panelHeader pdl hide-border-bottom" style="border-bottom-width: 1px;">
+  <b class=" code-title">Example deployment descriptor</b>
+  <span class="collapse-source expand-control"><span class="expand-control-icon icon">&nbsp;</span><span class="expand-control-text">Expand source</span></span>
+ </div>
+ <div class="codeContent panelContent pdl hide-toolbar"> 
+  <pre class="brush: xml; gutter: true; theme: Confluence; collapse: true" style="font-size:12px;">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;dd:deploymentdescriptor xsi:schemaLocation=&quot;http://ebsa.ipt.com/ddConfig-1.0 ddConfig-1.0.xsd&quot; xmlns:dd=&quot;http://ebsa.ipt.com/ddConfig-1.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;
+    &lt;dd:metadata&gt;
+        &lt;dd:minApplicationVersion&gt;1.0.0&lt;/dd:minApplicationVersion&gt;     
+    &lt;/dd:metadata&gt;
+    &lt;dd:plans&gt;
+        &lt;dd:plan description=&quot;most difficult plan&quot; impactLevel=&quot;2&quot; name=&quot;one&quot;&gt;
+            &lt;dd:step description=&quot;Stop things&quot;&gt;
+                &lt;dd:inject description=&quot;description&quot; path=&quot;control_managed_instances/startAPPWLSMS1/action&quot; value=&quot;stop&quot; hostnames=&quot;soatzm01,soatzm02&quot; tags=&quot;service&quot; ifMissing=&quot;fail&quot; /&gt;
+                &lt;dd:inject description=&quot;desc&quot; path=&quot;action&quot; hostnames=&quot;soatzm01&quot;&gt;
+                    &lt;dd:yaml&gt;
+                        something:
+                        - 'Class[Profile::Wls::Ipt_custom]'
+                        - 'Class[Profile::Wls::Startwls_managed]'
+                    &lt;/dd:yaml&gt;
+                &lt;/dd:inject&gt;
+            &lt;/dd:step&gt;
+            &lt;dd:step description=&quot;Uninstall what needs to be uninstalled&quot;&gt;
+                &lt;dd:perform filter=&quot;undeploy&quot; /&gt;
+            &lt;/dd:step&gt;
+            &lt;dd:step description=&quot;Upgrade, downgrade and deploy in one go&quot;&gt;
+                &lt;dd:perform filter=&quot;deploy&quot; /&gt;
+                &lt;dd:perform filter=&quot;upgrade&quot; /&gt;
+                &lt;dd:perform filter=&quot;downgrade&quot; /&gt;
+            &lt;/dd:step&gt;
+            &lt;dd:step description=&quot;Restart things&quot;&gt;
+                &lt;dd:inject description=&quot;description&quot; path=&quot;control_managed_instances/startAPPWLSMS1/action&quot; value=&quot;start&quot; hostnames=&quot;soatzm01,soatzm02&quot; tags=&quot;service&quot; ifMissing=&quot;fail&quot; /&gt;
+            &lt;/dd:step&gt;
+        &lt;/dd:plan&gt;
+
+        &lt;dd:plan description=&quot;easy plan&quot; impactLevel=&quot;1&quot;&gt;
+            &lt;dd:step description=&quot;Do everything in one go&quot;&gt;
+                &lt;dd:perform filter=&quot;all&quot; /&gt;
+            &lt;/dd:step&gt;
+        &lt;/dd:plan&gt;
+
+    &lt;/dd:plans&gt;
+    &lt;dd:components&gt;
+        &lt;dd:component minimumPlan=&quot;2&quot; hostnames=&quot;soatzm01&quot;&gt;
+            &lt;dd:yaml&gt;
+                CommonConfigRPM:
+                require:
+                - 'Class[Profile::Wls::Ipt_custom]'
+                - 'Class[Profile::Wls::Startwls_managed]'
+                tag: 'appdeploy'
+            &lt;/dd:yaml&gt;
+            &lt;dd:hints&gt;
+                &lt;dd:undeploy chainBehaviour=&quot;whole-chain-multi-transition&quot;&gt;&lt;/dd:undeploy&gt;
+                &lt;dd:upgrade method=&quot;justDeploy&quot;&gt;&lt;/dd:upgrade&gt;
+                &lt;dd:downgrade method=&quot;undeployRedeploy&quot;&gt;&lt;/dd:downgrade&gt;
+            &lt;/dd:hints&gt;
+        &lt;/dd:component&gt;
+        &lt;dd:component minimumPlan=&quot;1&quot; hostnames=&quot;soatzm01&quot;&gt;
+            &lt;dd:yaml&gt;
+            IPTSOACommon:
+            require: Package[CommonConfigRPM]
+            tag: 'appdeploy'
+            &lt;/dd:yaml&gt;
+            &lt;dd:hints&gt;
+                &lt;dd:undeploy chainBehaviour=&quot;whole-chain-multi-transition&quot;&gt;&lt;/dd:undeploy&gt;
+                &lt;dd:upgrade method=&quot;justDeploy&quot;&gt;&lt;/dd:upgrade&gt;
+                &lt;dd:downgrade method=&quot;undeployRedeploy&quot;&gt;&lt;/dd:downgrade&gt;
+            &lt;/dd:hints&gt;
+        &lt;/dd:component&gt;
+        &lt;dd:component minimumPlan=&quot;1&quot; hostnames=&quot;soatzm01&quot;&gt;
+            &lt;dd:yaml&gt;
+            IPTCommonExceptionHandler:
+            require: Package[IPTSOACommon]
+            tag: 'appdeploy'
+            &lt;/dd:yaml&gt;
+            &lt;dd:hints&gt;
+                &lt;dd:undeploy chainBehaviour=&quot;whole-chain-multi-transition&quot;&gt;&lt;/dd:undeploy&gt;
+                &lt;dd:upgrade method=&quot;justDeploy&quot;&gt;&lt;/dd:upgrade&gt;
+                &lt;dd:downgrade method=&quot;undeployRedeploy&quot;&gt;&lt;/dd:downgrade&gt;
+            &lt;/dd:hints&gt;
+        &lt;/dd:component&gt;
+        &lt;dd:component minimumPlan=&quot;1&quot; hostnames=&quot;soatzm01&quot;&gt;
+            &lt;dd:yaml&gt;
+            IPTCDPServiceBroker:
+            require: Package[IPTCommonExceptionHandler]
+            tag: 'appdeploy'
+            &lt;/dd:yaml&gt;
+            &lt;dd:hints&gt;
+                &lt;dd:undeploy chainBehaviour=&quot;whole-chain-multi-transition&quot;&gt;&lt;/dd:undeploy&gt;
+                &lt;dd:upgrade method=&quot;justDeploy&quot;&gt;&lt;/dd:upgrade&gt;
+                &lt;dd:downgrade method=&quot;undeployRedeploy&quot;&gt;&lt;/dd:downgrade&gt;
+            &lt;/dd:hints&gt;
+        &lt;/dd:component&gt;
+        &lt;dd:component minimumPlan=&quot;1&quot; hostnames=&quot;soatzm01&quot;&gt;
+            &lt;dd:yaml&gt;
+            PKISSServiceProcessBroker:
+            require: Package[IPTCDPServiceBroker]
+            tag: 'appdeploy'
+            &lt;/dd:yaml&gt;
+            &lt;dd:hints&gt;
+                &lt;dd:undeploy chainBehaviour=&quot;whole-chain-multi-transition&quot;&gt;&lt;/dd:undeploy&gt;
+                &lt;dd:upgrade method=&quot;justDeploy&quot;&gt;&lt;/dd:upgrade&gt;
+                &lt;dd:downgrade method=&quot;undeployRedeploy&quot;&gt;&lt;/dd:downgrade&gt;
+            &lt;/dd:hints&gt;
+        &lt;/dd:component&gt;
+        &lt;dd:component minimumPlan=&quot;1&quot; hostnames=&quot;soatzm01&quot;&gt;
+            &lt;dd:yaml&gt;
+            PKISSServices:
+            require: Package[PKISSServiceProcessBroker]
+            tag: 'appdeploy'
+            &lt;/dd:yaml&gt;
+            &lt;dd:hints&gt;
+                &lt;dd:undeploy chainBehaviour=&quot;whole-chain-multi-transition&quot;&gt;&lt;/dd:undeploy&gt;
+                &lt;dd:upgrade method=&quot;justDeploy&quot;&gt;&lt;/dd:upgrade&gt;
+                &lt;dd:downgrade method=&quot;undeployRedeploy&quot;&gt;&lt;/dd:downgrade&gt;
+            &lt;/dd:hints&gt;
+        &lt;/dd:component&gt;
+        &lt;dd:component minimumPlan=&quot;1&quot; hostnames=&quot;soatzm01&quot;&gt;
+            &lt;dd:yaml&gt;
+            IABSServiceProcessBroker:
+            require: Package[PKISSServices]
+            tag: 'appdeploy'
+            &lt;/dd:yaml&gt;
+            &lt;dd:hints&gt;
+                &lt;dd:undeploy chainBehaviour=&quot;whole-chain-multi-transition&quot;&gt;&lt;/dd:undeploy&gt;
+                &lt;dd:upgrade method=&quot;justDeploy&quot;&gt;&lt;/dd:upgrade&gt;
+                &lt;dd:downgrade method=&quot;undeployRedeploy&quot;&gt;&lt;/dd:downgrade&gt;
+            &lt;/dd:hints&gt;
+        &lt;/dd:component&gt;
+        &lt;dd:component minimumPlan=&quot;1&quot; hostnames=&quot;soatzm01&quot;&gt;
+            &lt;dd:yaml&gt;
+            IABSServiceManager:
+            require: Package[IABSServiceProcessBroker]
+            tag: 'appdeploy'
+            &lt;/dd:yaml&gt;
+            &lt;dd:hints&gt;
+                &lt;dd:undeploy chainBehaviour=&quot;whole-chain-multi-transition&quot;&gt;&lt;/dd:undeploy&gt;
+                &lt;dd:upgrade method=&quot;justDeploy&quot;&gt;&lt;/dd:upgrade&gt;
+                &lt;dd:downgrade method=&quot;undeployRedeploy&quot;&gt;&lt;/dd:downgrade&gt;
+            &lt;/dd:hints&gt;
+        &lt;/dd:component&gt;
+        &lt;dd:component minimumPlan=&quot;1&quot; hostnames=&quot;soatzm01&quot;&gt;
+            &lt;dd:yaml&gt;
+            IPTPKISSManagement:
+            require: Package[IABSServiceProcessBroker]
+            tag: 'appdeploy'
+            &lt;/dd:yaml&gt;
+            &lt;dd:hints&gt;
+                &lt;dd:undeploy chainBehaviour=&quot;whole-chain-multi-transition&quot;&gt;&lt;/dd:undeploy&gt;
+                &lt;dd:upgrade method=&quot;justDeploy&quot;&gt;&lt;/dd:upgrade&gt;
+                &lt;dd:downgrade method=&quot;undeployRedeploy&quot;&gt;&lt;/dd:downgrade&gt;
+            &lt;/dd:hints&gt;
+        &lt;/dd:component&gt;
+        &lt;dd:component minimumPlan=&quot;1&quot; hostnames=&quot;soatzm01&quot;&gt;
+            &lt;dd:yaml&gt;
+            IPTIABSManagement:
+            require: Package[IPTPKISSManagement]
+            tag: 'appdeploy'
+            &lt;/dd:yaml&gt;
+            &lt;dd:hints&gt;
+                &lt;dd:undeploy chainBehaviour=&quot;whole-chain-multi-transition&quot;&gt;&lt;/dd:undeploy&gt;
+                &lt;dd:upgrade method=&quot;justDeploy&quot;&gt;&lt;/dd:upgrade&gt;
+                &lt;dd:downgrade method=&quot;undeployRedeploy&quot;&gt;&lt;/dd:downgrade&gt;
+            &lt;/dd:hints&gt;
+        &lt;/dd:component&gt;
+        &lt;dd:component minimumPlan=&quot;1&quot; hostnames=&quot;soatzm01&quot;&gt;
+            &lt;dd:yaml&gt;
+            IPTBRPFulfilmentManagement:
+            require: Package[IPTIABSManagement]
+            tag: 'appdeploy'
+            &lt;/dd:yaml&gt;
+            &lt;dd:hints&gt;
+                &lt;dd:undeploy chainBehaviour=&quot;whole-chain-multi-transition&quot;&gt;&lt;/dd:undeploy&gt;
+                &lt;dd:upgrade method=&quot;justDeploy&quot;&gt;&lt;/dd:upgrade&gt;
+                &lt;dd:downgrade method=&quot;undeployRedeploy&quot;&gt;&lt;/dd:downgrade&gt;
+            &lt;/dd:hints&gt;
+        &lt;/dd:component&gt;
+        &lt;dd:component minimumPlan=&quot;1&quot; hostnames=&quot;soatzm01&quot;&gt;
+            &lt;dd:yaml&gt;
+            IPTRules:
+            require: Package[IPTBRPFulfilmentManagement]
+            tag: 'appdeploy'
+            &lt;/dd:yaml&gt;
+            &lt;dd:hints&gt;
+                &lt;dd:undeploy chainBehaviour=&quot;whole-chain-multi-transition&quot;&gt;&lt;/dd:undeploy&gt;
+                &lt;dd:upgrade method=&quot;justDeploy&quot;&gt;&lt;/dd:upgrade&gt;
+                &lt;dd:downgrade method=&quot;undeployRedeploy&quot;&gt;&lt;/dd:downgrade&gt;
+            &lt;/dd:hints&gt;
+        &lt;/dd:component&gt;
+        &lt;dd:component minimumPlan=&quot;1&quot; hostnames=&quot;soatzm01&quot; &gt;
+            &lt;dd:yaml&gt;
+            IPTFulfilmentManagement:
+            require: Package[IPTRules]
+            tag: 'appdeploy'
+            &lt;/dd:yaml&gt;
+            &lt;dd:hints&gt;
+                &lt;dd:undeploy chainBehaviour=&quot;whole-chain-multi-transition&quot;&gt;&lt;/dd:undeploy&gt;
+                &lt;dd:upgrade method=&quot;justDeploy&quot;&gt;&lt;/dd:upgrade&gt;
+                &lt;dd:downgrade method=&quot;undeployRedeploy&quot;&gt;&lt;/dd:downgrade&gt;
+            &lt;/dd:hints&gt;
+        &lt;/dd:component&gt;
+        &lt;dd:component minimumPlan=&quot;1&quot; hostnames=&quot;soatzm01&quot; &gt;
+            &lt;dd:yaml&gt;
+            IPTBatchHandler:
+            require: Package[IPTFulfilmentManagement]
+            tag: 'appdeploy'
+            &lt;/dd:yaml&gt;
+            &lt;dd:hints&gt;
+                &lt;dd:undeploy chainBehaviour=&quot;whole-chain-multi-transition&quot;&gt;&lt;/dd:undeploy&gt;
+                &lt;dd:upgrade method=&quot;justDeploy&quot;&gt;&lt;/dd:upgrade&gt;
+                &lt;dd:downgrade method=&quot;undeployRedeploy&quot;&gt;&lt;/dd:downgrade&gt;
+            &lt;/dd:hints&gt;
+        &lt;/dd:component&gt;
+    &lt;/dd:components&gt;
+&lt;/dd:deploymentdescriptor&gt;
+
+
+
+</pre> 
+ </div>
+</div><h2 id="Designnote-Environment&amp;ReleaseManagementV2.x-Detaildesign">Detail design</h2><h3 id="Designnote-Environment&amp;ReleaseManagementV2.x-Sequentialexecutionofanumberofpuppetruns">Sequential execution of a number of puppet runs</h3><p>The deployment process and all of the preprocessing is all about one thing and that is to execute a set of puppet runs which progressively change the state of the environment until the end goal is reached.  There is never a time when the state of the environment is not in a known state, even if it is an intermediate step along the way to a final state.</p><h3 id="Designnote-Environment&amp;ReleaseManagementV2.x-Selectingadeploymentplan">Selecting a deployment plan</h3><p>Deployment descriptors live in GIT in the EBSA Tools project in the environmentdeploymentdescriptors repository.</p><p>They are stored in folders based on appliication short name. </p><h3 id="Designnote-Environment&amp;ReleaseManagementV2.x-Datastructures">Data structures</h3><p>The environmentManagement program manages all of the data in a single class, in memory.  The class is called &quot;com.ipt.ebsa.manage.deploy.Deployment&quot;.  The data in this class is a mixture of data loaded from data sources, data which has been derived and a record of events as they unfold.</p><p>There is a single instance of the Deployment class per execution of the program and it is progressively enhanced with newly loaded and or derived data as the program runs.  It is then used as a single source of data during the rule based logic which generates and exceutes a deployment plan.</p><p>
+
+<map id="gliffy-map-26249024-3047" name="gliffy-map-26249024-3047"></map>
+<table width="100%" class="gliffy-macro-table">
+    <tr>
+        <td >
+            <table class="gliffy-macro-inner-table">
+                <caption align="bottom">
+ </caption>
+
+                <tr>
+                    <td>
+                        <img style="border: none; width: 1318px;" usemap="#gliffy-map-26249024-3047" src="attachments/24390972/26249025.png" alt="" class="gliffy-macro-image"/>
+                    </td>
+                </tr>
+            </table>
+ 
+        </td>
+    </tr>
+</table>
+
+
+</p><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th class="confluenceTh"> </th><th class="confluenceTh"> </th></tr><tr><td class="confluenceTd">String jobId</td><td class="confluenceTd"> UUID.randomUUID().toString(); This unique ID is used for a lot of differentiation from folder names to log messages</td></tr><tr><td class="confluenceTd">String environmentName</td><td class="confluenceTd">Passed in as one of the program parameters</td></tr><tr><td class="confluenceTd">ApplicationVersion applicationVersion</td><td class="confluenceTd">The ID of this object is passed in as a program parameter and the obect itself (a JPA entity is loaded from the database)</td></tr><tr><td class="confluenceTd">HieraData hieraData</td><td class="confluenceTd">The Hieradata object is an in memory copy of all of the Hieradata made available to the program.  It holds a map keyed on environment name.  The map contains another map keyed on file name.  Values stored per file name are instances of HieraFile which contains the YAMl as a map, the absolute path of the file and some other details about it.</td></tr><tr><td class="confluenceTd">XMLDeploymentDescriptorType deploymentDescriptor</td><td class="confluenceTd">This is the deployment descriptor which has been sleected to guide the execution of this deployment</td></tr><tr><td class="confluenceTd">DeploymentRecord deploymentRecord</td><td class="confluenceTd">This class has not been taken full advantage of it is supposed to be the one location where an entire record of the deployment is built up.  It can then be used as a source for reports.  At the moment it is scarecely used.</td></tr><tr><td class="confluenceTd">DeploymentEngine deploymentEngine</td><td class="confluenceTd"><p>It was originally envisaged that there might be more than one deployment engine implementation but the cre</p></td></tr><tr><td class="confluenceTd">Map&lt;String, ComponentDeploymentData&gt; components</td><td class="confluenceTd"><p>THis ismain data structure for holding information about components.  Each component is listed with its name as the key.  The ComponentDeploymentData class is a relatively complex data structure which holds a variety of details about each component, including</p><ul><li>The YAML for this component which has been found in the existing yaml files for the environment</li><li>The deployment descriptor details for this component</li><li>The proposed YAML for this component</li><li>Dependency chains for the component</li><li>Changesets for the component</li></ul></td></tr><tr><td colspan="1" class="confluenceTd">List&lt;Transition&gt; transitions</td><td colspan="1" class="confluenceTd">This is a list of objects which define the changes which need to be made to a YAML file insdide a particular transition</td></tr><tr><td colspan="1" class="confluenceTd">TreeMap&lt;String, TreeMap&lt;String, ?&gt;&gt; dependencyChains</td><td colspan="1" class="confluenceTd">A list of chained dependencies</td></tr><tr><td colspan="1" class="confluenceTd">XMLPlanType selectedPlan</td><td colspan="1" class="confluenceTd">The selected deployment plan</td></tr></tbody></table></div><p> </p><p> </p><h3 id="Designnote-Environment&amp;ReleaseManagementV2.x-Programflow">Program flow</h3><p>The table below shows the program flow.  The colours associate moments of program execution with the data which gets loaded into the in memory model as a result.</p><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th colspan="1" class="confluenceTh">Flow</th><th colspan="1" class="confluenceTh">Data model (com.ipt.ebsa.manage.deploy.Deployment)</th></tr><tr><td class="confluenceTd">EnvironmentManagementCLI<ul><li>main()<ul><li>DeploymentManager.execute()</li><li>DatabaseManager.initialise()</li><li><span style="color: rgb(128,128,128);">new Deployer()</span></li><li><span style="color: rgb(0,128,0);">DatabaseManager.lookupApplicationVersion</span></li><li>Deployer.deploy()<ul><li>new Deployment()</li><li><span style="color: rgb(255,153,0);">DeploymentEngine.buildDeploymentEngine() [DefaultDeploymentEngine]]</span></li><li><span style="color: rgb(128,0,0);">deployment.set .... [engine, applicationVersion, environment]</span></li><li><u><em><strong>deploment.run()</strong></em></u><ul><li><span style="color: rgb(51,102,255);">new DeploymentRecord()</span></li><li><span style="color: rgb(204,153,255);">new Hieradata()</span></li><li><span style="color: rgb(204,153,255);">Hieradata.load()</span></li><li><span style="color: rgb(0,128,128);">DDConfigurationLoader().load()</span></li><li><u><em><strong>deploymentEngine.prepare()</strong></em></u><ul><li><span style="color: rgb(153,204,255);">listComponentsInDeploymentDescriptor()</span></li><li><span style="color: rgb(255,0,255);">listComponentsInApplicationVersion()</span></li><li><span style="color: rgb(153,204,0);">findComponentsInExistingYaml()</span></li><li><span style="color: rgb(192,192,192);">calculateDifferencesAndAssignActions()</span></li><li><span style="color: rgb(0,0,255);">resolveDependencyChains()</span></li><li><span style="color: rgb(0,0,255);">applyDependencyChains()</span></li><li><span style="color: rgb(255,204,153);">findBestDeploymentPlan()</span></li><li><span style="color: rgb(51,51,153);">createTransitions()</span></li><li>new Report().dumpTableToFile()</li></ul></li><li><u><em><strong>deploymentEngine.validate()</strong></em></u></li><li><u><em><strong>deploymentEngine.execute()</strong></em></u><ul><li>new GITManager()</li><li>for all Transition<ul><li>new PuppetState()</li><li>for all YamlUpdate</li><li><br /><ul><li>new YamlInjector()</li><li>YamlInjector.apply()</li><li>YamlUtil.write()</li></ul></li><li>end</li><li>GITManager.commitBranchMergeToMaster();</li><li>new PuppetManager()</li><li>for all PuppetState<ul><li>PuppetManager.doPuppetRun()</li></ul></li><li>end</li></ul></li><li>end</li></ul></li><li><u><em><strong>deplymentEngine.finalise() || deploymentEngine.handleErrors()</strong></em></u></li></ul></li></ul></li><li>DeploymentManager.cleanup()</li><li>DatabaseManager.finalise()</li></ul></li></ul></td><td class="confluenceTd"><ul><li>S<span style="color: rgb(128,0,0);">tring environmentName</span></li><li><span style="color: rgb(128,0,0);">ApplicationVersion applicationVersion</span><ul><li><span style="color: rgb(0,128,0);">Long id</span></li><li><span style="color: rgb(0,128,0);">String name</span></li><li><span style="color: rgb(0,128,0);">String version</span></li><li><span style="color: rgb(0,128,0);">String notes</span></li><li><span style="color: rgb(0,128,0);">String jenkinsJobName</span></li><li><span style="color: rgb(0,128,0);">int jenkinsBuildNumber</span></li><li><span style="color: rgb(0,128,0);">String jenkinsBuildId</span></li><li><span style="color: rgb(0,128,0);">String relatedJiraIssue</span></li><li><span style="color: rgb(0,128,0);">String relatedBrpIssue</span></li><li><span style="color: rgb(0,128,0);">Date dateOfRelease</span></li><li><span style="color: rgb(0,128,0);">Date dateCreated</span></li><li><span style="color: rgb(0,128,0);">Application application</span></li><li><span style="color: rgb(0,128,0);">List&lt;ComponentVersion&gt; components</span></li></ul></li><li><span style="color: rgb(204,153,255);">HieraData hieraData</span><ul><li><span style="color: rgb(204,153,255);">File hieraFolder</span></li><li><span style="color: rgb(204,153,255);">String organisationPrefix</span></li><li><span style="color: rgb(204,153,255);">Map&lt;String,Map&lt;String,HieraFile&gt;&gt; environments</span></li></ul></li><li><span style="color: rgb(0,128,128);">XMLDeploymentDescriptorType deploymentDescriptor</span><ul><li><span style="color: rgb(0,128,128);">XMLMetadataType metadata</span></li><li><span style="color: rgb(0,128,128);">XMLPlansType plans</span></li><li><span style="color: rgb(0,128,128);">XMLComponentsType components</span></li></ul></li><li><span style="color: rgb(51,102,255);">DeploymentRecord deploymentRecord</span></li><li><span style="color: rgb(255,153,0);">DeploymentEngine deploymentEngine</span></li><li><span style="color: rgb(153,204,255);">Map&lt;</span><span style="color: rgb(255,0,255);">String, C</span><span style="color: rgb(255,0,255);">ompon</span><span style="color: rgb(153,204,0);"><span style="color: rgb(255,0,255);">entD</span></span><span style="color: rgb(153,204,0);">ep</span><span style="color: rgb(51,102,255);">l<span style="color: rgb(153,204,0);">oymentD</span></span><span style="color: rgb(192,192,192);">ata&gt; com</span><span style="color: rgb(0,0,255);">ponents</span><ul><li><span style="color: rgb(153,204,255);">XMLComponentType deploymentDescriptorDef</span></li><li><span style="color: rgb(153,204,255);">Map&lt;String, Object&gt; deploymentDescriptorYaml</span></li><li><span style="color: rgb(255,0,255);">ComponentVersion targetCmponentVersion</span></li><li><span style="color: rgb(153,204,0);">ComponentVersion existingComponentVersion</span></li><li><span style="color: rgb(153,204,0);">List&lt;YamlSearchResult&gt; existingYaml</span></li><li><span style="color: rgb(192,192,192);">List&lt;Exception&gt; exceptions</span></li><li><span style="color: rgb(192,192,192);">List&lt;ChangeSet&gt; changeSets</span></li><li><span style="color: rgb(0,0,255);">List&lt;ComponentDeploymentData&gt; upstreamDependencies</span></li><li><span style="color: rgb(0,0,255);">int maximumDepth</span></li><li><span style="color: rgb(0,0,255);">List&lt;ComponentDeploymentData&gt; downstreamDependencies</span></li><li><span style="color: rgb(0,0,255);">List&lt;TreeMap&lt;String, TreeMap&lt;String, ?&gt;&gt;&gt; dependencyChains</span></li></ul></li><li><span style="color: rgb(51,51,153);">List&lt;Transition&gt; transition</span><ul><li><span style="color: rgb(51,51,153);">XMLStepItemType source</span></li><li><span style="color: rgb(51,51,153);">State startState</span></li><li><span style="color: rgb(51,51,153);">State endState</span></li><li><span style="color: rgb(51,51,153);">int sequenceNumber</span></li><li><span style="color: rgb(51,51,153);">List&lt;YamlUpdate&gt; updates = new ArrayList&lt;YamlUpdate&gt;()</span></li></ul></li><li><span style="color: rgb(0,0,255);">TreeMap&lt;String, TreeMap&lt;String, ?&gt;&gt; dependencyChains</span></li><li><span style="color: rgb(255,204,153);">XMLPlanType selectedPlan</span><ul><li><span style="color: rgb(255,204,153);">List&lt;XMLStepItemType&gt; step;</span></li><li><span style="color: rgb(255,204,153);">Integer impactLevel;</span></li><li><span style="color: rgb(255,204,153);">String description;</span></li><li><span style="color: rgb(255,204,153);">String name;</span></li></ul></li><li><span style="color: rgb(128,128,128);">String jobId</span></li></ul></td></tr></tbody></table></div><h3 id="Designnote-Environment&amp;ReleaseManagementV2.x-Actionandvalidationmatrix">Action and validation matrix</h3><p>The matrix below shows the logic for what actions should be taken on a per component basis</p><div class="table-wrap"><table class="confluenceTable"><colgroup><col /><col /><col /><col /><col /><col /></colgroup><tbody><tr><td class="confluenceTd"><strong>ComponentVersion</strong></td><td class="confluenceTd"><strong>Existing YAML</strong></td><td class="confluenceTd"><strong>Version in CV</strong></td><td class="confluenceTd"><strong>Version in EY</strong></td><td class="confluenceTd"><strong>Preferred option</strong></td><td class="confluenceTd"><strong>Scenario</strong></td></tr><tr><td class="confluenceTd">Defined</td><td class="confluenceTd">Defined</td><td class="confluenceTd">Same</td><td class="confluenceTd">Same</td><td class="confluenceTd">No change</td><td class="confluenceTd">A different component must be being changed.  This component can stay as it is.</td></tr><tr><td class="confluenceTd">Defined</td><td class="confluenceTd">Defined</td><td class="confluenceTd">GT</td><td class="confluenceTd">LT</td><td class="confluenceTd">UPGRADE</td><td class="confluenceTd">The component has been selected fro an upgrade</td></tr><tr><td class="confluenceTd">Defined</td><td class="confluenceTd">Defined</td><td class="confluenceTd">LT</td><td class="confluenceTd">GT</td><td class="confluenceTd">DOWNGRADE</td><td class="confluenceTd">The component has been selected for a downgrade</td></tr><tr><td class="confluenceTd">Defined</td><td class="confluenceTd">Defined</td><td class="confluenceTd">Missing</td><td class="confluenceTd">Exists</td><td class="confluenceTd">FAIL - Component version invalid</td><td class="confluenceTd">Invalid ComponentVersion – something is completely broken.</td></tr><tr><td class="confluenceTd">Defined</td><td class="confluenceTd">Defined</td><td class="confluenceTd">Exists</td><td class="confluenceTd">Missing</td><td class="confluenceTd">FIX</td><td class="confluenceTd">The YAML file can be updated to reflect the reality. It will be useful to be able to apply the entire template every time to save the problem of keeping things in sync.</td></tr><tr><td class="confluenceTd">Defined</td><td class="confluenceTd">Defined</td><td class="confluenceTd">“Absent”</td><td class="confluenceTd">Exists</td><td class="confluenceTd">UNINSTALL</td><td class="confluenceTd">Clear case of uninstall</td></tr><tr><td class="confluenceTd">Defined</td><td class="confluenceTd">Defined</td><td class="confluenceTd">Exists</td><td class="confluenceTd">“Absent”</td><td class="confluenceTd">INSTALL</td><td class="confluenceTd">Clear case of something being installed</td></tr><tr><td class="confluenceTd">Defined</td><td class="confluenceTd">Defined</td><td class="confluenceTd">Anything</td><td class="confluenceTd">Anything</td><td class="confluenceTd">FAIL – No deployment plan</td><td class="confluenceTd">Without an entry for a component in the deployment plan it cannot be deployed.</td></tr><tr><td class="confluenceTd">Not defined</td><td class="confluenceTd">Defined</td><td class="confluenceTd">N/A</td><td class="confluenceTd">Anything</td><td class="confluenceTd">UNINSTALL or FAIL no componentVersion ???</td><td class="confluenceTd"><p>ComponentVersion has not been selected for inclusion in this ApplicationVersion but has been deployed in the past. Thi smight be an error and definitely needs a warning. It might be that the 1) deployment plan is out of date 2) That the applicatonversion is wrong 3) that the YAML file is wrong (e.g. typo). The deployment plan is definitely wrong. The plan should be kept up to date with additons as well as removals. I am inclined to say that the plan shoul dmatch the verison that is being deployed. Or you have a different plan.</p><p> </p><p>Steve C 20/08 I have changed my midn on this.  leaving the components in the deployment descriptor means that if they are not in the ComponentVerison then we know to remove them.  This is an UNINSTALL</p></td></tr><tr><td class="confluenceTd">Not defined</td><td class="confluenceTd">Defined</td><td class="confluenceTd">N/A</td><td class="confluenceTd">“Absent”</td><td class="confluenceTd">No change</td><td class="confluenceTd">ComponentVersion not present and nothing deployed in the environment</td></tr><tr><td class="confluenceTd">Defined</td><td class="confluenceTd">Not defined</td><td class="confluenceTd">Anything</td><td class="confluenceTd">N/A</td><td class="confluenceTd">NEW INSTALL</td><td class="confluenceTd">This is clearly an install into anew environment</td></tr></tbody></table></div><p> </p><h2 id="Designnote-Environment&amp;ReleaseManagementV2.x-Commandline"><span class="gliffy-container "> <span class="gliffy-chrome-container"> <span class="gliffy-chrome "> <span class="gliffy-item gliffy-zoom gliffy-end-button "><a href="https://<confluenceurl>/download/attachments/24390972/ERD%20for%20RELEASE%20DATABASE.png?version=4&amp;modificationDate=1407513990000&amp;api=v2" rel="nofollow"><span> </span></a></span><span class="gliffy-item gliffy-end-button arsenale-gliffy-lock-button"><a href="https://<confluenceurl>/pages/viewpage.action?pageId=26154638&amp;navigatingVersions=true" rel="nofollow"><span class="arsenaleGliffyButton"> Command</span></a> line</span></span></span></span></h2><h2 id="Designnote-Environment&amp;ReleaseManagementV2.x-"><span class="gliffy-container "><span class="gliffy-chrome-container"><span class="gliffy-chrome "><span class="gliffy-item gliffy-end-button arsenale-gliffy-lock-button"><br /></span></span></span></span></h2><h2 id="Designnote-Environment&amp;ReleaseManagementV2.x-Designdecisions">Design decisions</h2><h3 class="expand-control" id="Designnote-Environment&amp;ReleaseManagementV2.x-Prosandconsofdifferentfileformats"><span class="expand-control-icon icon"> </span><span class="expand-control-text">Pros and cons of different file formats</span></h3><div class="expand-control"><p> </p><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th class="confluenceTh"><div class="tablesorter-header-inner">Format</div></th><th class="confluenceTh"><div class="tablesorter-header-inner">Pro's</div></th><th class="confluenceTh"><div class="tablesorter-header-inner">Cons</div></th></tr><tr><td class="confluenceTd">Hiera Yaml</td><td class="confluenceTd"><p>Everything is in hiera YAML already</p><p>It is our systems native format</p></td><td class="confluenceTd"><ul><li>We may come across a need for some kind of expression which cannot be expressed in the heira YAML file format</li><li>Parsing out dependencies is difficult in YAML - not impossible though</li><li>The Yaml is expressed in terms of RPMS rather than components.  Is it easier to work with Components?  How do we ensure that we tie the components back to the correct RPMs and vice versa</li></ul></td></tr><tr><td class="confluenceTd">Hiera Yaml filling in an XML Sandwich</td><td class="confluenceTd"><p>We can extend the functionality provide by Hiera YAML and yet keep the good things about Heira YAML in a nicely segregated place.</p><p>Provides a rigid structure that we can work with easily (API support, schemas, JAXB).</p></td><td class="confluenceTd"><ul><li>Its kind of ugly</li><li>Formatting of hiera is bound to get messed up we will probably need to format the heira properly when we read it in.</li></ul></td></tr><tr><td colspan="1" class="confluenceTd">XML</td><td colspan="1" class="confluenceTd">Provides a rigid structure that we can work with easily (API support, schemas, JAXB).</td><td colspan="1" class="confluenceTd">We need to interpolate all XML into YAML and this is a bit of a pain.</td></tr></tbody></table></div></div>
+                    </div>
+
+                                        
+                    
+                 
+                </div>             </div> 
+            
+        </div>     </body>
+</html>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eb:builds xmlns:eb="http://ebsa.ipt.com/EnvironmentBuildSequence-1.0" xmlns:vc="http://ebsa.ipt.com/VCloudCommand-2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://ebsa.ipt.com/EnvironmentBuildSequence-1.0 ">
+  <eb:build id="prod_like">
+    <eb:param name="build_1" value="Rod"/>
+    <eb:param name="build_2" value="Jane"/>
+    <eb:param name="build_3" value="Freddy"/>
+    <eb:param name="excludes" value="emo,goth"/>
+    <eb:sequenceref sequenceid="S1"/>
+  </eb:build>
+  <eb:build id="prod_like2">
+    <eb:param name="build_1" value="Rod"/>
+    <eb:param name="build_2" value="Jane"/>
+    <eb:param name="build_3" value="Freddy"/>
+    <eb:param name="excludes" value="emo,goth"/>
+    <eb:sequenceref sequenceid="S1"/>
+  </eb:build>
+  <eb:sequence id="S1">
+    <eb:param name="sequence_1a" value="Zippy"/>
+    <eb:param name="sequence_1b" value="George"/>
+    <eb:param name="sequence_1c" value="Bungle"/>
+    <eb:step actionid="Release the hounds" context="step_context_param_1=Rosie" />
+    <eb:sequenceref sequenceid="S2" />
+  </eb:sequence>
+  <eb:sequence id="S2">
+    <eb:param name="sequence_2a" value="Sooty"/>
+    <eb:param name="sequence_2b" value="Sweep"/>
+    <eb:param name="sequence_2c" value="Sue"/>
+    <eb:step actionid="Release the hounds" context="step_context_param_2 =Noddy  ,  step_context_param_3 = Big Ears" />
+    <eb:step actionid="Open sesame" context="step_context_param_4=Rosie,machine=RageAgainst,sshopts=~/.ssh/config" />
+  </eb:sequence>
+</eb:builds>

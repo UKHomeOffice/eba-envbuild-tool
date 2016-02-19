@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eb:builds xmlns:eb="http://ebsa.ipt.com/EnvironmentBuildSequence-1.0" xmlns:vc="http://ebsa.ipt.com/VCloudCommand-2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://ebsa.ipt.com/EnvironmentBuildSequence-1.0">
+  <eb:action id="Release the hounds">
+    <eb:infra>
+      <eb:vCloud>
+        <vc:Environment>
+          <vc:VirtualApplication command="create" errorStrategy="exit" excludes="${excludes}" includes="" strategy="createOnly"/>
+        </vc:Environment>
+      </eb:vCloud>
+    </eb:infra>
+  </eb:action>
+  <eb:action id="Open sesame">
+    <eb:call action="Chocs away!" />
+  </eb:action>
+  <eb:action id="Chocs away!">
+    <eb:sshcommand machine="${machine}" jumphosts="Gloria ${userparam1} Estefan" sshoptsfile="${sshopts}" remotecommand="command x"/>
+  </eb:action>
+</eb:builds>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    xsv:minVersion="1.0" xsv:maxVersion="1.1"
+    targetNamespace="http://ebsa.ipt.com/EnvironmentBuildSequence-1.0"
+    xmlns:vc="http://ebsa.ipt.com/VCloudCommand-2.0"
+    xmlns:xsv="http://www.w3.org/2007/XMLSchema-versioning"
+    xmlns:eb="http://ebsa.ipt.com/EnvironmentBuildSequence-1.0">
+    <xs:import schemaLocation="vCloudCommand-2.0.xsd"
+        namespace="http://ebsa.ipt.com/VCloudCommand-2.0"/>
+
+    <xs:element name="builds" type="eb:BuildsType">
+        <xs:unique name="UniqueActionName">
+            <xs:selector xpath="ation"/>
+            <xs:field xpath="attribute::name"/>
+        </xs:unique>
+    </xs:element>
+
+    <xs:complexType name="BuildsType">
+        <xs:sequence>
+            <xs:element name="globalparams" type="eb:GlobalParametersType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="environment" type="eb:EnvironmentType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="build" type="eb:BuildType" minOccurs="1" maxOccurs="unbounded"/>
+            <xs:element name="sequence" type="eb:SequenceType" minOccurs="1" maxOccurs="unbounded"/>
+            <xs:element name="action" type="eb:ActionType" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="EnvironmentType">
+        <xs:attribute name="name" type="xs:string"/>
+        <xs:attribute name="build" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="BuildType">
+        <xs:sequence>
+            <xs:element name="param" type="eb:ParamType" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="sequence" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:attribute name="id"/>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="name" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="GlobalParametersType">
+        <xs:sequence>
+            <xs:element name="param" type="eb:ParamType" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="SequenceType">
+        <xs:complexContent>
+            <xs:extension base="eb:SequenceChoiceType">
+                <xs:attribute name="name" type="xs:string"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="SequenceChoiceType">
+        <xs:sequence>
+            <xs:element name="param" type="eb:ParamType" minOccurs="0" maxOccurs="unbounded" />
+            <xs:choice maxOccurs="unbounded">
+                <xs:element name="step" minOccurs="1" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:attribute name="name" type="xs:string"/>
+                        <xs:attribute name="action" type="xs:string"/>
+                        <xs:attribute name="context" type="xs:string"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="sequence" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:attribute name="id"/>
+                        <xs:attribute name="context" type="xs:string"/>
+                    </xs:complexType>
+                </xs:element>
+            </xs:choice>
+        </xs:sequence>        
+        <xs:attribute name="id" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="ActionType">
+        <xs:complexContent>
+            <xs:extension base="eb:ActionChoiceType">
+                <xs:attribute name="name" type="xs:string"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="ActionDefinitionType">
+        <xs:sequence>
+            <xs:element name="id" minOccurs="0"/>
+            <xs:element name="name" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ActionChoiceType">
+        <xs:sequence>
+            <xs:choice maxOccurs="unbounded">
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="infra"
+                    type="eb:InfrastructureProvisioningActionDefinitionType"/>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="osconfig"
+                    type="eb:OSConfigurationActionDefinitionType"/>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="call"
+                    type="eb:ActionCallType"/>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="sshcommand"
+                    type="eb:SSHCommandActionDefinitionType"/>
+            </xs:choice>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="InfrastructureProvisioningActionDefinitionType">
+        <xs:complexContent>
+            <xs:extension base="vc:Execute"/>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="OSConfigurationActionDefinitionType">
+        <xs:complexContent>
+            <xs:extension base="eb:ActionDefinitionType"/>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="SSHCommandActionDefinitionType">
+        <xs:complexContent>
+            <xs:extension base="eb:ActionDefinitionType">
+                <xs:attribute name="remotecommand" type="xs:string"/>
+                <xs:attribute name="machine" type="xs:string"/>
+                <xs:attribute name="sshoptsfile" type="xs:string"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="ActionCallType">
+        <xs:complexContent>
+            <xs:extension base="eb:ActionDefinitionType">               
+                 <xs:attribute name="name"/>                
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="ParamType">
+        <xs:attribute name="name" type="xs:string"/>
+        <xs:attribute name="value" type="xs:string"/>
+    </xs:complexType>
+    
+</xs:schema>

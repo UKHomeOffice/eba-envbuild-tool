@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<vc:execute
+	xmlns:vc="http://ebsa.ipt.com/VCloudCommand-2.0">
+	<vc:Environment>
+	<vc:VirtualApplication command="confirm" includes=".*" excludes=".*" strategy="exists" errorStrategy="exit" >
+	    <vc:OrganisationNetwork command="confirm" includes=".*" excludes=".*" strategy="exists" errorStrategy="exit" />
+	    <vc:ApplicationNetwork command="confirm" includes=".*" excludes=".*" strategy="exists" errorStrategy="exit"  />
+	    <vc:ApplicationNetwork command="confirm" includes=".*" excludes=".*" strategy="exists" errorStrategy="exit" />
+	    <vc:VirtualMachine command="create" includes=".*" excludes=".*" strategy="createOnly" errorStrategy="exit" />
+	</vc:VirtualApplication>
+	</vc:Environment>
+</vc:execute>

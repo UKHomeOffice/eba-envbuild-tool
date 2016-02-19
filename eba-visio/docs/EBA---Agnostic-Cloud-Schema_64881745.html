@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>EBA - Agnostic Cloud Schema</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            EBA - Agnostic Cloud Schema
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>The following diagrams represent the topologies associated with Skyscape and Amazon Web Services. In order to be able to design networks in a common way that can be provisioned in either of these cloud providers a provider agnostic topology, implemented as an XML schema, has been created for the EBA - Environment Build Automation tooling.</p><p> </p><p> </p></div>
+</div>
+</div>
+<div class="columnLayout two-equal" data-layout="two-equal">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>Skyscape VMWare</p></div>
+</div>
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>Amazon Web Services</p></div>
+</div>
+</div>
+<div class="columnLayout two-equal" data-layout="two-equal">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>
+
+<map id="gliffy-map-64881737-4599" name="gliffy-map-64881737-4599"></map>
+<table width="100%" class="gliffy-macro-table">
+    <tr>
+        <td >
+            <table class="gliffy-macro-inner-table">
+                <caption align="bottom">
+ </caption>
+
+                <tr>
+                    <td>
+                        <img style="border: none; width: 325px;" usemap="#gliffy-map-64881737-4599" src="attachments/64881745/64881736.png" alt="" class="gliffy-macro-image"/>
+                    </td>
+                </tr>
+            </table>
+ 
+        </td>
+    </tr>
+</table>
+
+
+</p></div>
+</div>
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>
+
+<map id="gliffy-map-64881739-5108" name="gliffy-map-64881739-5108"></map>
+<table width="100%" class="gliffy-macro-table">
+    <tr>
+        <td >
+            <table class="gliffy-macro-inner-table">
+                <caption align="bottom">
+ </caption>
+
+                <tr>
+                    <td>
+                        <img style="border: none; width: 565px;" usemap="#gliffy-map-64881739-5108" src="attachments/64881745/64881738.png" alt="" class="gliffy-macro-image"/>
+                    </td>
+                </tr>
+            </table>
+ 
+        </td>
+    </tr>
+</table>
+
+
+</p></div>
+</div>
+</div>
+<div class="columnLayout two-equal" data-layout="two-equal">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<ul><li><span style="line-height: 1.4285715;">There is no concept of a region, it is implicit.</span></li><li><span style="line-height: 1.4285715;">A virtual data center (vDc) concept in vmware relates to a set of infrastructure resources that </span>define memory, cpu, storage and bandwidth. These resources are made available to vApps to consume. You can choose more expensive/redundant/performant resources based on the level of service required. An organisation and a vDc can have more than 1 vDc.</li><li>A vShield Edge (vSe) provides a network security solution for vDc's. It can provide security features such as firewalling, VPN, NAT, DHCP and web load balancing capabilities.</li><li>A vApp is a collection of VM's that are isolated, they are typically used for host an application tier.</li><li>An Org network is used to provide access to other vApps or to allow access to data from external sources.</li></ul><p> </p><p> </p></div>
+</div>
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<ul><li>A region is a geographical location where data centres are available.</li><li>An availability zone is an actual data centre that can host infrastructure resources. </li><li>A VPC is used to launch resources for your virtual network of instances. It can span multiple availability zones and be used to organise these resources. This is similar to an Organisation in VMware in terms of how the virtual infrastructure is ring fenced.</li><li>The VPC takes on responsibility for gateway access and holding the security features that are provided by VMware's VShieldEdge.</li><li>A VPC logically addresses the subnets for the virtual network. These subnets are similar to the concept of a vApp in VMware. The can be hosted in separate accessibility zones so different tiers of an application can be hosted in different data centres. </li><li>An instance is logically connected to a subnet, a VM in VMware is equivalent to an Amazon Instance.</li><li>The concept of a vApp Network is redundant in the Amazon model as it is covered by a Subnet.</li><li>Amazon provide load balancing through an additional feature called Elastic Load Balancing which can be configured to automatically distribute traffic to Instances. This can be attached to VPC, but is an additional feature.</li></ul></div>
+</div>
+</div>
+<div class="columnLayout two-equal" data-layout="two-equal">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>Agnostic Topology</p></div>
+</div>
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p> </p></div>
+</div>
+</div>
+<div class="columnLayout two-equal" data-layout="two-equal">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>
+
+<map id="gliffy-map-64881741-1063" name="gliffy-map-64881741-1063"></map>
+<table width="100%" class="gliffy-macro-table">
+    <tr>
+        <td >
+            <table class="gliffy-macro-inner-table">
+                <caption align="bottom">
+ </caption>
+
+                <tr>
+                    <td>
+                        <img style="border: none; width: 498px;" usemap="#gliffy-map-64881741-1063" src="attachments/64881745/64881740.png" alt="" class="gliffy-macro-image"/>
+                    </td>
+                </tr>
+            </table>
+ 
+        </td>
+    </tr>
+</table>
+
+
+</p></div>
+</div>
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p> </p></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                        
+                    
+                 
+                </div>             </div> 
+            
+        </div>     </body>
+</html>

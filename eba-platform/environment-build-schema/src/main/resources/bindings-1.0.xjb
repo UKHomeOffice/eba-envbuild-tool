@@ -1,0 +1,20 @@
+<jxb:bindings version="1.0" xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+	jxb:extensionBindingPrefixes="xjc">
+
+    <jxb:bindings schemaLocation="EnvironmentBuildSchema-1.0.xsd" node="/xs:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="com.ipt.ebsa.environment.v1.build"/>
+            <jxb:nameXmlTransform>
+            	<jxb:typeName prefix="XML"/>
+            	<jxb:anonymousTypeName prefix="XML"/>
+            </jxb:nameXmlTransform>
+        </jxb:schemaBindings>
+        <jxb:bindings node="xs:simpleType[@name='UpdateBehaviour']">
+			<jxb:typesafeEnumClass>
+				<jxb:typesafeEnumMember value="overwrite-all" name="OVERWRITE_ALL" />
+				<jxb:typesafeEnumMember value="add-and-update-only" name="ADD_AND_UPDATE_ONLY" />
+			</jxb:typesafeEnumClass>
+		</jxb:bindings>
+    </jxb:bindings>
+</jxb:bindings>

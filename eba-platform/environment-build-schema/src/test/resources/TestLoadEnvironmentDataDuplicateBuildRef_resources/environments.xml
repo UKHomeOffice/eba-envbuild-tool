@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eb:builds xmlns:eb="http://ebsa.ipt.com/EnvironmentBuildSequence-1.0" xmlns:vc="http://ebsa.ipt.com/VCloudCommand-2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://ebsa.ipt.com/EnvironmentBuildSequence-1.0 ../../../main/resources/EnvironmentBuildSchema-1.0.xsd ">
+  <eb:environment name="env1">
+  	<eb:buildref id="buildref-id1" displayname="Standard EBSA Build 1" buildid="prod_like1"/>
+  	<eb:buildref id="buildref-id2" displayname="Standard EBSA Build 2" buildid="prod_like2"/>
+  	<eb:buildref id="buildref-id2" displayname="Standard EBSA Build 3" buildid="prod_like3"/>
+  </eb:environment>
+</eb:builds>

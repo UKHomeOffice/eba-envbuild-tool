@@ -1,0 +1,53 @@
+<?xml version="1.0" standalone="no"?>
+<GeographicContainer id="_1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://ebsa.ipt.com/AgnosticCloudConfig-1.0">
+	<account/>
+	<region/>
+	<EnvironmentContainer id="SKYSCAPE">
+		<name>np</name>
+		<provider>SKYSCAPE</provider>
+		<EnvironmentContainerDefinition id="np">
+			<name>np</name>
+			<version>0.16</version>
+			<Network id="UNITTEST_PUBLIC_SUBNET" dataCenterId="EBATestVDC" dataCenterName="EBATestVDC" gatewayId="EBATestGateway">
+				<name>UNITTEST_PUBLIC_SUBNET</name>
+				<description>Organisation Network, Public Subnet</description>
+				<fenceMode>BRIDGED</fenceMode>
+				<networkMask>255.255.255.0</networkMask>
+				<gatewayAddress>10.16.0.1</gatewayAddress>
+				<primaryDns>String</primaryDns>
+				<secondaryDns/>
+				<dnsSuffix/>
+				<staticIpPool>10.16.0.0/24</staticIpPool>
+				<ipRangeStart>10.16.0.11</ipRangeStart>
+				<ipRangeEnd>10.16.0.254</ipRangeEnd>
+				<CIDR>10.16.0.0/24</CIDR>
+				<shared>true</shared>
+				<peerNetworkName/>
+				<peerEnvironmentName/>
+			</Network>
+			<Network id="UNITTEST_INTERNAL_BOUNDRY_CONTROL_ACCESS" dataCenterId="EBATestVDC" dataCenterName="EBATestVDC">
+				<name>UNITTEST_INTERNAL_BOUNDRY_CONTROL_ACCESS</name>
+				<description>Organisation Network, Private Organisational Subnet</description>
+				<fenceMode>BRIDGED</fenceMode>
+				<networkMask>255.255.255.0</networkMask>
+				<gatewayAddress>10.16.15.1</gatewayAddress>
+				<primaryDns>String</primaryDns>
+				<secondaryDns/>
+				<dnsSuffix/>
+				<staticIpPool>10.16.15.0/24</staticIpPool>
+				<ipRangeStart>10.16.15.11</ipRangeStart>
+				<ipRangeEnd>10.16.15.254</ipRangeEnd>
+				<CIDR>10.16.15.0/24</CIDR>
+				<shared>true</shared>
+				<peerNetworkName/>
+				<peerEnvironmentName/>
+			</Network>
+			<Gateway id="EBATestGateway">
+				<name>EBATestGateway</name>
+			</Gateway>
+			<DataCenter id="EBATestVDC">
+				<name>EBATestVDC</name>
+			</DataCenter>
+		</EnvironmentContainerDefinition>
+	</EnvironmentContainer>
+</GeographicContainer>

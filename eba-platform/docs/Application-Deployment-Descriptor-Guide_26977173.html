@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Application Deployment Descriptor Guide</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Application Deployment Descriptor Guide
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    
+                    <div id="main-content" class="wiki-content group">
+                    <h2 id="ApplicationDeploymentDescriptorGuide-Introduction">Introduction</h2><p>Application Deployment Descriptors are XML files which define the components that make up an application, as well as the steps required to fully deploy those components into any environment in the correct order. They are used as input to the Self Service 2 tool at two points; <strong>creation of an Application Release</strong> and <strong>deployment of an application release</strong> to an environment. Both as discussed in more detail below.</p><p>The aim of this document is to outline the purpose and structure of deployment descriptors and how they are used by the Self Service 2 (SS2) tool.</p><p>Before reading, it's worthwhile taking a look at the <a href="https://<confluenceurl>/display/EN/Self+Service+2.0%3A+Overview">Self Service 2.0: Overview</a> for context. Some of the discussion in this document will assume knowledge of what the self service tool does.</p><h3 id="ApplicationDeploymentDescriptorGuide-DeploymentDescriptorStorage">Deployment Descriptor Storage</h3><p>Application deployment descriptors are stored in Stash, under the <a href="https://<stashurl>/projects/EBSAT/repos/environmentdeploymentdescriptors/browse?at=refs%2Fheads%2Fci" class="external-link" rel="nofollow">EBSA Tooling / <span>environmentdeploymentdescriptors</span></a><span> repository in the CI branch. These should only be accessible by DevOps resources within each team.</span></p><h3 id="ApplicationDeploymentDescriptorGuide-Creatingaversionofanapplication">Creating a version of an application</h3><p>Before an application can be deployed, an Application Version must be 'cut'. SS2 will detect all the components in the Deployment Descriptor and prompt the user to choose which version of each component to use. Application versions must also be named and a version number (of the format x.y.z) specified. This information is saved in the release database for use later when the version is deployed. </p><p>For further information on how to perform this step, please see <a href="https://<confluenceurl>/display/EN/Self+Service+2.0+User+Guide#SelfService2.0UserGuide-create_new_application_version">Self Service 2.0 User Guide</a></p><h3 id="ApplicationDeploymentDescriptorGuide-NamingConventionfornewDeploymentDescriptors">Naming Convention for new Deployment Descriptors</h3><p>Any <strong>new</strong> Deployment Descriptors need to follow the convention <strong>&lt;applicationName&gt;-&lt;minApplicationVersion&gt;</strong>, where minApplicationVersion is the value of the minApplicationVersion tag within the Descriptor.</p><p><em>The convention does not apply for any existing deployment descriptors.</em></p><p>For example, a Descriptor for Application <strong>CDPACT_MID</strong> , containing:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>minApplicationVersion</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: xml; gutter: false; theme: Confluence" style="font-size:12px;">    &lt;dd:metadata&gt;
+        &lt;dd:minApplicationVersion&gt;31.1.2&lt;/dd:minApplicationVersion&gt;     
+    &lt;/dd:metadata&gt; </pre>
+</div></div><p>Should be named <strong>CDPACT_MID-<span style="color: rgb(255,0,0);">31.1.2</span>.xml</strong></p><h3 id="ApplicationDeploymentDescriptorGuide-Deployingareleaseofanapplication">Deploying a release of an application</h3><p>Deploying an application version takes two inputs from the user:</p><ul style="list-style-type: square;"><li>The environment to deploy to, and</li><li>The version of the application to deploy</li></ul><p>Using this, the correct Application Deployment Descriptor is determined (they are all stored in stash), the YAML hiera data for the environment are retrieved (also from stash) and the versions of the components in the application are retrieved from the release database. SS2 uses this information to generate a deployment plan; an ordered list of transitions which will be applied sequentially across the hosts/roles in the environment. SS2 will handle deployment and undeployment, upgrades and downgrades as required and a transition is simple a set of hiera changes which can be made at the same time and actioned by a single puppet run. The order of the transitions is determined automatically by considering the dependencies between components denoted by 'requires' clauses in deployment descriptor (see <a href="#ApplicationDeploymentDescriptorGuide-components">components</a> for more information)</p><p>The flowchart below describes how these are then used to determine the deployment plan.</p><p>
+
+<map id="gliffy-map-28478268-5672" name="gliffy-map-28478268-5672"></map>
+<table width="100%" class="gliffy-macro-table">
+    <tr>
+        <td >
+            <table class="gliffy-macro-inner-table">
+                <caption align="bottom">
+ </caption>
+
+                <tr>
+                    <td>
+                        <img style="border: none; width: 500px;" usemap="#gliffy-map-28478268-5672" src="attachments/26977173/28478269.png" alt="" class="gliffy-macro-image"/>
+                    </td>
+                </tr>
+            </table>
+ 
+        </td>
+    </tr>
+</table>
+
+
+</p><p> </p><h2 id="ApplicationDeploymentDescriptorGuide-Structure">Structure</h2><p>Deployment Descriptors must follow a strict set of guidelines (enforced by validation against a schema which can be found <a href="https://<stashurl>/projects/EBSAT/repos/ebsa-ci-components/browse/Function/deployment-descriptor-schema/src/main/resources/ddConfig-1.0.xsd" class="external-link" rel="nofollow">here</a>). Since an .xsd file isn't very readable, the following guides describes the sections of the deployment descriptor.</p><h3 id="ApplicationDeploymentDescriptorGuide-Metadata">Metadata</h3><p>minApplicationVersion (required) - This is used to restrict this deployment descriptor for use with a subset of the application releases created. Releases with version numbers lower than this value cannot use this deployment descriptor.<em> This should follow Semantic Versioning (MAJOR.MINOR.PATCH)</em></p><p>maxApplicationVersion (not in use) - This is permitted by the schema but has no effect on selection of the correct deployment descriptor.</p><h3 id="ApplicationDeploymentDescriptorGuide-Plans">Plans</h3><p>A plan contains the steps needs to perform the required actions. In the simplest case, this is a single step to perform all the necessary, deploy, undeploy, upgrade or downgrade steps for a component.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Simple plan</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: xml; gutter: false; theme: Confluence" style="font-size:12px;">&lt;dd:plans&gt;
+    &lt;dd:plan description=&quot;simulator test&quot; impactLevel=&quot;1&quot; name=&quot;one&quot;&gt;
+        &lt;dd:step description=&quot;ssb: upgrade downgrade install uninstall&quot;&gt;
+            &lt;dd:perform filter=&quot;all&quot; /&gt;
+        &lt;/dd:step&gt;
+    &lt;/dd:plan&gt;
+&lt;/dd:plans&gt;</pre>
+</div></div><p>If there are multiple plans in a deployment descriptor, the one with the smallest <strong>impactLevel</strong> will be used. If a component specified a higher <strong>minimumPlan</strong> then the impactLevel of the plan used will greater than or equal to this.</p><h3 id="ApplicationDeploymentDescriptorGuide-Schemes">Schemes</h3><p>In the simplest cases, a component is deployed to the same hostname or role in all environments, and to determine this, the component's hostname attribute is read. In the following example, the host is soatzm01 regardless of which environment is being deployed to.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Confluence" style="font-size:12px;">&lt;dd:component hostnames=&quot;soatzm01&quot;&gt;
+    &lt;dd:yaml&gt;
+        cdp-soa-audit-logging-config-rpm: 
+        tag: &#39;appdeploy&#39;
+    &lt;/dd:yaml&gt;
+&lt;/dd:component&gt;</pre>
+</div></div><p> </p><p>However, in some situations, the target for deployment of a given component may vary across different environments, or the component may be deployed to multiple locations. In this situation, a scheme may be defined for each target environment. At deployment time, the scheme matching the chosen environment will be selected, and within it, the 'target' which matches the component's hostname will identify where the component should be deployed. Here's an example:</p><p> </p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Confluence" style="font-size:12px;">&lt;dd:schemes&gt;
+        &lt;dd:scheme environment=&quot;st-sst1-cdp1&quot;&gt;
+            &lt;dd:target name=&quot;soaRoleOrHosts1&quot; hostnames=&quot;soatzm01&quot;/&gt;
+            &lt;dd:target name=&quot;soaRoleOrHosts2&quot; hostnames=&quot;soatzm01,soatzm02&quot;/&gt;
+        &lt;/dd:scheme&gt;
+
+        &lt;dd:scheme environment=&quot;st-sst1-app1&quot;&gt;
+            &lt;dd:target name=&quot;soaRoleOrHosts1&quot; hostnames=&quot;soatzm11&quot;/&gt;
+            &lt;dd:target name=&quot;soaRoleOrHosts2&quot; hostnames=&quot;soatzm11&quot;/&gt;
+        &lt;/dd:scheme&gt;
+&lt;/dd:schemes&gt;
+&lt;dd:components&gt;
+        &lt;dd:component minimumPlan=&quot;1&quot; hostnames=&quot;soaRoleOrHosts2&quot;&gt;
+            &lt;dd:yaml&gt;
+                cdp-soa-audit-logging-config-rpm: 
+                    tag: &#39;appdeploy&#39;
+            &lt;/dd:yaml&gt;
+        &lt;/dd:component&gt;
+&lt;/dd:components&gt;</pre>
+</div></div><p>In this example, the component is deployed to two hosts, soatzm01,soatzm02 in environment st-sst1-cdp1 and to just one host, soatzm11 in environmentst-sst-app1. The hostname, soaRoleOrHosts2, matches the target names in the two schemes.</p><p>If this deployment descriptor were used to deploy to any other environments, SS2 would search for a role or host yaml file named soaRoleOrHosts2.yaml, which would not exist. SS2 would alert the user early on that their deployment isn't possible in this situation. To ensure deployment across all other environments is still possible, soaRoleOrHosts2 could be changed to a real host or role ('soa', say). Then, for all environments except for the two mentioned in the schemes section, the component would be deployed to role soa. SS2 will always look for a scheme for the chosen environment but when one hasn't been defined, it will fall back to the interpretting the component's hostname value literally.</p><h3 id="ApplicationDeploymentDescriptorGuide-componentsComponents"><span class="confluence-anchor-link" id="ApplicationDeploymentDescriptorGuide-components"></span>Components</h3><p>Components are packages which can be installed by Puppet into the environment. As a minimum, a component must have a name and a target hostname as shown below.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Confluence" style="font-size:12px;">&lt;dd:component hostnames=&quot;soa&quot;&gt;
+    &lt;dd:yaml&gt;
+        cdp-soa-audit-logging-config-rpm: 
+		tag: &#39;appdeploy&#39;
+    &lt;/dd:yaml&gt;
+&lt;/dd:component&gt;</pre>
+</div></div><p>The &lt;dd:yaml&gt; section contains the yaml snippet which should be present in the hiera file for the role or host mentioned in the hostnames attribute. SS2 will 'fix' the hiera file if it doesn't contain the equivalent yaml.</p><h4 id="ApplicationDeploymentDescriptorGuide-ComponentDependencies">Component Dependencies</h4><p>An application may comprise of a number of components and there may be an ordering associated with deployment and undeployment of those components. There are two mechanisms for representing these dependencies:</p><ol><li><strong>requires XML attribute</strong> - used where a component requires that another component on a different host or role has been deployed already.</li><li><strong>requires yaml stanza </strong>- used where a component requires that another component has already been deployed on the same host or role.</li></ol><p> </p><p>[Component-1]</p><p style="margin-left: 30.0px;">&gt; [Component-2]</p><p style="margin-left: 60.0px;">&gt; [Component-3]</p><p> </p><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th class="confluenceTh"><p> </p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Hiera YAML</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false; theme: Confluence" style="font-size:12px;">...
+system::packages:
+	Component-1:
+		ensure: 1.0.0
+	Component-2:
+		ensure: 1.0.0
+		require:
+		- Package[Component-1]
+	Component-3:
+		ensure: 1.0.0
+		require:
+ 		- Package[Component-2]
+...</pre>
+</div></div><p> </p></th><th class="confluenceTh"><p> </p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Deployment Descriptor</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: xml; gutter: false; theme: Confluence" style="font-size:12px;">...
+&lt;dd:components&gt;
+	&lt;dd:component&gt;
+		&lt;dd:yaml&gt;
+        	Component-1:
+				ensure: 1.0.0
+        &lt;/dd:yaml&gt;
+        &lt;dd:hints&gt;
+			...
+        &lt;/dd:hints&gt;
+   	&lt;/dd:component&gt;
+	&lt;dd:component&gt;
+		&lt;dd:yaml&gt;
+        	Component-2:
+				ensure: 1.0.0
+				require:
+				- Package[Component-1]
+        &lt;/dd:yaml&gt;
+        &lt;dd:hints&gt;
+			...
+        &lt;/dd:hints&gt;
+   	&lt;/dd:component&gt;
+	&lt;dd:component&gt;
+		&lt;dd:yaml&gt;
+        	Component-3:
+				ensure: 1.0.0
+				require:
+ 				- Package[Component-2]
+        &lt;/dd:yaml&gt;
+        &lt;dd:hints&gt;
+			...
+        &lt;/dd:hints&gt;
+   	&lt;/dd:component&gt;
+&lt;/dd:components&gt;
+...</pre>
+</div></div><p> </p></th></tr></tbody></table></div><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th class="confluenceTh">Chain</th><th class="confluenceTh">Transition</th><th class="confluenceTh">Deploy</th><th colspan="1" class="confluenceTh">Transitions for upgrade Component 2</th></tr><tr><td class="confluenceTd">whole-chain</td><td class="confluenceTd">multi-transition</td><td class="confluenceTd">undeployRedeploy</td><td colspan="1" class="confluenceTd"><ol><li>Undeploy C3</li><li>Undeploy C2</li><li>Undeploy C1</li><li>Deploy C1<br />Deploy C2 (Upgraded)<br />Deploy C3</li></ol></td></tr><tr><td class="confluenceTd">dependents-only</td><td class="confluenceTd">multi-transition</td><td class="confluenceTd">undeployRedeploy</td><td colspan="1" class="confluenceTd"><ol><li>Undeploy C3</li><li>Undeploy C2</li><li>Deploy C2 (Upgraded)<br />Deploy C3</li></ol></td></tr><tr><td class="confluenceTd">whole-chain</td><td class="confluenceTd">single-transition</td><td class="confluenceTd">undeployRedeploy</td><td colspan="1" class="confluenceTd"><ol><li>Undeploy C3<br />Undeploy C2<br />Undeploy C1</li><li>Deploy C1<br />Deploy C2 (Upgraded)<br />Deploy C3</li></ol></td></tr><tr><td class="confluenceTd">dependents-only</td><td class="confluenceTd">single-transition</td><td class="confluenceTd">undeployRedeploy</td><td colspan="1" class="confluenceTd"><ol><li>Undeploy C3<br />Undeploy C2</li><li>Deploy C2 (Upgraded)<br />Deploy C3</li></ol></td></tr><tr><td colspan="1" class="confluenceTd">isolated</td><td colspan="1" class="confluenceTd">-</td><td colspan="1" class="confluenceTd">undeployRedeploy</td><td colspan="1" class="confluenceTd"><ol><li>Undeploy C2<br />Deploy C2 (Upgraded)</li></ol></td></tr><tr><td class="confluenceTd">whole-chain</td><td class="confluenceTd">multi-transition</td><td class="confluenceTd">justDeploy</td><td colspan="1" class="confluenceTd"><ol><li>Redeploy C3</li><li>Redeploy C2 (Upgraded)</li><li>Redeploy C1</li></ol></td></tr><tr><td class="confluenceTd">dependents-only</td><td class="confluenceTd">multi-transition</td><td class="confluenceTd">justDeploy</td><td colspan="1" class="confluenceTd"><ol><li>Redeploy C3</li><li>Redeploy C2 (Upgraded)</li></ol></td></tr><tr><td class="confluenceTd">whole-chain</td><td class="confluenceTd">single-transition</td><td class="confluenceTd">justDeploy</td><td colspan="1" class="confluenceTd"><ol><li>Redeploy C3<br />Redeploy C2 (Upgraded)<br />Redeploy C1</li></ol></td></tr><tr><td class="confluenceTd">dependents-only</td><td class="confluenceTd">single-transition</td><td class="confluenceTd">justDeploy</td><td colspan="1" class="confluenceTd"><ol><li>Redeploy C3<br />Redeploy C2 (Upgraded)</li></ol></td></tr><tr><td colspan="1" class="confluenceTd">isolated</td><td colspan="1" class="confluenceTd">-</td><td colspan="1" class="confluenceTd">justDeploy</td><td colspan="1" class="confluenceTd"><ol><li>Redeploy C2 (Upgraded)</li></ol></td></tr></tbody></table></div><p><strong>whole-chain-multi-transition</strong></p><p>For &quot;whole-chain-multi-transition&quot; puppet would be forced to act on this component separately in the dependency chain, and it would be forced to do a run for this component that it can be guaranteed to be changed before its dependents and after its dependencies.</p><p><strong>whole-chain-single-transition</strong></p><p>For &quot;whole-chain-single-transition&quot; puppet would be forced to act on the entire chain, but it would be allowed to remove / deploy all components in the same dependency chain at the same time.</p><p><strong>dependents-only-multi-transition</strong></p><p>For &quot;dependents-only-multi-transition&quot; puppet would be forced to act on the all components in the chain which are above the affected component. It would be forced to do a run for each component.</p><p><strong>dependents-only-single-transition</strong></p><p>For &quot;dependents-only-single-transition&quot; puppet would be forced to act on the entire chain, but it would be allowed to act on all components in the same dependency chain during the same puppet run.</p><p><strong>isolated</strong></p><p>In this the component could be added/removed on its own without affecting other dependencies in its chain (although the Hieradata for the immediate upstream dependencies will be updated to remove relevant &quot;requires&quot; declarations.). This is the default.</p><p><strong>undeployRedeploy</strong></p><p>In this case puppet would be forced to do a run specifically to undeploy this component, then a new run would be performed to install the desired version.</p><p><strong>justDeploy</strong></p><p>In this case puppet would be allowed to just install the desired version without any other actions first. This is the default.</p><h2 id="ApplicationDeploymentDescriptorGuide-optionalTagsOptionaltags"><span class="confluence-anchor-link" id="ApplicationDeploymentDescriptorGuide-optionalTags"></span>Optional tags</h2><h3 id="ApplicationDeploymentDescriptorGuide-Before/After">Before / After</h3><p>Optional &lt;dd:before&gt; and &lt;dd:after&gt; tags can be provided within another optional tag, &lt;dd:deploy&gt; or &lt;dd:undeploy&gt; to allow an action to happen before or after a component deployment or undeployment. For example: </p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Before/After Examples</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: xml; gutter: false; theme: Confluence" style="font-size:12px;">&lt;dd:component&gt;
+		&lt;dd:yaml&gt;
+			...
+        &lt;/dd:yaml&gt;
+		&lt;dd:before&gt;
+			&lt;dd:step&gt;
+				&lt;dd:inject path=&quot;system::services/tomcat-service/ensure&quot; value=&quot;running&quot; ifMissing=&quot;insertAll&quot; hostnames=&quot;soaRoleOrHosts&quot;/&gt;
+			&lt;/dd:step&gt;
+		&lt;/dd:before&gt;
+&lt;/dd:component&gt;</pre>
+</div></div><p>In this example, the <strong>inject</strong> command will insert the given value into the given yaml path for the hostnames or roles given.</p><blockquote><p><strong><span style="color: rgb(255,0,0);">The inject command cannot be replicated in Ansible, since Puppet Hiera yaml sections are injected into Puppet Hiera, therefore the command's functionality needs to be replaced</span></strong><span style="color: rgb(255,0,0);"> </span><span style="color: rgb(255,0,0);"><strong><span style="color: rgb(255,0,0);">going forward</span></strong>.</span></p><p><span style="color: rgb(255,0,0);"><strong>Please refer to <a href="https://<confluenceurl>/display/EN/Guidance+on+deprecated+commands+in+deployment+descriptors">Guidance</a></strong><strong> on how to replicate the command's functionality.</strong><br /></span></p></blockquote><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th class="confluenceTh">XML</th><th class="confluenceTh">YAML</th></tr><tr><td class="confluenceTd"><pre>&lt;dd:inject path=&quot;system::services/service/ensure&quot; value=&quot;running&quot; ifMissing=&quot;insertAll&quot; hostnames=&quot;...&quot;/&gt;</pre></td><td class="confluenceTd"><pre>system::services:<br />  service:<br />    ensure: running </pre></td></tr><tr><td class="confluenceTd"><pre>&lt;dd:inject path=&quot;system::services/service/boolean&quot; value=&quot;true&quot; ifMissing=&quot;insertAll&quot; hostnames=&quot;...&quot;/&gt;</pre></td><td class="confluenceTd"><pre>system::services:<br />  service:<br />    boolean: true </pre></td></tr><tr><td class="confluenceTd"><pre>&lt;dd:inject path=&quot;system::services/service/text&quot; value=&quot;'true'&quot; ifMissing=&quot;insertAll&quot; hostnames=&quot;...&quot;/&gt;</pre></td><td class="confluenceTd"><pre>system::services:<br />  service:<br />    text: 'true' </pre></td></tr><tr><td class="confluenceTd"><pre>&lt;dd:inject path=&quot;system::services/service/number&quot; value=&quot;5.3&quot; ifMissing=&quot;insertAll&quot; hostnames=&quot;...&quot;/&gt;</pre></td><td class="confluenceTd"><pre>system::services:<br />  service:<br />    number: 5.3 </pre></td></tr></tbody></table></div><p> </p><p>&quot;inject&quot; can also contain a <strong>&lt;dd:yaml&gt;</strong> tag, which can be used to insert a block of Yaml <em>instead of</em> the path/value attributes.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Example of Inject with Yaml block</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: xml; gutter: false; theme: Confluence" style="font-size:12px;">&lt;dd:component&gt;
+		&lt;dd:yaml&gt;
+			...
+        &lt;/dd:yaml&gt;
+		&lt;dd:before&gt;
+			&lt;dd:step&gt;
+				&lt;dd:inject path=&quot;system::services/tomcat-service&quot; ifMissing=&quot;insertAll&quot; hostnames=&quot;soaRoleOrHosts&quot;&gt;
+                    &lt;dd:yaml&gt;
+                        ensure: running
+                    &lt;/dd:yaml&gt;
+                &lt;/dd:inject&gt;
+				&lt;dd:inject path=&quot;ebsa::filewall&quot; ifMissing=&quot;insertAll&quot; hostnames=&quot;soaRoleOrHosts&quot;&gt;
+                    &lt;dd:yaml&gt;
+                        postgres:
+                          ports:
+                            - 1111
+                            - 2222
+                        tomcat:
+                          port: 3333 
+                    &lt;/dd:yaml&gt;
+                &lt;/dd:inject&gt;
+			&lt;/dd:step&gt;
+		&lt;/dd:before&gt;
+&lt;/dd:component&gt;</pre>
+</div></div><p> </p><p>Alternatively, &quot;inject&quot; could have been replaced with either <strong>remove</strong> or <strong>execute</strong>, which would result in the following actions:</p><p><strong>remove</strong> - similar to the <strong>inject</strong> tag, this removes the YAML found at the specified path.</p><blockquote><p><strong><span style="color: rgb(255,0,0);">Similar to the <strong>inject</strong> command, the remove command cannot be replicated in Ansible, since Puppet Hiera yaml sections are removed from Puppet Hiera, therefore the command's functionality needs to be replaced</span></strong><span style="color: rgb(255,0,0);"> </span><span style="color: rgb(255,0,0);"><strong><span style="color: rgb(255,0,0);">going forward</span></strong>.</span></p><p><span style="color: rgb(255,0,0);"><strong><span style="color: rgb(255,0,0);"><strong>Please refer to <a href="https://<confluenceurl>/display/EN/Guidance+on+deprecated+commands+in+deployment+descriptors">Guidance</a></strong><strong> on how to replicate the command's functionality.</strong></span></strong><br /></span></p></blockquote><p><strong>execute</strong> - Run a command on the given hostnames or roles.</p><blockquote><p><strong><span style="color: rgb(255,0,0);"> To ensure this functionality can be replicated in Ansible, the execute tag should only be used to start, stop and restart services, and no other commands</span></strong></p></blockquote><p>For example:</p><p>To restart a service called &lt;SERVICE_NAME&gt; -</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Example using execute</b></div><div class="codeContent panelContent pdl">
+<pre class="brush: xml; gutter: false; theme: Confluence" style="font-size:12px;">&lt;dd:component&gt;
+		&lt;dd:yaml&gt;
+			...
+        &lt;/dd:yaml&gt;
+		&lt;dd:after&gt;
+			&lt;dd:step&gt;
+				&lt;dd:execute command=&quot;service restart service=&lt;SERVICE_NAME&gt;&quot; hostnames=&quot;soaRoleOrHosts&quot;/&gt;
+			&lt;/dd:step&gt;
+		&lt;/dd:after&gt;
+&lt;/dd:component&gt;</pre>
+</div></div><p>The execute command (in this instance &quot;service restart service=&lt;SERVICE_NAME&gt;&quot;) is run as an mCollective command, so the command actually being run here is &quot;mco rpc service restart service=&lt;SERVICE_NAME&gt;&quot;.</p><h2 id="ApplicationDeploymentDescriptorGuide-Examples">Examples</h2><p><a href="attachments/26977173/28478294.xml" data-linked-resource-id="28478294" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="deploymentdescriptor_example.xml" data-nice-type="XML File" data-linked-resource-content-type="text/xml" data-linked-resource-container-id="26977173" data-linked-resource-container-version="57">Basic deployment descriptor</a> - Use this as a basis for brand new applications.</p><p> </p>
+                    </div>
+
+                                        
+                    
+                 
+                </div>             </div> 
+            
+        </div>     </body>
+</html>

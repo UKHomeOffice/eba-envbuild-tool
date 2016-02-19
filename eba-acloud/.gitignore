@@ -1,0 +1,16 @@
+target/
+work/
+.classpath
+.project
+.settings/
+.idea/
+**/*.iml
+dependency-reduced-pom.xml
+ssh_config
+**/*.swp
+**/*.swo
+**/environmentBuild.log*
+performance.log
+wire.log*
+JAVA_API.conf
+Function/acloud/.metadata/

@@ -1,0 +1,115 @@
+<GeographicContainer id="_1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ebsa.ipt.com/AgnosticCloudConfig-1.0" xsi:schemaLocation="http://ebsa.ipt.com/AgnosticCloudConfig-1.0 AgnosticCloudConfig-1.0.xsd">
+    <account>Home Office</account>
+    <region>IPT-AWS</region>
+    <EnvironmentContainer id="_2">
+        <name>np</name>
+        <provider>AWS</provider>
+        <Environment id="_5" environmentContainerDefinitionId="_3">
+            <name>EBSAD-20086-ENV</name>
+            <notes>EBSAD-20086-ENV</notes>
+            <EnvironmentDefinition environmentDefinitionType="Physical" id="_6">
+                <name>EBSAD-20086-ENVDEF</name>
+                <version>1.5</version>
+                <cidr>10.16.0.0/16</cidr>
+                
+                <VirtualMachineContainer dataCenterId="_4" id="_7">
+                    <name>EBSAD-20086-VMC</name>
+                    <description>EBSAD-20086-VMC</description>
+                    <runtimeLease></runtimeLease>
+                    <storageLease></storageLease>
+                    <serviceLevel>Home Office IPT (IL2-DEVTEST-BASIC)</serviceLevel>
+                    <powerOn>true</powerOn>
+                    <deploy>true</deploy>
+                    <domain></domain>
+                    <VirtualMachine id="_9">
+                        <vmName>EBSAD-20086-VM</vmName>
+                        <computerName>EBSAD-20086-VM</computerName>
+                        <description>EBSAD-20086-VM</description>
+                        <templateName>ami-abb22edc</templateName>
+                        <templateServiceLevel>Home Office IPT (IL2-DEVTEST-BASIC)</templateServiceLevel>
+                        <storageProfile>9-76-3-BASIC-Any</storageProfile>
+                        <customisationScript></customisationScript>
+                        <cpuCount>2</cpuCount>
+                        <memory>4</memory>
+                        <memoryUnit>GB</memoryUnit>
+                        <hardwareProfile>m3.large</hardwareProfile>
+                        <hatype></hatype>
+                        <Storage id="_11">
+                            <indexNumber>1</indexNumber>
+                            <size>50</size>
+                            <sizeUnit>GB</sizeUnit>
+                            <busType></busType>
+                            <busSubType></busSubType>
+                            <deviceMount>/dev/sda1</deviceMount>
+                        </Storage>
+						<NIC id="_10" networkID="_8">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>StaticManual</ipAssignment>
+							<Interface>
+								<staticIpPool />
+								<networkMask />
+								<name>EBSAD-20086-NIC</name>
+								<staticIpAddress>10.16.3.4</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+						<NIC id="_12" networkID="org1">
+							<indexNumber>1</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>StaticManual</ipAssignment>
+							<Interface>
+								<staticIpPool />
+								<networkMask />
+								<name>EBSAD-20086-ORG-NIC</name>
+								<staticIpAddress>10.16.4.4</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+                    </VirtualMachine>
+                    <Network dataCenterId="_4" id="_8">
+                        <name>EBSAD-20086-VM-NET</name>
+                        <description></description>
+                        <fenceMode>NATROUTED</fenceMode>
+                        <networkMask>255.255.255.0</networkMask>
+                        <gatewayAddress>10.16.3.1</gatewayAddress>
+                        <primaryDns>10.16.3.1</primaryDns>
+                        <secondaryDns>10.16.3.1</secondaryDns>
+                        <dnsSuffix>dns-suffix</dnsSuffix>
+                        <staticIpPool></staticIpPool>
+                        <ipRangeStart>10.16.3.2</ipRangeStart>
+                        <ipRangeEnd>10.16.3.10</ipRangeEnd>
+                        <CIDR>10.16.3.0/24</CIDR>
+                        <shared>true</shared>
+                    </Network>
+                </VirtualMachineContainer>
+            </EnvironmentDefinition>
+        </Environment>
+        <EnvironmentContainerDefinition id="_3">
+            <name>HO_IPT_NP</name>
+            <version>1.5</version>
+            
+            <Network dataCenterId="_4" id="org1" gatewayId="gw1">
+	            <name>EBSAD-20086-ORG-NET</name>
+	            <description></description>
+	            <fenceMode>NATROUTED</fenceMode>
+	            <networkMask></networkMask>
+	            <gatewayAddress></gatewayAddress>
+	            <primaryDns></primaryDns>
+	            <secondaryDns></secondaryDns>
+	            <dnsSuffix></dnsSuffix>
+	            <staticIpPool></staticIpPool>
+	            <ipRangeStart></ipRangeStart>
+	            <ipRangeEnd></ipRangeEnd>
+	            <CIDR>10.16.4.0/24</CIDR>
+	            <shared>true</shared>
+            </Network>
+            <Gateway id="gw1">
+            	<name>EBSAD-20086-GW</name>
+            </Gateway>
+            <DataCenter id="_4">
+                <name>eu-west-1a</name>
+            </DataCenter>
+        </EnvironmentContainerDefinition>
+    </EnvironmentContainer>
+</GeographicContainer>

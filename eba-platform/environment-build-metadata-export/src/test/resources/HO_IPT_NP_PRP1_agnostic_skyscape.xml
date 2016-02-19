@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Partial implementation (1st Virtual Machine Container, all Org Networks) of HO_IPT_NP_PRP1 in the cloud agnostic schema -->
+<GeographicContainer id="ID_1" xmlns="http://ebsa.ipt.com/AgnosticCloudConfig-1.0" xsi:schemaLocation="http://ebsa.ipt.com/AgnosticCloudConfig-1.0 AgnosticCloudConfig-1.0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<account>Home Office</account>
+	<region>IPT</region>
+	<EnvironmentContainer id="EnvironmentContainer_1">
+		<name>np</name>
+		<provider>SKYSCAPE</provider>
+		<Environment id="Environment_1">
+			<name>HO_IPT_NP_PRP1</name>
+			<notes>HO_IPT_NP_PRP1 environment</notes>
+			<EnvironmentDefinition environmentDefinitionType="Physical" id="EnvrionmentDefinition_1">
+				<name>HO_IPT_NP_PRP1</name>
+				<version>1.0</version>
+				<cidr>10.0.101.0/16</cidr>
+				<VirtualMachineContainer id="VirtualMachineContainer_1" dataCenterName="Home Office IPT NP (IL2-PROD-STANDARD)">
+					<name>HO_IPT_NP_PRP1_MABC</name>
+					<description>Management Boundary Control for IPT NP PRP1</description>
+					<runtimeLease></runtimeLease>
+					<storageLease></storageLease>
+					<serviceLevel>Home Office IPT NP (IL2-PROD-BASIC)</serviceLevel>
+					<powerOn>true</powerOn>
+					<deploy>true</deploy>
+					<domain></domain>
+					<VirtualMachine id="mfwam01">
+						<vmName>mfwam01.np-prp1-mabc.ipt.ho.local</vmName>
+						<computerName>mfwam01.np-prp1-mabc.ipt.ho.local</computerName>
+						<description>Firewall</description>
+						<templateName>EBSA-TEMPLATES-VYATTA-VSE6.6R5-32</templateName>
+						<templateServiceLevel>Home Office IPT NP (IL2-DEVTEST-BASIC)</templateServiceLevel>
+						<storageProfile>9-76-1-BASIC-Any</storageProfile>
+						<customisationScript>/var/lib/jenkins/jobs/retrieve_configuration/workspace/customise.vyatta.sh</customisationScript>
+						<cpuCount>2</cpuCount>
+						<memory>4</memory>
+						<memoryUnit>GB</memoryUnit>
+						<hardwareProfile></hardwareProfile>
+						<hatype></hatype>
+						<Storage id="ID_57">
+							<indexNumber>1</indexNumber>
+							<size>50</size>
+							<sizeUnit>GB</sizeUnit>
+							<busType></busType>
+							<busSubType></busSubType>
+							<deviceMount></deviceMount>
+						</Storage>
+						<NIC networkName="HO_IPT_NP_TLG1_MEBC_APP_I1" id="ID_59">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>StaticManual</ipAssignment>
+							<Interface>
+								<staticIpPool></staticIpPool>
+								<networkMask></networkMask>
+								<name>HO_IPT_NP_TLG1_MEBC_APP_I1</name>
+								<staticIpAddress>10.16.15.33</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+							<Interface>
+								<staticIpPool>10.16.15.34/44</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>HO_IPT_NP_TLG1_MEBC_APP_I1</name>
+								<staticIpAddress>10.16.15.34</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>10</VRRP>
+							</Interface>
+						</NIC>
+						<NIC networkName="HO_IPT_NP_PRP1_COBC_MABC_MAN_I1" id="ID_60">
+							<indexNumber>1</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>StaticManual</ipAssignment>
+							<Interface>
+								<interfaceNumber>1</interfaceNumber>
+								<staticIpPool>10.32.128.2/22</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>HO_IPT_NP_PRP1_COBC_MABC_MAN_I1</name>
+								<staticIpAddress>10.32.128.2</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+						<NIC networkName="HO_IPT_NP_PRP1_PRZO_MABC_MAN_I1" id="ID_61">
+							<indexNumber>2</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>StaticManual</ipAssignment>
+							<Interface>
+								<staticIpPool></staticIpPool>
+								<networkMask></networkMask>
+								<name>HO_IPT_NP_PRP1_PRZO_MABC_MAN_I1</name>
+								<staticIpAddress>10.32.144.2</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+						<NIC networkName="HO_IPT_NP_PRP1_DABC_MABC_MAN_I1" id="ID_62">
+							<indexNumber>2</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>StaticManual</ipAssignment>
+							<Interface>
+								<staticIpPool></staticIpPool>
+								<networkMask></networkMask>
+								<name>HO_IPT_NP_PRP1_DABC_MABC_MAN_I1</name>
+								<staticIpAddress>10.32.160.2</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+						<NIC networkName="HO_IPT_NP_PRP1_DAZO_MABC_MAN_I1" id="ID_63">
+							<indexNumber>3</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>StaticManual</ipAssignment>
+							<Interface>
+								<staticIpPool></staticIpPool>
+								<networkMask></networkMask>
+								<name>HO_IPT_NP_PRP1_DAZO_MABC_MAN_I1</name>
+								<staticIpAddress>10.32.176.2</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+						<NIC networkName="HO_IPT_NP_PRP1_ESZO_MABC_MAN_I1" id="ID_64">
+							<indexNumber>4</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>StaticManual</ipAssignment>
+							<Interface>
+								<staticIpPool></staticIpPool>
+								<networkMask></networkMask>
+								<name>HO_IPT_NP_PRP1_ESZO_MABC_MAN_I1</name>
+								<staticIpAddress>10.32.192.2</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+						<NIC networkName="HO_IPT_NP_MFWAH0_HBT" id="ID_65">
+							<indexNumber>5</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>StaticManual</ipAssignment>
+							<Interface>
+								<staticIpPool></staticIpPool>
+								<networkMask></networkMask>
+								<name>HO_IPT_NP_MFWAH0_HBT</name>
+								<staticIpAddress>10.0.101.1</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+					</VirtualMachine>
+					<VirtualMachine id="mfwam02">
+						<vmName>mfwam02.np-prp1-mabc.ipt.ho.local</vmName>
+						<computerName>mfwam02.np-prp1-mabc.ipt.ho.local</computerName>
+						<description></description>
+						<templateName>EBSA-TEMPLATES-VYATTA-VSE6.6R5-32</templateName>
+						<templateServiceLevel>Home Office IPT NP (IL2-DEVTEST-BASIC)</templateServiceLevel>
+						<storageProfile>9-76-1-BASIC-Any</storageProfile>
+						<customisationScript>/var/lib/jenkins/jobs/retrieve_configuration/workspace/customise.vyatta.sh</customisationScript>
+						<cpuCount>2</cpuCount>
+						<memory>4</memory>
+						<memoryUnit>GB</memoryUnit>
+						<hardwareProfile></hardwareProfile>
+						<hatype></hatype>
+						<Storage id="ID_57a">
+							<indexNumber>1</indexNumber>
+							<size>50</size>
+							<sizeUnit>GB</sizeUnit>
+							<busType></busType>
+							<busSubType></busSubType>
+							<deviceMount></deviceMount>
+						</Storage>
+						<NIC networkName="HO_IPT_NP_TLG1_MEBC_APP_I1" id="ID_59a">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>StaticManual</ipAssignment>
+							<Interface>
+								<staticIpPool></staticIpPool>
+								<networkMask></networkMask>
+								<name>HO_IPT_NP_TLG1_MEBC_APP_I1</name>
+								<staticIpAddress>10.16.15.34</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+						<NIC networkName="HO_IPT_NP_PRP1_COBC_MABC_MAN_I1" id="ID_60a">
+							<indexNumber>1</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>StaticManual</ipAssignment>
+							<Interface>
+								<staticIpPool></staticIpPool>
+								<networkMask></networkMask>
+								<name>HO_IPT_NP_PRP1_COBC_MABC_MAN_I1</name>
+								<staticIpAddress>10.32.128.3</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+						<NIC networkName="HO_IPT_NP_PRP1_PRZO_MABC_MAN_I1" id="ID_61a">
+							<indexNumber>2</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>StaticManual</ipAssignment>
+							<Interface>
+								<staticIpPool></staticIpPool>
+								<networkMask></networkMask>
+								<name>HO_IPT_NP_PRP1_PRZO_MABC_MAN_I1</name>
+								<staticIpAddress>10.32.144.3</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+						<NIC networkName="HO_IPT_NP_PRP1_DABC_MABC_MAN_I1" id="ID_62a">
+							<indexNumber>2</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>StaticManual</ipAssignment>
+							<Interface>
+								<staticIpPool></staticIpPool>
+								<networkMask></networkMask>
+								<name>HO_IPT_NP_PRP1_DABC_MABC_MAN_I1</name>
+								<staticIpAddress>10.32.160.3</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+						<NIC networkName="HO_IPT_NP_PRP1_DAZO_MABC_MAN_I1" id="ID_63a">
+							<indexNumber>3</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>StaticManual</ipAssignment>
+							<Interface>
+								<staticIpPool></staticIpPool>
+								<networkMask></networkMask>
+								<name>HO_IPT_NP_PRP1_DAZO_MABC_MAN_I1</name>
+								<staticIpAddress>10.32.176.3</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+						<NIC networkName="HO_IPT_NP_PRP1_ESZO_MABC_MAN_I1" id="ID_64a">
+							<indexNumber>4</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>StaticManual</ipAssignment>
+							<Interface>
+								<staticIpPool></staticIpPool>
+								<networkMask></networkMask>
+								<name>HO_IPT_NP_PRP1_ESZO_MABC_MAN_I1</name>
+								<staticIpAddress>10.32.192.3</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+						<NIC networkName="HO_IPT_NP_MFWAH0_HBT" id="ID_65a">
+							<indexNumber>5</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>StaticManual</ipAssignment>
+							<Interface>
+								<staticIpPool></staticIpPool>
+								<networkMask></networkMask>
+								<name>HO_IPT_NP_MFWAH0_HBT</name>
+								<staticIpAddress>10.0.101.2</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+					</VirtualMachine>
+					<Network id="HO_IPT_NP_MFWAH0_HBT" dataCenterName="Home Office IPT NP (IL2-PROD-STANDARD)">
+						<name>HO_IPT_NP_MFWAH0_HBT</name>
+						<description></description>
+						<fenceMode>ISOLATED</fenceMode>
+						<networkMask>255.255.255.0</networkMask>
+						<gatewayAddress>10.0.101.3</gatewayAddress>
+						<primaryDns></primaryDns>
+						<secondaryDns></secondaryDns>
+						<dnsSuffix>np-prp1-dabc.ipt.ho.local</dnsSuffix>
+						<staticIpPool></staticIpPool>
+						<ipRangeStart>10.0.101.1</ipRangeStart>
+						<ipRangeEnd>10.0.101.2</ipRangeEnd>
+						<CIDR></CIDR>
+						<shared>true</shared>
+					</Network>
+				</VirtualMachineContainer>
+			</EnvironmentDefinition>
+		</Environment>
+		<!-- This Environment is for testing SubnetRoutes -->
+		<Environment id="Environment_2">
+			<name>HO_IPT_NP_PRP1A</name>
+			<notes>HO_IPT_NP_PRP1A environment</notes>
+		</Environment>
+	</EnvironmentContainer>
+</GeographicContainer>

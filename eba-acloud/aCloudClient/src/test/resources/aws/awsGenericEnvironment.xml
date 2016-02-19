@@ -1,0 +1,2175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GeographicContainer id="ID_1" xsi:schemaLocation="http://ebsa.ipt.com/AgnosticCloudConfig-1.0 AgnosticCloudConfig-1.0.xsd" xmlns="http://ebsa.ipt.com/AgnosticCloudConfig-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<account>String</account>
+	<region>String</region>
+	<EnvironmentContainer id="ID_2">
+		<name>String</name>
+		<provider>AWS</provider>
+		<Environment environmentContainerDefinitionId="ID_1" id="ID_3">
+			<name>String</name>
+			<notes>String</notes>
+			<EnvironmentDefinition environmentDefinitionType="Blueprint" id="ID_4">
+				<name>String</name>
+				<version>String</version>
+				<cidr>String</cidr>
+				
+				<VirtualMachineContainer dataCenterId="ID_4" id="ID_5" dataCenterName="datacentername">
+					<name>String</name>
+					<description>String</description>
+					<runtimeLease>String</runtimeLease>
+					<storageLease>String</storageLease>
+					<serviceLevel>String</serviceLevel>
+					<powerOn>true</powerOn>
+					<deploy>true</deploy>
+					<domain>String</domain>
+					<VirtualMachine id="ID_6">
+						<vmName>afwam01</vmName>
+						<computerName>afwam01</computerName>
+						<description>String</description>
+						<templateName>String</templateName>
+						<templateServiceLevel>String</templateServiceLevel>
+						<storageProfile>String</storageProfile>
+						<customisationScript>awsUserDataScript.sh</customisationScript>
+						<VMOrder>0</VMOrder>
+						<VMStartDelay>0</VMStartDelay>
+						<VMStopDelay>0</VMStopDelay>
+						<VMStartAction>powerOn</VMStartAction>
+						<VMStopAction>powerOff</VMStopAction>
+						<cpuCount>0</cpuCount>
+						<memory>0</memory>
+						<memoryUnit>String</memoryUnit>
+						<hardwareProfile>String</hardwareProfile>
+						<hatype>String</hatype>
+						<Storage id="ID_7">
+							<indexNumber>0</indexNumber>
+							<size>0</size>
+							<sizeUnit>String</sizeUnit>
+							<busType>String</busType>
+							<busSubType>String</busSubType>
+							<deviceMount>String</deviceMount>
+						</Storage>
+						<Storage id="ID_8">
+							<indexNumber>0</indexNumber>
+							<size>0</size>
+							<sizeUnit>String</sizeUnit>
+							<busType>String</busType>
+							<busSubType>String</busSubType>
+							<deviceMount>String</deviceMount>
+						</Storage>
+						<NIC networkName="networkName" networkID="ID_4" id="ID_9">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>String</ipAssignment>
+							<Interface>
+								<interfaceNumber>1</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>compartment1</name>
+								<staticIpAddress>10.16.0.1</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+							<Interface>
+								<interfaceNumber>2</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>compartment2</name>
+								<staticIpAddress>10.16.0.2</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+						</NIC>
+						<NIC networkName="networkName" networkID="ID_4" id="ID_10">
+							<indexNumber>1</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>String</ipAssignment>
+							<Interface>
+								<interfaceNumber>1</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>10.16.0.3</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+							<Interface>
+								<interfaceNumber>2</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>10.16.0.4</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+						</NIC>
+						<MetaData id="ID_11">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+						<MetaData id="ID_12">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+					</VirtualMachine>
+					<VirtualMachine id="ID_13">
+						<vmName>afwam02</vmName>
+						<computerName>afwam02</computerName>
+						<description>String</description>
+						<templateName>String</templateName>
+						<templateServiceLevel>String</templateServiceLevel>
+						<storageProfile>String</storageProfile>
+						<customisationScript></customisationScript>
+						<VMOrder>0</VMOrder>
+						<VMStartDelay>0</VMStartDelay>
+						<VMStopDelay>0</VMStopDelay>
+						<VMStartAction>powerOn</VMStartAction>
+						<VMStopAction>powerOff</VMStopAction>
+						<cpuCount>0</cpuCount>
+						<memory>0</memory>
+						<memoryUnit>String</memoryUnit>
+						<hardwareProfile>String</hardwareProfile>
+						<hatype>String</hatype>
+						<Storage id="ID_14">
+							<indexNumber>0</indexNumber>
+							<size>0</size>
+							<sizeUnit>String</sizeUnit>
+							<busType>String</busType>
+							<busSubType>String</busSubType>
+							<deviceMount>String</deviceMount>
+						</Storage>
+						<Storage id="ID_15">
+							<indexNumber>0</indexNumber>
+							<size>0</size>
+							<sizeUnit>String</sizeUnit>
+							<busType>String</busType>
+							<busSubType>String</busSubType>
+							<deviceMount>String</deviceMount>
+						</Storage>
+						<NIC networkName="networkName" networkID="ID_13" id="ID_16">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>String</ipAssignment>
+							<Interface>
+								<interfaceNumber>1</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>10.16.0.5</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+							<Interface>
+								<interfaceNumber>2</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>10.16.0.6</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+						</NIC>
+						<NIC networkName="networkName" networkID="ID_13" id="ID_17">
+							<indexNumber>1</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>String</ipAssignment>
+							<Interface>
+								<interfaceNumber>1</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>10.16.0.7</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+							<Interface>
+								<interfaceNumber>2</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>10.16.0.8</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+						</NIC>
+						<MetaData id="ID_18">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+						<MetaData id="ID_19">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+					</VirtualMachine>
+					<Network dataCenterId="ID_1" id="ID_20" dataCenterName="datacentername">
+						<name>String</name>
+						<description>String</description>
+						<fenceMode>String</fenceMode>
+						<networkMask>String</networkMask>
+						<gatewayAddress>String</gatewayAddress>
+						<primaryDns>String</primaryDns>
+						<secondaryDns>String</secondaryDns>
+						<dnsSuffix>String</dnsSuffix>
+						<staticIpPool>String</staticIpPool>
+						<ipRangeStart>String</ipRangeStart>
+						<ipRangeEnd>String</ipRangeEnd>
+						<CIDR>String</CIDR>
+						<shared>false</shared>
+						<MetaData id="ID_21">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+						<MetaData id="ID_22">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+					</Network>
+					<Network dataCenterId="ID_1" id="ID_23" dataCenterName="datacentername">
+						<name>String</name>
+						<description>String</description>
+						<fenceMode>String</fenceMode>
+						<networkMask>String</networkMask>
+						<gatewayAddress>String</gatewayAddress>
+						<primaryDns>String</primaryDns>
+						<secondaryDns>String</secondaryDns>
+						<dnsSuffix>String</dnsSuffix>
+						<staticIpPool>String</staticIpPool>
+						<ipRangeStart>String</ipRangeStart>
+						<ipRangeEnd>String</ipRangeEnd>
+						<CIDR>String</CIDR>
+						<shared>false</shared>
+						<MetaData id="ID_24">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+						<MetaData id="ID_25">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+					</Network>
+				</VirtualMachineContainer>
+				<VirtualMachineContainer dataCenterId="ID_1" id="ID_26" dataCenterName="datacentername">
+					<name>String</name>
+					<description>String</description>
+					<runtimeLease>String</runtimeLease>
+					<storageLease>String</storageLease>
+					<serviceLevel>String</serviceLevel>
+					<powerOn>true</powerOn>
+					<deploy>true</deploy>
+					<domain>String</domain>
+					<VirtualMachine id="ID_27">
+						<vmName>String</vmName>
+						<computerName>String</computerName>
+						<description>String</description>
+						<templateName>String</templateName>
+						<templateServiceLevel>String</templateServiceLevel>
+						<storageProfile>String</storageProfile>
+						<customisationScript>String</customisationScript>
+						<VMOrder>0</VMOrder>
+						<VMStartDelay>0</VMStartDelay>
+						<VMStopDelay>0</VMStopDelay>
+						<VMStartAction>none</VMStartAction>
+						<VMStopAction>guestShutdown</VMStopAction>
+						<cpuCount>0</cpuCount>
+						<memory>0</memory>
+						<memoryUnit>String</memoryUnit>
+						<hardwareProfile>String</hardwareProfile>
+						<hatype>String</hatype>
+						<Storage id="ID_28">
+							<indexNumber>0</indexNumber>
+							<size>0</size>
+							<sizeUnit>String</sizeUnit>
+							<busType>String</busType>
+							<busSubType>String</busSubType>
+							<deviceMount>String</deviceMount>
+						</Storage>
+						<Storage id="ID_29">
+							<indexNumber>0</indexNumber>
+							<size>0</size>
+							<sizeUnit>String</sizeUnit>
+							<busType>String</busType>
+							<busSubType>String</busSubType>
+							<deviceMount>String</deviceMount>
+						</Storage>
+						<NIC networkName="networkName" networkID="ID_10" id="ID_30">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>String</ipAssignment>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>String</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>String</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+						</NIC>
+						<NIC networkName="networkName" networkID="ID_10" id="ID_31">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>String</ipAssignment>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>String</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>String</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+						</NIC>
+						<MetaData id="ID_32">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+						<MetaData id="ID_33">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+					</VirtualMachine>
+					<VirtualMachine id="ID_34">
+						<vmName>String</vmName>
+						<computerName>String</computerName>
+						<description>String</description>
+						<templateName>String</templateName>
+						<templateServiceLevel>String</templateServiceLevel>
+						<storageProfile>String</storageProfile>
+						<customisationScript>String</customisationScript>
+						<VMOrder>0</VMOrder>
+						<VMStartDelay>0</VMStartDelay>
+						<VMStopDelay>0</VMStopDelay>
+						<VMStartAction>none</VMStartAction>
+						<VMStopAction>powerOff</VMStopAction>
+						<cpuCount>0</cpuCount>
+						<memory>0</memory>
+						<memoryUnit>String</memoryUnit>
+						<hardwareProfile>String</hardwareProfile>
+						<hatype>String</hatype>
+						<Storage id="ID_35">
+							<indexNumber>0</indexNumber>
+							<size>0</size>
+							<sizeUnit>String</sizeUnit>
+							<busType>String</busType>
+							<busSubType>String</busSubType>
+							<deviceMount>String</deviceMount>
+						</Storage>
+						<Storage id="ID_36">
+							<indexNumber>0</indexNumber>
+							<size>0</size>
+							<sizeUnit>String</sizeUnit>
+							<busType>String</busType>
+							<busSubType>String</busSubType>
+							<deviceMount>String</deviceMount>
+						</Storage>
+						<NIC networkName="networkName" networkID="ID_31" id="ID_37">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>String</ipAssignment>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>String</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>String</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+						</NIC>
+						<NIC networkName="networkName" networkID="ID_31" id="ID_38">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>String</ipAssignment>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>String</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>String</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+						</NIC>
+						<MetaData id="ID_39">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+						<MetaData id="ID_40">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+					</VirtualMachine>
+					<Network dataCenterId="ID_31" id="ID_41" dataCenterName="datacentername">
+						<name>String</name>
+						<description>String</description>
+						<fenceMode>String</fenceMode>
+						<networkMask>String</networkMask>
+						<gatewayAddress>String</gatewayAddress>
+						<primaryDns>String</primaryDns>
+						<secondaryDns>String</secondaryDns>
+						<dnsSuffix>String</dnsSuffix>
+						<staticIpPool>String</staticIpPool>
+						<ipRangeStart>String</ipRangeStart>
+						<ipRangeEnd>String</ipRangeEnd>
+						<CIDR>String</CIDR>
+						<shared>false</shared>
+						<MetaData id="ID_42">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+						<MetaData id="ID_43">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+					</Network>
+					<Network dataCenterId="ID_31" id="ID_44" dataCenterName="datacentername">
+						<name>String</name>
+						<description>String</description>
+						<fenceMode>String</fenceMode>
+						<networkMask>String</networkMask>
+						<gatewayAddress>String</gatewayAddress>
+						<primaryDns>String</primaryDns>
+						<secondaryDns>String</secondaryDns>
+						<dnsSuffix>String</dnsSuffix>
+						<staticIpPool>String</staticIpPool>
+						<ipRangeStart>String</ipRangeStart>
+						<ipRangeEnd>String</ipRangeEnd>
+						<CIDR>String</CIDR>
+						<shared>false</shared>
+						<MetaData id="ID_45">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+						<MetaData id="ID_46">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+					</Network>
+				</VirtualMachineContainer>
+				<MetaData id="ID_47">
+					<name>String</name>
+					<value>String</value>
+				</MetaData>
+				<MetaData id="ID_48">
+					<name>String</name>
+					<value>String</value>
+				</MetaData>
+			</EnvironmentDefinition>
+			<EnvironmentDefinition environmentDefinitionType="Blueprint" id="ID_49">
+				<name>String</name>
+				<version>String</version>
+				<cidr>String</cidr>
+				
+				<VirtualMachineContainer dataCenterId="ID_31" id="ID_50" dataCenterName="datacentername">
+					<name>String</name>
+					<description>String</description>
+					<runtimeLease>String</runtimeLease>
+					<storageLease>String</storageLease>
+					<serviceLevel>String</serviceLevel>
+					<powerOn>true</powerOn>
+					<deploy>true</deploy>
+					<domain>String</domain>
+					<VirtualMachine id="ID_51">
+						<vmName>String</vmName>
+						<computerName>String</computerName>
+						<description>String</description>
+						<templateName>String</templateName>
+						<templateServiceLevel>String</templateServiceLevel>
+						<storageProfile>String</storageProfile>
+						<customisationScript>String</customisationScript>
+						<VMOrder>0</VMOrder>
+						<VMStartDelay>0</VMStartDelay>
+						<VMStopDelay>0</VMStopDelay>
+						<VMStartAction>none</VMStartAction>
+						<VMStopAction>powerOff</VMStopAction>
+						<cpuCount>0</cpuCount>
+						<memory>0</memory>
+						<memoryUnit>String</memoryUnit>
+						<hardwareProfile>String</hardwareProfile>
+						<hatype>String</hatype>
+						<Storage id="ID_52">
+							<indexNumber>0</indexNumber>
+							<size>0</size>
+							<sizeUnit>String</sizeUnit>
+							<busType>String</busType>
+							<busSubType>String</busSubType>
+							<deviceMount>String</deviceMount>
+						</Storage>
+						<Storage id="ID_53">
+							<indexNumber>0</indexNumber>
+							<size>0</size>
+							<sizeUnit>String</sizeUnit>
+							<busType>String</busType>
+							<busSubType>String</busSubType>
+							<deviceMount>String</deviceMount>
+						</Storage>
+						<NIC networkName="networkName" networkID="ID_30" id="ID_54">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>String</ipAssignment>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>String</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>String</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+						</NIC>
+						<NIC networkName="networkName" networkID="ID_30" id="ID_55">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>String</ipAssignment>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>String</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>String</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+						</NIC>
+						<MetaData id="ID_56">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+						<MetaData id="ID_57">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+					</VirtualMachine>
+					<VirtualMachine id="ID_58">
+						<vmName>String</vmName>
+						<computerName>String</computerName>
+						<description>String</description>
+						<templateName>String</templateName>
+						<templateServiceLevel>String</templateServiceLevel>
+						<storageProfile>String</storageProfile>
+						<customisationScript>String</customisationScript>
+						<VMOrder>0</VMOrder>
+						<VMStartDelay>0</VMStartDelay>
+						<VMStopDelay>0</VMStopDelay>
+						<VMStartAction>none</VMStartAction>
+						<VMStopAction>guestShutdown</VMStopAction>
+						<cpuCount>0</cpuCount>
+						<memory>0</memory>
+						<memoryUnit>String</memoryUnit>
+						<hardwareProfile>String</hardwareProfile>
+						<hatype>String</hatype>
+						<Storage id="ID_59">
+							<indexNumber>0</indexNumber>
+							<size>0</size>
+							<sizeUnit>String</sizeUnit>
+							<busType>String</busType>
+							<busSubType>String</busSubType>
+							<deviceMount>String</deviceMount>
+						</Storage>
+						<Storage id="ID_60">
+							<indexNumber>0</indexNumber>
+							<size>0</size>
+							<sizeUnit>String</sizeUnit>
+							<busType>String</busType>
+							<busSubType>String</busSubType>
+							<deviceMount>String</deviceMount>
+						</Storage>
+						<NIC networkName="networkName" networkID="ID_30" id="ID_61">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>String</ipAssignment>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>String</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>String</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+						</NIC>
+						<NIC networkName="networkName" networkID="ID_30" id="ID_62">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>String</ipAssignment>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>String</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>String</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+						</NIC>
+						<MetaData id="ID_63">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+						<MetaData id="ID_64">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+					</VirtualMachine>
+					<Network dataCenterId="ID_30" id="ID_65" dataCenterName="datacentername">
+						<name>String</name>
+						<description>String</description>
+						<fenceMode>String</fenceMode>
+						<networkMask>String</networkMask>
+						<gatewayAddress>String</gatewayAddress>
+						<primaryDns>String</primaryDns>
+						<secondaryDns>String</secondaryDns>
+						<dnsSuffix>String</dnsSuffix>
+						<staticIpPool>String</staticIpPool>
+						<ipRangeStart>String</ipRangeStart>
+						<ipRangeEnd>String</ipRangeEnd>
+						<CIDR>String</CIDR>
+						<shared>false</shared>
+						<MetaData id="ID_66">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+						<MetaData id="ID_67">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+					</Network>
+					<Network dataCenterId="ID_30" id="ID_68" dataCenterName="datacentername">
+						<name>String</name>
+						<description>String</description>
+						<fenceMode>String</fenceMode>
+						<networkMask>String</networkMask>
+						<gatewayAddress>String</gatewayAddress>
+						<primaryDns>String</primaryDns>
+						<secondaryDns>String</secondaryDns>
+						<dnsSuffix>String</dnsSuffix>
+						<staticIpPool>String</staticIpPool>
+						<ipRangeStart>String</ipRangeStart>
+						<ipRangeEnd>String</ipRangeEnd>
+						<CIDR>String</CIDR>
+						<shared>false</shared>
+						<MetaData id="ID_69">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+						<MetaData id="ID_70">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+					</Network>
+				</VirtualMachineContainer>
+				<VirtualMachineContainer dataCenterId="ID_30" id="ID_71" dataCenterName="datacentername">
+					<name>String</name>
+					<description>String</description>
+					<runtimeLease>String</runtimeLease>
+					<storageLease>String</storageLease>
+					<serviceLevel>String</serviceLevel>
+					<powerOn>true</powerOn>
+					<deploy>true</deploy>
+					<domain>String</domain>
+					<VirtualMachine id="ID_72">
+						<vmName>String</vmName>
+						<computerName>String</computerName>
+						<description>String</description>
+						<templateName>String</templateName>
+						<templateServiceLevel>String</templateServiceLevel>
+						<storageProfile>String</storageProfile>
+						<customisationScript>String</customisationScript>
+						<VMOrder>0</VMOrder>
+						<VMStartDelay>0</VMStartDelay>
+						<VMStopDelay>0</VMStopDelay>
+						<VMStartAction>powerOn</VMStartAction>
+						<VMStopAction>powerOff</VMStopAction>
+						<cpuCount>0</cpuCount>
+						<memory>0</memory>
+						<memoryUnit>String</memoryUnit>
+						<hardwareProfile>String</hardwareProfile>
+						<hatype>String</hatype>
+						<Storage id="ID_73">
+							<indexNumber>0</indexNumber>
+							<size>0</size>
+							<sizeUnit>String</sizeUnit>
+							<busType>String</busType>
+							<busSubType>String</busSubType>
+							<deviceMount>String</deviceMount>
+						</Storage>
+						<Storage id="ID_74">
+							<indexNumber>0</indexNumber>
+							<size>0</size>
+							<sizeUnit>String</sizeUnit>
+							<busType>String</busType>
+							<busSubType>String</busSubType>
+							<deviceMount>String</deviceMount>
+						</Storage>
+						<NIC networkName="networkName" networkID="ID_30" id="ID_75">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>String</ipAssignment>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>String</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>String</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+						</NIC>
+						<NIC networkName="networkName" networkID="ID_30" id="ID_76">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>String</ipAssignment>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>String</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>String</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+						</NIC>
+						<MetaData id="ID_77">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+						<MetaData id="ID_78">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+					</VirtualMachine>
+					<VirtualMachine id="ID_79">
+						<vmName>String</vmName>
+						<computerName>String</computerName>
+						<description>String</description>
+						<templateName>String</templateName>
+						<templateServiceLevel>String</templateServiceLevel>
+						<storageProfile>String</storageProfile>
+						<customisationScript>String</customisationScript>
+						<VMOrder>0</VMOrder>
+						<VMStartDelay>0</VMStartDelay>
+						<VMStopDelay>0</VMStopDelay>
+						<VMStartAction>powerOn</VMStartAction>
+						<VMStopAction>guestShutdown</VMStopAction>
+						<cpuCount>0</cpuCount>
+						<memory>0</memory>
+						<memoryUnit>String</memoryUnit>
+						<hardwareProfile>String</hardwareProfile>
+						<hatype>String</hatype>
+						<Storage id="ID_80">
+							<indexNumber>0</indexNumber>
+							<size>0</size>
+							<sizeUnit>String</sizeUnit>
+							<busType>String</busType>
+							<busSubType>String</busSubType>
+							<deviceMount>String</deviceMount>
+						</Storage>
+						<Storage id="ID_81">
+							<indexNumber>0</indexNumber>
+							<size>0</size>
+							<sizeUnit>String</sizeUnit>
+							<busType>String</busType>
+							<busSubType>String</busSubType>
+							<deviceMount>String</deviceMount>
+						</Storage>
+						<NIC networkName="networkName" networkID="ID_75" id="ID_82">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>String</ipAssignment>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>String</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>String</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+						</NIC>
+						<NIC networkName="networkName" networkID="ID_75" id="ID_83">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>String</ipAssignment>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>String</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>String</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+						</NIC>
+						<MetaData id="ID_84">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+						<MetaData id="ID_85">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+					</VirtualMachine>
+					<Network dataCenterId="ID_75" id="ID_86" dataCenterName="datacentername">
+						<name>String</name>
+						<description>String</description>
+						<fenceMode>String</fenceMode>
+						<networkMask>String</networkMask>
+						<gatewayAddress>String</gatewayAddress>
+						<primaryDns>String</primaryDns>
+						<secondaryDns>String</secondaryDns>
+						<dnsSuffix>String</dnsSuffix>
+						<staticIpPool>String</staticIpPool>
+						<ipRangeStart>String</ipRangeStart>
+						<ipRangeEnd>String</ipRangeEnd>
+						<CIDR>String</CIDR>
+						<shared>false</shared>
+						<MetaData id="ID_87">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+						<MetaData id="ID_88">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+					</Network>
+					<Network dataCenterId="ID_75" id="ID_89" dataCenterName="datacentername">
+						<name>String</name>
+						<description>String</description>
+						<fenceMode>String</fenceMode>
+						<networkMask>String</networkMask>
+						<gatewayAddress>String</gatewayAddress>
+						<primaryDns>String</primaryDns>
+						<secondaryDns>String</secondaryDns>
+						<dnsSuffix>String</dnsSuffix>
+						<staticIpPool>String</staticIpPool>
+						<ipRangeStart>String</ipRangeStart>
+						<ipRangeEnd>String</ipRangeEnd>
+						<CIDR>String</CIDR>
+						<shared>false</shared>
+						<MetaData id="ID_90">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+						<MetaData id="ID_91">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+					</Network>
+				</VirtualMachineContainer>
+				<MetaData id="ID_92">
+					<name>String</name>
+					<value>String</value>
+				</MetaData>
+				<MetaData id="ID_93">
+					<name>String</name>
+					<value>String</value>
+				</MetaData>
+			</EnvironmentDefinition>
+		</Environment>
+		<Environment environmentContainerDefinitionId="ID_75" id="ID_94">
+			<name>String</name>
+			<notes>String</notes>
+			<EnvironmentDefinition environmentDefinitionType="Physical" id="ID_95">
+				<name>String</name>
+				<version>String</version>
+				<cidr>String</cidr>
+				
+				<VirtualMachineContainer dataCenterId="ID_75" id="ID_96" dataCenterName="datacentername">
+					<name>String</name>
+					<description>String</description>
+					<runtimeLease>String</runtimeLease>
+					<storageLease>String</storageLease>
+					<serviceLevel>String</serviceLevel>
+					<powerOn>true</powerOn>
+					<deploy>true</deploy>
+					<domain>String</domain>
+					<VirtualMachine id="ID_97">
+						<vmName>String</vmName>
+						<computerName>String</computerName>
+						<description>String</description>
+						<templateName>String</templateName>
+						<templateServiceLevel>String</templateServiceLevel>
+						<storageProfile>String</storageProfile>
+						<customisationScript>String</customisationScript>
+						<VMOrder>0</VMOrder>
+						<VMStartDelay>0</VMStartDelay>
+						<VMStopDelay>0</VMStopDelay>
+						<VMStartAction>powerOn</VMStartAction>
+						<VMStopAction>powerOff</VMStopAction>
+						<cpuCount>0</cpuCount>
+						<memory>0</memory>
+						<memoryUnit>String</memoryUnit>
+						<hardwareProfile>String</hardwareProfile>
+						<hatype>String</hatype>
+						<Storage id="ID_98">
+							<indexNumber>0</indexNumber>
+							<size>0</size>
+							<sizeUnit>String</sizeUnit>
+							<busType>String</busType>
+							<busSubType>String</busSubType>
+							<deviceMount>String</deviceMount>
+						</Storage>
+						<Storage id="ID_99">
+							<indexNumber>0</indexNumber>
+							<size>0</size>
+							<sizeUnit>String</sizeUnit>
+							<busType>String</busType>
+							<busSubType>String</busSubType>
+							<deviceMount>String</deviceMount>
+						</Storage>
+						<NIC networkName="networkName" networkID="ID_75" id="ID_100">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>String</ipAssignment>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>String</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>String</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+						</NIC>
+						<NIC networkName="networkName" networkID="ID_75" id="ID_101">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>String</ipAssignment>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>String</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>String</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+						</NIC>
+						<MetaData id="ID_102">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+						<MetaData id="ID_103">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+					</VirtualMachine>
+					<VirtualMachine id="ID_104">
+						<vmName>String</vmName>
+						<computerName>String</computerName>
+						<description>String</description>
+						<templateName>String</templateName>
+						<templateServiceLevel>String</templateServiceLevel>
+						<storageProfile>String</storageProfile>
+						<customisationScript>String</customisationScript>
+						<VMOrder>0</VMOrder>
+						<VMStartDelay>0</VMStartDelay>
+						<VMStopDelay>0</VMStopDelay>
+						<VMStartAction>powerOn</VMStartAction>
+						<VMStopAction>guestShutdown</VMStopAction>
+						<cpuCount>0</cpuCount>
+						<memory>0</memory>
+						<memoryUnit>String</memoryUnit>
+						<hardwareProfile>String</hardwareProfile>
+						<hatype>String</hatype>
+						<Storage id="ID_105">
+							<indexNumber>0</indexNumber>
+							<size>0</size>
+							<sizeUnit>String</sizeUnit>
+							<busType>String</busType>
+							<busSubType>String</busSubType>
+							<deviceMount>String</deviceMount>
+						</Storage>
+						<Storage id="ID_106">
+							<indexNumber>0</indexNumber>
+							<size>0</size>
+							<sizeUnit>String</sizeUnit>
+							<busType>String</busType>
+							<busSubType>String</busSubType>
+							<deviceMount>String</deviceMount>
+						</Storage>
+						<NIC networkName="networkName" networkID="ID_75" id="ID_107">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>String</ipAssignment>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>String</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>String</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+						</NIC>
+						<NIC networkName="networkName" networkID="ID_75" id="ID_108">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>String</ipAssignment>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>String</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>String</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+						</NIC>
+						<MetaData id="ID_109">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+						<MetaData id="ID_110">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+					</VirtualMachine>
+					<Network dataCenterId="ID_75" id="ID_111" dataCenterName="datacentername">
+						<name>String</name>
+						<description>String</description>
+						<fenceMode>String</fenceMode>
+						<networkMask>String</networkMask>
+						<gatewayAddress>String</gatewayAddress>
+						<primaryDns>String</primaryDns>
+						<secondaryDns>String</secondaryDns>
+						<dnsSuffix>String</dnsSuffix>
+						<staticIpPool>String</staticIpPool>
+						<ipRangeStart>String</ipRangeStart>
+						<ipRangeEnd>String</ipRangeEnd>
+						<CIDR>String</CIDR>
+						<shared>false</shared>
+						<MetaData id="ID_112">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+						<MetaData id="ID_113">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+					</Network>
+					<Network dataCenterId="ID_75" id="ID_114" dataCenterName="datacentername">
+						<name>String</name>
+						<description>String</description>
+						<fenceMode>String</fenceMode>
+						<networkMask>String</networkMask>
+						<gatewayAddress>String</gatewayAddress>
+						<primaryDns>String</primaryDns>
+						<secondaryDns>String</secondaryDns>
+						<dnsSuffix>String</dnsSuffix>
+						<staticIpPool>String</staticIpPool>
+						<ipRangeStart>String</ipRangeStart>
+						<ipRangeEnd>String</ipRangeEnd>
+						<CIDR>String</CIDR>
+						<shared>false</shared>
+						<MetaData id="ID_115">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+						<MetaData id="ID_116">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+					</Network>
+				</VirtualMachineContainer>
+				<VirtualMachineContainer dataCenterId="ID_75" id="ID_117" dataCenterName="datacentername">
+					<name>String</name>
+					<description>String</description>
+					<runtimeLease>String</runtimeLease>
+					<storageLease>String</storageLease>
+					<serviceLevel>String</serviceLevel>
+					<powerOn>true</powerOn>
+					<deploy>true</deploy>
+					<domain>String</domain>
+					<VirtualMachine id="ID_118">
+						<vmName>String</vmName>
+						<computerName>String</computerName>
+						<description>String</description>
+						<templateName>String</templateName>
+						<templateServiceLevel>String</templateServiceLevel>
+						<storageProfile>String</storageProfile>
+						<customisationScript>String</customisationScript>
+						<VMOrder>0</VMOrder>
+						<VMStartDelay>0</VMStartDelay>
+						<VMStopDelay>0</VMStopDelay>
+						<VMStartAction>powerOn</VMStartAction>
+						<VMStopAction>powerOff</VMStopAction>
+						<cpuCount>0</cpuCount>
+						<memory>0</memory>
+						<memoryUnit>String</memoryUnit>
+						<hardwareProfile>String</hardwareProfile>
+						<hatype>String</hatype>
+						<Storage id="ID_119">
+							<indexNumber>0</indexNumber>
+							<size>0</size>
+							<sizeUnit>String</sizeUnit>
+							<busType>String</busType>
+							<busSubType>String</busSubType>
+							<deviceMount>String</deviceMount>
+						</Storage>
+						<Storage id="ID_120">
+							<indexNumber>0</indexNumber>
+							<size>0</size>
+							<sizeUnit>String</sizeUnit>
+							<busType>String</busType>
+							<busSubType>String</busSubType>
+							<deviceMount>String</deviceMount>
+						</Storage>
+						<NIC networkName="networkName" networkID="ID_75" id="ID_121">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>String</ipAssignment>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>String</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>String</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+						</NIC>
+						<NIC networkName="networkName" networkID="ID_75" id="ID_122">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>String</ipAssignment>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>String</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>String</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+						</NIC>
+						<MetaData id="ID_123">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+						<MetaData id="ID_124">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+					</VirtualMachine>
+					<VirtualMachine id="ID_125">
+						<vmName>String</vmName>
+						<computerName>String</computerName>
+						<description>String</description>
+						<templateName>String</templateName>
+						<templateServiceLevel>String</templateServiceLevel>
+						<storageProfile>String</storageProfile>
+						<customisationScript>String</customisationScript>
+						<VMOrder>0</VMOrder>
+						<VMStartDelay>0</VMStartDelay>
+						<VMStopDelay>0</VMStopDelay>
+						<VMStartAction>none</VMStartAction>
+						<VMStopAction>powerOff</VMStopAction>
+						<cpuCount>0</cpuCount>
+						<memory>0</memory>
+						<memoryUnit>String</memoryUnit>
+						<hardwareProfile>String</hardwareProfile>
+						<hatype>String</hatype>
+						<Storage id="ID_126">
+							<indexNumber>0</indexNumber>
+							<size>0</size>
+							<sizeUnit>String</sizeUnit>
+							<busType>String</busType>
+							<busSubType>String</busSubType>
+							<deviceMount>String</deviceMount>
+						</Storage>
+						<Storage id="ID_127">
+							<indexNumber>0</indexNumber>
+							<size>0</size>
+							<sizeUnit>String</sizeUnit>
+							<busType>String</busType>
+							<busSubType>String</busSubType>
+							<deviceMount>String</deviceMount>
+						</Storage>
+						<NIC networkName="networkName" networkID="ID_75" id="ID_128">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>String</ipAssignment>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>String</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>String</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+						</NIC>
+						<NIC networkName="networkName" networkID="ID_75" id="ID_129">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>String</ipAssignment>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>String</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>String</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+						</NIC>
+						<MetaData id="ID_130">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+						<MetaData id="ID_131">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+					</VirtualMachine>
+					<Network dataCenterId="ID_25" id="ID_132" dataCenterName="datacentername">
+						<name>String</name>
+						<description>String</description>
+						<fenceMode>String</fenceMode>
+						<networkMask>String</networkMask>
+						<gatewayAddress>String</gatewayAddress>
+						<primaryDns>String</primaryDns>
+						<secondaryDns>String</secondaryDns>
+						<dnsSuffix>String</dnsSuffix>
+						<staticIpPool>String</staticIpPool>
+						<ipRangeStart>String</ipRangeStart>
+						<ipRangeEnd>String</ipRangeEnd>
+						<CIDR>String</CIDR>
+						<shared>false</shared>
+						<MetaData id="ID_133">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+						<MetaData id="ID_134">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+					</Network>
+					<Network dataCenterId="ID_25" id="ID_135" dataCenterName="datacentername">
+						<name>String</name>
+						<description>String</description>
+						<fenceMode>String</fenceMode>
+						<networkMask>String</networkMask>
+						<gatewayAddress>String</gatewayAddress>
+						<primaryDns>String</primaryDns>
+						<secondaryDns>String</secondaryDns>
+						<dnsSuffix>String</dnsSuffix>
+						<staticIpPool>String</staticIpPool>
+						<ipRangeStart>String</ipRangeStart>
+						<ipRangeEnd>String</ipRangeEnd>
+						<CIDR>String</CIDR>
+						<shared>false</shared>
+						<MetaData id="ID_136">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+						<MetaData id="ID_137">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+					</Network>
+				</VirtualMachineContainer>
+				<MetaData id="ID_138">
+					<name>String</name>
+					<value>String</value>
+				</MetaData>
+				<MetaData id="ID_139">
+					<name>String</name>
+					<value>String</value>
+				</MetaData>
+			</EnvironmentDefinition>
+			<EnvironmentDefinition environmentDefinitionType="Logical" id="ID_140">
+				<name>String</name>
+				<version>String</version>
+				<cidr>String</cidr>
+				
+				<VirtualMachineContainer dataCenterId="ID_25" id="ID_141" dataCenterName="datacentername">
+					<name>String</name>
+					<description>String</description>
+					<runtimeLease>String</runtimeLease>
+					<storageLease>String</storageLease>
+					<serviceLevel>String</serviceLevel>
+					<powerOn>true</powerOn>
+					<deploy>true</deploy>
+					<domain>String</domain>
+					<VirtualMachine id="ID_142">
+						<vmName>String</vmName>
+						<computerName>String</computerName>
+						<description>String</description>
+						<templateName>String</templateName>
+						<templateServiceLevel>String</templateServiceLevel>
+						<storageProfile>String</storageProfile>
+						<customisationScript>String</customisationScript>
+						<VMOrder>0</VMOrder>
+						<VMStartDelay>0</VMStartDelay>
+						<VMStopDelay>0</VMStopDelay>
+						<VMStartAction>powerOn</VMStartAction>
+						<VMStopAction>powerOff</VMStopAction>
+						<cpuCount>0</cpuCount>
+						<memory>0</memory>
+						<memoryUnit>String</memoryUnit>
+						<hardwareProfile>String</hardwareProfile>
+						<hatype>String</hatype>
+						<Storage id="ID_143">
+							<indexNumber>0</indexNumber>
+							<size>0</size>
+							<sizeUnit>String</sizeUnit>
+							<busType>String</busType>
+							<busSubType>String</busSubType>
+							<deviceMount>String</deviceMount>
+						</Storage>
+						<Storage id="ID_144">
+							<indexNumber>0</indexNumber>
+							<size>0</size>
+							<sizeUnit>String</sizeUnit>
+							<busType>String</busType>
+							<busSubType>String</busSubType>
+							<deviceMount>String</deviceMount>
+						</Storage>
+						<NIC networkName="networkName" networkID="ID_25" id="ID_145">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>String</ipAssignment>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>String</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>String</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+						</NIC>
+						<NIC networkName="networkName" networkID="ID_25" id="ID_146">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>String</ipAssignment>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>String</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>String</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+						</NIC>
+						<MetaData id="ID_147">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+						<MetaData id="ID_148">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+					</VirtualMachine>
+					<VirtualMachine id="ID_149">
+						<vmName>String</vmName>
+						<computerName>String</computerName>
+						<description>String</description>
+						<templateName>String</templateName>
+						<templateServiceLevel>String</templateServiceLevel>
+						<storageProfile>String</storageProfile>
+						<customisationScript>String</customisationScript>
+						<VMOrder>0</VMOrder>
+						<VMStartDelay>0</VMStartDelay>
+						<VMStopDelay>0</VMStopDelay>
+						<VMStartAction>none</VMStartAction>
+						<VMStopAction>guestShutdown</VMStopAction>
+						<cpuCount>0</cpuCount>
+						<memory>0</memory>
+						<memoryUnit>String</memoryUnit>
+						<hardwareProfile>String</hardwareProfile>
+						<hatype>String</hatype>
+						<Storage id="ID_150">
+							<indexNumber>0</indexNumber>
+							<size>0</size>
+							<sizeUnit>String</sizeUnit>
+							<busType>String</busType>
+							<busSubType>String</busSubType>
+							<deviceMount>String</deviceMount>
+						</Storage>
+						<Storage id="ID_151">
+							<indexNumber>0</indexNumber>
+							<size>0</size>
+							<sizeUnit>String</sizeUnit>
+							<busType>String</busType>
+							<busSubType>String</busSubType>
+							<deviceMount>String</deviceMount>
+						</Storage>
+						<NIC networkName="networkName" networkID="ID_25" id="ID_152">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>String</ipAssignment>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>String</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>String</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+						</NIC>
+						<NIC networkName="networkName" networkID="ID_25" id="ID_153">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>String</ipAssignment>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>String</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>String</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+						</NIC>
+						<MetaData id="ID_154">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+						<MetaData id="ID_155">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+					</VirtualMachine>
+					<Network dataCenterId="ID_25" id="ID_156" dataCenterName="datacentername">
+						<name>String</name>
+						<description>String</description>
+						<fenceMode>String</fenceMode>
+						<networkMask>String</networkMask>
+						<gatewayAddress>String</gatewayAddress>
+						<primaryDns>String</primaryDns>
+						<secondaryDns>String</secondaryDns>
+						<dnsSuffix>String</dnsSuffix>
+						<staticIpPool>String</staticIpPool>
+						<ipRangeStart>String</ipRangeStart>
+						<ipRangeEnd>String</ipRangeEnd>
+						<CIDR>String</CIDR>
+						<shared>false</shared>
+						<MetaData id="ID_157">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+						<MetaData id="ID_158">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+					</Network>
+					<Network dataCenterId="ID_25" id="ID_159" dataCenterName="datacentername">
+						<name>String</name>
+						<description>String</description>
+						<fenceMode>String</fenceMode>
+						<networkMask>String</networkMask>
+						<gatewayAddress>String</gatewayAddress>
+						<primaryDns>String</primaryDns>
+						<secondaryDns>String</secondaryDns>
+						<dnsSuffix>String</dnsSuffix>
+						<staticIpPool>String</staticIpPool>
+						<ipRangeStart>String</ipRangeStart>
+						<ipRangeEnd>String</ipRangeEnd>
+						<CIDR>String</CIDR>
+						<shared>false</shared>
+						<MetaData id="ID_160">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+						<MetaData id="ID_161">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+					</Network>
+				</VirtualMachineContainer>
+				<VirtualMachineContainer dataCenterId="ID_25" id="ID_162" dataCenterName="datacentername">
+					<name>String</name>
+					<description>String</description>
+					<runtimeLease>String</runtimeLease>
+					<storageLease>String</storageLease>
+					<serviceLevel>String</serviceLevel>
+					<powerOn>true</powerOn>
+					<deploy>true</deploy>
+					<domain>String</domain>
+					<VirtualMachine id="ID_163">
+						<vmName>String</vmName>
+						<computerName>String</computerName>
+						<description>String</description>
+						<templateName>String</templateName>
+						<templateServiceLevel>String</templateServiceLevel>
+						<storageProfile>String</storageProfile>
+						<customisationScript>String</customisationScript>
+						<VMOrder>0</VMOrder>
+						<VMStartDelay>0</VMStartDelay>
+						<VMStopDelay>0</VMStopDelay>
+						<VMStartAction>none</VMStartAction>
+						<VMStopAction>powerOff</VMStopAction>
+						<cpuCount>0</cpuCount>
+						<memory>0</memory>
+						<memoryUnit>String</memoryUnit>
+						<hardwareProfile>String</hardwareProfile>
+						<hatype>String</hatype>
+						<Storage id="ID_164">
+							<indexNumber>0</indexNumber>
+							<size>0</size>
+							<sizeUnit>String</sizeUnit>
+							<busType>String</busType>
+							<busSubType>String</busSubType>
+							<deviceMount>String</deviceMount>
+						</Storage>
+						<Storage id="ID_165">
+							<indexNumber>0</indexNumber>
+							<size>0</size>
+							<sizeUnit>String</sizeUnit>
+							<busType>String</busType>
+							<busSubType>String</busSubType>
+							<deviceMount>String</deviceMount>
+						</Storage>
+						<NIC networkName="networkName" networkID="ID_25" id="ID_166">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>String</ipAssignment>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>String</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>String</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+						</NIC>
+						<NIC networkName="networkName" networkID="ID_25" id="ID_167">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>String</ipAssignment>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>String</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>String</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+						</NIC>
+						<MetaData id="ID_168">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+						<MetaData id="ID_169">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+					</VirtualMachine>
+					<VirtualMachine id="ID_170">
+						<vmName>String</vmName>
+						<computerName>String</computerName>
+						<description>String</description>
+						<templateName>String</templateName>
+						<templateServiceLevel>String</templateServiceLevel>
+						<storageProfile>String</storageProfile>
+						<customisationScript>String</customisationScript>
+						<VMOrder>0</VMOrder>
+						<VMStartDelay>0</VMStartDelay>
+						<VMStopDelay>0</VMStopDelay>
+						<VMStartAction>none</VMStartAction>
+						<VMStopAction>guestShutdown</VMStopAction>
+						<cpuCount>0</cpuCount>
+						<memory>0</memory>
+						<memoryUnit>String</memoryUnit>
+						<hardwareProfile>String</hardwareProfile>
+						<hatype>String</hatype>
+						<Storage id="ID_171">
+							<indexNumber>0</indexNumber>
+							<size>0</size>
+							<sizeUnit>String</sizeUnit>
+							<busType>String</busType>
+							<busSubType>String</busSubType>
+							<deviceMount>String</deviceMount>
+						</Storage>
+						<Storage id="ID_172">
+							<indexNumber>0</indexNumber>
+							<size>0</size>
+							<sizeUnit>String</sizeUnit>
+							<busType>String</busType>
+							<busSubType>String</busSubType>
+							<deviceMount>String</deviceMount>
+						</Storage>
+						<NIC networkName="networkName" networkID="ID_25" id="ID_173">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>String</ipAssignment>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>String</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>String</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+						</NIC>
+						<NIC networkName="networkName" networkID="ID_25" id="ID_174">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>String</ipAssignment>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>String</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+							<Interface>
+								<interfaceNumber>0</interfaceNumber>
+								<staticIpPool>String</staticIpPool>
+								<networkMask>String</networkMask>
+								<name>String</name>
+								<staticIpAddress>String</staticIpAddress>
+								<isVip>true</isVip>
+								<VRRP>0</VRRP>
+							</Interface>
+						</NIC>
+						<MetaData id="ID_175">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+						<MetaData id="ID_176">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+					</VirtualMachine>
+					<Network dataCenterId="ID_25" id="ID_177" dataCenterName="datacentername">
+						<name>String</name>
+						<description>String</description>
+						<fenceMode>String</fenceMode>
+						<networkMask>String</networkMask>
+						<gatewayAddress>String</gatewayAddress>
+						<primaryDns>String</primaryDns>
+						<secondaryDns>String</secondaryDns>
+						<dnsSuffix>String</dnsSuffix>
+						<staticIpPool>String</staticIpPool>
+						<ipRangeStart>String</ipRangeStart>
+						<ipRangeEnd>String</ipRangeEnd>
+						<CIDR>String</CIDR>
+						<shared>false</shared>
+						<MetaData id="ID_178">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+						<MetaData id="ID_179">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+					</Network>
+					<Network dataCenterId="ID_25" id="ID_180" dataCenterName="datacentername">
+						<name>String</name>
+						<description>String</description>
+						<fenceMode>String</fenceMode>
+						<networkMask>String</networkMask>
+						<gatewayAddress>String</gatewayAddress>
+						<primaryDns>String</primaryDns>
+						<secondaryDns>String</secondaryDns>
+						<dnsSuffix>String</dnsSuffix>
+						<staticIpPool>String</staticIpPool>
+						<ipRangeStart>String</ipRangeStart>
+						<ipRangeEnd>String</ipRangeEnd>
+						<CIDR>String</CIDR>
+						<shared>false</shared>
+						<MetaData id="ID_181">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+						<MetaData id="ID_182">
+							<name>String</name>
+							<value>String</value>
+						</MetaData>
+					</Network>
+				</VirtualMachineContainer>
+				<MetaData id="ID_183">
+					<name>String</name>
+					<value>String</value>
+				</MetaData>
+				<MetaData id="ID_184">
+					<name>String</name>
+					<value>String</value>
+				</MetaData>
+			</EnvironmentDefinition>
+		</Environment>
+		<EnvironmentContainerDefinition id="ID_185">
+			<name>String</name>
+			<version>String</version>
+			
+			<Network dataCenterId="ID_25" id="ID_186" gatewayId="ID_25" dataCenterName="datacentername">
+				<name>String</name>
+				<description>String</description>
+				<fenceMode>String</fenceMode>
+				<networkMask>String</networkMask>
+				<gatewayAddress>String</gatewayAddress>
+				<primaryDns>String</primaryDns>
+				<secondaryDns>String</secondaryDns>
+				<dnsSuffix>String</dnsSuffix>
+				<staticIpPool>String</staticIpPool>
+				<ipRangeStart>String</ipRangeStart>
+				<ipRangeEnd>String</ipRangeEnd>
+				<CIDR>String</CIDR>
+				<shared>false</shared>
+				<MetaData id="ID_187">
+					<name>String</name>
+					<value>String</value>
+				</MetaData>
+				<MetaData id="ID_188">
+					<name>String</name>
+					<value>String</value>
+				</MetaData>
+				<peerNetworkName>String</peerNetworkName>
+				<peerEnvironmentName>String</peerEnvironmentName>
+			</Network>
+			<Network dataCenterId="ID_25" id="ID_189" gatewayId="ID_25" dataCenterName="datacentername">
+				<name>String</name>
+				<description>String</description>
+				<fenceMode>String</fenceMode>
+				<networkMask>String</networkMask>
+				<gatewayAddress>String</gatewayAddress>
+				<primaryDns>String</primaryDns>
+				<secondaryDns>String</secondaryDns>
+				<dnsSuffix>String</dnsSuffix>
+				<staticIpPool>String</staticIpPool>
+				<ipRangeStart>String</ipRangeStart>
+				<ipRangeEnd>String</ipRangeEnd>
+				<CIDR>String</CIDR>
+				<shared>false</shared>
+				<MetaData id="ID_190">
+					<name>String</name>
+					<value>String</value>
+				</MetaData>
+				<MetaData id="ID_191">
+					<name>String</name>
+					<value>String</value>
+				</MetaData>
+				<peerNetworkName>String</peerNetworkName>
+				<peerEnvironmentName>String</peerEnvironmentName>
+			</Network>
+			<Gateway id="ID_192">
+				<name>String</name>
+				<NAT id="ID_193">
+					<appliedOn>String</appliedOn>
+					<originalSourceIpOrRange>String</originalSourceIpOrRange>
+					<translatedSourceIpOrRange>String</translatedSourceIpOrRange>
+					<enabled>true</enabled>
+					<DNAT id="ID_194">
+						<translatedPort>String</translatedPort>
+						<protocolType>String</protocolType>
+						<protocolOriginalPort>String</protocolOriginalPort>
+						<protocolIcmpType>String</protocolIcmpType>
+					</DNAT>
+				</NAT>
+				<NAT id="ID_195">
+					<appliedOn>String</appliedOn>
+					<originalSourceIpOrRange>String</originalSourceIpOrRange>
+					<translatedSourceIpOrRange>String</translatedSourceIpOrRange>
+					<enabled>true</enabled>
+					<DNAT id="ID_196">
+						<translatedPort>String</translatedPort>
+						<protocolType>String</protocolType>
+						<protocolOriginalPort>String</protocolOriginalPort>
+						<protocolIcmpType>String</protocolIcmpType>
+					</DNAT>
+				</NAT>
+			</Gateway>
+			<Gateway id="ID_197">
+				<name>String</name>
+				<NAT id="ID_198">
+					<appliedOn>String</appliedOn>
+					<originalSourceIpOrRange>String</originalSourceIpOrRange>
+					<translatedSourceIpOrRange>String</translatedSourceIpOrRange>
+					<enabled>true</enabled>
+					<DNAT id="ID_199">
+						<translatedPort>String</translatedPort>
+						<protocolType>String</protocolType>
+						<protocolOriginalPort>String</protocolOriginalPort>
+						<protocolIcmpType>String</protocolIcmpType>
+					</DNAT>
+				</NAT>
+				<NAT id="ID_200">
+					<appliedOn>String</appliedOn>
+					<originalSourceIpOrRange>String</originalSourceIpOrRange>
+					<translatedSourceIpOrRange>String</translatedSourceIpOrRange>
+					<enabled>true</enabled>
+					<DNAT id="ID_201">
+						<translatedPort>String</translatedPort>
+						<protocolType>String</protocolType>
+						<protocolOriginalPort>String</protocolOriginalPort>
+						<protocolIcmpType>String</protocolIcmpType>
+					</DNAT>
+				</NAT>
+			</Gateway>
+			<DataCenter id="ID_202">
+				<name>String</name>
+			</DataCenter>
+			<DataCenter id="ID_203">
+				<name>String</name>
+			</DataCenter>
+		</EnvironmentContainerDefinition>
+		<EnvironmentContainerDefinition id="ID_204">
+			<name>String</name>
+			<version>String</version>
+			
+			<Network dataCenterId="ID_25" id="ID_205" gatewayId="ID_25" dataCenterName="datacentername">
+				<name>String</name>
+				<description>String</description>
+				<fenceMode>String</fenceMode>
+				<networkMask>String</networkMask>
+				<gatewayAddress>String</gatewayAddress>
+				<primaryDns>String</primaryDns>
+				<secondaryDns>String</secondaryDns>
+				<dnsSuffix>String</dnsSuffix>
+				<staticIpPool>String</staticIpPool>
+				<ipRangeStart>String</ipRangeStart>
+				<ipRangeEnd>String</ipRangeEnd>
+				<CIDR>String</CIDR>
+				<shared>false</shared>
+				<MetaData id="ID_206">
+					<name>String</name>
+					<value>String</value>
+				</MetaData>
+				<MetaData id="ID_207">
+					<name>String</name>
+					<value>String</value>
+				</MetaData>
+				<peerNetworkName>String</peerNetworkName>
+				<peerEnvironmentName>String</peerEnvironmentName>
+			</Network>
+			<Network dataCenterId="ID_25" id="ID_208" gatewayId="ID_25" dataCenterName="datacentername">
+				<name>String</name>
+				<description>String</description>
+				<fenceMode>String</fenceMode>
+				<networkMask>String</networkMask>
+				<gatewayAddress>String</gatewayAddress>
+				<primaryDns>String</primaryDns>
+				<secondaryDns>String</secondaryDns>
+				<dnsSuffix>String</dnsSuffix>
+				<staticIpPool>String</staticIpPool>
+				<ipRangeStart>String</ipRangeStart>
+				<ipRangeEnd>String</ipRangeEnd>
+				<CIDR>String</CIDR>
+				<shared>false</shared>
+				<MetaData id="ID_209">
+					<name>String</name>
+					<value>String</value>
+				</MetaData>
+				<MetaData id="ID_210">
+					<name>String</name>
+					<value>String</value>
+				</MetaData>
+				<peerNetworkName>String</peerNetworkName>
+				<peerEnvironmentName>String</peerEnvironmentName>
+			</Network>
+			<Gateway id="ID_211">
+				<name>String</name>
+				<NAT id="ID_212">
+					<appliedOn>String</appliedOn>
+					<originalSourceIpOrRange>String</originalSourceIpOrRange>
+					<translatedSourceIpOrRange>String</translatedSourceIpOrRange>
+					<enabled>true</enabled>
+					<DNAT id="ID_213">
+						<translatedPort>String</translatedPort>
+						<protocolType>String</protocolType>
+						<protocolOriginalPort>String</protocolOriginalPort>
+						<protocolIcmpType>String</protocolIcmpType>
+					</DNAT>
+				</NAT>
+				<NAT id="ID_214">
+					<appliedOn>String</appliedOn>
+					<originalSourceIpOrRange>String</originalSourceIpOrRange>
+					<translatedSourceIpOrRange>String</translatedSourceIpOrRange>
+					<enabled>true</enabled>
+					<DNAT id="ID_215">
+						<translatedPort>String</translatedPort>
+						<protocolType>String</protocolType>
+						<protocolOriginalPort>String</protocolOriginalPort>
+						<protocolIcmpType>String</protocolIcmpType>
+					</DNAT>
+				</NAT>
+			</Gateway>
+			<Gateway id="ID_216">
+				<name>String</name>
+				<NAT id="ID_217">
+					<appliedOn>String</appliedOn>
+					<originalSourceIpOrRange>String</originalSourceIpOrRange>
+					<translatedSourceIpOrRange>String</translatedSourceIpOrRange>
+					<enabled>true</enabled>
+					<DNAT id="ID_218">
+						<translatedPort>String</translatedPort>
+						<protocolType>String</protocolType>
+						<protocolOriginalPort>String</protocolOriginalPort>
+						<protocolIcmpType>String</protocolIcmpType>
+					</DNAT>
+				</NAT>
+				<NAT id="ID_219">
+					<appliedOn>String</appliedOn>
+					<originalSourceIpOrRange>String</originalSourceIpOrRange>
+					<translatedSourceIpOrRange>String</translatedSourceIpOrRange>
+					<enabled>true</enabled>
+					<DNAT id="ID_220">
+						<translatedPort>String</translatedPort>
+						<protocolType>String</protocolType>
+						<protocolOriginalPort>String</protocolOriginalPort>
+						<protocolIcmpType>String</protocolIcmpType>
+					</DNAT>
+				</NAT>
+			</Gateway>
+			<DataCenter id="ID_221">
+				<name>String</name>
+			</DataCenter>
+			<DataCenter id="ID_222">
+				<name>String</name>
+			</DataCenter>
+		</EnvironmentContainerDefinition>
+	</EnvironmentContainer>
+</GeographicContainer>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>EBA - Environment Build Automation</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            EBA - Environment Build Automation
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    
+                    <div id="main-content" class="wiki-content group">
+                    <h1 id="EBA-EnvironmentBuildAutomation-Introduction">Introduction</h1><p>A set of environment build tools has been developed as part of the Home Office IPT programme. This project delivers these tools in a re-usable way, showing how they have been used together on the IPT programme to facilitate the provision of thousands of VM's across many environments, with tooling support for project teams to deploy their own applications to their allotted environments.</p><p>The IPT programme environment build tools have been packaged into 4 projects and released to the Home Office Github account. Two of those packages are fully open sourced and available to the public and two of them are available on an invitational basis only.</p><ul><li><a href="EBA---Visio-Physical-Design_57512650.html">EBA - Visio</a> (Open sourced)</li><li><a href="EBA---ACloud_61115560.html">EBA - ACloud</a> (Open sourced)</li><li>EBA - Self Service</li><li>EBA - Environment Build</li></ul><p>The footprint of these projects onto the overall design is shown in the diagram below. </p><p><span class="confluence-embedded-file-wrapper"><img class="confluence-embedded-image" src="attachments/65476887/65481011.png" data-image-src="attachments/65476887/65481011.png" data-unresolved-comment-count="0" data-linked-resource-id="65481011" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="E2E Environment Build scoped.png" data-base-url="https://<confluenceurl>" data-linked-resource-content-type="image/png" data-linked-resource-container-id="65476887" data-linked-resource-container-version="31"></span></p><p>Note that the open sourced ACloud and Visio have been made to work together (see <a href="EBA---OS---Landing-Page_65478538.html">EBA - OS - Landing Page</a>) in the absence of full Environment Build framework for the general public; if you are setting up a small number of machines this is fine. However if you need thousands of machines and years of history, the Environment Build framework (consisting of the &quot;EBA - Environment Build&quot; yellow box above, plus the &quot;EBA - ACloud&quot; and &quot;EBA - Visio&quot; components in red) is useful to aid maintainability.</p><h1 id="EBA-EnvironmentBuildAutomation-Overview">Overview</h1><p><a href="EBA---Environment-Build-Automation---an-overview_65477488.html">EBA - Environment Build Automation - an overview</a></p><h1 id="EBA-EnvironmentBuildAutomation-Architecture">Architecture</h1><p>An architectural overview of the environment build automation tooling is at <a href="EBA---Architecture-Overview_65471092.html">EBA - Architecture Overview</a>.</p><p>The functional interactions that illustrate how the Environment Build and Management process works can be found here:  <a href="EBA---Key-Functional-Interactions_65482098.html">EBA - Key Functional Interactions</a></p><p>A component guide can be found here;  <a href="EBA---Component-Design_65486679.html">EBA - Component Design</a></p><h1 id="EBA-EnvironmentBuildAutomation-UserGuides">User Guides</h1><p>The following set of guides have been assembled to show how the EBA tools can be used to design and provision cloud based environments as well as deploy configured applications across those environments.</p><ul><li><a href="EBA---Visio-Physical-Design_57512650.html">EBA - Visio Physical Design</a> - How to use the Visio Physical Design tool to create physical network designs that can be used by the Environment Build tool.</li><li><a href="EBA---Detailed-Jenkins-Environment-Build-flow_65490998.html">EBA - Detailed Jenkins Environment Build flow</a> - How to use the Environment Build tool to provision environments in the cloud.<ul><li><a href="EBA---Build-Plans_65491060.html">EBA - Build Plans</a> - How to create the overall build plan that the Environment Build tool requires to build your environments.</li></ul></li></ul><ul><li><a href="EBA---Deployment-Self-Service-User-guides_57514068.html">EBA - Deployment Self Service User guides</a> - How to use Self Service to deploy applications to environments.</li></ul><h1 id="EBA-EnvironmentBuildAutomation-Standardsandusefullinks">Standards and useful links</h1><p>This is collection of standards that the EBA tools are known to work with. Care should be taken when deviating from these standards as this could cause the EBA tool chain to not work as expected. For example the Host Naming Standard (see <a href="EBA---Infrastructure-Naming-Standards_58295113.html">EBA - Infrastructure Naming Standards</a>) is used as a source of facts when working with Puppet and Hiera data and 'role' is taken as the first 3 characters of the hostname.</p><ul><li><a href="EBA---Infrastructure-Naming-Standards_58295113.html">EBA - Infrastructure Naming Standards</a> - The infrastructure naming standards are important, besides just being a useful guide, as following them supports a source of &quot;facts&quot; that can be adopted when authoring puppet data.</li><li><a href="EBA---Glossary_65483650.html">EBA - Glossary</a></li></ul><p> </p><p> </p><p> </p>
+                    </div>
+
+                                        
+                    
+                 
+                </div>             </div> 
+            
+        </div>     </body>
+</html>

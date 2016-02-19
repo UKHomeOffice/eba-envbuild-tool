@@ -1,0 +1,196 @@
+<?xml version="1.0" standalone="no"?>
+<GeographicContainer id="_1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://ebsa.ipt.com/AgnosticCloudConfig-1.0">
+	<account/>
+	<region/>
+	<EnvironmentContainer id="SKYSCAPE">
+		<name>np</name>
+		<provider>SKYSCAPE</provider>
+		<Environment id="np">
+			<name>UNITTESTvCloudTestEnv1</name>
+			<notes/>
+			<EnvironmentDefinition id="UNITTESTvCloudTestEnv1" environmentDefinitionType="Physical">
+				<name>UNITTESTvCloudTestEnv1</name>
+				<version>0.15</version>
+				<cidr/>
+				<VirtualMachineContainer id="VirtualMachineContainer_BC_1" dataCenterName="EBATestVDC">
+					<name>VirtualMachineContainer_BC_1</name>
+					<description>VirtualMachineContainer_BC_1</description>
+					<runtimeLease/>
+					<storageLease/>
+					<serviceLevel>EBATestVDC</serviceLevel>
+					<powerOn>true</powerOn>
+					<deploy>true</deploy>
+					<domain>boundry1.test.local</domain>
+					<VirtualMachine id="unittestnboundry01">
+						<vmName>unittestnboundry01</vmName>
+						<computerName>unittestnboundry01</computerName>
+						<description>Internet Firewall</description>
+						<templateName>CentOS64-64BIT</templateName>
+						<templateServiceLevel>EBATestVDC</templateServiceLevel>
+						<storageProfile>SSD-Accelerated</storageProfile>
+						<customisationScript/>
+						<cpuCount>1</cpuCount>
+						<memory>1</memory>
+						<memoryUnit>GB</memoryUnit>
+						<hardwareProfile/>
+						<hatype/>
+						<Storage id="unittestnboundry01_disk1">
+							<indexNumber>1</indexNumber>
+							<size>20</size>
+							<sizeUnit>GB</sizeUnit>
+							<busType/>
+							<busSubType/>
+							<deviceMount/>
+						</Storage>
+						<NIC id="unittestnboundry01_nic0" networkName="UNITTEST_PUBLIC_SUBNET">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool>IP Pool</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>extpubnic01</name>
+								<staticIpAddress>10.16.0.12</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+						<NIC id="unittestnboundry01_nic1" networkName="UNITTEST_APPNET_E1_BC_1">
+							<indexNumber>1</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool>IP Pool</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>intpubnic01</name>
+								<staticIpAddress>10.16.1.12</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+					</VirtualMachine>
+					<VirtualMachine id="unittestbastion01">
+						<vmName>unittestbastion01</vmName>
+						<computerName>unittestbastion01</computerName>
+						<description>SSH Jump</description>
+						<templateName>CentOS64-64BIT</templateName>
+						<templateServiceLevel>EBATestVDC</templateServiceLevel>
+						<storageProfile>SSD-Accelerated</storageProfile>
+						<customisationScript/>
+						<cpuCount>1</cpuCount>
+						<memory>1</memory>
+						<memoryUnit>GB</memoryUnit>
+						<hardwareProfile/>
+						<hatype/>
+						<Storage id="unittestbastion01_disk1">
+							<indexNumber>1</indexNumber>
+							<size>20</size>
+							<sizeUnit>GB</sizeUnit>
+							<busType/>
+							<busSubType/>
+							<deviceMount/>
+						</Storage>
+						<NIC id="unittestbastion01_nic0" networkName="UNITTEST_APPNET_E1_BC_1">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool>IP Pool</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>basextnic01</name>
+								<staticIpAddress>10.16.1.13</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+						<NIC id="unittestbastion01_nic1" networkName="UNITTEST_APPNET_E2_BC_2">
+							<indexNumber>1</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool>IP Pool</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>basintnic01</name>
+								<staticIpAddress>10.16.2.12</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+					</VirtualMachine>
+					<VirtualMachine id="unittestsfirewall01">
+						<vmName>unittestsfirewall01</vmName>
+						<computerName>unittestsfirewall01</computerName>
+						<description>South Firewall</description>
+						<templateName>CentOS64-64BIT</templateName>
+						<templateServiceLevel>EBATestVDC</templateServiceLevel>
+						<storageProfile>SSD-Accelerated</storageProfile>
+						<customisationScript/>
+						<cpuCount>1</cpuCount>
+						<memory>1</memory>
+						<memoryUnit>GB</memoryUnit>
+						<hardwareProfile/>
+						<hatype/>
+						<Storage id="unittestsfirewall01_disk1">
+							<indexNumber>1</indexNumber>
+							<size>20</size>
+							<sizeUnit>GB</sizeUnit>
+							<busType/>
+							<busSubType/>
+							<deviceMount/>
+						</Storage>
+						<NIC id="unittestsfirewall01_nic0" networkName="UNITTEST_INTERNAL_BOUNDRY_CONTROL_ACCESS">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool>IP Pool</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>intappnic01</name>
+								<staticIpAddress>10.16.15.12</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+						<NIC id="unittestsfirewall01_nic1" networkName="UNITTEST_APPNET_E2_BC_2">
+							<indexNumber>1</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>Static Manual</ipAssignment>
+							<Interface>
+								<staticIpPool>IP Pool</staticIpPool>
+								<networkMask>255.255.255.0</networkMask>
+								<name>intbasnic01</name>
+								<staticIpAddress>10.16.2.13</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+					</VirtualMachine>
+					<Network id="UNITTEST_APPNET_E1_BC_1" dataCenterName="">
+						<name>UNITTEST_APPNET_E1_BC_1</name>
+						<description>BC Application network E1 Internal Subnet</description>
+						<fenceMode>NATROUTED</fenceMode>
+						<networkMask>255.255.255.0</networkMask>
+						<gatewayAddress>10.16.1.1</gatewayAddress>
+						<primaryDns>10.16.1.1</primaryDns>
+						<secondaryDns/>
+						<dnsSuffix>boundry1.test.local</dnsSuffix>
+						<staticIpPool>10.16.1.0/24</staticIpPool>
+						<ipRangeStart>10.16.1.11</ipRangeStart>
+						<ipRangeEnd>10.16.1.254</ipRangeEnd>
+						<CIDR>10.16.1.0/24</CIDR>
+						<shared>true</shared>
+					</Network>
+					<Network id="UNITTEST_APPNET_E2_BC_2" dataCenterName="">
+						<name>UNITTEST_APPNET_E2_BC_2</name>
+						<description>BC Application network E2 Internal Subnet</description>
+						<fenceMode>NATROUTED</fenceMode>
+						<networkMask>255.255.255.0</networkMask>
+						<gatewayAddress>10.16.2.1</gatewayAddress>
+						<primaryDns>10.16.1.1</primaryDns>
+						<secondaryDns/>
+						<dnsSuffix>boundry1.test.local</dnsSuffix>
+						<staticIpPool>10.16.2.0/24</staticIpPool>
+						<ipRangeStart>10.16.2.11</ipRangeStart>
+						<ipRangeEnd>10.16.2.254</ipRangeEnd>
+						<CIDR>10.16.2.0/24</CIDR>
+						<shared>true</shared>
+					</Network>
+				</VirtualMachineContainer>
+			</EnvironmentDefinition>
+		</Environment>
+	</EnvironmentContainer>
+</GeographicContainer>

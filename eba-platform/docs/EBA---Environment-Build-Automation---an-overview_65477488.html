@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>EBA - Environment Build Automation - an overview</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            EBA - Environment Build Automation - an overview
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    
+                    <div id="main-content" class="wiki-content group">
+                    <h1 id="EBA-EnvironmentBuildAutomation-anoverview-Context">Context</h1><p>Environment Build Automation in this context is using the definition of an environment from a Visio drawing to automatically construct that environment in the cloud.</p><p>An environment build capability was developed to make environment builds easy, efficient and repeatable. Key features:</p><ul><li>An end to end environment build system with as little human interaction as possible</li><li>Humans only responsible for:<ul><li>Environment design</li><li>Environment build execution</li></ul></li></ul><p>Multiple cloud providers have been targeted and piloted although only Skyscape (VMware) and Amazon Web Services (AWS) are supported at this time.</p><h1 id="EBA-EnvironmentBuildAutomation-anoverview-Overview">Overview</h1><p>
+
+<map id="gliffy-map-65477466-921" name="gliffy-map-65477466-921"></map>
+<table width="100%" class="gliffy-macro-table">
+    <tr>
+        <td >
+            <table class="gliffy-macro-inner-table">
+                <caption align="bottom">
+ </caption>
+
+                <tr>
+                    <td>
+                        <img style="border: none; width: 1290px;" usemap="#gliffy-map-65477466-921" src="attachments/65477488/65477465.png" alt="" class="gliffy-macro-image"/>
+                    </td>
+                </tr>
+            </table>
+ 
+        </td>
+    </tr>
+</table>
+
+
+</p><p>In a single line, an operator logs into Jenkins and selects the environment, action and version they want to deploy, clicks &quot;Generate Plan&quot; and reviews the output, then clicks &quot;Build&quot; and the system is built in the Cloud.</p><p>In order for this to happen, there needs to be a set of Visio infrastructure designs (see <a href="EBA---Visio-Physical-Design_57512650.html">EBA - Visio Physical Design</a>) and build plans (see <a href="EBA---Build-Plans_65491060.html">EBA - Build Plans</a>) already set up. This process is very similar to the Open Sourced project found in <a href="EBA---OS---Landing-Page_65478538.html">EBA - OS - Landing Page</a> as it uses the same Visio and ACloud tools, however in this full EBA we add in a Jenkins instance to orchestrate and an Environment Database (also known as the &quot;Environment Build Repository&quot; in other diagrams) instance to maintain history.</p><h2 id="EBA-EnvironmentBuildAutomation-anoverview-Datamodels">Data models</h2><ul><li>The infrastructure designs are based around <a class="external-link" href="https://<stashurl>/projects/EBSAT/repos/ebsa-platform-components/browse/Function/acloud/aCloudConfiguration/src/main/resources/AgnosticCloudConfig-1.0.xsd" rel="nofollow">AgnosticCloudConfig-1.0.xsd</a> which defines the entities of a physical environment e.g. the VMs and networks (see<a href="EBA---ACloud_61115560.html#EBA-ACloud-Acloud_XSD"> EBA - ACloud XSD</a>). This is a provider-agnostic data model that allows infrastructure to be provisioned. XML that meets this XSD is known as the &quot;Configuration XML&quot;. This is used throughout the end to end solution starting with the Visio XML export right through to the aCloud client. See this link for the rationale in creating the <a href="EBA---Agnostic-Cloud-Schema_64881745.html">agnostic cloud environment configuration schema</a>.</li><li>The Build Plans are based around <a href="EBA---Build-Plans_65491060.html">EBA - Build Plans</a> which describe the set of actions needed to build an entire set of infrastructure. These can contain many Execution Plans and refer to many different Visio environment documents (via their exported configuration xml files - see <a href="EBA---Visio-Physical-Design_57512650.html">EBA - Visio Physical Design</a>)</li></ul><ul><li>The Execution Plans are based around <a class="external-link" href="https://<stashurl>/projects/EBSAT/repos/ebsa-platform-components/browse/Function/acloud/aCloudConfiguration/src/main/resources/aCloudCommand-1.0.xsd" rel="nofollow">aCloudCommand-1.0.xsd</a> which defines commands that can be performed on entities within the physical environment e.g. create VM, stop VM, etc. Used when creating Build Plans to describe the steps needed to build the entities of a physical environment. See <a href="EBA---Sample-Execution-Plans_63242319.html">EBA - Sample Execution Plans</a>.</li></ul><p>These XSD's form the data interfaces between the various components. Generally speaking, as long as the XML is correct any tool can be used to create it - it doesn't have to be Visio, it could be Notepad.</p><h2 id="EBA-EnvironmentBuildAutomation-anoverview-processProcessflowforEnvironmentBuild"><span class="confluence-anchor-link" id="EBA-EnvironmentBuildAutomation-anoverview-process"></span>Process flow for Environment Build</h2><p>This diagram shows the overall flow from the following inputs;</p><ul><li>an Infrastructure Architect designing the Visio infrastructure+network layouts, and exporting them to XML</li><li>A DevOps person creating the build plan i.e. the sequence of steps required to get that environment running (including creating hardware, puppet, any customisation scripts and orchestration), and putting that into Git (Stash). <br /><br /></li></ul><p>
+
+<map id="gliffy-map-30279087-5927" name="gliffy-map-30279087-5927"></map>
+<table width="100%" class="gliffy-macro-table">
+    <tr>
+        <td >
+            <table class="gliffy-macro-inner-table">
+                <caption align="bottom">
+ </caption>
+
+                <tr>
+                    <td>
+                        <img style="border: none; width: 1253px;" usemap="#gliffy-map-30279087-5927" src="attachments/28287305/30279088.png" alt="" class="gliffy-macro-image"/>
+                    </td>
+                </tr>
+            </table>
+ 
+        </td>
+    </tr>
+</table>
+
+
+</p><p>Given the above inputs, an Operator would log into the Environment Management Jenkins (bottom left corner of the diagram), and select the Environment:Action pair (two strings concatenated together), and a version. The Environment:Action pair is gleaned from the build plans in Stash (it does a local clone), and the Version from the database (which gets it from the <a class="external-link" href="https://<stashurl>/projects/EBSAT/repos/ebsa-ci-components/browse/Function/environment-build-metadata-import" rel="nofollow">environment-build-metadata-import</a> project (this is the IMPORT_VISIO_EXTRACT job in the above diagram), which polls Stash and uploads new Configuration XMLs into the database as they come in; ultimately the Version is as specified in the Version Information tab on the Visio VSD file). On clicking &quot;Build&quot;, Jenkins calls the <a class="external-link" href="https://<stashurl>/projects/EBSAT/repos/ebsa-ci-components/browse/Function/environment-build-plugin" rel="nofollow">environment-build-plugin</a> code, which looks up extra details from the Environment Management Database through the <a class="external-link" href="https://<stashurl>/projects/EBSAT/repos/ebsa-ci-components/browse/Function/environment-build-metadata-export" rel="nofollow">environment-build-metadata-export</a> code, and sends the resulting commands to ACloud to build infrastructure or executes scripts over SSH.</p><p>More details can be found in the <a href="EBA---Component-Design_65486679.html">EBA - Component Design</a> and in <a href="EBA---Architecture-Overview_65471092.html">EBA - Architecture Overview</a></p><p> </p><p><u><br /></u></p>
+                    </div>
+
+                                        
+                    
+                 
+                </div>             </div> 
+            
+        </div>     </body>
+</html>

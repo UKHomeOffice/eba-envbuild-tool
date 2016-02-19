@@ -1,0 +1,143 @@
+<?xml version="1.0"?>
+<vc:Organisation xmlns:vc="http://ebsa.ipt.com/VCloudConfig-2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://ebsa.ipt.com/VCloudConfig-2.0 file:///Y:/ebsa/ipt/vcloudclient/vcloud/vCloudConfiguration/src/main/resources/vCloudConfig-2.0.xsd">
+	<vc:Configuration>
+        <vc:EdgeGateway>
+            <vc:Name>nft000c2i2-1</vc:Name>
+            <vc:EdgeGatewayServices/>
+            <vc:VirtualDataCenter>Home Office IPT NP (IL2-PROD-STANDARD)</vc:VirtualDataCenter>
+        </vc:EdgeGateway>
+		<vc:OrganisationNetwork>
+			<vc:VirtualDataCenter>Home Office IPT NP (IL2-PROD-STANDARD)</vc:VirtualDataCenter>
+			<vc:EdgeGateway>nft000c2i2-1</vc:EdgeGateway>
+			<vc:Name>HO_IPT_NP_PRP1_COBC_MABC_MAN_I1</vc:Name>
+			<vc:Description>Isolated network - Core Boundary Control to the Management Boundary Control in PRP1</vc:Description>
+			<vc:Shared>true</vc:Shared>
+			<vc:NetworkSettings>
+				<vc:FenceMode>ISOLATED</vc:FenceMode>
+				<vc:GatewayAddress>10.32.128.1</vc:GatewayAddress>
+				<vc:NetworkMask>255.255.255.0</vc:NetworkMask>
+				<vc:PrimaryDNS>10.16.16.7</vc:PrimaryDNS>
+				<vc:IPRange>
+					<vc:startAddress>10.32.128.2</vc:startAddress>
+					<vc:endAddress>10.32.128.254</vc:endAddress>
+				</vc:IPRange>
+			</vc:NetworkSettings>
+		</vc:OrganisationNetwork>
+		<vc:OrganisationNetwork>
+			<vc:VirtualDataCenter>Home Office IPT NP (IL2-PROD-STANDARD)</vc:VirtualDataCenter>
+			<vc:EdgeGateway>nft000c2i2-1</vc:EdgeGateway>
+			<vc:Name>HO_IPT_NP_PRP1_PRZO_MABC_MAN_I1</vc:Name>
+			<vc:Description>Isolated network - Private Application Zone to the Management Boundary Control in PRP1</vc:Description>
+			<vc:Shared>true</vc:Shared>
+			<vc:NetworkSettings>
+				<vc:FenceMode>ISOLATED</vc:FenceMode>
+				<vc:GatewayAddress>10.32.144.1</vc:GatewayAddress>
+				<vc:NetworkMask>255.255.255.0</vc:NetworkMask>
+				<vc:PrimaryDNS>10.16.16.7</vc:PrimaryDNS>
+				<vc:IPRange>
+					<vc:startAddress>10.32.144.2</vc:startAddress>
+					<vc:endAddress>10.32.144.254</vc:endAddress>
+				</vc:IPRange>
+			</vc:NetworkSettings>
+		</vc:OrganisationNetwork>
+		<vc:OrganisationNetwork>
+			<vc:VirtualDataCenter>Home Office IPT NP (IL2-PROD-STANDARD)</vc:VirtualDataCenter>
+			<vc:EdgeGateway>nft000c2i2-1</vc:EdgeGateway>
+			<vc:Name>HO_IPT_NP_PRP1_DABC_MABC_MAN_I1</vc:Name>
+			<vc:Description>Isolated network - Data Boundary Control to the Management Boundary Control in PRP1</vc:Description>
+			<vc:Shared>true</vc:Shared>
+			<vc:NetworkSettings>
+				<vc:FenceMode>ISOLATED</vc:FenceMode>
+				<vc:GatewayAddress>10.32.160.1</vc:GatewayAddress>
+				<vc:NetworkMask>255.255.255.0</vc:NetworkMask>
+				<vc:PrimaryDNS>10.16.16.7</vc:PrimaryDNS>
+				<vc:IPRange>
+					<vc:startAddress>10.32.160.2</vc:startAddress>
+					<vc:endAddress>10.32.160.254</vc:endAddress>
+				</vc:IPRange>
+			</vc:NetworkSettings>
+		</vc:OrganisationNetwork>
+		<vc:OrganisationNetwork>
+			<vc:VirtualDataCenter>Home Office IPT NP (IL2-PROD-STANDARD)</vc:VirtualDataCenter>
+			<vc:EdgeGateway>nft000c2i2-1</vc:EdgeGateway>
+			<vc:Name>HO_IPT_NP_PRP1_DAZO_MABC_MAN_I1</vc:Name>
+			<vc:Description>Isolated network - Data Zone to the Management Boundary Control in PRP1</vc:Description>
+			<vc:Shared>true</vc:Shared>
+			<vc:NetworkSettings>
+				<vc:FenceMode>ISOLATED</vc:FenceMode>
+				<vc:GatewayAddress>10.32.176.1</vc:GatewayAddress>
+				<vc:NetworkMask>255.255.255.0</vc:NetworkMask>
+				<vc:PrimaryDNS>10.16.16.7</vc:PrimaryDNS>
+				<vc:IPRange>
+					<vc:startAddress>10.32.176.2</vc:startAddress>
+					<vc:endAddress>10.32.176.254</vc:endAddress>
+				</vc:IPRange>
+			</vc:NetworkSettings>
+		</vc:OrganisationNetwork>
+		<vc:OrganisationNetwork>
+			<vc:VirtualDataCenter>Home Office IPT NP (IL2-PROD-STANDARD)</vc:VirtualDataCenter>
+			<vc:EdgeGateway>nft000c2i2-1</vc:EdgeGateway>
+			<vc:Name>HO_IPT_NP_PRP1_ESZO_MABC_MAN_I1</vc:Name>
+			<vc:Description>Isolated network - External Simulator Zone to the Management Boundary Control in PRP1</vc:Description>
+			<vc:Shared>true</vc:Shared>
+			<vc:NetworkSettings>
+				<vc:FenceMode>ISOLATED</vc:FenceMode>
+				<vc:GatewayAddress>10.32.192.1</vc:GatewayAddress>
+				<vc:NetworkMask>255.255.255.0</vc:NetworkMask>
+				<vc:PrimaryDNS>10.16.16.7</vc:PrimaryDNS>
+				<vc:IPRange>
+					<vc:startAddress>10.32.192.2</vc:startAddress>
+					<vc:endAddress>10.32.192.254</vc:endAddress>
+				</vc:IPRange>
+			</vc:NetworkSettings>
+		</vc:OrganisationNetwork>
+		<vc:OrganisationNetwork>
+			<vc:VirtualDataCenter>Home Office IPT NP (IL2-PROD-STANDARD)</vc:VirtualDataCenter>
+			<vc:EdgeGateway>nft000c2i2-1</vc:EdgeGateway>
+			<vc:Name>HO_IPT_NP_PRP1_COBC_DABC_APP_I1</vc:Name>
+			<vc:Description>Isolated network - Core Boundary Control to the Data Boundary Control in PRP1</vc:Description>
+			<vc:Shared>true</vc:Shared>
+			<vc:NetworkSettings>
+				<vc:FenceMode>ISOLATED</vc:FenceMode>
+				<vc:GatewayAddress>10.32.15.1</vc:GatewayAddress>
+				<vc:NetworkMask>255.255.255.0</vc:NetworkMask>
+				<vc:IPRange>
+					<vc:startAddress>10.32.15.2</vc:startAddress>
+					<vc:endAddress>10.32.15.254</vc:endAddress>
+				</vc:IPRange>
+			</vc:NetworkSettings>
+		</vc:OrganisationNetwork>
+		<vc:OrganisationNetwork>
+			<vc:VirtualDataCenter>Home Office IPT NP (IL2-PROD-STANDARD)</vc:VirtualDataCenter>
+			<vc:EdgeGateway>nft000c2i2-1</vc:EdgeGateway>
+			<vc:Name>HO_IPT_NP_PRP1_DABC_DAZO_APP_I1</vc:Name>
+			<vc:Description>Isolated network - Data Boundary Control to the Data Zone in PRP1</vc:Description>
+			<vc:Shared>true</vc:Shared>
+			<vc:NetworkSettings>
+				<vc:FenceMode>ISOLATED</vc:FenceMode>
+				<vc:GatewayAddress>10.32.47.1</vc:GatewayAddress>
+				<vc:NetworkMask>255.255.255.0</vc:NetworkMask>
+				<vc:IPRange>
+					<vc:startAddress>10.32.47.2</vc:startAddress>
+					<vc:endAddress>10.32.47.254</vc:endAddress>
+				</vc:IPRange>
+			</vc:NetworkSettings>
+		</vc:OrganisationNetwork>
+		<vc:OrganisationNetwork>
+			<vc:VirtualDataCenter>Home Office IPT NP (IL2-PROD-STANDARD)</vc:VirtualDataCenter>
+			<vc:EdgeGateway>nft000c2i2-1</vc:EdgeGateway>
+			<vc:Name>HO_IPT_NP_PRP1_DABC_ESZO_APP_I1</vc:Name>
+			<vc:Description>Isolated network - Data Boundary Control to the External Simulator Zone in PRP1</vc:Description>
+			<vc:Shared>true</vc:Shared>
+			<vc:NetworkSettings>
+				<vc:FenceMode>ISOLATED</vc:FenceMode>
+				<vc:GatewayAddress>10.32.79.1</vc:GatewayAddress>
+				<vc:NetworkMask>255.255.255.0</vc:NetworkMask>
+				<vc:IPRange>
+					<vc:startAddress>10.32.79.2</vc:startAddress>
+					<vc:endAddress>10.32.79.254</vc:endAddress>
+				</vc:IPRange>
+			</vc:NetworkSettings>
+		</vc:OrganisationNetwork>
+	</vc:Configuration>
+</vc:Organisation>

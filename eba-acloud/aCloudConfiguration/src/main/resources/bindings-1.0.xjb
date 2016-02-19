@@ -1,0 +1,45 @@
+<jxb:bindings version="1.0" xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+	jxb:extensionBindingPrefixes="xjc">
+    
+    <jxb:bindings schemaLocation="AgnosticCloudConfig-1.0.xsd" node="/xs:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="com.ipt.ebsa.agnostic.cloud.config.v1"/>
+            <jxb:nameXmlTransform>
+            	<jxb:typeName prefix="XML"/>
+            	<jxb:anonymousTypeName prefix="XML"/>
+            </jxb:nameXmlTransform>
+        </jxb:schemaBindings>
+        <jxb:bindings node="//xs:attribute[@name='networkID']">
+			<jxb:property>
+				<jxb:baseType name="XMLNetworkType"/>
+			</jxb:property>
+        </jxb:bindings>
+        <jxb:bindings node="//xs:attribute[@name='dataCenterId']" multiple="true">
+			<jxb:property>
+				<jxb:baseType name="XMLDataCenterType"/>
+			</jxb:property>
+        </jxb:bindings>
+        <jxb:bindings node="//xs:attribute[@name='gatewayId']">
+			<jxb:property>
+				<jxb:baseType name="XMLGatewayType"/>
+			</jxb:property>
+        </jxb:bindings>
+        <jxb:bindings node="//xs:attribute[@name='environmentContainerDefinitionId']">
+			<jxb:property>
+				<jxb:baseType name="XMLEnvironmentContainerDefinitionType"/>
+			</jxb:property>
+        </jxb:bindings>
+    </jxb:bindings>
+    
+    <jxb:bindings schemaLocation="aCloudCommand-1.1.xsd" node="/xs:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="com.ipt.ebsa.agnostic.cloud.command.v1"/>
+            <jxb:nameXmlTransform>
+            	<jxb:typeName prefix="Cmd"/>
+            	<jxb:anonymousTypeName prefix="Cmd"/> 
+            </jxb:nameXmlTransform>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+    
+</jxb:bindings>

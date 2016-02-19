@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ac:execute xmlns:ac="http://ebsa.ipt.com/aCloudCommand-1.1" xsi:schemaLocation="http://ebsa.ipt.com/aCloudCommand-1.1 aCloudCommand-1.1.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<ac:EnvironmentContainer  includes=".*" errorStrategy="exit" strategy="exists" command="confirm">
+		<ac:Environment  includes=".*" errorStrategy="exit" strategy="exists" command="confirm">
+			<ac:options>
+				<ac:option name="overwriteEmptyTemplateMachines" value="true"/>
+			</ac:options>
+			<ac:VirtualMachineContainer  includes=".*" errorStrategy="exit" strategy="exists" command="start">
+			</ac:VirtualMachineContainer>
+			<ac:Overrides>
+				<ac:override xpath="/GeographicContainer/EnvironmentContainer/Environment/EnvironmentDefinition/VirtualMachineContainer[name='UNITTEST_SUSD_TEST_VMC']/VirtualMachine[vmName='UNITTEST_SUSD_testvm1']/VMOrder" value="1"/>
+				<ac:override xpath="/GeographicContainer/EnvironmentContainer/Environment/EnvironmentDefinition/VirtualMachineContainer[name='UNITTEST_SUSD_TEST_VMC']/VirtualMachine[vmName='UNITTEST_SUSD_testvm2']/VMOrder" value="2"/>
+				<ac:override xpath="/GeographicContainer/EnvironmentContainer/Environment/EnvironmentDefinition/VirtualMachineContainer[name='UNITTEST_SUSD_TEST_VMC']/VirtualMachine[vmName='UNITTEST_SUSD_testvm3']/VMOrder" value="3"/>
+				<ac:override xpath="/GeographicContainer/EnvironmentContainer/Environment/EnvironmentDefinition/VirtualMachineContainer[name='UNITTEST_SUSD_TEST_VMC']/VirtualMachine[vmName='UNITTEST_SUSD_testvm4']/VMOrder" value="4"/>
+			</ac:Overrides>
+		</ac:Environment>
+	</ac:EnvironmentContainer>
+</ac:execute>

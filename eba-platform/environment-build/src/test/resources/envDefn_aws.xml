@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ac:GeographicContainer id="_1" xmlns:ac="http://ebsa.ipt.com/AgnosticCloudConfig-1.0">
+    <ac:account>Home Office</ac:account>
+    <ac:region>IPT</ac:region>
+    <ac:EnvironmentContainer id="_2">
+        <ac:name>npa</ac:name>
+        <ac:provider>AWS</ac:provider>
+        <ac:Environment environmentContainerDefinitionId="_3" id="_22">
+            <ac:name>HO_IPT_NPA_PRP1</ac:name>
+            <ac:notes>HO_IPT_NPA_PRP1 environment</ac:notes>
+            <ac:EnvironmentDefinition environmentDefinitionType="Physical" id="_23">
+                <ac:name>HO_IPT_NPA_PRP1</ac:name>
+                <ac:version>1.0</ac:version>
+                <ac:cidr></ac:cidr>
+                <ac:VirtualMachineContainer dataCenterName="Home Office IPT NP (IL2-PROD-STANDARD)" dataCenterId="_4" id="_24">
+                    <ac:name>HO_IPT_NPA_PRP1_MABC</ac:name>
+                    <ac:description>Management Boundary Control for IPT NP PRP1</ac:description>
+                    <ac:runtimeLease></ac:runtimeLease>
+                    <ac:storageLease></ac:storageLease>
+                    <ac:serviceLevel>Home Office IPT NP (IL2-PROD-BASIC)</ac:serviceLevel>
+                    <ac:powerOn>true</ac:powerOn>
+                    <ac:deploy>true</ac:deploy>
+                    <ac:domain></ac:domain>
+                    <ac:VirtualMachine id="_26">
+                        <ac:vmName>mfwam01.np-prp1-mabc.ipt.ho.local</ac:vmName>
+                        <ac:computerName>mfwam01.np-prp1-mabc.ipt.ho.local</ac:computerName>
+                        <ac:description>Firewall</ac:description>
+                        <ac:templateName>EBSA-TEMPLATES-VYATTA-VSE6.6R5-32</ac:templateName>
+                        <ac:templateServiceLevel>Home Office IPT NP (IL2-DEVTEST-BASIC)</ac:templateServiceLevel>
+                        <ac:storageProfile>9-76-1-BASIC-Any</ac:storageProfile>
+                        <ac:customisationScript>/var/lib/jenkins/jobs/retrieve_configuration/workspace/customise.vyatta.sh</ac:customisationScript>
+                        <ac:cpuCount>2</ac:cpuCount>
+                        <ac:memory>4</ac:memory>
+                        <ac:memoryUnit>GB</ac:memoryUnit>
+                        <ac:hardwareProfile>c3.4xlarge</ac:hardwareProfile>
+                        <ac:hatype></ac:hatype>
+                        <ac:Storage id="_34">
+                            <ac:indexNumber>1</ac:indexNumber>
+                            <ac:size>50</ac:size>
+                            <ac:sizeUnit>GB</ac:sizeUnit>
+                            <ac:busType></ac:busType>
+                            <ac:busSubType></ac:busSubType>
+                            <ac:deviceMount></ac:deviceMount>
+                        </ac:Storage>
+                        <ac:NIC networkName="HO_IPT_NP_TLG1_MEBC_APP_I1" networkID="_13" id="_27">
+                            <ac:indexNumber>0</ac:indexNumber>
+                            <ac:primary>true</ac:primary>
+                            <ac:ipAssignment>StaticManual</ac:ipAssignment>
+                            <ac:Interface>
+                                <ac:staticIpPool></ac:staticIpPool>
+                                <ac:networkMask></ac:networkMask>
+                                <ac:name>HO_IPT_NP_TLG1_MEBC_APP_I1</ac:name>
+                                <ac:staticIpAddress>10.16.15.33</ac:staticIpAddress>
+                                <ac:isVip>false</ac:isVip>
+                            </ac:Interface>
+                            <ac:Interface>
+                                <ac:staticIpPool>10.16.15.34/44</ac:staticIpPool>
+                                <ac:networkMask>255.255.255.0</ac:networkMask>
+                                <ac:name>HO_IPT_NP_TLG1_MEBC_APP_I1</ac:name>
+                                <ac:staticIpAddress>10.16.15.34</ac:staticIpAddress>
+                                <ac:isVip>true</ac:isVip>
+                                <ac:VRRP>10</ac:VRRP>
+                            </ac:Interface>
+                        </ac:NIC>
+                        <ac:NIC networkName="HO_IPT_NPA_PRP1_COBC_MABC_MAN_I1" networkID="_14" id="_28">
+                            <ac:indexNumber>1</ac:indexNumber>
+                            <ac:primary>false</ac:primary>
+                            <ac:ipAssignment>StaticManual</ac:ipAssignment>
+                            <ac:Interface>
+                                <ac:interfaceNumber>1</ac:interfaceNumber>
+                                <ac:staticIpPool>10.32.128.2/22</ac:staticIpPool>
+                                <ac:networkMask>255.255.255.0</ac:networkMask>
+                                <ac:name>HO_IPT_NPA_PRP1_COBC_MABC_MAN_I1</ac:name>
+                                <ac:staticIpAddress>10.32.128.2</ac:staticIpAddress>
+                                <ac:isVip>false</ac:isVip>
+                            </ac:Interface>
+                        </ac:NIC>
+                        <ac:NIC networkName="HO_IPT_NPA_PRP1_PRZO_MABC_MAN_I1" networkID="_15" id="_29">
+                            <ac:indexNumber>2</ac:indexNumber>
+                            <ac:primary>false</ac:primary>
+                            <ac:ipAssignment>StaticManual</ac:ipAssignment>
+                            <ac:Interface>
+                                <ac:staticIpPool></ac:staticIpPool>
+                                <ac:networkMask></ac:networkMask>
+                                <ac:name>HO_IPT_NPA_PRP1_PRZO_MABC_MAN_I1</ac:name>
+                                <ac:staticIpAddress>10.32.144.2</ac:staticIpAddress>
+                                <ac:isVip>false</ac:isVip>
+                            </ac:Interface>
+                        </ac:NIC>
+                        <ac:NIC networkName="HO_IPT_NPA_PRP1_DABC_MABC_MAN_I1" networkID="_16" id="_30">
+                            <ac:indexNumber>2</ac:indexNumber>
+                            <ac:primary>false</ac:primary>
+                            <ac:ipAssignment>StaticManual</ac:ipAssignment>
+                            <ac:Interface>
+                                <ac:staticIpPool></ac:staticIpPool>
+                                <ac:networkMask></ac:networkMask>
+                                <ac:name>HO_IPT_NPA_PRP1_DABC_MABC_MAN_I1</ac:name>
+                                <ac:staticIpAddress>10.32.160.2</ac:staticIpAddress>
+                                <ac:isVip>false</ac:isVip>
+                            </ac:Interface>
+                        </ac:NIC>
+                        <ac:NIC networkName="HO_IPT_NPA_PRP1_DAZO_MABC_MAN_I1" networkID="_17" id="_31">
+                            <ac:indexNumber>3</ac:indexNumber>
+                            <ac:primary>false</ac:primary>
+                            <ac:ipAssignment>StaticManual</ac:ipAssignment>
+                            <ac:Interface>
+                                <ac:staticIpPool></ac:staticIpPool>
+                                <ac:networkMask></ac:networkMask>
+                                <ac:name>HO_IPT_NPA_PRP1_DAZO_MABC_MAN_I1</ac:name>
+                                <ac:staticIpAddress>10.32.176.2</ac:staticIpAddress>
+                                <ac:isVip>false</ac:isVip>
+                            </ac:Interface>
+                        </ac:NIC>
+                        <ac:NIC networkName="HO_IPT_NPA_PRP1_ESZO_MABC_MAN_I1" networkID="_18" id="_32">
+                            <ac:indexNumber>4</ac:indexNumber>
+                            <ac:primary>false</ac:primary>
+                            <ac:ipAssignment>StaticManual</ac:ipAssignment>
+                            <ac:Interface>
+                                <ac:staticIpPool></ac:staticIpPool>
+                                <ac:networkMask></ac:networkMask>
+                                <ac:name>HO_IPT_NPA_PRP1_ESZO_MABC_MAN_I1</ac:name>
+                                <ac:staticIpAddress>10.32.192.2</ac:staticIpAddress>
+                                <ac:isVip>false</ac:isVip>
+                            </ac:Interface>
+                        </ac:NIC>
+                        <ac:NIC networkName="HO_IPT_NP_MFWAH0_HBT" networkID="_25" id="_33">
+                            <ac:indexNumber>5</ac:indexNumber>
+                            <ac:primary>false</ac:primary>
+                            <ac:ipAssignment>StaticManual</ac:ipAssignment>
+                            <ac:Interface>
+                                <ac:staticIpPool></ac:staticIpPool>
+                                <ac:networkMask></ac:networkMask>
+                                <ac:name>HO_IPT_NP_MFWAH0_HBT</ac:name>
+                                <ac:staticIpAddress>10.0.101.1</ac:staticIpAddress>
+                                <ac:isVip>false</ac:isVip>
+                            </ac:Interface>
+                        </ac:NIC>
+                    </ac:VirtualMachine>
+                    <ac:VirtualMachine id="_35">
+                        <ac:vmName>mfwam02.np-prp1-mabc.ipt.ho.local</ac:vmName>
+                        <ac:computerName>mfwam02.np-prp1-mabc.ipt.ho.local</ac:computerName>
+                        <ac:description></ac:description>
+                        <ac:templateName>EBSA-TEMPLATES-VYATTA-VSE6.6R5-32</ac:templateName>
+                        <ac:templateServiceLevel>Home Office IPT NP (IL2-DEVTEST-BASIC)</ac:templateServiceLevel>
+                        <ac:storageProfile>9-76-1-BASIC-Any</ac:storageProfile>
+                        <ac:customisationScript>/var/lib/jenkins/jobs/retrieve_configuration/workspace/customise.vyatta.sh</ac:customisationScript>
+                        <ac:cpuCount>2</ac:cpuCount>
+                        <ac:memory>4</ac:memory>
+                        <ac:memoryUnit>GB</ac:memoryUnit>
+                        <ac:hardwareProfile>c3.4xlarge</ac:hardwareProfile>
+                        <ac:hatype></ac:hatype>
+                        <ac:Storage id="_43">
+                            <ac:indexNumber>1</ac:indexNumber>
+                            <ac:size>50</ac:size>
+                            <ac:sizeUnit>GB</ac:sizeUnit>
+                            <ac:busType></ac:busType>
+                            <ac:busSubType></ac:busSubType>
+                            <ac:deviceMount></ac:deviceMount>
+                        </ac:Storage>
+                        <ac:NIC networkName="HO_IPT_NP_TLG1_MEBC_APP_I1" networkID="_13" id="_36">
+                            <ac:indexNumber>0</ac:indexNumber>
+                            <ac:primary>true</ac:primary>
+                            <ac:ipAssignment>StaticManual</ac:ipAssignment>
+                            <ac:Interface>
+                                <ac:staticIpPool></ac:staticIpPool>
+                                <ac:networkMask></ac:networkMask>
+                                <ac:name>HO_IPT_NP_TLG1_MEBC_APP_I1</ac:name>
+                                <ac:staticIpAddress>10.16.15.34</ac:staticIpAddress>
+                                <ac:isVip>false</ac:isVip>
+                            </ac:Interface>
+                        </ac:NIC>
+                        <ac:NIC networkName="HO_IPT_NPA_PRP1_COBC_MABC_MAN_I1" networkID="_14" id="_37">
+                            <ac:indexNumber>1</ac:indexNumber>
+                            <ac:primary>false</ac:primary>
+                            <ac:ipAssignment>StaticManual</ac:ipAssignment>
+                            <ac:Interface>
+                                <ac:staticIpPool></ac:staticIpPool>
+                                <ac:networkMask></ac:networkMask>
+                                <ac:name>HO_IPT_NPA_PRP1_COBC_MABC_MAN_I1</ac:name>
+                                <ac:staticIpAddress>10.32.128.3</ac:staticIpAddress>
+                                <ac:isVip>false</ac:isVip>
+                            </ac:Interface>
+                        </ac:NIC>
+                        <ac:NIC networkName="HO_IPT_NPA_PRP1_PRZO_MABC_MAN_I1" networkID="_15" id="_38">
+                            <ac:indexNumber>2</ac:indexNumber>
+                            <ac:primary>false</ac:primary>
+                            <ac:ipAssignment>StaticManual</ac:ipAssignment>
+                            <ac:Interface>
+                                <ac:staticIpPool></ac:staticIpPool>
+                                <ac:networkMask></ac:networkMask>
+                                <ac:name>HO_IPT_NPA_PRP1_PRZO_MABC_MAN_I1</ac:name>
+                                <ac:staticIpAddress>10.32.144.3</ac:staticIpAddress>
+                                <ac:isVip>false</ac:isVip>
+                            </ac:Interface>
+                        </ac:NIC>
+                        <ac:NIC networkName="HO_IPT_NPA_PRP1_DABC_MABC_MAN_I1" networkID="_16" id="_39">
+                            <ac:indexNumber>2</ac:indexNumber>
+                            <ac:primary>false</ac:primary>
+                            <ac:ipAssignment>StaticManual</ac:ipAssignment>
+                            <ac:Interface>
+                                <ac:staticIpPool></ac:staticIpPool>
+                                <ac:networkMask></ac:networkMask>
+                                <ac:name>HO_IPT_NPA_PRP1_DABC_MABC_MAN_I1</ac:name>
+                                <ac:staticIpAddress>10.32.160.3</ac:staticIpAddress>
+                                <ac:isVip>false</ac:isVip>
+                            </ac:Interface>
+                        </ac:NIC>
+                        <ac:NIC networkName="HO_IPT_NPA_PRP1_DAZO_MABC_MAN_I1" networkID="_17" id="_40">
+                            <ac:indexNumber>3</ac:indexNumber>
+                            <ac:primary>false</ac:primary>
+                            <ac:ipAssignment>StaticManual</ac:ipAssignment>
+                            <ac:Interface>
+                                <ac:staticIpPool></ac:staticIpPool>
+                                <ac:networkMask></ac:networkMask>
+                                <ac:name>HO_IPT_NPA_PRP1_DAZO_MABC_MAN_I1</ac:name>
+                                <ac:staticIpAddress>10.32.176.3</ac:staticIpAddress>
+                                <ac:isVip>false</ac:isVip>
+                            </ac:Interface>
+                        </ac:NIC>
+                        <ac:NIC networkName="HO_IPT_NPA_PRP1_ESZO_MABC_MAN_I1" networkID="_18" id="_41">
+                            <ac:indexNumber>4</ac:indexNumber>
+                            <ac:primary>false</ac:primary>
+                            <ac:ipAssignment>StaticManual</ac:ipAssignment>
+                            <ac:Interface>
+                                <ac:staticIpPool></ac:staticIpPool>
+                                <ac:networkMask></ac:networkMask>
+                                <ac:name>HO_IPT_NPA_PRP1_ESZO_MABC_MAN_I1</ac:name>
+                                <ac:staticIpAddress>10.32.192.3</ac:staticIpAddress>
+                                <ac:isVip>false</ac:isVip>
+                            </ac:Interface>
+                        </ac:NIC>
+                        <ac:NIC networkName="HO_IPT_NP_MFWAH0_HBT" networkID="_25" id="_42">
+                            <ac:indexNumber>5</ac:indexNumber>
+                            <ac:primary>false</ac:primary>
+                            <ac:ipAssignment>StaticManual</ac:ipAssignment>
+                            <ac:Interface>
+                                <ac:staticIpPool></ac:staticIpPool>
+                                <ac:networkMask></ac:networkMask>
+                                <ac:name>HO_IPT_NP_MFWAH0_HBT</ac:name>
+                                <ac:staticIpAddress>10.0.101.2</ac:staticIpAddress>
+                                <ac:isVip>false</ac:isVip>
+                            </ac:Interface>
+                        </ac:NIC>
+                    </ac:VirtualMachine>
+                    <ac:Network dataCenterName="Home Office IPT NP (IL2-PROD-STANDARD)" dataCenterId="_4" id="_25">
+                        <ac:name>HO_IPT_NP_MFWAH0_HBT</ac:name>
+                        <ac:description></ac:description>
+                        <ac:fenceMode>ISOLATED</ac:fenceMode>
+                        <ac:networkMask>255.255.255.0</ac:networkMask>
+                        <ac:gatewayAddress>10.0.101.3</ac:gatewayAddress>
+                        <ac:primaryDns></ac:primaryDns>
+                        <ac:secondaryDns></ac:secondaryDns>
+                        <ac:dnsSuffix>np-prp1-dabc.ipt.ho.local</ac:dnsSuffix>
+                        <ac:staticIpPool></ac:staticIpPool>
+                        <ac:ipRangeStart>10.0.101.1</ac:ipRangeStart>
+                        <ac:ipRangeEnd>10.0.101.2</ac:ipRangeEnd>
+                        <ac:CIDR></ac:CIDR>
+                        <ac:shared>true</ac:shared>
+                    </ac:Network>
+                </ac:VirtualMachineContainer>
+            </ac:EnvironmentDefinition>
+        </ac:Environment>
+        <ac:EnvironmentContainerDefinition id="_3">
+            <ac:name>HO_IPT_NPA_PRP1</ac:name>
+            <ac:version>1.0</ac:version>
+            <ac:Network gatewayId="_5" dataCenterName="Home Office IPT NP (IL2-PROD-STANDARD)" dataCenterId="_4" id="_13">
+                <ac:name>HO_IPT_NP_TLG1_MEBC_APP_I1</ac:name>
+                <ac:description>Isolated network that connects the MEBC to other Management VApps</ac:description>
+                <ac:fenceMode>ISOLATED</ac:fenceMode>
+                <ac:networkMask>255.255.255.0</ac:networkMask>
+                <ac:gatewayAddress>10.16.15.1</ac:gatewayAddress>
+                <ac:primaryDns>10.16.16.7</ac:primaryDns>
+                <ac:secondaryDns></ac:secondaryDns>
+                <ac:dnsSuffix></ac:dnsSuffix>
+                <ac:staticIpPool></ac:staticIpPool>
+                <ac:ipRangeStart>10.16.15.2</ac:ipRangeStart>
+                <ac:ipRangeEnd>10.16.15.254</ac:ipRangeEnd>
+                <ac:CIDR></ac:CIDR>
+                <ac:shared>true</ac:shared>
+            </ac:Network>
+            <ac:Network gatewayId="_5" dataCenterName="Home Office IPT NP (IL2-PROD-STANDARD)" dataCenterId="_4" id="_14">
+                <ac:name>HO_IPT_NPA_PRP1_COBC_MABC_MAN_I1</ac:name>
+                <ac:description>Isolated network - Core Boundary Control to the Management Boundary Control in PRP1</ac:description>
+                <ac:fenceMode>ISOLATED</ac:fenceMode>
+                <ac:networkMask>255.255.255.0</ac:networkMask>
+                <ac:gatewayAddress>10.32.128.1</ac:gatewayAddress>
+                <ac:primaryDns>10.16.16.7</ac:primaryDns>
+                <ac:secondaryDns></ac:secondaryDns>
+                <ac:dnsSuffix></ac:dnsSuffix>
+                <ac:staticIpPool></ac:staticIpPool>
+                <ac:ipRangeStart>10.32.128.2</ac:ipRangeStart>
+                <ac:ipRangeEnd>10.32.128.254</ac:ipRangeEnd>
+                <ac:CIDR></ac:CIDR>
+                <ac:shared>true</ac:shared>
+            </ac:Network>
+            <ac:Network gatewayId="_5" dataCenterName="Home Office IPT NP (IL2-PROD-STANDARD)" dataCenterId="_4" id="_15">
+                <ac:name>HO_IPT_NPA_PRP1_PRZO_MABC_MAN_I1</ac:name>
+                <ac:description>Isolated network - Private Application Zone to the Management Boundary Control in PRP1</ac:description>
+                <ac:fenceMode>ISOLATED</ac:fenceMode>
+                <ac:networkMask>255.255.255.0</ac:networkMask>
+                <ac:gatewayAddress>10.32.144.1</ac:gatewayAddress>
+                <ac:primaryDns>10.16.16.7</ac:primaryDns>
+                <ac:secondaryDns></ac:secondaryDns>
+                <ac:dnsSuffix></ac:dnsSuffix>
+                <ac:staticIpPool></ac:staticIpPool>
+                <ac:ipRangeStart>10.32.144.2</ac:ipRangeStart>
+                <ac:ipRangeEnd>10.32.144.254</ac:ipRangeEnd>
+                <ac:CIDR></ac:CIDR>
+                <ac:shared>true</ac:shared>
+            </ac:Network>
+            <ac:Network gatewayId="_5" dataCenterName="Home Office IPT NP (IL2-PROD-STANDARD)" dataCenterId="_4" id="_16">
+                <ac:name>HO_IPT_NPA_PRP1_DABC_MABC_MAN_I1</ac:name>
+                <ac:description>Isolated network - Data Boundary Control to the Management Boundary Control in PRP1</ac:description>
+                <ac:fenceMode>ISOLATED</ac:fenceMode>
+                <ac:networkMask>255.255.255.0</ac:networkMask>
+                <ac:gatewayAddress>10.32.160.1</ac:gatewayAddress>
+                <ac:primaryDns>10.16.16.7</ac:primaryDns>
+                <ac:secondaryDns></ac:secondaryDns>
+                <ac:dnsSuffix></ac:dnsSuffix>
+                <ac:staticIpPool></ac:staticIpPool>
+                <ac:ipRangeStart>10.32.160.2</ac:ipRangeStart>
+                <ac:ipRangeEnd>10.32.160.254</ac:ipRangeEnd>
+                <ac:CIDR></ac:CIDR>
+                <ac:shared>true</ac:shared>
+            </ac:Network>
+            <ac:Network gatewayId="_5" dataCenterName="Home Office IPT NP (IL2-PROD-STANDARD)" dataCenterId="_4" id="_17">
+                <ac:name>HO_IPT_NPA_PRP1_DAZO_MABC_MAN_I1</ac:name>
+                <ac:description>Isolated network - Data Zone to the Management Boundary Control in PRP1</ac:description>
+                <ac:fenceMode>ISOLATED</ac:fenceMode>
+                <ac:networkMask>255.255.255.0</ac:networkMask>
+                <ac:gatewayAddress>10.32.176.1</ac:gatewayAddress>
+                <ac:primaryDns>10.16.16.7</ac:primaryDns>
+                <ac:secondaryDns></ac:secondaryDns>
+                <ac:dnsSuffix></ac:dnsSuffix>
+                <ac:staticIpPool></ac:staticIpPool>
+                <ac:ipRangeStart>10.32.176.2</ac:ipRangeStart>
+                <ac:ipRangeEnd>10.32.176.254</ac:ipRangeEnd>
+                <ac:CIDR></ac:CIDR>
+                <ac:shared>true</ac:shared>
+            </ac:Network>
+            <ac:Network gatewayId="_5" dataCenterName="Home Office IPT NP (IL2-PROD-STANDARD)" dataCenterId="_4" id="_18">
+                <ac:name>HO_IPT_NPA_PRP1_ESZO_MABC_MAN_I1</ac:name>
+                <ac:description>Isolated network - External Simulator Zone to the Management Boundary Control in PRP1</ac:description>
+                <ac:fenceMode>ISOLATED</ac:fenceMode>
+                <ac:networkMask>255.255.255.0</ac:networkMask>
+                <ac:gatewayAddress>10.32.192.1</ac:gatewayAddress>
+                <ac:primaryDns>10.16.16.7</ac:primaryDns>
+                <ac:secondaryDns></ac:secondaryDns>
+                <ac:dnsSuffix></ac:dnsSuffix>
+                <ac:staticIpPool></ac:staticIpPool>
+                <ac:ipRangeStart>10.32.192.2</ac:ipRangeStart>
+                <ac:ipRangeEnd>10.32.192.254</ac:ipRangeEnd>
+                <ac:CIDR></ac:CIDR>
+                <ac:shared>true</ac:shared>
+            </ac:Network>
+            <ac:Network gatewayId="_5" dataCenterName="Home Office IPT NP (IL2-PROD-STANDARD)" dataCenterId="_4" id="_19">
+                <ac:name>HO_IPT_NPA_PRP1_COBC_DABC_APP_I1</ac:name>
+                <ac:description>Isolated network - Core Boundary Control to the Data Boundary Control in PRP1</ac:description>
+                <ac:fenceMode>ISOLATED</ac:fenceMode>
+                <ac:networkMask>255.255.255.0</ac:networkMask>
+                <ac:gatewayAddress>10.32.15.1</ac:gatewayAddress>
+                <ac:primaryDns></ac:primaryDns>
+                <ac:secondaryDns></ac:secondaryDns>
+                <ac:dnsSuffix></ac:dnsSuffix>
+                <ac:staticIpPool></ac:staticIpPool>
+                <ac:ipRangeStart>10.32.15.2</ac:ipRangeStart>
+                <ac:ipRangeEnd>10.32.15.254</ac:ipRangeEnd>
+                <ac:CIDR></ac:CIDR>
+                <ac:shared>true</ac:shared>
+            </ac:Network>
+            <ac:Network gatewayId="_5" dataCenterName="Home Office IPT NP (IL2-PROD-STANDARD)" dataCenterId="_4" id="_20">
+                <ac:name>HO_IPT_NPA_PRP1_DABC_DAZO_APP_I1</ac:name>
+                <ac:description>Isolated network - Data Boundary Control to the Data Zone in PRP1</ac:description>
+                <ac:fenceMode>ISOLATED</ac:fenceMode>
+                <ac:networkMask>255.255.255.0</ac:networkMask>
+                <ac:gatewayAddress>10.32.47.1</ac:gatewayAddress>
+                <ac:primaryDns></ac:primaryDns>
+                <ac:secondaryDns></ac:secondaryDns>
+                <ac:dnsSuffix></ac:dnsSuffix>
+                <ac:staticIpPool></ac:staticIpPool>
+                <ac:ipRangeStart>10.32.47.2</ac:ipRangeStart>
+                <ac:ipRangeEnd>10.32.47.254</ac:ipRangeEnd>
+                <ac:CIDR></ac:CIDR>
+                <ac:shared>true</ac:shared>
+            </ac:Network>
+            <ac:Network gatewayId="_5" dataCenterName="Home Office IPT NP (IL2-PROD-STANDARD)" dataCenterId="_4" id="_21">
+                <ac:name>HO_IPT_NPA_PRP1_DABC_ESZO_APP_I1</ac:name>
+                <ac:description>Isolated network - Data Boundary Control to the External Simulator Zone in PRP1</ac:description>
+                <ac:fenceMode>ISOLATED</ac:fenceMode>
+                <ac:networkMask>255.255.255.0</ac:networkMask>
+                <ac:gatewayAddress>10.32.79.1</ac:gatewayAddress>
+                <ac:primaryDns></ac:primaryDns>
+                <ac:secondaryDns></ac:secondaryDns>
+                <ac:dnsSuffix></ac:dnsSuffix>
+                <ac:staticIpPool></ac:staticIpPool>
+                <ac:ipRangeStart>10.32.79.2</ac:ipRangeStart>
+                <ac:ipRangeEnd>10.32.79.254</ac:ipRangeEnd>
+                <ac:CIDR></ac:CIDR>
+                <ac:shared>true</ac:shared>
+            </ac:Network>
+            <ac:Gateway id="_5">
+                <ac:name>nft000c2i2-1</ac:name>
+                <ac:NAT id="_6">
+                    <ac:appliedOn>nft000c2i2</ac:appliedOn>
+                    <ac:originalSourceIpOrRange>185.40.8.186</ac:originalSourceIpOrRange>
+                    <ac:translatedSourceIpOrRange>10.16.0.5</ac:translatedSourceIpOrRange>
+                    <ac:enabled>true</ac:enabled>
+                    <ac:DNAT id="_7">
+                        <ac:translatedPort>22</ac:translatedPort>
+                        <ac:protocolType>TCP</ac:protocolType>
+                        <ac:protocolOriginalPort>22</ac:protocolOriginalPort>
+                        <ac:protocolIcmpType></ac:protocolIcmpType>
+                    </ac:DNAT>
+                </ac:NAT>
+                <ac:NAT id="_8">
+                    <ac:appliedOn>nft000c2i2</ac:appliedOn>
+                    <ac:originalSourceIpOrRange>185.40.8.186</ac:originalSourceIpOrRange>
+                    <ac:translatedSourceIpOrRange>10.16.0.3</ac:translatedSourceIpOrRange>
+                    <ac:enabled>true</ac:enabled>
+                    <ac:DNAT id="_9">
+                        <ac:translatedPort>80</ac:translatedPort>
+                        <ac:protocolType>TCP</ac:protocolType>
+                        <ac:protocolOriginalPort>80</ac:protocolOriginalPort>
+                        <ac:protocolIcmpType></ac:protocolIcmpType>
+                    </ac:DNAT>
+                </ac:NAT>
+                <ac:NAT id="_10">
+                    <ac:appliedOn>nft000c2i2</ac:appliedOn>
+                    <ac:originalSourceIpOrRange>185.40.8.186</ac:originalSourceIpOrRange>
+                    <ac:translatedSourceIpOrRange>10.16.0.3</ac:translatedSourceIpOrRange>
+                    <ac:enabled>true</ac:enabled>
+                    <ac:DNAT id="_11">
+                        <ac:translatedPort>443</ac:translatedPort>
+                        <ac:protocolType>TCP</ac:protocolType>
+                        <ac:protocolOriginalPort>443</ac:protocolOriginalPort>
+                        <ac:protocolIcmpType></ac:protocolIcmpType>
+                    </ac:DNAT>
+                </ac:NAT>
+                <ac:NAT id="_12">
+                    <ac:appliedOn>nft000c2i2</ac:appliedOn>
+                    <ac:originalSourceIpOrRange>10.16.0.4</ac:originalSourceIpOrRange>
+                    <ac:translatedSourceIpOrRange>185.40.8.186</ac:translatedSourceIpOrRange>
+                    <ac:enabled>true</ac:enabled>
+                </ac:NAT>
+            </ac:Gateway>
+            <ac:DataCenter id="_4">
+                <ac:name>Home Office IPT NP (IL2-PROD-STANDARD)</ac:name>
+            </ac:DataCenter>
+        </ac:EnvironmentContainerDefinition>
+    </ac:EnvironmentContainer>
+</ac:GeographicContainer>

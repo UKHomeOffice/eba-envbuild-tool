@@ -1,0 +1,3 @@
+The Environment Management Test Harness
+
+This is a small application that users can run on their machine to test their deployment descriptors before executing them on Jenkins.

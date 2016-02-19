@@ -1,0 +1,121 @@
+<deploymentdescriptor>
+	<plans>
+       <plan impact="2">
+         <commands>
+             <script>magic.sh</script>
+         </commands>
+         
+         <transition description="Stop services">
+             <update hostname="soatzm01" tag="service">
+				control_managed_instances:
+				  'startAPPWLSMS1':
+				     action: 'stop'
+		     </update>
+         </transition>
+         
+		 <transition description="Undeploy everything">
+			 <removeallpackages hostname="soatzm01" />
+         </transition>
+         
+         <transition description="Deploy initial packages">
+			 <updatepackages hostname="soatzm01" packages="CommonConfigRPM, IPTSOACommon, IPTCommonExceptionHandler"/>
+         </transition>
+         
+         <transition description="Deploy IPTCDPServiceBroker">
+			 <updatepackages hostname="soatzm01" packages="IPTCDPServiceBroker"/>
+         </transition>
+         
+         <transition description="Deploy the rest">
+			 <updateallpackages hostname="soatzm01" />			  
+         </transition>
+         
+         <transition description="Restart service">
+			 <update hostname="soatzm01">
+				control_managed_instances:
+				  'startAPPWLSMS1':
+				     action: 'start'
+		     </update>
+		 </transition>
+       </plan>
+       
+       <plan impact="1">
+         <transition description="Just apply package updates, no need for restarts">
+			 <updateallpackages role="app" />
+         </transition>
+       </plan>
+    </plans>
+	<components>
+	      <component mil="2">
+				  CommonConfigRPM:
+	                require:
+	                  - 'Class[Profile::Wls::Ipt_custom]'
+	                  - 'Class[Profile::Wls::Startwls_managed]'
+	                tag:    'appdeploy'
+	      </component>          
+	      <component mil="1">
+	              IPTSOACommon:
+	                require: Package[CommonConfigRPM]
+	                tag:    'appdeploy'
+	      </component>          
+	      <component mil="1">
+	              IPTCommonExceptionHandler:
+	                require: Package[IPTSOACommon]
+	                tag:    'appdeploy'
+	      </component>          
+	      <component mil="1">
+	              IPTCDPServiceBroker:
+	                require: Package[IPTCommonExceptionHandler]
+	                tag:    'appdeploy'
+	      </component>          
+	      <component mil="1">
+	              PKISSServiceProcessBroker:
+	                require: Package[IPTCDPServiceBroker]
+	                tag:    'appdeploy'
+	      </component>          
+	      <component mil="1">
+	              PKISSServices:
+	                require: Package[PKISSServiceProcessBroker]
+	                tag:    'appdeploy'
+	      </component>          
+	      <component mil="1">
+	              IABSServiceProcessBroker:    
+	                require: Package[PKISSServices]
+	                tag:    'appdeploy'
+	      </component>          
+	      <component mil="1"> 
+	              IABSServiceManager:
+	                require: Package[IABSServiceProcessBroker]
+	                tag:    'appdeploy'
+	      </component>          
+	      <component mil="1"> 
+	              IPTPKISSManagement:
+	                require: Package[IABSServiceProcessBroker]
+	                tag:    'appdeploy'
+	      </component>          
+	      <component mil="1">
+	              IPTIABSManagement:
+	                require: Package[IPTPKISSManagement]
+	                tag:    'appdeploy'
+	      </component>          
+	      <component mil="1">    
+	              IPTBRPFulfilmentManagement:
+	                require: Package[IPTIABSManagement]
+	                tag:    'appdeploy'
+	      </component>          
+	      <component mil="1">  
+	              IPTRules:
+	                require: Package[IPTBRPFulfilmentManagement]
+	                tag:    'appdeploy'
+	      </component>          
+	      <component mil="5">      
+	              IPTFulfilmentManagement:
+	                require: Package[IPTRules]
+	                tag:    'appdeploy'
+	      </component>          
+	      <component mil="5">
+	              IPTBatchHandler:
+	                require: Package[IPTFulfilmentManagement]
+	                tag:    'appdeploy'  
+	       </component>
+       </components>
+  </deploymentdescriptor>

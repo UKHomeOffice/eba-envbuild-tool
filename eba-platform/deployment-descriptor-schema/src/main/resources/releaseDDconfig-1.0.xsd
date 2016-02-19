@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:rr="http://ebsa.ipt.com/releaseDDconfig-1.0" xmlns:dd="http://ebsa.ipt.com/ddConfig-1.0" targetNamespace="http://ebsa.ipt.com/releaseDDconfig-1.0" elementFormDefault="qualified" attributeFormDefault="unqualified" rr:minVersion="1.1">
+	
+	<xs:import schemaLocation="ddConfig-1.0.xsd" namespace="http://ebsa.ipt.com/ddConfig-1.0" />
+	
+	<xs:element name="releaseDeploymentDescriptor" type="rr:releaseDeploymentDescriptorType">
+		<xs:annotation>
+			<xs:documentation>
+			The Release plan
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	
+	<xs:complexType name="releaseDeploymentDescriptorType">
+		<xs:sequence>
+			<xs:element name="phase" type="rr:phaseType" minOccurs="1" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>
+					Defines the Applications for this deployment plan
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="phaseType">
+		<xs:annotation>
+			<xs:documentation>
+			Contains a list of list of applications that can be bundled together and executed in parallel.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="before" type="rr:phaseAdditionalActionsType" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="application" type="rr:applicationType" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="after" type="rr:phaseAdditionalActionsType" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="stop" type="rr:stopType" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="phaseAdditionalActionsType">
+    	<xs:sequence>
+    		<xs:element name="step" type="rr:phaseStepItemType" minOccurs="1" maxOccurs="unbounded"/>
+    	</xs:sequence>
+    </xs:complexType>  
+    
+    <xs:complexType name="phaseStepItemType">
+		<xs:sequence>
+			<xs:choice minOccurs="1" maxOccurs="unbounded">
+				<xs:element name="inject" type="dd:injectType" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="execute" type="dd:executeType" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="remove" type="dd:removeType" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="command" type="dd:executeType" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="wait" type="rr:waitType" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:choice>
+		</xs:sequence>
+		<xs:attribute name="description" type="xs:string"/>
+	</xs:complexType>
+	
+	<xs:complexType name="waitType">
+		<xs:attribute name="seconds" type="xs:integer" use="required">
+			<xs:annotation>
+				<xs:documentation>Wait for some seconds before continuing</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	
+	<xs:complexType name="stopType">
+		<xs:attribute name="message" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>Gracefully stop the deployment here. It can be finished later. 
+				If a message is included it will be logged in the Jenkins console.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	
+	<xs:complexType name="applicationType">
+		<xs:attribute name="shortName" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>
+				The name of the application. This must match the shortName from the Application table in the Release Management database.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+
+</xs:schema>

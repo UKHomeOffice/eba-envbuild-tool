@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GeographicContainer id="GeographicContainer_1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ebsa.ipt.com/AgnosticCloudConfig-1.0" xsi:schemaLocation="http://ebsa.ipt.com/AgnosticCloudConfig-1.0 AgnosticCloudConfig-1.0.xsd">
+	<account>Homeoffice</account>
+	<region>eu-west-1</region>
+	<EnvironmentContainer id="EnvironmentContainer_1">
+		<name>AmazonTest</name>
+		<providor>AMAZONWEBSERVICES</providor>
+		<Environment id="Environment_1" environmentContainerDefinitionId="EnvironmentContainerDefinition_1">
+			<name>AmazonTest</name>
+			<notes>Environment to test the amazon machines and networks for testing</notes>
+			<cidr>10.16.0.0/16</cidr>
+			<EnvironmentDefinition environmentDefinitionTypeType="Physical" id="EnvironmentDefinition_1">
+				<name>Test1</name>
+				<version>1</version>
+				
+				<VirtualMachineContainer id="VirtualMachineContainer_MEBC_1" dataCenterId="DataCenter_1">
+					<name>TEST_VMC</name>
+					<description>TEST_VMC container</description>
+					<runtimeLease>String</runtimeLease>
+					<storageLease>String</storageLease>
+					<serviceLevel>String</serviceLevel>
+					<powerOn>true</powerOn>
+					<deploy>true</deploy>
+					<domain>test.local</domain>
+					<VirtualMachine id="VirtualMachine_MEBC_1">
+						<vmName>testvm1</vmName>
+						<computerName>testvm1</computerName>
+						<description>Test VM 1</description>
+						<templateName>ami-abb22edc</templateName>
+						<templateServiceLevel>String</templateServiceLevel>
+						<storageProfile>String</storageProfile>
+						<customisationScript>script.sh</customisationScript>
+						<cpuCount>2</cpuCount>
+						<memory>4096</memory>
+						<memoryUnit>MB</memoryUnit>
+						<hardwareProfile>m3.large</hardwareProfile>
+						<hatype>NA</hatype>
+						<Storage id="Storage_testvm1_0">
+							<indexNumber>0</indexNumber>
+							<size>50</size>
+							<sizeUnit>GB</sizeUnit>
+							<busType>String</busType>
+							<busSubType>String</busSubType>
+							<deviceMount>/dev/sda1</deviceMount>
+						</Storage>
+						<Storage id="Storage_testvm1_1">
+							<indexNumber>0</indexNumber>
+							<size>50</size>
+							<sizeUnit>GB</sizeUnit>
+							<busType>String</busType>
+							<busSubType>String</busSubType>
+							<deviceMount>/dev/sdh</deviceMount>
+						</Storage>
+						<NIC networkID="TEST_ORG_NET_1" id="Nic_testvm1_0">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<name>testvm1nic0</name>
+							<ipAssignment>10.16.0.4</ipAssignment>
+							<staticIpAddress>10.16.0.4</staticIpAddress>
+							<vip>NA</vip>
+						</NIC>
+						<NIC networkID="TEST_APP_NET_1" id="Nic_testvm1_1">
+							<indexNumber>1</indexNumber>
+							<primary>false</primary>
+							<name>testvm1nic1</name>
+							<ipAssignment>10.16.1.4</ipAssignment>
+							<staticIpAddress>10.16.1.4</staticIpAddress>
+							<vip>NA</vip>
+						</NIC>
+						<NIC networkID="TEST_APP_NET_2" id="Nic_testvm1_2">
+							<indexNumber>2</indexNumber>
+							<primary>false</primary>
+							<name>testvm1nic2</name>
+							<ipAssignment>10.16.2.4</ipAssignment>
+							<staticIpAddress>10.16.2.4</staticIpAddress>
+							<vip>NA</vip>
+						</NIC>
+					</VirtualMachine>
+					<Network id="TEST_APP_NET_1" dataCenterId="DataCenter_1">
+						<name>TEST_APP_NET_1</name>
+						<description>Test Application Subnet 1</description>
+						<fenceMode>String</fenceMode>
+						<networkMask>String</networkMask>
+						<gatewayAddress>10.16.1.1</gatewayAddress>
+						<primaryDns>String</primaryDns>
+						<secondaryDns>String</secondaryDns>
+						<dnsSuffix>String</dnsSuffix>
+						<staticIpPool>String</staticIpPool>
+						<ipRangeStart>String</ipRangeStart>
+						<ipRangeEnd>String</ipRangeEnd>
+						<CIDR>10.16.1.0/24</CIDR>
+						<shared>true</shared>
+					</Network>
+					<Network id="TEST_APP_NET_2" dataCenterId="DataCenter_1">
+						<name>TEST_APP_NET_2</name>
+						<description>Test Application Subnet 2</description>
+						<fenceMode>String</fenceMode>
+						<networkMask>String</networkMask>
+						<gatewayAddress>10.16.2.1</gatewayAddress>
+						<primaryDns>String</primaryDns>
+						<secondaryDns>String</secondaryDns>
+						<dnsSuffix>String</dnsSuffix>
+						<staticIpPool>String</staticIpPool>
+						<ipRangeStart>String</ipRangeStart>
+						<ipRangeEnd>String</ipRangeEnd>
+						<CIDR>10.16.2.0/24</CIDR>
+						<shared>true</shared>
+					</Network>
+				</VirtualMachineContainer>
+			</EnvironmentDefinition>
+		</Environment>
+		<EnvironmentContainerDefinition id="EnvironmentContainerDefinition_1">
+			<name>AmazonPoC_Environment_Definition</name>
+			<version>1</version>
+			
+			<Network id="TEST_ORG_NET_1" gatewayId="AwsTestGatway_1" dataCenterId="DataCenter_1">
+				<name>TEST_NET_1</name>
+				<description>Organisation Network, Public Subnet</description>
+				<fenceMode>String</fenceMode>
+				<networkMask>String</networkMask>
+				<gatewayAddress>10.16.0.1</gatewayAddress>
+				<primaryDns>String</primaryDns>
+				<secondaryDns>String</secondaryDns>
+				<dnsSuffix>String</dnsSuffix>
+				<staticIpPool>String</staticIpPool>
+				<ipRangeStart>String</ipRangeStart>
+				<ipRangeEnd>String</ipRangeEnd>
+				<CIDR>10.16.0.0/24</CIDR>
+				<shared>true</shared>
+			</Network>
+			<Gateway id="AwsTestGatway_1">
+				<name>Amazon_TEST_gateway</name>
+				<NAT id="ID_201">
+					<appliedOn>String</appliedOn>
+					<originalSourceIpOrRange>String</originalSourceIpOrRange>
+					<translatedSourceIpOrRange>String</translatedSourceIpOrRange>
+					<enabled>true</enabled>
+					<DNAT id="ID_202">
+						<translatedPort>String</translatedPort>
+						<protocolType>String</protocolType>
+						<protocolOriginalPort>String</protocolOriginalPort>
+						<protocolIcmpType>String</protocolIcmpType>
+					</DNAT>
+				</NAT>
+			</Gateway>
+			<DataCenter id="DataCenter_1">
+				<name>eu-west-1a</name>
+			</DataCenter>
+		</EnvironmentContainerDefinition>
+	</EnvironmentContainer>
+</GeographicContainer>

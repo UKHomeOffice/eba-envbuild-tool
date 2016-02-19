@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eb:builds xmlns:eb="http://ebsa.ipt.com/EnvironmentBuildSequence-1.0"
+    xmlns:vc="http://ebsa.ipt.com/VCloudCommand-2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://ebsa.ipt.com/EnvironmentBuildSequence-1.0 ../../../main/resources/EnvironmentBuildSchema-1.0.xsd ">
+    
+    <!-- THIS environment is modelled on the new format of environments for the project teams -->
+    <eb:environment name="HO IPT NP II PRJ2 DEV1">
+        
+        <eb:buildref id="bnbeb" displayname="Create HO_IPT_NP_II_PRJ2_DEV1 from scratch" buildid="build-from-scratch">
+            <eb:parameter name="vapp_name" value="HO_IPT_NP_II_PRJ2_DEV1"/>
+        </eb:buildref>        
+    </eb:environment>
+    
+    <!-- Brand new basic environment build (BNBEB) -->
+    <eb:build id="bnbeb">
+        <eb:sequenceref sequenceid="init"/>
+        <eb:sequenceref sequenceid="bnbeb-confirm-org-networks"/>
+        <eb:sequenceref sequenceid="bnbeb-create-all"/>
+    </eb:build>
+    <eb:sequence id="bnbeb-confirm-org-networks">
+       <eb:step actionid="confirm_org_networks" context="network-pattern=HO_IPT_NP_DAT1_MABC_MI1"/>
+    </eb:sequence>
+    <eb:sequence id="bnbeb-create-all">
+      
+       <eb:param name="ppt_tags" value="tags osconfig,concat::setup,iptables,lvm,ntp,system::facts,system::ntp,system::sysconfig"/>
+       <eb:param name="vms_mgmt" value="mrt.*"/>
+       <eb:param name="ppt_mgmt" value="-s 1 -F role=mrt"/>
+       <eb:param name="vms_fw" value="art.*"/>
+       <eb:param name="ppt_fw" value="-s 1 -F role=art"/>
+       <eb:param name="ppt_all" value="-s 21 -F (!role=mrt and !role=art) "/>
+       
+       <eb:step actionid="create_vapp"/>
+       <eb:step actionid="assign_org_networks"/>
+       <eb:step actionid="create_vapp_networks"/>
+       <eb:step actionid="create_vms"/>    
+       
+       <!-- Start management routers -->
+       <eb:step actionid="start_vms" context="vms=${vms_mgmt}"/>
+       <eb:step actionid="poll_vms" context="params=${ppt_mgmt}"/>
+       <eb:step actionid="run_puppet" context="params=${ppt_mgmt} ${puppet_tags}"/>
+       
+       <!-- Start fire walls -->
+       <eb:step actionid="start_vms" context="vms=${vms_mgmt}"/>
+       <eb:step actionid="poll_vms" context="params=${ppt_mgmt}"/>
+       <eb:step actionid="run_puppet" context="params=${ppt_mgmt} ${puppet_tags}"/>
+       
+       <!-- Start everything else -->
+       <eb:step actionid="start_vapp" context="vms=${vms_mgmt}"/>
+       <eb:step actionid="poll_vms" context="params=${ppt_all}"/>
+       <eb:step actionid="run_puppet" context="params=${ppt_all} ${puppet_tags}"/>
+       
+       <!-- Base puppet run -->
+       <eb:sequenceref sequenceid="register-dnsand-do-bau-puppet-run"/>
+    
+    </eb:sequence>
+    
+    
+    <!-- Base sequences -->
+    <eb:sequence id="init">
+      <!-- Init step that pretty much every build does, no need to repeat everywhere -->
+      <eb:step actionid="retrieve_configuration"/>
+    </eb:sequence>
+    
+    <!-- DNS Registration and BAU puppet ran -->
+    <eb:sequence id="register-dnsand-do-bau-puppet-run">
+       <eb:param name="tooling_vapp_name" value="HO_IPT_NP_TLG1_MTZO"/>
+       <eb:param name="ppt_dns" value="role=mgt"/>
+       <eb:param name="ppt_bau" value="tags puppet"/>
+       
+       <!--  DNS -->
+       <eb:step actionid="run_puppet" context="environment=${tooling_vapp_name},params=${ppt_dns}"/>
+       <!--  BAU -->
+       <eb:step actionid="run_puppet" context="params=${ppt_bau}"/>       
+    </eb:sequence>
+    
+    <!-- Base actions -->
+    <eb:action id="retrieve_configuration">
+        <eb:sshcommand machine="${machine}" sshoptsfile="${sshopts}" remotecommand="sudo -u peadmin /var/lib/peadmin/syncPuppetConfig.strategic.sh"/>
+    </eb:action>
+    <eb:action id="poll_vms">
+        <eb:sshcommand machine="${machine}" sshoptsfile="${sshopts}" remotecommand="sudo -u peadmin /var/lib/peadmin/waitForMCo.sh ${params}"/>   
+    </eb:action>
+    <eb:action id="run_puppet">
+        <eb:sshcommand machine="${machine}" sshoptsfile="${sshopts}" remotecommand="sudo -u peadmin /opt/puppet/bin/mco rpc gonzo ${batch} ${cmd} ${environment} ${params} -t ${timeout}; if [ \$? -ne 0 ]; then if [ \$? -eq 2 ]; then echo 'Error: Puppet Agent took longer than $timeout seconds to perform changes.  Please report this to EBSA.'; fi; exit 1; fi"/>
+    </eb:action>    
+    <eb:action id="create_vapp">
+        <eb:infra>
+        	<eb:vCloud>
+	            <vc:Environment xmlns:vc="http://ebsa.ipt.com/VCloudCommand-2.0">
+	                <vc:VirtualApplication command="create" includes="${vapp_name}" strategy="merge" errorStrategy="exit"/>
+	                <vc:VirtualApplication command="confirm" includes="${vapp_name}" strategy="exists" errorStrategy="exit"/>
+	            </vc:Environment>
+	        </eb:vCloud>
+        </eb:infra>
+    </eb:action>
+    <eb:action id="assign_org_networks">
+        <eb:infra>
+        	<eb:vCloud>
+	            <vc:Environment xmlns:vc="http://ebsa.ipt.com/VCloudCommand-2.0">
+	                <vc:VirtualApplication command="confirm" includes="${vapp_name}" strategy="exists" errorStrategy="exit">
+	                    <vc:OrganisationNetwork command="create" includes=".*" strategy="merge" errorStrategy="exit"/>
+	                    <vc:OrganisationNetwork command="confirm" includes=".*" strategy="exists" errorStrategy="exit"/>
+	                </vc:VirtualApplication>
+	            </vc:Environment>
+	        </eb:vCloud>
+        </eb:infra>
+    </eb:action>
+    <eb:action id="create_vapp_networks">
+        <eb:infra>
+        	<eb:vCloud>
+	            <vc:Environment xmlns:vc="http://ebsa.ipt.com/VCloudCommand-2.0">
+	                <vc:VirtualApplication command="confirm" includes="${vapp_name}" strategy="exists" errorStrategy="exit">
+	                    <vc:ApplicationNetwork command="create" includes=".*" strategy="merge" errorStrategy="exit"/>
+	                    <vc:ApplicationNetwork command="confirm" includes=".*" strategy="exists" errorStrategy="exit"/>
+	                </vc:VirtualApplication>
+	            </vc:Environment>
+	        </eb:vCloud>
+        </eb:infra>
+    </eb:action>
+    <eb:action id="create_vms">
+        <eb:infra>
+        	<eb:vCloud>
+	            <vc:Environment xmlns:vc="http://ebsa.ipt.com/VCloudCommand-2.0">
+	                <vc:options>
+	                    <vc:option name="overwriteEmptyTemplateMachines" value="true"/>
+	                </vc:options>
+	                <vc:VirtualApplication command="confirm" includes="${vapp_name}" strategy="exists" errorStrategy="exit">
+	                    <vc:VirtualMachine command="create" includes=".*" strategy="merge" errorStrategy="exit"/>
+	                    <vc:VirtualMachine command="confirm" includes=".*" strategy="exists" errorStrategy="exit"/>
+	                </vc:VirtualApplication>
+	            </vc:Environment>
+	        </eb:vCloud>
+        </eb:infra>
+    </eb:action>
+    <eb:action id="start_vms">
+        <eb:infra>
+        	<eb:vCloud>
+	            <vc:Environment xmlns:vc="http://ebsa.ipt.com/VCloudCommand-2.0">
+	                <vc:VirtualApplication command="confirm" includes="${vapp_name}" strategy="exists" errorStrategy="exit">
+	                    <vc:VirtualMachine command="start" includes="${vms}" errorStrategy="exit"/>
+	                </vc:VirtualApplication>
+	            </vc:Environment>
+	        </eb:vCloud>
+        </eb:infra>
+    </eb:action>
+    <eb:action id="start_vapp">
+        <eb:infra>
+        	<eb:vCloud>
+	            <vc:Environment xmlns:vc="http://ebsa.ipt.com/VCloudCommand-2.0">
+	                <vc:VirtualApplication command="start" includes="${vapp_name}" errorStrategy="exit"/>
+	            </vc:Environment>
+            </eb:vCloud>
+        </eb:infra>
+    </eb:action>
+    <eb:action id="create_org_networks">
+        <eb:infra>
+        	<eb:vCloud>
+	            <vc:Configuration xmlns:vc="http://ebsa.ipt.com/VCloudCommand-2.0">
+	                <vc:OrganisationNetwork command="create" includes="${network-pattern}" strategy="overwrite" errorStrategy="exit"/>
+	            </vc:Configuration>
+            </eb:vCloud>
+        </eb:infra>
+    </eb:action>
+     <eb:action id="confirm_org_networks">
+        <eb:infra>
+        	<eb:vCloud>
+	            <vc:Configuration xmlns:vc="http://ebsa.ipt.com/VCloudCommand-2.0">
+	                <vc:OrganisationNetwork command="confirm" includes="${network-pattern}" strategy="exists" errorStrategy="exit"/>
+	            </vc:Configuration>
+            </eb:vCloud>
+        </eb:infra>
+    </eb:action>
+    <eb:action id="create_edgegateway">
+        <eb:infra>
+        	<eb:vCloud>
+	            <vc:Configuration xmlns:vc="http://ebsa.ipt.com/VCloudCommand-2.0">
+	                <vc:EdgeGateway command="create" includes=".*" strategy="merge" errorStrategy="exit"/>
+	            </vc:Configuration>
+            </eb:vCloud>
+        </eb:infra>
+    </eb:action>
+</eb:builds>

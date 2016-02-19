@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<builds xmlns="http://ebsa.ipt.com/EnvironmentBuildSequence-1.0" xmlns:ac="http://ebsa.ipt.com/aCloudCommand-1.1" xmlns:vc="http://ebsa.ipt.com/VCloudCommand-2.0">
+    <globalparams>
+        <param value="Bruce" name="global_1"/>
+        <param value="Lance" name="global_2"/>
+        <param value="Julian" name="global_3"/>
+    </globalparams>
+    <environment name="hostile">
+        <buildref buildid="prod_like" displayname="Standard EBSA Build" id="UniqueIdentifityForThisBuildRef">
+            <parameter value="Glenda" name="build_4"/>
+            <userparameter id="something useful" displayname="Input something useful please, guv"/>
+            <parameter value="Joseph" name="build_5"/>
+            <userparameter id="something better" displayname="Input something better please, guv"/>
+        </buildref>
+    </environment>
+    <environmentcontainer name="base_container">
+        <buildref buildid="prod_like" displayname="Standard Container" id="S1">
+            <parameter value="Hey" name="env_1"/>
+            <userparameter id="up_cont_1" displayname="Something for a container"/>
+            <parameter value="Ya" name="env_2"/>
+            <userparameter id="up_cont_2" displayname="Something else"/>
+        </buildref>
+    </environmentcontainer>
+    <build id="prod_like">
+        <param value="Rod" name="build_1"/>
+        <param value="Jane" name="build_2"/>
+        <param value="Freddy" name="build_3"/>
+        <sequenceref sequenceid="S1"/>
+    </build>
+    <sequence id="S1">
+        <param value="Zippy" name="sequence_1a"/>
+        <param value="George" name="sequence_1b"/>
+        <param value="Bungle" name="sequence_1c"/>
+        <step context="step_context_param_1=Rosie" actionid="Release the hounds"/>
+        <sequenceref context="count=duckula" sequenceid="S2"/>
+    </sequence>
+    <sequence id="S2">
+        <param value="Sooty" name="sequence_2a"/>
+        <param value="Sweep" name="sequence_2b"/>
+        <param value="Sue" name="sequence_2c"/>
+        <step context="step_context_param_2 =Noddy  ,  step_context_param_3 = Big Ears" actionid="Release the hounds"/>
+        <step context="step_context_param_4=Rosie" actionid="Open sesame"/>
+        <step actionid="The engines cannae take it"/>
+        <step actionid="Illogical, captain"/>
+    </sequence>
+    <action id="Release the hounds">
+        <infra>
+            <vCloud>
+                <vc:Environment>
+                    <vc:VirtualApplication errorStrategy="exit" strategy="createOnly" excludes="" includes="" command="create"/>
+                </vc:Environment>
+            </vCloud>
+            <aCloud>
+                <ac:EnvironmentContainer>
+                    <ac:Environment>
+                        <ac:VirtualMachineContainer errorStrategy="exit" strategy="createOnlyWait" excludes="" includes="" command="create"/>
+                    </ac:Environment>
+                </ac:EnvironmentContainer>
+            </aCloud>
+        </infra>
+    </action>
+    <action id="Open sesame">
+        <call action="Chocs away!"/>
+        <call action="Bolt the gate"/>
+    </action>
+    <action id="Chocs away!">
+        <sshcommand jumphosts="Gloria Estefan" sshoptsfile="${sshopts}" machine="${machine}" remotecommand="command x"/>
+    </action>
+    <action id="Bolt the gate">
+        <sshcommand sshoptsfile="${sshopts}" machine="${machine}" remotecommand="command x"/>
+    </action>
+    <action id="The engines cannae take it">
+        <internalhiera zones=" zone1, zone2" routespath="path/to/xls" routesrepourl="git://testroutes.git" hierarepourl="git://testhiera.git" updatebehaviour="overwrite-all">
+            <scope yamlpath="somepath/going/here"/>
+            <zone zone="HO_IPT_ZONE1"/>
+            <scope yamlpath="someother/path"/>
+            <zone zone="HO_IPT_ZONE2"/>
+        </internalhiera>
+    </action>
+    <action id="Illogical, captain">
+        <firewallhiera zones="zoneA , zoneB" firewallpath="path/to/firewall/xls" firewallrepourl="git://firewall.git" hierarepourl="git://hiera.git" updatebehaviour="add-and-update-only">
+            <scope yamlpath="somepath/going/here"/>
+            <zone zone="HO_IPT_ZONE1"/>
+            <scope yamlpath="someother/path"/>
+            <zone zone="HO_IPT_ZONE2"/>
+        </firewallhiera>
+    </action>
+</builds>

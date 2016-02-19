@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.ipt.ebsa</groupId>
+	<artifactId>aCloudClient</artifactId>
+	<packaging>jar</packaging>
+	<description>This is the client library</description>
+
+	<parent>
+		<groupId>com.ipt.ebsa</groupId>
+		<artifactId>aCloud</artifactId>
+		<version>1.0.86_aws-SNAPSHOT</version>
+	</parent>
+
+	<properties>
+		<appassembler-output>>${project.build.directory}/appassembler</appassembler-output>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>xml-apis</groupId>
+			<artifactId>xml-apis</artifactId>
+			<version>2.0.2</version>
+		</dependency>
+		
+		<!-- This is the reference to the XML Loader -->
+		<dependency>
+			<groupId>com.ipt.ebsa</groupId>
+			<artifactId>aCloudConfiguration</artifactId>
+		</dependency>
+
+		<!--  Weld for using CDI in JSE -->
+		<dependency>
+			<groupId>org.jboss.weld.se</groupId>
+			<artifactId>weld-se-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+		</dependency>
+
+		<!-- Commons -->
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-cli</groupId>
+			<artifactId>commons-cli</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>1.9.2</version>
+		</dependency>
+		<dependency><!-- Used by the connector client -->
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-csv</artifactId>
+		</dependency>
+		
+		<!-- jcabi aspects -->
+		<dependency>
+			<groupId>com.jcabi</groupId>
+			<artifactId>jcabi-aspects</artifactId>
+			<version>0.22</version>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>1.8.5</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!-- SDK -->
+		<dependency>
+			<groupId>com.vmware</groupId>
+			<artifactId>vcloud-java-sdk</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.vmware</groupId>
+			<artifactId>rest-api-schemas</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk</artifactId>
+			<version>1.10.10</version>
+			<exclusions>
+		        <exclusion>
+		            <artifactId>jackson-core</artifactId>
+		            <groupId>com.fasterxml.jackson.core</groupId>
+		        </exclusion>
+		        <exclusion>
+		            <artifactId>jackson-databind</artifactId>
+		            <groupId>com.fasterxml.jackson.core</groupId>
+		        </exclusion>
+		        <exclusion>
+		            <artifactId>jackson-annotations</artifactId>
+		            <groupId>com.fasterxml.jackson.core</groupId>
+		        </exclusion>
+	    	</exclusions>
+		</dependency>
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-core</artifactId>
+		    <version>2.3.0</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>2.3.0</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-annotations</artifactId>
+		    <version>2.3.0</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.microsoft.azure</groupId>
+		    <artifactId>azure-management</artifactId>
+		    <version>0.7.0</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.microsoft.azure</groupId>
+		    <artifactId>azure-management-compute</artifactId>
+		    <version>0.7.0</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.microsoft.azure</groupId>
+		    <artifactId>azure-management-network</artifactId>
+		    <version>0.7.0</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.microsoft.azure</groupId>
+		    <artifactId>azure-management-storage</artifactId>
+		    <version>0.7.0</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.microsoft.azure</groupId>
+		    <artifactId>azure-serviceruntime</artifactId>
+		    <version>0.6.0</version>
+		</dependency>
+		
+		<dependency>
+	      <groupId>com.microsoft.azure</groupId>
+	      <artifactId>azure-storage</artifactId>
+	      <version>1.2.0</version>
+	    </dependency>
+
+		<!-- The usual suspects -->
+        <dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.7</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.7.7</version>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>1.9.5</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.7</version>
+		</dependency>
+		<dependency>
+		  <groupId>com.google.code.tempus-fugit</groupId>
+		  <artifactId>tempus-fugit</artifactId>
+		  <version>1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.mycila</groupId>
+			<artifactId>mycila-junit</artifactId>
+			<version>1.4.ga</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-net</groupId>
+			<artifactId>commons-net</artifactId>
+			<version>3.3</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<!-- Facilitates downloading source and javadoc in Eclipse -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+			</plugin>
+
+			<!-- Ensures we are compiling at 1.6 level -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>appassembler-maven-plugin</artifactId>
+				<version>1.8</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>assemble</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<programs>
+						<program>
+							<mainClass>com.ipt.ebsa.AgnosticClientCLI</mainClass>
+							<id>acloud-app</id>
+						</program>
+					</programs>
+					<repositoryLayout>flat</repositoryLayout>
+					<useWildcardClassPath>true</useWildcardClassPath>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.2.2</version>
+				<configuration>
+					<descriptors>
+						<descriptor>src/main/assembly/assembly.xml</descriptor>
+					</descriptors>
+				</configuration>
+				<executions>
+					<execution>
+						<id>make-assembly</id> <!-- this is used for inheritance merges -->
+						<phase>package</phase> <!-- bind to the packaging phase -->
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+	            <groupId>org.apache.maven.plugins</groupId>
+	            <artifactId>maven-surefire-plugin</artifactId>
+	            <configuration>
+	                <includes>
+	                    <include>**/DefaultTestSuite.class</include>
+	                </includes>
+	            </configuration>
+        	</plugin>
+			<plugin>
+				<groupId>com.jcabi</groupId>
+				<artifactId>jcabi-maven-plugin</artifactId>
+				<version>0.12</version>
+				<executions>
+					<execution>
+						<id>aspectJ compilation</id>
+						<goals>
+							<goal>ajc</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>aspectJ compilation for JUnit test classes</id>
+						<phase>test</phase>
+						<configuration>
+							<classesDirectory>target/test-classes</classesDirectory>
+						</configuration>
+						<goals>
+							<goal>ajc</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.10.3</version>
+				<configuration>
+					<show>private</show>
+					<nohelp>true</nohelp>
+				</configuration>
+			</plugin>
+		</plugins>
+		<pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>com.jcabi</groupId>
+										<artifactId>jcabi-maven-plugin</artifactId>
+										<versionRange>[0.0,)</versionRange>
+										<goals>
+											<goal>ajc</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<execute />
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+</project>

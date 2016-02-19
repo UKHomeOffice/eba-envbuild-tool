@@ -1,0 +1,60 @@
+ [31m|[0m [ >                                                           ] 0 / 1
+18/02 13:30:34,542 DEBUG com.ipt.ebsa.ssh.JschManager: 
+ [32m*[0m [ ==========================================================> ] 1 / 1
+
+
+svcam01.np-ii-dat1-ssz1.ipt.ho.local     [31mRequest Aborted[0m
+   [33mChanges Made; Failures Occurred running '/opt/puppet/bin/puppet agent --test --detailed-exitcodes --color false'[0m
+         err: Error: /Stage[main]/System::Execs/Exec[rpmcheck]: Failed to call refresh: /usr/local/bin/rpmcheck.sh returned 1 instead of one of [0]
+              Error: /Stage[main]/System::Execs/Exec[rpmcheck]: /usr/local/bin/rpmcheck.sh returned 1 instead of one of [0]
+   Exit Code: 1
+         out: Info: Retrieving plugin
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/pe_version.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/role.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/dg_cluster_name.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/fqdn_app.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/i
+18/02 13:30:34,542 DEBUG com.ipt.ebsa.ssh.JschManager: ptables_persistent_version.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/lvm_support.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/ipt_env.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/facter_dot_d.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/fqdn_south.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/project.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/db_cluster.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/sec_comp.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/puppet_vardir.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/hostname_south.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/sudo_env.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/organisation.rb
+              Info: Loading facts in /var/opt
+18/02 13:30:34,542 DEBUG com.ipt.ebsa.ssh.JschManager: /lib/pe-puppet/lib/facter/root_home.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/custom_auth_conf.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/oracle_publickey.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/vapp_id.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/mebc_domain.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/oracle_database_homes.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/puppetdb_server_status.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/postgres_default_version.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/ebsa_env.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/env_name.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/hostname_app.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/zabbix_v
+18/02 13:30:34,542 DEBUG com.ipt.ebsa.ssh.JschManager: ersion.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/windows.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/default_gateway.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/concat_basedir.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/orawls.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/compartment.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/amandabackup_publickey.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/tooling_domain.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/ip6tables_version.rb
+              Info: Loading facts in /var/opt/lib/pe-puppet/lib/facter/iptables_version.rb
+              Info: Caching catalog for svcam01.np-ii-dat1-ssz1.ipt.ho.local
+              Info: Applying configuration version '1424266160'
+              Notice: /Stage[main]/System::Packages/Package[gen-
+18/02 13:30:34,542 DEBUG com.ipt.ebsa.ssh.JschManager: bin-java7]/ensure: removed
+              Info: /Stage[main]/System::Packages/Package[gen-bin-java7]: Scheduling refresh of Exec[rpmcheck]
+              Notice: /Stage[main]/System::Execs/Exec[rpmcheck]/returns: Failed RPM File exists
+              Notice: Finished catalog run in 24.93 seconds
+      Output:
+      status: 6

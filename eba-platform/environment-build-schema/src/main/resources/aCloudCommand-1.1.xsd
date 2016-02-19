@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 rel. 3 sp1 (http://www.altova.com) by Home Office (Home Office) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ac="http://ebsa.ipt.com/aCloudCommand-1.1" xmlns:altova="http://www.altova.com/xml-schema-extensions" targetNamespace="http://ebsa.ipt.com/aCloudCommand-1.1" xmlns="http://ebsa.ipt.com/aCloudCommand-1.1" elementFormDefault="qualified" attributeFormDefault="unqualified" ac:minVersion="1.1">
+	<xs:element name="execute">
+		<xs:annotation>
+			<xs:documentation>The command type is a high level element</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="ac:Execute"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="Execute">
+		<xs:choice>
+			<xs:element name="EnvironmentContainer">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="ac:detail">
+							<xs:sequence>
+								<xs:element name="OrganisationNetwork" type="ac:detail" minOccurs="0" maxOccurs="unbounded"/>
+								<xs:element name="EdgeGateway" type="ac:detail" minOccurs="0" maxOccurs="unbounded"/>
+								<xs:element name="Environment" type="ac:EnvironmentType"/>
+							</xs:sequence>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="detail">
+		<xs:attribute name="command" type="ac:Command">
+			<xs:annotation>
+				<xs:documentation>A command which can be applied to the entity</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="includes">
+			<xs:annotation>
+				<xs:documentation>Regular expression to match the name(s) of the entities being referred to</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="excludes">
+			<xs:annotation>
+				<xs:documentation>Regular expression to exclude the name(s) of the entities not being referred to</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="strategy" type="ac:Strategy">
+			<xs:annotation>
+				<xs:documentation>Some commands require further details, in these cases a strategy can be provided to give the engine some processing choices.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="errorStrategy" type="ac:ErrorStrategy">
+			<xs:annotation>
+				<xs:documentation>One of a distinct set of supported strategies to execute on error</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:simpleType name="Strategy">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="createOnly">
+				<xs:annotation>
+					<xs:documentation>This strategy will expect that it will be creating all entities.  It will fail if an entity already exists.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="merge">
+				<xs:annotation>
+					<xs:documentation>This strategy will expect that some entities might already exist.  It will only create those entities that do not already exist.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="createOnlyWait">
+				<xs:annotation>
+					<xs:documentation>This strategy will expect that it will be creating all entities.  It will fail if an entity already exists. It will then block until the instance is started.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="mergeWait">
+				<xs:annotation>
+					<xs:documentation>This strategy will expect that some entities might already exist.  It will only create those entities that do not already exist. It will then block until the instance is started.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="overwrite">
+				<xs:annotation>
+					<xs:documentation>This strategy will overwrite previously existing entities.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="exists">
+				<xs:annotation>
+					<xs:documentation>This strategy will succeed if an element is confirmed to exist.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="doesnotexist">
+				<xs:annotation>
+					<xs:documentation>This strategy will succeed if an element is confirmed not to exist.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ErrorStrategy">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="exit">
+				<xs:annotation>
+					<xs:documentation>This strategy will stop processing immediately and leave the system in whatever state it is in at the moment of error.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="cleanAndExit">
+				<xs:annotation>
+					<xs:documentation>This strategy will attempt to leave the system in a state which is clean, ideally it will return the system to the state it was in prior to execution of the job.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="continue">
+				<xs:annotation>
+					<xs:documentation>This strategy will report the error and continue as if nothing had happened</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="optimistic">
+				<xs:annotation>
+					<xs:documentation>Optimistic error handling</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Command">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="create"/>
+			<xs:enumeration value="confirm"/>
+			<xs:enumeration value="confirmHdd"/>
+			<xs:enumeration value="delete"/>
+			<xs:enumeration value="start"/>
+			<xs:enumeration value="stop"/>
+			<xs:enumeration value="suspend"/>
+			<xs:enumeration value="resume"/>
+			<xs:enumeration value="reboot"/>
+			<xs:enumeration value="shutdown"/>
+			<xs:enumeration value="deploy"/>
+			<xs:enumeration value="undeploy"/>
+			<xs:enumeration value="updateStartSection"/>
+			<!-- https://blogs.vmware.com/vsphere/2012/04/partially-powered-off-vapp-vms.html -->
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="VirtualApplication">
+		<xs:complexContent>
+			<xs:extension base="ac:detail">
+				<xs:sequence>
+					<xs:element name="ApplicationNetwork" type="ac:detail" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="VirtualMachine" type="ac:detail" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:simpleType name="optionNameType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="overwriteEmptyTemplateMachines"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="EnvironmentType">
+		<xs:complexContent>
+			<xs:extension base="ac:detail">
+				<xs:sequence>
+					<xs:element name="options" minOccurs="0">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="option" maxOccurs="unbounded">
+									<xs:complexType>
+										<xs:attribute name="name" type="ac:optionNameType" use="required"/>
+										<xs:attribute name="value" type="xs:string" use="required"/>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="VirtualMachineContainer" type="ac:VirtualApplication" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="Overrides" minOccurs="0">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="override" maxOccurs="unbounded">
+									<xs:complexType>
+										<xs:attribute name="xpath" type="xs:string" use="required"/>
+										<xs:attribute name="value" type="xs:string" use="required"/>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>

@@ -1,0 +1,196 @@
+<?xml version="1.0" standalone="no"?>
+<GeographicContainer id="_1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://ebsa.ipt.com/AgnosticCloudConfig-1.0">
+	<account/>
+	<region/>
+	<EnvironmentContainer id="AWS">
+		<name>Environment_1</name>
+		<provider>AWS</provider>
+		<Environment id="Environment_1">
+			<name>UNITTESTAmazonTestEnv1</name>
+			<notes/>
+			<EnvironmentDefinition id="UNITTESTAmazonTestEnv1" environmentDefinitionType="Physical">
+				<name>UNITTESTAmazonTestEnv1</name>
+				<version>0.01</version>
+				<cidr>10.16.0.0/16</cidr>
+				<VirtualMachineContainer id="VirtualMachineContainer_BC_1" dataCenterName="eu-west-1a">
+					<name>VirtualMachineContainer_BC_1</name>
+					<description>VirtualMachineContainer_BC_1</description>
+					<runtimeLease/>
+					<storageLease/>
+					<serviceLevel/>
+					<powerOn>true</powerOn>
+					<deploy>true</deploy>
+					<domain>boundry1.test.local</domain>
+					<VirtualMachine id="unittest_nboundry01">
+						<vmName>unittest_nboundry01</vmName>
+						<computerName>unittest_nboundry01</computerName>
+						<description>Internet Firewall</description>
+						<templateName>ami-bff32ccc</templateName>
+						<templateServiceLevel/>
+						<storageProfile/>
+						<customisationScript/>
+						<cpuCount>1</cpuCount>
+						<memory>1</memory>
+						<memoryUnit>GB</memoryUnit>
+						<hardwareProfile>t2.micro</hardwareProfile>
+						<hatype/>
+						<Storage id="unittest_nboundry01_disk1">
+							<indexNumber>1</indexNumber>
+							<size>0</size>
+							<sizeUnit>GB</sizeUnit>
+							<busType/>
+							<busSubType/>
+							<deviceMount>/dev/sda1</deviceMount>
+						</Storage>
+						<NIC id="unittest_nboundry01_nic0" networkName="UNITTEST_PUBLIC_SUBNET">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>Static IP Pool</ipAssignment>
+							<Interface>
+								<staticIpPool>IP Pool</staticIpPool>
+								<networkMask/>
+								<name>extpubnic01</name>
+								<staticIpAddress>10.16.0.4</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+						<NIC id="unittest_nboundry01_nic1" networkName="UNITTEST_APPNET_E1_BC_1">
+							<indexNumber>1</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>Static IP Pool</ipAssignment>
+							<Interface>
+								<staticIpPool>IP Pool</staticIpPool>
+								<networkMask/>
+								<name>intpubnic01</name>
+								<staticIpAddress>10.16.1.4</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+					</VirtualMachine>
+					<VirtualMachine id="unittestbastion01">
+						<vmName>unittestbastion01</vmName>
+						<computerName>unittestbastion01</computerName>
+						<description>SSH Jump</description>
+						<templateName>ami-bff32ccc</templateName>
+						<templateServiceLevel/>
+						<storageProfile/>
+						<customisationScript/>
+						<cpuCount>1</cpuCount>
+						<memory>1</memory>
+						<memoryUnit>GB</memoryUnit>
+						<hardwareProfile>t2.micro</hardwareProfile>
+						<hatype/>
+						<Storage id="unittestbastion01_disk1">
+							<indexNumber>1</indexNumber>
+							<size>0</size>
+							<sizeUnit>GB</sizeUnit>
+							<busType/>
+							<busSubType/>
+							<deviceMount>/dev/sda1</deviceMount>
+						</Storage>
+						<NIC id="unittestbastion01_nic0" networkName="UNITTEST_APPNET_E1_BC_1">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>Static IP Pool</ipAssignment>
+							<Interface>
+								<staticIpPool>IP Pool</staticIpPool>
+								<networkMask/>
+								<name>basextnic01</name>
+								<staticIpAddress>10.16.1.5</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+						<NIC id="unittestbastion01_nic1" networkName="UNITTEST_APPNET_E2_BC_2">
+							<indexNumber>1</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>Static IP Pool</ipAssignment>
+							<Interface>
+								<staticIpPool>IP Pool</staticIpPool>
+								<networkMask/>
+								<name>basintnic01</name>
+								<staticIpAddress>10.16.2.5</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+					</VirtualMachine>
+					<VirtualMachine id="unittestsfirewall01">
+						<vmName>unittestsfirewall01</vmName>
+						<computerName>unittestsfirewall01</computerName>
+						<description>South Firewall</description>
+						<templateName>ami-bff32ccc</templateName>
+						<templateServiceLevel/>
+						<storageProfile/>
+						<customisationScript/>
+						<cpuCount>1</cpuCount>
+						<memory>1</memory>
+						<memoryUnit>GB</memoryUnit>
+						<hardwareProfile>t2.micro</hardwareProfile>
+						<hatype/>
+						<Storage id="unittestsfirewall01_disk1">
+							<indexNumber>1</indexNumber>
+							<size>0</size>
+							<sizeUnit>GB</sizeUnit>
+							<busType/>
+							<busSubType/>
+							<deviceMount>/dev/sda1</deviceMount>
+						</Storage>
+						<NIC id="unittestsfirewall01_nic0" networkName="UNITTEST_INTERNAL_BOUNDRY_CONTROL_ACCESS">
+							<indexNumber>0</indexNumber>
+							<primary>true</primary>
+							<ipAssignment>Static IP Pool</ipAssignment>
+							<Interface>
+								<staticIpPool>IP Pool</staticIpPool>
+								<networkMask/>
+								<name>intappnic01</name>
+								<staticIpAddress>10.16.15.5</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+						<NIC id="unittestsfirewall01_nic1" networkName="UNITTEST_APPNET_E2_BC_2">
+							<indexNumber>1</indexNumber>
+							<primary>false</primary>
+							<ipAssignment>Static IP Pool</ipAssignment>
+							<Interface>
+								<staticIpPool>IP Pool</staticIpPool>
+								<networkMask/>
+								<name>intbasnic01</name>
+								<staticIpAddress>10.16.2.4</staticIpAddress>
+								<isVip>false</isVip>
+							</Interface>
+						</NIC>
+					</VirtualMachine>
+					<Network id="UNITTEST_APPNET_E1_BC_1" dataCenterName="">
+						<name>UNITTEST_APPNET_E1_BC_1</name>
+						<description>BC Application network E1 Internal Subnet</description>
+						<fenceMode>NATROUTED</fenceMode>
+						<networkMask/>
+						<gatewayAddress>10.16.1.1</gatewayAddress>
+						<primaryDns>String</primaryDns>
+						<secondaryDns/>
+						<dnsSuffix>boundry1.test.local</dnsSuffix>
+						<staticIpPool>10.16.1.0/24</staticIpPool>
+						<ipRangeStart>10.16.1.11</ipRangeStart>
+						<ipRangeEnd>10.16.1.254</ipRangeEnd>
+						<CIDR>10.16.1.0/24</CIDR>
+						<shared>true</shared>
+					</Network>
+					<Network id="UNITTEST_APPNET_E2_BC_2" dataCenterName="">
+						<name>UNITTEST_APPNET_E2_BC_2</name>
+						<description>BC Application network E2 Internal Subnet</description>
+						<fenceMode>NATROUTED</fenceMode>
+						<networkMask/>
+						<gatewayAddress>10.16.2.1</gatewayAddress>
+						<primaryDns>String</primaryDns>
+						<secondaryDns/>
+						<dnsSuffix>boundry1.test.local</dnsSuffix>
+						<staticIpPool>10.16.2.0/24</staticIpPool>
+						<ipRangeStart>10.16.2.11</ipRangeStart>
+						<ipRangeEnd>10.16.2.254</ipRangeEnd>
+						<CIDR>10.16.2.0/24</CIDR>
+						<shared>true</shared>
+					</Network>
+				</VirtualMachineContainer>
+			</EnvironmentDefinition>
+		</Environment>
+	</EnvironmentContainer>
+</GeographicContainer>
