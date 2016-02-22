@@ -29,6 +29,7 @@ Run a Maven clean install in this order:
 
 		programme-super-parent
 		programme-parent
+		aCloud   (located in ..\eba-acloud\)
 		environment-common
 		database-management
 		environment-build-database 
