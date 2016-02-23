@@ -1,7 +1,7 @@
 # EBA - Platform
 EBA - Platform is a set of components that ties into the Visio designs, stores them in the Environment Build Repository, and provides the Environment Action Repository with valid options for users to build.
 
-Note we recommend building these with the Maven skipTests property set to true - many of these tests attempt to build existing designs from YAML files and have been removed from this codebase for security reasons.
+Note we recommend building these with the Maven skipTests property set to true - many of these tests attempt to build existing designs from YAML files which have been removed from this codebase for security reasons.
 
 ## Requirements ##
 - **JDK 7**:
